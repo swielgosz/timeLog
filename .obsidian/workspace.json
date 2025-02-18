@@ -33,8 +33,7 @@
               "title": "Release Notes 1.8.7"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -183,7 +182,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "278cf823f9997151",
+  "active": "7302f041b3acd805",
   "lastOpenFiles": [
     "February/Untitled.md",
     "2025.md",
