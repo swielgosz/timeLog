@@ -48,9 +48,21 @@
               "icon": "lucide-file",
               "title": "Research Notes"
             }
+          },
+          {
+            "id": "9f54670c3a0f5302",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.8.10"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.8.10"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -198,7 +210,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "378806f86838a90b",
+  "active": "9f54670c3a0f5302",
   "lastOpenFiles": [
     "To Do.md",
     "Attachments/Pasted image 20250318104613.png",
