@@ -326,7 +326,6 @@ Goals for the week:
 - Created loss module
 - Implemented sharding so training can be parallelized! This was basically the whole day
 
-## 04/21 - 04/25
-### 04/21
-- [ ] Fill out Annual Activities Report for NSF GRFP
-- [ ] 
+
+
+Note: switching to using Research Notes rather than To Do  since this is redundant from personal notes
