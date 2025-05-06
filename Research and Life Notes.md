@@ -35,4 +35,4 @@ Container memory usage
 7.05GB / 7.47GBContainer CPU usage
 ```
 
-But then when I run sweeps while trying to log images, the CPU and memory usage look about the same except the sweep crashes! Boo. 
+But then when I run sweeps while trying to log images, the CPU and memory usage look about the same except the sweep crashes! Boo.
