@@ -21,5 +21,9 @@ I know I'm capable of doing way more than I have been, and I think one thing tha
 
 In conclusion, I would do better if I imposed more frequent deadlines on myself and kept a regular schedule (or at the very least only ever work sometime between the hours of 8-7 pm even if the hours within that vary due to zumba and such activities). Also I should start lifting again. Big muscles = big brain.
 
+# 5/6
+Going back to trying to log images in parallel with wandb sweeps. I'm going to put this aside if it's too much effort, but it would be great if it worked. We can just track model effectiveness via loss and/or only save images locally, but the whole point of wandb sweeps is to view the effects of experiment parameters, so wouldn't it be nice if we could just view all of the visualizations on one dashboard? 
+
+
 
 
