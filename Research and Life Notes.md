@@ -12,4 +12,7 @@ Working on fixing heat map visualizations and beginning other visualizations. At
 # 5/5
 Bad day. Brain was doing a lot of this ![[Pasted image 20250506094055.png|100]]. This was weird because normally Mondays are productive days for me with a fresh start to the week, meetings to prep for, etc. 
 
-What was different today than other days? Didn't get good sleep the night before which I normally do. I also started apartment hunting over the weekend which is partially fun/exciting, partially just exacerbates/ current economic conditions 
+What was different today than other days? Didn't get good sleep the night before which I normally do. I also started apartment hunting over the weekend which is partially fun/exciting, partially just exacerbates/makes me think even more of current economic conditions which has been what one might call... a bummer. I try my best to ignore current events while I am working, but it's more difficult to do this some days than others, and this was one of those days.
+
+But anyway, I was thinking about how why my Mondays are typically productive, and why I used to 
+
