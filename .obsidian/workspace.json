@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Research Notes.md",
+                "file": "Research and Lab Activity Notes.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Research Notes"
+              "title": "Research and Lab Activity Notes"
             }
           }
         ],
@@ -214,8 +214,9 @@
   },
   "active": "9f54670c3a0f5302",
   "lastOpenFiles": [
+    "Pasted image 20250506094055.png",
     "To Do.md",
-    "Research Notes.md",
+    "Research and Lab Activity Notes.md",
     "Attachments/Pasted image 20250318104613.png",
     "Attachments",
     "Attachments/Pasted image 20250318104758.png",
