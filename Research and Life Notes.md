@@ -1,5 +1,5 @@
 # 4/30
-Finalizing parallelization of weights and biases sweep. I was having some trouble with saving visualizations to wandb as artifacts because 
+Finalizing parallelization of weights and biases sweep. I was having some trouble with saving visualizations to wandb as artifacts because I am running sweeps in parallel. 
 
 Attended group meeting for X-Lab. John presented about his hybrid electric rotorcraft project. His goal is to find the point at which hybrid vehicles become more efficient than electric only vehicles, which is a functions of required battery size and travel range. Other work has looked at hybrid electric rotorcraft, but John's novelty is that he will be able to vary the power share ratio between battery and engine power sources to optimize the rotorcraft. Goal is to support VTOL efforts long term.
 
