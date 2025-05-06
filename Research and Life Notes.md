@@ -24,6 +24,14 @@ In conclusion, I would do better if I imposed more frequent deadlines on myself 
 # 5/6
 Going back to trying to log images in parallel with wandb sweeps. I'm going to put this aside if it's too much effort, but it would be great if it worked. We can just track model effectiveness via loss and/or only save images locally, but the whole point of wandb sweeps is to view the effects of experiment parameters, so wouldn't it be nice if we could just view all of the visualizations on one dashboard? 
 
-If I run wandb sweep sequen
+If I run wandb sweep sequentially (i.e. the vanilla way, not in parallel), my CPU and memory usage look something like this:
+```
+Container CPU usage
 
+844.75% / 800% (8 CPUs available)
+
+Container memory usage
+
+7.05GB / 7.47GBContainer CPU usage
+```
 
