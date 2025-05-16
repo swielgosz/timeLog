@@ -1,3 +1,4 @@
+
 # 4/30
 Finalizing parallelization of weights and biases sweep. I was having some trouble with saving visualizations to wandb as artifacts because I am running sweeps in parallel. I think the crux of the issue is this error message: `npack_from requires a buffer of at least 4 bytes for unpacking 4 bytes at offset 0 (actual buffer size is 0)`. Underlying image data is probably empty or corrected, maybe caused by a thread/process conflict.  Side note - when this happens, the Remote Extension in VS Code fails probably due to crashed or hanging processes. If this happens, just restart the docker container from Docker Desktop and all will be well. 
 
