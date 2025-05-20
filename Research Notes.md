@@ -3,4 +3,4 @@ Today I am starting by cleaning up some of my code/repo that got a bit jumbled d
 
 Side note - my visualization script is very messy right now because I have individual functions for each visualization. I should consider implementing a visualization class at some point, but this is not a key issue right now. I am putting this on my running to do list. 
 
-Confirming that training script can be run either directly as a `.py` file, or run multiple at once via parallelizing `sweep.sh` file. Confirmed that training script can be run directly (no images logged, only numeric metrics). Confirmed that training script can be run from a shel
+Confirming that training script can be run either directly as a `.py` file, or run multiple at once via parallelizing `sweep.sh` file. Confirmed that training script can be run directly (no images logged, only numeric metrics). Confirmed that training script can be run from a shell script after some troubleshooting. Now testing ability to log images. Starting with one image.
