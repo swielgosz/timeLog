@@ -35,8 +35,7 @@
               "title": "To Do"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -184,10 +183,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "b3b66f899d0c5d00",
+  "active": "9a285b8aaf570054",
   "lastOpenFiles": [
-    "Research Notes.md",
     "To Do.md",
+    "Research Notes.md",
     "To Do",
     "Archive/To Do.md",
     "Archive/Research and Life Notes.md",
