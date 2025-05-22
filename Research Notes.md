@@ -1,5 +1,7 @@
-# 5/20
+# 5/21
 
+# 5/20
+Worked on same stuff as day before. Forgot to rubber duck with notes on here, but in general I have been having more success getting through pomodoro sessions. Getting back in a heavier coding flow has been a little tough since I left things in a messy state post abstract submission... don't do that again!
 # 5/19
 Today I am starting by cleaning up some of my code/repo that got a bit jumbled during the extended abstract crunch. I specifically want to review and keep or toss everything currently in my stash, as well as go through issues on github and archive, create PRs, close issues etc as appropriate. My git history for unpushed work is also messy right now - going to clean it up to the best of my ability in a reasonable amount of time. I have been using my local computer for development recently, but after a nice spring cleaning I will start using Curiosity again so I can run more experiments in parallel. 
 
