@@ -1,6 +1,8 @@
 # 5/23
 Code is now set up to set up to run scripts in parallel and log in wandb. It would be nice to have a way to run the script directly still to test one off scenarios so that I can quickly check if visualizations, etc are working. We don't necessarily want to run a sweep every time, especially when doing sandboxing. Tried for a little bit and it was more work than expected so I don't think it's worth pursuing this for the time being.
 
+Having issues with Ruff again.
+
 # 5/20
 Worked on same stuff as day before. Forgot to rubber duck with notes on here, but in general I have been having more success getting through pomodoro sessions. Getting back in a heavier coding flow has been a little tough since I left things in a messy state post abstract submission... don't do that again!
 # 5/19
