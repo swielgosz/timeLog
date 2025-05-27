@@ -5,7 +5,7 @@ I haven't used Curiosity in a while (since before it got moved). I got logged in
 
 To verify that everything is working on Curiosity, I tried running the same Weights & Biases sweep that is working on my local machine. I get errors related to reading in the data - I was probably using an old dataset/format when testing on my local machine. Fix this to make the data and code consistent. 
 
-Troubleshooting: I set the number of timesteps to propagate the orbit. When I check the number of timesteps, some have 999 timesteps while some have 1000. This is not correctg. This is probably an unintended consequence of the work I was doing to create datasets with fixed timesteps. 
+Troubleshooting: I set the number of timesteps to propagate the orbit. When I check the number of timesteps, some have 999 timesteps while some have 1000. This is not correct. This is probably an unintended consequence of the work I was doing to create datasets with fixed timesteps. My suspicion was correct. I intend to improve the integration by fixed true anomaly functionality anyway, so for the time being I am leaving that functionality isolated on its own branch and removing those commits from downstream work.
 # 5/23
 Code is now set up to set up to run scripts in parallel and log in wandb. It would be nice to have a way to run the script directly still to test one off scenarios so that I can quickly check if visualizations, etc are working. We don't necessarily want to run a sweep every time, especially when doing sandboxing. Tried for a little bit and it was more work than expected so I don't think it's worth pursuing this for the time being.
 
