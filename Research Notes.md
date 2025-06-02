@@ -1,6 +1,6 @@
 # June 2025
 ## 6/02
-
+Goal: create experiment and visualization to modularize code. Begin with base class. What is the best place to organize classes for now? I am going to create 
 
 # May 2025
 ## 5/28
