@@ -35,8 +35,7 @@
               "title": "To Do"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -109,7 +108,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "To Do.md",
+                "file": "Research Notes.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -119,7 +118,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for To Do"
+              "title": "Backlinks for Research Notes"
             }
           },
           {
@@ -128,12 +127,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "To Do.md",
+                "file": "Research Notes.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from To Do"
+              "title": "Outgoing links from Research Notes"
             }
           },
           {
@@ -157,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "To Do.md",
+                "file": "Research Notes.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of To Do"
+              "title": "Outline of Research Notes"
             }
           }
         ],
@@ -184,10 +183,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "b3b66f899d0c5d00",
+  "active": "9a285b8aaf570054",
   "lastOpenFiles": [
-    "Research Notes.md",
     "To Do.md",
+    "Research Notes.md",
     "To Do",
     "Archive/To Do.md",
     "Archive/Research and Life Notes.md",
