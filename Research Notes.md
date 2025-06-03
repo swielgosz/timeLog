@@ -1,4 +1,6 @@
 # June 2025
+## 6/03
+Having trouble loading in and applying the saved equinox model (`.eqx`). When I load in the model, I am able to access it and view its structure but when I integrate reach the maximum numner of solver steps. I should be integrating a `Func` class term, so I load in the model as a Func and deserialize leaves accordingly. 
 ## 6/02
 Goal: create experiment and visualization to modularize code. Begin with base class. What is the best place to organize classes/code? For now, I am going to create an `experiments` package and a `visualization` package. Each package will contain a module defining the base class, as well as separate modules for related subclasses. Do modules need to be packaged? Not sure (last time I was heavily using and creating classes was in C++ which has some differences), but it is the simplest way for me right now so I am sticking with that.
 
