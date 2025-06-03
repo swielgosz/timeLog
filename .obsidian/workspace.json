@@ -35,7 +35,8 @@
               "title": "To Do"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -108,7 +109,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Research Notes.md",
+                "file": "To Do.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +119,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Research Notes"
+              "title": "Backlinks for To Do"
             }
           },
           {
@@ -127,12 +128,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Research Notes.md",
+                "file": "To Do.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Research Notes"
+              "title": "Outgoing links from To Do"
             }
           },
           {
@@ -156,13 +157,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Research Notes.md",
+                "file": "To Do.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Research Notes"
+              "title": "Outline of To Do"
             }
           }
         ],
@@ -183,10 +184,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "9a285b8aaf570054",
+  "active": "b3b66f899d0c5d00",
   "lastOpenFiles": [
-    "To Do.md",
     "Research Notes.md",
+    "To Do.md",
     "To Do",
     "Archive/To Do.md",
     "Archive/Research and Life Notes.md",
