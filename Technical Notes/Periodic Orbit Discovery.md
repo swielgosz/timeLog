@@ -9,3 +9,5 @@ This contains the notes for my literature review regarding periodic orbit discov
 - Crossing events
 
 ## Shooting methods
+
+## Latent Space
