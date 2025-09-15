@@ -5,9 +5,12 @@ This contains the notes for my literature review regarding periodic orbit discov
 - Differential correction
 	- STMs needed for anything involving sensitivities, corrections, or stability
 - Continuation methods
-- Constraints
+- Constraints/symmetries
 - Crossing events
 
+Other terms to learn
+- Monodromy matrix
+- 
 ## Shooting methods
 
 ## Latent Space
