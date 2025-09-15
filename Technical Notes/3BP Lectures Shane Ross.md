@@ -1,1 +1,1 @@
-## Lecture 1 - 
+## Lecture 1 - `document.querySelector('video').playbackRate = 2.75`
