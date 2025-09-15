@@ -7,10 +7,12 @@ This contains the notes for my literature review regarding periodic orbit discov
 - Continuation methods
 - Constraints/symmetries
 - Crossing events
+- eigenanalysis
+	- what do the eigenvalues and eigenvectors of an STM indicate?
 
 Other terms to learn
 - Monodromy matrix
-- 
+- manifolds (local invariant manifolds)
 ## Shooting methods
 
 ## Latent Space
