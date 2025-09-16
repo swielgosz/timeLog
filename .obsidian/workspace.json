@@ -34,9 +34,21 @@
               "icon": "lucide-file",
               "title": "3BP Lectures Shane Ross"
             }
+          },
+          {
+            "id": "d4db6fc8c7c43192",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "Lecture 1 Intro, Equations of Motion, Nondimensionalization.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "Lecture 1 Intro, Equations of Motion, Nondimensionalization"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -186,10 +198,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "08c87bdcee45926a",
+  "active": "d4db6fc8c7c43192",
   "lastOpenFiles": [
-    "Lecture 1 Intro, Equations of Motion, Nondimensionalization.pdf",
     "Technical Notes/3BP Lectures Shane Ross.md",
+    "Lecture 1 Intro, Equations of Motion, Nondimensionalization.pdf",
     "Technical Notes/Periodic Orbit Discovery.md",
     "Technical Notes/GENERATING PERIODIC ORBITS IN THE CIRCULAR RESTRICTED THREEBODY PROBLEM WITH APPLICATIONS TO LUNAR SOUTH POLE COVERAGE - Grebow Thesis.md",
     "Fall 2025.md",
