@@ -11,5 +11,5 @@ F12 -> Console:
 - Multiple gravity assists and switching orbits
 - Trajectories in the four-body problem (patching two three-body trajectories)
 
-## Lecture  - 
+## Lecture  -2 
 ![[Lecture 1 Intro, Equations of Motion, Nondimensionalization.pdf]]
