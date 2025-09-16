@@ -23,3 +23,5 @@ The last term isn't necessary, it just makes it so that the JC at the triangular
 ![[Lecture 3 Energy, Jacobi Constant, Regions of Possible Motion.pdf]]
 ## Lagrange Points
 ![[Lecture 4 Lagrange Points- Equilibrium Points in Restricted 3-Body Problem.pdf]]
+## Linearized EOM
+![[Lecture 5 Motion near L1 and L2- Linearized Equations of Motion.pdf]]
