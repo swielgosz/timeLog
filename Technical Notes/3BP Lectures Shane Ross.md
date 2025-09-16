@@ -21,3 +21,5 @@ The last term isn't necessary, it just makes it so that the JC at the triangular
 
 ## Hamilton's Equations, Jacobi. Constant, Zero Velocity Curves, Hill Regions of Possible Motion
 ![[Lecture 3 Energy, Jacobi Constant, Regions of Possible Motion.pdf]]
+## Lagrange Points
+![[Lecture 4 Lagrange Points- Equilibrium Points in Restricted 3-Body Problem.pdf]]
