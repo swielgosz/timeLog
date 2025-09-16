@@ -62,7 +62,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -119,7 +119,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 218.5
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "8b5870f707c309dd",
@@ -212,15 +213,15 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "1b7c2af85210e216",
+  "active": "08c87bdcee45926a",
   "lastOpenFiles": [
+    "Lecture 1 Intro, Equations of Motion, Nondimensionalization.pdf",
     "Untitled.md",
     "Technical Notes/3BP Lectures Shane Ross.md",
     "Lecture 5 Motion near L1 and L2- Linearized Equations of Motion.pdf",
     "Lecture 4 Lagrange Points- Equilibrium Points in Restricted 3-Body Problem.pdf",
     "Lecture 3 Energy, Jacobi Constant, Regions of Possible Motion.pdf",
     "Lecture 2 Equations of Motion in Rotating Frame.pdf",
-    "Lecture 1 Intro, Equations of Motion, Nondimensionalization.pdf",
     "Technical Notes/Periodic Orbit Discovery.md",
     "Technical Notes/GENERATING PERIODIC ORBITS IN THE CIRCULAR RESTRICTED THREEBODY PROBLEM WITH APPLICATIONS TO LUNAR SOUTH POLE COVERAGE - Grebow Thesis.md",
     "Fall 2025.md",
