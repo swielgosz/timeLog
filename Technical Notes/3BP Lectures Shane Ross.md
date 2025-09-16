@@ -18,3 +18,5 @@ F12 -> Console:
 ![[Lecture 2 Equations of Motion in Rotating Frame.pdf]]The potential is
 $U(x,y,z) = -\frac{(1-\mu)}{r_1}-\frac{mu}{r_2}-\frac{1}{2}\mu(1-\mu)$ 
 The last term isn't necessary, it just makes it so that the JC at the triangular Lagrange points ($L_4$, $L_5$) is exactly 3 or a nondimensional energy of exactly -1/2
+
+## 
