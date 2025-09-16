@@ -10,3 +10,6 @@ F12 -> Console:
 - Construction of orbits with prescribed itineraries
 - Multiple gravity assists and switching orbits
 - Trajectories in the four-body problem (patching two three-body trajectories)
+
+## Lecture  - 
+![[Lecture 1 Intro, Equations of Motion, Nondimensionalization.pdf]]
