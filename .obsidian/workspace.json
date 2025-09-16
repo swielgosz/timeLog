@@ -186,11 +186,48 @@
       "obsidian-git:Open Git source control": false
     }
   },
+  "floating": {
+    "id": "cbb2bd3e2de0f0ac",
+    "type": "floating",
+    "children": [
+      {
+        "id": "4f12f5886491bf19",
+        "type": "window",
+        "children": [
+          {
+            "id": "355034780dda9631",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "3090685279344b1d",
+                "type": "leaf",
+                "state": {
+                  "type": "pdf",
+                  "state": {
+                    "file": "Lecture 1 Intro, Equations of Motion, Nondimensionalization.pdf"
+                  },
+                  "icon": "lucide-file-text",
+                  "title": "Lecture 1 Intro, Equations of Motion, Nondimensionalization"
+                }
+              }
+            ]
+          }
+        ],
+        "direction": "vertical",
+        "x": 343,
+        "y": 98,
+        "width": 1024,
+        "height": 800,
+        "maximize": false,
+        "zoom": 0
+      }
+    ]
+  },
   "active": "08c87bdcee45926a",
   "lastOpenFiles": [
     "Lecture 1 Intro, Equations of Motion, Nondimensionalization.pdf",
-    "Technical Notes/Periodic Orbit Discovery.md",
     "Technical Notes/3BP Lectures Shane Ross.md",
+    "Technical Notes/Periodic Orbit Discovery.md",
     "Technical Notes/GENERATING PERIODIC ORBITS IN THE CIRCULAR RESTRICTED THREEBODY PROBLEM WITH APPLICATIONS TO LUNAR SOUTH POLE COVERAGE - Grebow Thesis.md",
     "Fall 2025.md",
     "Notebook Contents.md",
