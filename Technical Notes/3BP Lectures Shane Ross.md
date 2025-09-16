@@ -13,3 +13,5 @@ F12 -> Console:
 
 ## Lecture  -2 
 ![[Lecture 1 Intro, Equations of Motion, Nondimensionalization.pdf]]
+
+## Lecture 3 - 
