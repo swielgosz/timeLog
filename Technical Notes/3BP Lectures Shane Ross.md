@@ -24,4 +24,4 @@ The last term isn't necessary, it just makes it so that the JC at the triangular
 ## Lagrange Points
 ![[Lecture 4 Lagrange Points- Equilibrium Points in Restricted 3-Body Problem.pdf]]
 ## Linearized EOM
-![[Lecture 5 Motion near L1 and L2- Linearized Equations of Motion.pdf]]
+![[Lecture 5 Motion near L1 and L2- Linearized Equations of Motion.pdf]]In eq 1, $Df$ is the Jacobian of $f$
