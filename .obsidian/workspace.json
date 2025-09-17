@@ -61,8 +61,7 @@
               "title": "Untitled"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -250,10 +249,10 @@
       }
     ]
   },
-  "active": "08c87bdcee45926a",
+  "active": "3375ce7e6ef8a3ec",
   "lastOpenFiles": [
-    "Lecture 2 Equations of Motion in Rotating Frame.pdf",
     "Technical Notes/3BP Lectures Shane Ross.md",
+    "Lecture 2 Equations of Motion in Rotating Frame.pdf",
     "Lecture 1 Intro, Equations of Motion, Nondimensionalization.pdf",
     "Untitled.md",
     "Lecture 5 Motion near L1 and L2- Linearized Equations of Motion.pdf",
