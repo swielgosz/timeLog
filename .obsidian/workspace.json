@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Fall 2025.md",
+                "file": "Technical Notes/3BP Lectures Shane Ross.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Fall 2025"
+              "title": "3BP Lectures Shane Ross"
             }
           },
           {
@@ -248,13 +248,13 @@
       }
     ]
   },
-  "active": "09fbc00869b033eb",
+  "active": "3375ce7e6ef8a3ec",
   "lastOpenFiles": [
+    "Fall 2025.md",
+    "Attachments/Lecture 2 Equations of Motion in Rotating Frame.pdf",
     "Resources.md",
     "Attachments/Lecture 1 Intro, Equations of Motion, Nondimensionalization.pdf",
-    "Fall 2025.md",
     "Archive/Research Notes.md",
-    "Attachments/Lecture 2 Equations of Motion in Rotating Frame.pdf",
     "Archive/Research and Life Notes.md",
     "Archive/To Do.md",
     "Technical Notes/3BP Lectures Shane Ross.md",
