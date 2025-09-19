@@ -75,7 +75,8 @@
               "title": "Untitled"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -225,8 +226,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3375ce7e6ef8a3ec",
+  "active": "d4db6fc8c7c43192",
   "lastOpenFiles": [
+    "Technical Notes/GENERATING PERIODIC ORBITS IN THE CIRCULAR RESTRICTED THREEBODY PROBLEM WITH APPLICATIONS TO LUNAR SOUTH POLE COVERAGE - Grebow Thesis.md",
     "Technical Notes/3BP Lectures Shane Ross.md",
     "Attachments/Lecture 1 Intro, Equations of Motion, Nondimensionalization.pdf",
     "Untitled.md",
@@ -236,7 +238,6 @@
     "Archive/Research Notes.md",
     "Archive/Research and Life Notes.md",
     "Archive/To Do.md",
-    "Technical Notes/GENERATING PERIODIC ORBITS IN THE CIRCULAR RESTRICTED THREEBODY PROBLEM WITH APPLICATIONS TO LUNAR SOUTH POLE COVERAGE - Grebow Thesis.md",
     "Technical Notes/Periodic Orbit Discovery.md",
     "Notebook Contents.md",
     "Untitled 1.base",
