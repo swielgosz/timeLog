@@ -76,9 +76,23 @@
               "icon": "lucide-file",
               "title": "Untitled"
             }
+          },
+          {
+            "id": "ed5e1249b3d25079",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Untitled 1.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Untitled 1"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -228,12 +242,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "d4db6fc8c7c43192",
+  "active": "ed5e1249b3d25079",
   "lastOpenFiles": [
+    "Untitled 1.md",
+    "Untitled.md",
+    "Technical Notes/3BP Lectures Shane Ross.md",
     "Attachments/Lecture 1 Intro, Equations of Motion, Nondimensionalization.pdf",
     "Technical Notes/GENERATING PERIODIC ORBITS IN THE CIRCULAR RESTRICTED THREEBODY PROBLEM WITH APPLICATIONS TO LUNAR SOUTH POLE COVERAGE - Grebow Thesis.md",
-    "Technical Notes/3BP Lectures Shane Ross.md",
-    "Untitled.md",
     "Attachments/Lecture 2 Equations of Motion in Rotating Frame.pdf",
     "Fall 2025.md",
     "Resources.md",
