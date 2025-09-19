@@ -211,43 +211,6 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "floating": {
-    "id": "cbb2bd3e2de0f0ac",
-    "type": "floating",
-    "children": [
-      {
-        "id": "ad59c0b5dada7cf0",
-        "type": "window",
-        "children": [
-          {
-            "id": "45975e32b9b48e85",
-            "type": "tabs",
-            "children": [
-              {
-                "id": "09fbc00869b033eb",
-                "type": "leaf",
-                "state": {
-                  "type": "pdf",
-                  "state": {
-                    "file": "Attachments/Lecture 2 Equations of Motion in Rotating Frame.pdf"
-                  },
-                  "icon": "lucide-file-text",
-                  "title": "Lecture 2 Equations of Motion in Rotating Frame"
-                }
-              }
-            ]
-          }
-        ],
-        "direction": "vertical",
-        "x": 343,
-        "y": 98,
-        "width": 1024,
-        "height": 800,
-        "maximize": false,
-        "zoom": 0
-      }
-    ]
-  },
   "active": "3375ce7e6ef8a3ec",
   "lastOpenFiles": [
     "Attachments/Lecture 2 Equations of Motion in Rotating Frame.pdf",
