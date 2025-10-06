@@ -1,3 +1,134 @@
+# September 24
+## Recap
+Yesterday in my 1;1, John and I agreed that it would make sense to not focus too. much on the education portion of my planning for the future phase. I haven't done much development in a while, so I want to get back to that.
+
+I will build out capabilities for differential correction as needed. I won't focus on building out an extensive repository before I have a need for it. Rather, I'll 
+# September 23
+## Recap
+Last week, I gave a literature review about periodic orbit discovery. I didn't get to multiple shooting methods or collocation, but will need to implement these in my own work. I want to go back and add these methods to the colab I shared out. I have a few other updates to make that I noted within the colab to work through.
+
+Ultimately, I want to have a dynamics repo hopefully eventually extending to PO and QPO discovery in CR3BP, 3BP, 4BP (maybe include other trajectories?). I have a general outline of what I want this to look like, but John and I are going to discuss this further today.
+
+As I continue to work on this, I also need to finalize my schedule and ultimate goal for the semester. We have an idea of where to go but not how to do it.
+
+As a jumping off point, John recommended "Spacecraft Relative Motion Dynamics and Control Using Fundamental Modal Solution Constants" and "Geometric perspectives on fundamental solutions in the linearized satellite relative motion problem" from HP Schaub's group. I started working through those yesterday as well as some of my remaining Shane Ross videos. I want to review these in more depth today to be able to identify if/where they will be useful for us.
+
+## Goals
+- [x]  Second pass through papers by HP Schaub
+	- [ ] Be able to explain them and identify if/where they will relate to our problem
+- [x] Solidify goal for the semester in words
+	- [x] I have notes on my plan, but I should summarize them into a more concrete problem statement and identify areas that will require the mose research/effort
+	- [ ] Similarly, we started a semester schedule but I still need to fill in some details and dates
+- [ ] Populate colab notebook with multiple shooting theory
+- [ ] Populate colab notebook with collocation theory
+- [ ] implement multiple shooting
+- [ ] implement collocation
+- [ ] transfer code from colab notebook to a more modular format in a manner that would be used for future work
+
+## Problem Statement
+We aim to develop a neural ODE framework for discovering periodic orbits in increasingly complex dynamical systems. This amounts to solving challenging boundary value problems in highly nonlinear settings.
+
+Traditionally, periodic orbits are identified using numerical methods such as differential correction. These techniques often fail in strongly nonlinear regimes or when long integration times result in large accumulated errors.
+
+To mitigate these limitations, our approach will use neural ODEs to parameterize the dynamics in a latent space, where they can be encouraged towards smooth and near-linear forms through training. This representation is more amenable to tools from numerical dynamical systems theory. We hypothesize that this approach will enable the discovery of periodic orbits that are otherwise inaccessible as the system of interest grows in complexity and nonlinearity. The resulting framework should increase the probability of converging to solutions of the boundary value problems that underlie periodic orbit discovery, even in complex nonlinear systems.
+
+## Geometric perspectives on fundamental solutions in the linearized satellite motion problem
+
+![[Pasted image 20250923131108.png]]
+Modal decomposition for linear systems usually means diagonalizing a constant matrix. If you have a linear time-invariant (LTI) system
+$$
+
+\dot{x} = A x,
+
+$$
+you can diagonalize $A = V \Lambda V^{-1}$, and the solutions are combinations of exponential modes
+$$
+
+x(t) = \sum_i c_i v_i e^{\lambda_i t}.
+
+$$
+That is the standard modal decomposition.
+
+For relative motion problems, only the Clohessy–Wiltshire (CW) case is LTI. Most other formulations (eccentric reference orbits, CR3BP, etc.) are linear time-varying (LTV):
+$$
+
+\dot{x} = A(t)x, \quad A(t+T) = A(t).
+
+$$
+Here the coefficients are periodic in time, and you cannot simply diagonalize one constant matrix.
+
+Lyapunov–Floquet theory says there exists a periodic change of variables
+$$
+
+x(t) = P(t) z(t), \quad P(t+T)=P(t),
+
+$$
+such that the new coordinates satisfy
+
+$$
+
+\dot{z} = \Lambda z,
+
+$$
+with constant $\Lambda$. This shows any LTV system with periodic coefficients is equivalent to an LTI system.
+
+  
+Section IIA explains this in more detail:
+Equation (2) says $x = P(t) z$, $z = P(t)^{-1}x$. 
+Equation (3) shows that in the new coordinates the dynamics reduce to $\dot{z} = \Lambda z$. 
+Equation (4) is the compatibility condition
+$$
+
+P(t)^{-1} A(t) P(t) - P(t)^{-1}\dot{P}(t) = \Lambda.
+
+$$
+Equation (5) constructs $P(t)$ using the state transition matrix $\Phi(t;t_0)$:
+$$
+
+P(t) = \Phi(t;t_0) e^{-\Lambda(t-t_0)}.
+
+$$
+
+Equation (6) enforces that $P(t)$ is the identity at the epoch time. Equation (7) shows that
+$$
+
+\Lambda = \tfrac{1}{T}\ln \Phi(t_0+T;t_0),
+
+$$
+which connects the constant matrix $\Lambda$ to the monodromy matrix.
+Once you have $\Lambda$, and assuming it is diagonalizable, the solution takes the form
+
+$$
+
+x(t) = \sum_i c_i P(t) v_i e^{\lambda_i t},
+
+$$
+
+where the $v_i$ are eigenvectors and the $\lambda_i$ are eigenvalues of $\Lambda$. The exponential terms govern growth, decay, or oscillation, and the periodic modulation $P(t)$ shapes the time dependence.
+
+For CR3BP or eccentric relative motion, the system is LTV with periodic coefficients. Lyapunov–Floquet theory lets you still write solutions as modal decompositions, but with periodic modulation. The eigenvalues $\lambda_i$ are obtained from $\Lambda = \frac{1}{T}\ln M$, with $M$ the monodromy matrix. Stability is determined by these eigenvalues, or equivalently by the multipliers of the monodromy matrix. The periodic modulation $P(t)$ does not affect stability but is needed if you want the actual time-domain solution.
+
+In summary, modal decomposition is straightforward in the CW problem because the system is LTI. In more general periodic systems, Lyapunov–Floquet theory extends the idea: solutions look like exponential modes, but with periodic modulation. Stability comes from the exponential part, which is computed from the monodromy matrix.
+
+ --- 
+# September 17
+## Recap
+I am preparing for my literature review about numerical techniques to discover periodic orbits in the CR3BP. I originally began my introduction of shooting methods with a simple example akin to the classic cannon problem, but as I've gone on I don't think that it's worth including this with the time that I have.
+
+I collected many resources regarding PO discovery in the CR3BP (primarily papers, theses, repos from Kathleen Howell's group) but I realized my recollection of the fundamentals of stability analysis was shaky and the resources that I was referencing were a step beyond where my understanding was at.
+
+To this end, I am working through Shane Ross's [CR3BP course](https://www.youtube.com/playlist?list=PLUeHTafWecAXDF9vWi7PuE2ZQQ2hXyYt_), which provides a good primer on the content and introduces numerical differentiation methods for orbit discovery. I brushed up on some fundamental concepts from linear algebra/numerical methods/astrodynamics, most notably in the area of stability analysis. Now, I'm ready to take a deeper dive into the actual implementation side of numerical differential correction. This will involve:
+- STM
+- Single Shooting
+- Multiple Shooting
+- Collocation
+
+## Goals for the day
+At a high level, I want to cement my understanding of differential correction, with a focus on single and multiple shooting methods today, and collocation tomorrow. I want to end the day with an better understanding of collocation and the monodromy matrix, but not necessarily do anything with this yet.
+- [ ] Refer to Grebow's thesis and https://bluescarni.github.io/heyoka.py/notebooks/Periodic%20orbits%20in%20the%20CR3BP.html for numerical methods guidance
+- [ ] Before coding, outline the steps required in detail
+- [ ] At a minimum, Lyapunov orbit discovery
+- [ ] Preferably halo or some type of 3D orbit discovery as well
 
 # September 9
 
