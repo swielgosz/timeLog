@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Fall 2025.md",
+                "file": "Archive/Research Notes.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Fall 2025"
+              "title": "Research Notes"
             }
           }
         ],
@@ -188,6 +188,7 @@
   },
   "active": "08c87bdcee45926a",
   "lastOpenFiles": [
+    "Fall 2025.md",
     "Attachments/Pasted image 20251006110545.png",
     "Attachments/Pasted image 20251006110526.png",
     "Attachments/Pasted image 20251006110119.png",
@@ -196,7 +197,6 @@
     "Attachments/orbits_visualization_3d.pdf",
     "Notebook Contents.md",
     "Archive/Research Notes.md",
-    "Fall 2025.md",
     "Resources.md",
     "Attachments/Pasted image 20250923131108.png",
     "Lit Review Color Code.md",
