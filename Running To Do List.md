@@ -1,0 +1,2 @@
+- [ ] parallelize data generation
+- [ ] new acceleration metric - time averaged acceleration error
