@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Archive/Research Notes.md",
+                "file": "Fall 2025.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Research Notes"
+              "title": "Fall 2025"
             }
           },
           {
@@ -35,8 +35,7 @@
               "title": "Research Notes"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -186,8 +185,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "08c87bdcee45926a",
+  "active": "3375ce7e6ef8a3ec",
   "lastOpenFiles": [
+    "Archive/Research Notes.md",
     "Fall 2025.md",
     "Attachments/Pasted image 20251006110545.png",
     "Attachments/Pasted image 20251006110526.png",
@@ -196,7 +196,6 @@
     "Attachments/loss_curves_3BP.pdf",
     "Attachments/orbits_visualization_3d.pdf",
     "Notebook Contents.md",
-    "Archive/Research Notes.md",
     "Resources.md",
     "Attachments/Pasted image 20250923131108.png",
     "Lit Review Color Code.md",
