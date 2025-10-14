@@ -35,8 +35,7 @@
               "title": "Running To Do List"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -186,10 +185,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f79ddf59d05d5e29",
+  "active": "3375ce7e6ef8a3ec",
   "lastOpenFiles": [
-    "Fall 2025.md",
     "Running To Do List.md",
+    "Fall 2025.md",
     "Archive/Research Notes.md",
     "Attachments/Pasted image 20251006110545.png",
     "Attachments/Pasted image 20251006110526.png",
