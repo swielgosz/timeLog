@@ -1,2 +1,3 @@
 - [ ] parallelize data generation
+	- [ ] if datasets are very large - will we have to break them up to save/upload them for memory purposes? for the time being, curiosity should be fine
 - [ ] new acceleration metric - time averaged acceleration error
