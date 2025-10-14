@@ -171,6 +171,9 @@ Ideas:
 		- No: Flight computers are resource-constrained — they can’t run ephemeris-driven N-body propagation in real time.
 
 ## Summary
+
+we work on astro and ML. we are looking at trajectory design, and in particular these useful orbits 
+
 Today I continued research for literature review regarding periodic orbit discovery. Technical notes for relevant topics are found in Technical Notes/Periodic Orbit Discovery. I began implementing shooting methods in a Jupyter notebook. I will first present a simple problem where we only need to use root-finding methods, then advance to the more complex Kepler's problem and CR3BP where STMs are required. 
 
 In my 1:1, John and I agreed on a research idea which will require more fine tuning, but at a high level we want to design neural ODEs to point us to POs or QPOs in complex environments (CR3BP -> 3BP -> 4BP).  We are hoping these become observable in latent space. We're not sure how to do this yet and it will require heavy research/brainstorming, but we are using Ethan Bernet's work as a jumping off point. 
