@@ -2,9 +2,9 @@ we work on astro and ML. we are looking at trajectory design, and in particular 
 
 john liked when I said spawn transfer from
 
-don't say: neural odes are better at learning smoother represenations of the dynamics
+don't say: neural odes are better at learning smoother represenations of the dynamics. we're gonna make it more nearly linear 
 don't say the proof of concept is useful
-cushion myself - these are preliminary results. we want to prove that we can reproduce these results 
+cushion myself - these are preliminary results. we want to prove that we can reproduce these results before going to more interesting systems in latent dynamics. stepping stone in utility
 
 
 Today I continued research for literature review regarding periodic orbit discovery. Technical notes for relevant topics are found in Technical Notes/Periodic Orbit Discovery. I began implementing shooting methods in a Jupyter notebook. I will first present a simple problem where we only need to use root-finding methods, then advance to the more complex Kepler's problem and CR3BP where STMs are required. 
