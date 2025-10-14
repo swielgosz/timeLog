@@ -64,7 +64,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -214,7 +214,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "6f8f9ce444fcace3",
+  "active": "d243e23252eb70fa",
   "lastOpenFiles": [
     "sensitivity analysis.md",
     "code.md",
