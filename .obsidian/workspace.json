@@ -22,6 +22,18 @@
             }
           },
           {
+            "id": "dcdf4e370899027c",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "Attachments/Pasted image 20251016122314.png"
+              },
+              "icon": "lucide-image",
+              "title": "Pasted image 20251016122314"
+            }
+          },
+          {
             "id": "8c0a2cf8441009e7",
             "type": "leaf",
             "state": {
@@ -73,7 +85,8 @@
               "title": "Untitled"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -223,10 +236,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f79ddf59d05d5e29",
+  "active": "dcdf4e370899027c",
   "lastOpenFiles": [
-    "Untitled.md",
     "Fall 2025.md",
+    "Untitled.md",
     "Attachments/heatmap_data_sensitivity_circular_testbaseline.png",
     "Attachments/heatmap_data_sensitivity_circular.png",
     "Attachments/W&B Chart 10_21_2025, 11_32_57 AM.png",
