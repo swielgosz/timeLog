@@ -22,6 +22,42 @@
             }
           },
           {
+            "id": "f12f8acebab79720",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "Attachments/W&B Chart 10_21_2025, 11_14_09 AM.png"
+              },
+              "icon": "lucide-image",
+              "title": "W&B Chart 10_21_2025, 11_14_09 AM"
+            }
+          },
+          {
+            "id": "f3b99a3d93e2e6a0",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "Attachments/W&B Chart 10_21_2025, 11_14_09 AM.png"
+              },
+              "icon": "lucide-image",
+              "title": "W&B Chart 10_21_2025, 11_14_09 AM"
+            }
+          },
+          {
+            "id": "01e443e89055c0b0",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "Attachments/W&B Chart 10_21_2025, 11_13_27 AM.png"
+              },
+              "icon": "lucide-image",
+              "title": "W&B Chart 10_21_2025, 11_13_27 AM"
+            }
+          },
+          {
             "id": "a6ed1c4891f6c1aa",
             "type": "leaf",
             "state": {
@@ -121,8 +157,7 @@
               "title": "Untitled"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -272,9 +307,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "a6ed1c4891f6c1aa",
+  "active": "f79ddf59d05d5e29",
   "lastOpenFiles": [
+    "Attachments/multi_dataset_xy_fixnu0 1.pdf",
+    "Attachments/W&B Chart 10_21_2025, 11_14_09 AM.png",
     "Fall 2025.md",
+    "Attachments/W&B Chart 10_21_2025, 11_13_27 AM.png",
+    "Attachments/heatmap_data_sensitivity_baseline.png",
     "Attachments/orbital_elements_hist_baseline 1.png",
     "Attachments/multi_dataset_xy_baseline 1 1.pdf",
     "Attachments/multi_dataset_xy_baseline 1.pdf",
@@ -286,9 +325,6 @@
     "Attachments/W&B Chart 10_21_2025, 11_32_15 AM.png",
     "Attachments/orbital_elements_hist_circular.png",
     "Attachments/multi_dataset_xy_circular.pdf",
-    "Attachments/W&B Chart 10_21_2025, 11_14_09 AM.png",
-    "Attachments/W&B Chart 10_21_2025, 11_13_27 AM.png",
-    "Attachments/W&B Chart 10_21_2025, 11_12_54 AM.png",
     "Attachments/multi_dataset_xy_baseline 2.pdf",
     "Attachments/multi_dataset_xy_fixnu0.pdf",
     "Attachments/multi_dataset_xy_baseline.pdf",
