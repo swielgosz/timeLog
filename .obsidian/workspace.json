@@ -22,6 +22,42 @@
             }
           },
           {
+            "id": "a6ed1c4891f6c1aa",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "Attachments/heatmap_data_sensitivity_baseline.png"
+              },
+              "icon": "lucide-image",
+              "title": "heatmap_data_sensitivity_baseline"
+            }
+          },
+          {
+            "id": "f8fcbfb112095c54",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "Attachments/orbital_elements_hist_baseline 1.png"
+              },
+              "icon": "lucide-image",
+              "title": "orbital_elements_hist_baseline 1"
+            }
+          },
+          {
+            "id": "a2b4e669101de170",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "Attachments/multi_dataset_xy_baseline 1 1.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "multi_dataset_xy_baseline 1 1"
+            }
+          },
+          {
             "id": "dcdf4e370899027c",
             "type": "leaf",
             "state": {
@@ -236,9 +272,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "dcdf4e370899027c",
+  "active": "a6ed1c4891f6c1aa",
   "lastOpenFiles": [
     "Fall 2025.md",
+    "Attachments/orbital_elements_hist_baseline 1.png",
+    "Attachments/multi_dataset_xy_baseline 1 1.pdf",
+    "Attachments/multi_dataset_xy_baseline 1.pdf",
+    "Attachments/Pasted image 20251016122314.png",
     "Untitled.md",
     "Attachments/heatmap_data_sensitivity_circular_testbaseline.png",
     "Attachments/heatmap_data_sensitivity_circular.png",
@@ -249,11 +289,8 @@
     "Attachments/W&B Chart 10_21_2025, 11_14_09 AM.png",
     "Attachments/W&B Chart 10_21_2025, 11_13_27 AM.png",
     "Attachments/W&B Chart 10_21_2025, 11_12_54 AM.png",
-    "Attachments/W&B Chart 10_21_2025, 11_12_25 AM.png",
-    "Attachments/W&B Chart 10_21_2025, 11_10_30 AM.png",
     "Attachments/multi_dataset_xy_baseline 2.pdf",
     "Attachments/multi_dataset_xy_fixnu0.pdf",
-    "Attachments/multi_dataset_xy_baseline 1.pdf",
     "Attachments/multi_dataset_xy_baseline.pdf",
     "sensitivity analysis.md",
     "code.md",
@@ -272,7 +309,6 @@
     "Attachments/Lecture 2 Equations of Motion in Rotating Frame.pdf",
     "Archive/Research and Life Notes.md",
     "Technical Notes/Periodic Orbit Discovery.md",
-    "Untitled 1.base",
     "To Do.md",
     "February/Untitled.md",
     "Welcome.md"
