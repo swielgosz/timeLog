@@ -48,6 +48,16 @@
               "icon": "lucide-file",
               "title": "code"
             }
+          },
+          {
+            "id": "bd5e802e267411e4",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
           }
         ]
       }
@@ -201,16 +211,16 @@
   },
   "active": "f79ddf59d05d5e29",
   "lastOpenFiles": [
-    "Attachments/Pasted image 20251017125450.png",
-    "Attachments/Pasted image 20251017124525.png",
-    "Attachments/Pasted image 20251016122946.png",
-    "Attachments/Pasted image 20251016122832.png",
     "Attachments/Pasted image 20251016122314.png",
-    "Attachments/Pasted image 20251016122305.png",
-    "code.md",
     "sensitivity analysis.md",
-    "Resources.md",
+    "Attachments/Pasted image 20251016122305.png",
+    "Attachments/Pasted image 20251016122832.png",
+    "Attachments/Pasted image 20251016122946.png",
+    "Attachments/Pasted image 20251017124525.png",
+    "Attachments/Pasted image 20251017125450.png",
     "Fall 2025.md",
+    "code.md",
+    "Resources.md",
     "Running To Do List.md",
     "Untitled.md",
     "Archive/Research Notes.md",
@@ -222,7 +232,6 @@
     "Attachments/loss_curves_3BP.pdf",
     "Attachments/orbits_visualization_3d.pdf",
     "Notebook Contents.md",
-    "Attachments/Pasted image 20250923131108.png",
     "Lit Review Color Code.md",
     "Technical Notes/GENERATING PERIODIC ORBITS IN THE CIRCULAR RESTRICTED THREEBODY PROBLEM WITH APPLICATIONS TO LUNAR SOUTH POLE COVERAGE - Grebow Thesis.md",
     "Untitled 1.md",
