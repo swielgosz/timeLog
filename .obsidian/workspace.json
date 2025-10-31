@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Running To Do List.md",
+                "file": "Fall 2025.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Running To Do List"
+              "title": "Fall 2025"
             }
           },
           {
@@ -309,6 +309,7 @@
   },
   "active": "f79ddf59d05d5e29",
   "lastOpenFiles": [
+    "Running To Do List.md",
     "Fall 2025.md",
     "Attachments/multi_dataset_xy_fixnu0 1.pdf",
     "Attachments/W&B Chart 10_21_2025, 11_14_09 AM.png",
@@ -331,7 +332,6 @@
     "sensitivity analysis.md",
     "code.md",
     "Resources.md",
-    "Running To Do List.md",
     "Archive/Research Notes.md",
     "Archive/To Do.md",
     "Attachments/loss_curves_3BP.pdf",
