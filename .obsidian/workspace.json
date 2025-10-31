@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Fall 2025.md",
+                "file": "Running To Do List.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Fall 2025"
+              "title": "Running To Do List"
             }
           },
           {
@@ -309,9 +309,9 @@
   },
   "active": "f79ddf59d05d5e29",
   "lastOpenFiles": [
+    "Fall 2025.md",
     "Attachments/multi_dataset_xy_fixnu0 1.pdf",
     "Attachments/W&B Chart 10_21_2025, 11_14_09 AM.png",
-    "Fall 2025.md",
     "Attachments/W&B Chart 10_21_2025, 11_13_27 AM.png",
     "Attachments/heatmap_data_sensitivity_baseline.png",
     "Attachments/orbital_elements_hist_baseline 1.png",
@@ -342,7 +342,6 @@
     "Untitled 1.md",
     "Technical Notes/3BP Lectures Shane Ross.md",
     "Attachments/Lecture 1 Intro, Equations of Motion, Nondimensionalization.pdf",
-    "Attachments/Lecture 2 Equations of Motion in Rotating Frame.pdf",
     "Archive/Research and Life Notes.md",
     "Technical Notes/Periodic Orbit Discovery.md",
     "To Do.md",
