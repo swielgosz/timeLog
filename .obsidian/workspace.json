@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "8b5870f707c309dd",
@@ -173,6 +174,9 @@
   },
   "active": "df097145813889a2",
   "lastOpenFiles": [
+    "Attachments/Pasted image 20251107161725.png",
+    "Attachments/Pasted image 20251107161440.png",
+    "Attachments/Pasted image 20251107161434.png",
     "Attachments/Pasted image 20251107160547.png",
     "Attachments/Pasted image 20251107160541.png",
     "Attachments/Pasted image 20251107130500.png",
@@ -181,9 +185,6 @@
     "Attachments/Pasted image 20251107125856.png",
     "Attachments/Pasted image 20251107125708.png",
     "Attachments/Pasted image 20251107125052.png",
-    "Attachments/Pasted image 20251107125037.png",
-    "Attachments/Pasted image 20251107125020.png",
-    "Attachments/Pasted image 20251107123808.png",
     "Untitled.md",
     "code.md",
     "sensitivity analysis.md",
