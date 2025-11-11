@@ -12,3 +12,6 @@ We can also get the angle between the acceleration and the position, where we kn
 - \theta is the angle between **r** and **a** in [0,\pi].
     
 - For a purely attractive **central** force (2BP), \mathbf a is antiparallel to \mathbf r ⇒ \theta \approx \pi (180°).
+
+
+
