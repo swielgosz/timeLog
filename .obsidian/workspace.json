@@ -35,8 +35,7 @@
               "title": "Advising Meetings"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -186,8 +185,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "8c9ada01c0f8313d",
+  "active": "df097145813889a2",
   "lastOpenFiles": [
+    "Advising Meetings.md",
     "Attachments/Pasted image 20251111134957.png",
     "Attachments/Pasted image 20251111134948.png",
     "Attachments/Pasted image 20251111134907.png",
@@ -198,9 +198,7 @@
     "Attachments/Pasted image 20251111134744.png",
     "Attachments/Pasted image 20251111134730.png",
     "Attachments/Pasted image 20251111134307.png",
-    "Attachments/Pasted image 20251111134300.png",
     "Fall 2025.md",
-    "Advising Meetings.md",
     "Untitled.md",
     "code.md",
     "sensitivity analysis.md",
