@@ -14,4 +14,42 @@ We can also get the angle between the acceleration and the position, where we kn
 - For a purely attractive **central** force (2BP), \mathbf a is antiparallel to \mathbf r ⇒ \theta \approx \pi (180°).
 
 
+## Baseline:
+``` python
+data:
+  dataset_name : "complex_TBP_planar_4"
+  problem: '2BP'
 
+parameters:
+
+  ## MINIMAL LENGTH STRATEGY
+  length_strategy:
+                      [[ 
+                        [0.0, 1.0],                        
+                      ]]
+  lr_strategy: [[0.001, ]]
+  steps_strategy: [[1000, ]]
+  segment_length_strategy: [[4,]]
+
+  width: 16
+  depth: 2
+  train_val_split: 0.8
+  batch_size: 32
+  num_trajs: -1
+
+  # loss_fcn: "mean_squared_error"
+  loss_fcn: "percent_error"
+  # loss_fcn: "percent_error_plus_nmse"
+
+  activation: tanh
+  # activation: leaky_relu
+  # activation: elu
+
+  feature_layer: sph_4D_rinv_vel
+  # feature_layer: sph_4D_rinv_vinv
+  output_layer: mlp_4D
+  planar_constraint: true
+
+  rtol: 0.000001
+  atol: 0.00000001
+  ```
