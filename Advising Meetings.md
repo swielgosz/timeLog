@@ -20,7 +20,10 @@ We can also get the angle between the acceleration and the position, where we kn
 Possible errors:
 may occur at apoapsis, periapsis, when we cross -1 or 1
 repeat the plots for the acceleration components and magnitude 
-if $\hat{a}_{true} = \hat{a}__{pred}
+if $\hat{a}_{true} = \hat{a}_{pred}$
+return to og config with spikes - why are they there?
+make the same plots that I have for input features, but for output features 
+
 ## Baseline:
 ``` python
 data:
