@@ -16,6 +16,9 @@ We can also get the angle between the acceleration and the position, where we kn
 ## Dataset
 ![[Pasted image 20251111133559.png]]
 ![[Pasted image 20251111133754.png]]
+
+Possible errors:
+may occur at apoapsis, periapsis, when we cross -1 or 1
 ## Baseline:
 ``` python
 data:
