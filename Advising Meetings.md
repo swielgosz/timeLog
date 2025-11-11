@@ -64,3 +64,51 @@ loss:
 Our model may not be complex enough
 
 ## v2 - increase depth to 4
+``` python
+parameters:
+
+  ## MINIMAL LENGTH STRATEGY
+  length_strategy:
+                      [[ 
+                        [0.0, 1.0],                        
+                      ]]
+  lr_strategy: [[0.001, ]]
+  steps_strategy: [[1000, ]]
+  segment_length_strategy: [[4,]]
+
+  width: 16
+  depth: 4
+  train_val_split: 0.8
+  batch_size: 32
+  num_trajs: -1
+
+  # loss_fcn: "mean_squared_error"
+  loss_fcn: "percent_error"
+  # loss_fcn: "percent_error_plus_nmse"
+
+  activation: tanh
+  # activation: leaky_relu
+  # activation: elu
+
+  feature_layer: sph_4D_rinv_vel
+  # feature_layer: sph_4D_rinv_vinv
+  output_layer: mlp_4D
+  planar_constraint: true
+
+  rtol: 0.000001
+  atol: 0.00000001
+```
+![[Pasted image 20251111134744.png]]
+![[Pasted image 20251111134750.png]]
+![[Pasted image 20251111134806.png]]
+![[Pasted image 20251111134730.png]]
+![[Pasted image 20251111134820.png]]
+## v3 - relu
+
+## v4 - leaky relu
+![[Pasted image 20251111134856.png]]
+![[Pasted image 20251111134907.png]]
+![[Pasted image 20251111134948.png]]
+![[Pasted image 20251111134957.png]]
+## v5 - change input features
+Previously, input features were 1/r, x/r, y/r, z/r, and velocity. replace velocity with velocity magnitude and direction.
