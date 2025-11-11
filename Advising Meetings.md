@@ -13,7 +13,9 @@ We can also get the angle between the acceleration and the position, where we kn
     
 - For a purely attractive **central** force (2BP), \mathbf a is antiparallel to \mathbf r ⇒ \theta \approx \pi (180°).
 
-
+## Dataset
+![[Pasted image 20251111133559.png]]
+![[Pasted image 20251111133754.png]]
 ## Baseline:
 ``` python
 data:
@@ -53,3 +55,12 @@ parameters:
   rtol: 0.000001
   atol: 0.00000001
   ```
+loss:
+![[Pasted image 20251111133931.png]]
+![[Pasted image 20251111133936.png]]
+![[Pasted image 20251111134252.png]]![[Pasted image 20251111134300.png]]
+![[Pasted image 20251111134307.png]]
+
+Our model may not be complex enough
+
+## v2 - increase depth to 4
