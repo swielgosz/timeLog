@@ -19,6 +19,8 @@ We can also get the angle between the acceleration and the position, where we kn
 
 Possible errors:
 may occur at apoapsis, periapsis, when we cross -1 or 1
+repeat the plots for the acceleration components and magnitude 
+if $\hat{a}_{true} = \hat{a}__{pred}
 ## Baseline:
 ``` python
 data:
