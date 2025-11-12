@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Fall 2025.md",
+                "file": "code.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Fall 2025"
+              "title": "code"
             }
           },
           {
@@ -187,10 +187,10 @@
   },
   "active": "df097145813889a2",
   "lastOpenFiles": [
+    "Fall 2025.md",
     "Attachments/Pasted image 20251112102520.png",
     "Attachments/Pasted image 20251112102231.png",
     "Advising Meetings.md",
-    "Fall 2025.md",
     "Attachments/Pasted image 20251111134957.png",
     "Attachments/Pasted image 20251111134948.png",
     "Attachments/Pasted image 20251111134907.png",
@@ -199,7 +199,6 @@
     "Attachments/Pasted image 20251111134806.png",
     "Attachments/Pasted image 20251111134750.png",
     "Attachments/Pasted image 20251111134744.png",
-    "Attachments/Pasted image 20251111134730.png",
     "Untitled.md",
     "code.md",
     "sensitivity analysis.md",
