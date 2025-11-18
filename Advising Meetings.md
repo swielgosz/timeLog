@@ -1,5 +1,9 @@
 # November 18
-
+ next week:
+ - direciton fixed
+ - redo conference stuff
+ - what else needs to be done?
+- pending sufficient data, wer could have a segmentaiton and v
 John's work enforced $\Lambda ^2 u = 0$
 Take gradient with repect to output ($\grad \dot \vec{a}$) (equivalent to \vec{grad}u = -\vec{a})
 
@@ -11,7 +15,17 @@ this is based on John's heurisitics and whatnot
 
 - not done with characterization - we need to run sensitivity studies with the fresh setup
 	- this should be done within the next week
-	- we should have everything we need bu
+	- we should have everything we need but in latent ODEs
+	- John is optimistic that we can do this by the end of the month
+	- gives me December for latent ODEs 
+- end this month with very good to have all the differential correction stuff done
+- if we have all pieces in place by January, that is good
+- get scripts ready for latent odes
+- studies shouldn't take more than one night to complete - should be 6 hoursish
+- john isn't convinced that dot product. pass features through sigmoid for the magnitude (0 to 1), and then tanh for the rest
+- minimize number of constraints included for the baseline
+- could include a section for other knobs to turn
+- first try enforcing magnitude 
 ## Dataset
 ![[Pasted image 20251111133754.png]]
 ![[Pasted image 20251111133559.png]]
