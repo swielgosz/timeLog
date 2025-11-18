@@ -1,8 +1,10 @@
 # November 18
 
-Debugging this behavior:
-
+## Dataset
+![[Pasted image 20251111133754.png]]
+![[Pasted image 20251111133559.png]]
 ## v0- baseline
+Debugging this behavior:
 ![[Pasted image 20251112102231.png]]
 config:
 ``` python
@@ -36,7 +38,7 @@ parameters:
   atol: 0.00000001
 ```
 
-
+Time to run: 
 Trying to speed up training so I can debug better. Let's try longer segments first, then maybe lower depth.  
 
 # v1 - longer segment length (trying to speed up training)
