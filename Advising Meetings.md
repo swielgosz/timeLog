@@ -86,6 +86,35 @@ Turns out, we have very little data at periapsis for highly eccentric orbits!
 
 Running for 5000 steps to be safe after 1000 was not converged.
 Time to run: 2:47
+![[Pasted image 20251118111714.png]]
+![[Pasted image 20251118111722.png]]
+![[Pasted image 20251118111729.png]]
+![[Pasted image 20251118111747.png]]
+![[Pasted image 20251118111814.png]]
+![[Pasted image 20251118111828.png]]
+![[Pasted image 20251118111800.png]]
+
+Validation gap looks a lot better, but mlp output behaviro is 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # November 11
