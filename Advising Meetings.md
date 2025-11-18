@@ -385,6 +385,10 @@ Conclusions so far:
 - we need to enforce ||dir_acc|| = 1 to avoid acceleration dips previously seen
 - There is a balance of model architecture needed to keep behavior smooth
 - one model looks correct but the acceleration magnitude and directions are mirrored?
+![[Pasted image 20251118131059.png]]
+
+we need to enforce that the force is always attractive
+
 # November 11
 Is there a way we can view the acceleration magnitude and direction similar to how we applied the model and viewed the feature layer components?
 
