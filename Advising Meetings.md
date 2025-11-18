@@ -3,6 +3,8 @@
 John's work enforced $\Lambda ^2 u = 0$
 Take gradient with repect to output ($\grad \dot \vec{a}$) (equivalent to \vec{grad}u = -\vec{a})
 
+re:validation data - pick a random seed and find distribution that is closer 
+
 
 ## Dataset
 ![[Pasted image 20251111133754.png]]
