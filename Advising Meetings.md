@@ -380,7 +380,11 @@ parameters:
 ![[Pasted image 20251118123249.png]]
 ![[Pasted image 20251118123306.png]]
 
-
+## returning to previous model
+Conclusions so far:
+- we need to enforce ||dir_acc|| = 1 to avoid acceleration dips previously seen
+- There is a balance of model architecture needed to keep behavior smooth
+- one model looks correct but the acceleration magnitude and directions are mirrored?
 # November 11
 Is there a way we can view the acceleration magnitude and direction similar to how we applied the model and viewed the feature layer components?
 

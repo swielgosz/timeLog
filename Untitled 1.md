@@ -12,3 +12,4 @@ I meant that the part of the network producing the acceleration vector (its magn
 Together these adjustments give the head enough expressiveness while forcing physically consistent outputs—better matching the truth during those periapsis spikes.
 
 --- 
+what really confuses me is that the angle between the position and acceleration should be pi and it is for both the ground truth data and the accelerations.
