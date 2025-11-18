@@ -4,8 +4,14 @@ John's work enforced $\Lambda ^2 u = 0$
 Take gradient with repect to output ($\grad \dot \vec{a}$) (equivalent to \vec{grad}u = -\vec{a})
 
 re:validation data - pick a random seed and find distribution that is closer 
+domain of output is way smaller when we choose the bounds - i.e. the directions are bounded vs the cartesian accelerations
+John argues that smaller domain is more learnable because we are far better conditioned 
+rapid interpretability is also useful
+this is based on John's heurisitics and whatnot
 
-
+- not done with characterization - we need to run sensitivity studies with the fresh setup
+	- this should be done within the next week
+	- we should have everything we need bu
 ## Dataset
 ![[Pasted image 20251111133754.png]]
 ![[Pasted image 20251111133559.png]]
