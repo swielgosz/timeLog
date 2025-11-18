@@ -1,6 +1,8 @@
 # November 18
 
 Debugging this behavior:
+
+## v0- baseline
 ![[Pasted image 20251112102231.png]]
 config:
 ``` python
@@ -37,7 +39,8 @@ parameters:
 
 Trying to speed up training so I can debug better. Let's try longer segments first, then maybe lower depth.  
 
-Changing segment_length to 18 instead of 4: 
+# v1 - longer segment length (trying to speed up training)
+** Difference**: changing segment_length to 18 instead of 4: 
 ![[Pasted image 20251118100548.png]]
 ![[Pasted image 20251118100633.png]]
 ![[Pasted image 20251118100654.png]]
@@ -47,9 +50,20 @@ Changing segment_length to 18 instead of 4:
 ![[Pasted image 20251118100614.png]]
 ![[Pasted image 20251118100620.png]]
 
-We don't look totally converged. Let's run for 200 steps instead of 1000.
-Time to run: 
+We don't look totally converged. Let's run for 2000 steps instead of 1000.
 
+## v2 - increasing steps to improve convergence
+Time to run: 1:25
+Loss decreases more but validation gap gets worse:
+
+![[Pasted image 20251118102102.png]]
+
+
+![[Pasted image 20251118102117.png]]
+![[Pasted image 20251118102055.png]]
+![[Pasted image 20251118102149.png]]
+![[Pasted image 20251118102156.png]]
+![[Pasted image 20251118102207.png]]
 
 Previously, 2 wasn't sufficient but maybe 3 is? Keeping batch size the same for now
 
