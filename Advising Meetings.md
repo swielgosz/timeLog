@@ -324,8 +324,15 @@ parameters:
   rtol: 0.00000001
   atol: 0.0000000001
 ```
-
-Other
+This also still has final_activation in it
+![[Pasted image 20251118121531.png]]
+![[Pasted image 20251118121556.png]]
+![[Pasted image 20251118121612.png]]
+![[Pasted image 20251118121707.png]]
+![[Pasted image 20251118121714.png]]
+![[Pasted image 20251118121721.png]]
+- This didn't have a significant difference (which is beneficial to some extent, train time is longer with lower tolerances). We will revert to previous tolerance and remove tanh
+- just in case, let's try removing final activation but keep these tight tolerances (ETA - this is run n4tqvi4l and result basically mirrored those above. not shown for lack of relevance)
 # November 11
 Is there a way we can view the acceleration magnitude and direction similar to how we applied the model and viewed the feature layer components?
 
