@@ -3,7 +3,9 @@
  - direciton fixed
  - redo conference stuff
  - what else needs to be done?
-- pending sufficient data, wer could have a segmentaiton and v
+- pending sufficient data, wer could have a segmentaiton where we separate by segments and orbits - segmentation validation vs orbit validation?
+- try with both and then decide
+
 John's work enforced $\Lambda ^2 u = 0$
 Take gradient with repect to output ($\grad \dot \vec{a}$) (equivalent to \vec{grad}u = -\vec{a})
 

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "code.md",
+                "file": "Fall 2025.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "code"
+              "title": "Fall 2025"
             }
           },
           {
@@ -63,8 +63,7 @@
               "title": "Untitled 1"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -214,23 +213,22 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "32dac6e62407ca4b",
+  "active": "df097145813889a2",
   "lastOpenFiles": [
+    "code.md",
+    "Advising Meetings.md",
     "Attachments/Pasted image 20251118134332.png",
     "Attachments/Pasted image 20251118134324.png",
     "Attachments/Pasted image 20251118134317.png",
     "Attachments/Pasted image 20251118131059.png",
     "Untitled 1.md",
-    "Advising Meetings.md",
     "Attachments/Pasted image 20251118123306.png",
     "Attachments/Pasted image 20251118123249.png",
     "Attachments/Pasted image 20251118123240.png",
     "Attachments/Pasted image 20251118123229.png",
     "Attachments/Pasted image 20251118123222.png",
     "Attachments/Pasted image 20251118123212.png",
-    "Attachments/Pasted image 20251118121721.png",
     "Running To Do List.md",
-    "code.md",
     "Fall 2025.md",
     "Untitled.md",
     "sensitivity analysis.md",
