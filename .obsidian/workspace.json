@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Running To Do List.md",
+                "file": "Fall 2025.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Running To Do List"
+              "title": "Fall 2025"
             }
           },
           {
@@ -202,6 +202,7 @@
   },
   "active": "32dac6e62407ca4b",
   "lastOpenFiles": [
+    "Running To Do List.md",
     "Fall 2025.md",
     "Advising Meetings.md",
     "Attachments/Pasted image 20251112102520.png",
@@ -225,7 +226,6 @@
     "Lit Review Color Code.md",
     "Notebook Contents.md",
     "Resources.md",
-    "Running To Do List.md",
     "Attachments/multi_dataset_xy_fixnu0 1.pdf",
     "Attachments/multi_dataset_xy_baseline 1.pdf",
     "Attachments/multi_dataset_xy_circular.pdf",
