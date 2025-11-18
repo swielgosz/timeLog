@@ -63,7 +63,8 @@
               "title": "Untitled 1"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -213,10 +214,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "df097145813889a2",
+  "active": "32dac6e62407ca4b",
   "lastOpenFiles": [
-    "Advising Meetings.md",
+    "Running To Do List.md",
     "Fall 2025.md",
+    "Advising Meetings.md",
     "code.md",
     "Attachments/Pasted image 20251118134332.png",
     "Attachments/Pasted image 20251118134324.png",
@@ -229,7 +231,6 @@
     "Attachments/Pasted image 20251118123229.png",
     "Attachments/Pasted image 20251118123222.png",
     "Attachments/Pasted image 20251118123212.png",
-    "Running To Do List.md",
     "Untitled.md",
     "sensitivity analysis.md",
     "Attachments/multi_dataset_xy_baseline 1 1.pdf",
