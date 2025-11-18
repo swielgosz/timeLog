@@ -385,7 +385,7 @@ Conclusions so far:
 - we need to enforce ||dir_acc|| = 1 to avoid acceleration dips previously seen
 - There is a balance of model architecture needed to keep behavior smooth
 - one model looks correct but the acceleration magnitude and directions are mirrored?
-look at run_id = 
+look at run_id = z0v2rmhl again:
 
 ![[Pasted image 20251118115157.png]]
 ![[Pasted image 20251118115124.png]]
@@ -399,6 +399,10 @@ look at run_id =
 we need to enforce that the force is always attractive
 let's do this
 
+## adding attraction component to loss:
+![[Pasted image 20251118134317.png]]
+![[Pasted image 20251118134324.png]]
+![[Pasted image 20251118134332.png]]
 # November 11
 Is there a way we can view the acceleration magnitude and direction similar to how we applied the model and viewed the feature layer components?
 
