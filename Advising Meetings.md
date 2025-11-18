@@ -385,6 +385,15 @@ Conclusions so far:
 - we need to enforce ||dir_acc|| = 1 to avoid acceleration dips previously seen
 - There is a balance of model architecture needed to keep behavior smooth
 - one model looks correct but the acceleration magnitude and directions are mirrored?
+look at run_id = 
+
+![[Pasted image 20251118115157.png]]
+![[Pasted image 20251118115124.png]]
+![[Pasted image 20251118115208.png]]
+![[Pasted image 20251118115228.png]]
+![[Pasted image 20251118115234.png]]
+![[Pasted image 20251118115254.png]]
+
 ![[Pasted image 20251118131059.png]]
 
 we need to enforce that the force is always attractive
