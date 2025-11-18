@@ -3,6 +3,9 @@
 ## Dataset
 ![[Pasted image 20251111133754.png]]
 ![[Pasted image 20251111133559.png]]
+
+What is our validation data now that we have segmented orbits?
+Right now, we segment our data and _then_ we split it into training and validation. This is bad! This means we could end up with parts of the orbit that we do not see. We should split into training and validation orbits before we segment the data. Before that, let's see what our training and validation data currently looks like and see if that could explain the behavior that we're currently seeing at all.
 ## v0- baseline
 Debugging this behavior:
 ![[Pasted image 20251112102231.png]]
