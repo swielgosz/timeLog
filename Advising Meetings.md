@@ -1,5 +1,9 @@
 # November 18
 
+John's work enforced $\Lambda ^2 u = 0$
+Take gradient with repect to output ($\grad \dot \vec{a}$) (equivalent to \vec{grad}u = -\vec{a})
+
+
 ## Dataset
 ![[Pasted image 20251111133754.png]]
 ![[Pasted image 20251111133559.png]]
