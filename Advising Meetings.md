@@ -388,6 +388,7 @@ Conclusions so far:
 ![[Pasted image 20251118131059.png]]
 
 we need to enforce that the force is always attractive
+let's do this
 
 # November 11
 Is there a way we can view the acceleration magnitude and direction similar to how we applied the model and viewed the feature layer components?
