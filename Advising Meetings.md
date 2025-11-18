@@ -333,6 +333,54 @@ This also still has final_activation in it
 ![[Pasted image 20251118121721.png]]
 - This didn't have a significant difference (which is beneficial to some extent, train time is longer with lower tolerances). We will revert to previous tolerance and remove tanh
 - just in case, let's try removing final activation but keep these tight tolerances (ETA - this is run n4tqvi4l and result basically mirrored those above. not shown for lack of relevance)
+- things we still want to consider - the points where we get 0 acceleration are because ||acc_dir||~= 0. we should enforce a unit vector or test different output layers. Before we try this, let's decrease depth and increase width
+
+## decrease depth, increase width
+run_id: 48r3r35l
+runtime: 1:54
+config:
+``` python
+parameters:
+
+  length_strategy:
+                      [[
+                        [0.0, 1.0],
+                      ]]
+  lr_strategy: [[0.001]]
+  steps_strategy: [[3000]]
+  segment_length_strategy: [[4,]]
+
+  width: 64
+  depth: 3
+  train_val_split: 0.8
+  batch_size: 32
+  num_trajs: -1
+
+  # loss_fcn: "mean_squared_error"
+  loss_fcn: "percent_error"
+  # loss_fcn: "percent_error_plus_nmse"
+
+  # activation: tanh
+  activation: leaky_relu
+  # activation: elu
+
+  feature_layer: sph_4D_rinv_vel
+  # feature_layer: sph_4D_rinv_vinv
+  output_layer: mlp_4D
+  # output_layer: mlp_4D_unit_scaled
+  # output_layer: mlp_simple
+  planar_constraint: true
+
+  rtol: 0.000001
+  atol: 0.00000001
+  ```
+![[Pasted image 20251118123212.png]]
+![[Pasted image 20251118123222.png]]
+![[Pasted image 20251118123240.png]]
+![[Pasted image 20251118123249.png]]
+![[Pasted image 20251118123306.png]]
+
+
 # November 11
 Is there a way we can view the acceleration magnitude and direction similar to how we applied the model and viewed the feature layer components?
 
