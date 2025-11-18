@@ -94,25 +94,64 @@ Time to run: 2:47
 ![[Pasted image 20251118111828.png]]
 ![[Pasted image 20251118111800.png]]
 
-Validation gap looks a lot better, but mlp output behaviro is 
+Validation gap looks a lot better, but mlp output behavior is whacky. 
+Looks like we plateau around 3000 steps. Let's lower our batch size to speed up training.
+
+## v4 - lower batch size for faster training
+run_id: 26d2zihk
+Difference: lower batch size from 32 to 16
+run time: 
+config:
+``` python
+  length_strategy:
+                      [[
+                        [0.0, 1.0],
+                      ]]
+  lr_strategy: [[0.001]]
+  steps_strategy: [[5000]]
+  segment_length_strategy: [[4,]]
+
+  width: 16
+  depth: 4
+  train_val_split: 0.8
+  batch_size: 16
+  num_trajs: -1
+
+  # loss_fcn: "mean_squared_error"
+  loss_fcn: "percent_error"
+  # loss_fcn: "percent_error_plus_nmse"
+
+  # activation: tanh
+  activation: leaky_relu
+  # activation: elu
+
+  feature_layer: sph_4D_rinv_vel
+  # feature_layer: sph_4D_rinv_vinv
+  output_layer: mlp_4D
+  # output_layer: mlp_4D_unit_scaled
+  # output_layer: mlp_simple
+  planar_constraint: true
+
+  rtol: 0.000001
+  atol: 0.00000001```
+
+
+Time to run: 2:39. No improvement! In fact, this might not even be large enough to learn. Each batch is a set of segments of shape \[batch_size, segment_length, state_dim\]
+
+![[Pasted image 20251118113124.png]]
+![[Pasted image 20251118113133.png]]
+
+
+![[Pasted image 20251118113141.png]]
+
+![[Pasted image 20251118113149.png]]
 
 
 
+![[Pasted image 20251118113156.png]]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![[Pasted image 20251118113211.png]]
+![[Pasted image 20251118113220.png]]
 
 
 
