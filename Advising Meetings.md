@@ -2,6 +2,41 @@
 
 Debugging this behavior:
 ![[Pasted image 20251112102231.png]]
+config:
+``` python
+parameters:
+
+  length_strategy:
+                      [[ 
+                        [0.0, 1.0],                        
+                      ]]
+  lr_strategy: [[0.001, ]]
+  steps_strategy: [[1000, ]]
+  segment_length_strategy: [[4,]]
+
+  width: 16
+  depth: 4
+  train_val_split: 0.8
+  batch_size: 32
+  num_trajs: -1
+
+  loss_fcn: "percent_error"
+
+  activation: leaky_relu
+
+  feature_layer: sph_4D_rinv_vel
+
+  output_layer: mlp_4D
+
+  planar_constraint: true
+
+  rtol: 0.000001
+  atol: 0.00000001
+```
+
+
+Trying to speed up training so I can debug better. Let's try lower depth. Previously, 2 wasn't sufficient but maybe 3 is? Keeping batch size the same for now
+
 # November 11
 Is there a way we can view the acceleration magnitude and direction similar to how we applied the model and viewed the feature layer components?
 
