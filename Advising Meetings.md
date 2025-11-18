@@ -273,9 +273,59 @@ What if we add a final activation to increase expressiveness?
 
 ## adding final activation - jnn.tanh
 run_id: 4uronz2w
-time to run:
-config is same as before, `final_activation` was implemented into `self.mlp` in `Func` class in `neuralODE`. For now, we are s
+time to run: 1:49
+config is same as before, `final_activation` was implemented into `self.mlp` in `Func` class in `neuralODE`. For now, we are starting with tanh since it is smooth, bounded, and symmetric. 
 
+![[Pasted image 20251118120711.png]]
+![[Pasted image 20251118120719.png]]
+![[Pasted image 20251118120747.png]]
+![[Pasted image 20251118120734.png]]
+![[Pasted image 20251118120758.png]]
+
+- This wasn't fruitful
+- Decreasing rtol and atol may help - Lowering rtol/atol makes the ODE solver track the dynamics more tightly, so it can capture sharp spikes (like periapsis) more faithfully during both training solves and feature captures. That often helps, because the model sees cleaner gradients and the solver doesn’t smooth over the rapid acceleration change. The trade-off is higher compute cost and potential stiffness: tighter tolerances mean smaller step sizes, so training slows down and might become unstable if the model still can’t represent the spike. I’d consider reducing tolerances moderately once the model capacity/output head is in good shape; pair it with monitoring solver statistics to ensure the integration remains stable.
+
+# decreasing rtol and atol
+run_id: amnrug9d
+run time: 2:30
+config:
+``` python
+parameters:
+
+  length_strategy:
+                      [[
+                        [0.0, 1.0],
+                      ]]
+  lr_strategy: [[0.001]]
+  steps_strategy: [[3000]]
+  segment_length_strategy: [[4,]]
+
+  width: 32
+  depth: 4
+  train_val_split: 0.8
+  batch_size: 32
+  num_trajs: -1
+
+  # loss_fcn: "mean_squared_error"
+  loss_fcn: "percent_error"
+  # loss_fcn: "percent_error_plus_nmse"
+
+  # activation: tanh
+  activation: leaky_relu
+  # activation: elu
+
+  feature_layer: sph_4D_rinv_vel
+  # feature_layer: sph_4D_rinv_vinv
+  output_layer: mlp_4D
+  # output_layer: mlp_4D_unit_scaled
+  # output_layer: mlp_simple
+  planar_constraint: true
+
+  rtol: 0.00000001
+  atol: 0.0000000001
+```
+
+Other
 # November 11
 Is there a way we can view the acceleration magnitude and direction similar to how we applied the model and viewed the feature layer components?
 
