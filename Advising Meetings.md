@@ -215,7 +215,67 @@ time to run: 1:29
 - output features are not tracking, but we are seeing smooth behavior now
 - Let's try increasing depth to increase expressiveness
 
-# v4 - 
+# v4 - increasing depth
+run_id: v0cve1s8
+time to run: 1:51
+config:
+``` python
+wandb:
+  group: "2BP-sensitivity"  # Change this to your desired group name
+
+data:
+  dataset_name : "complex_TBP_planar_4"
+  problem: '2BP'
+
+parameters:
+
+  length_strategy:
+                      [[
+                        [0.0, 1.0],
+                      ]]
+  lr_strategy: [[0.001]]
+  steps_strategy: [[3000]]
+  segment_length_strategy: [[4,]]
+
+  width: 32
+  depth: 4
+  train_val_split: 0.8
+  batch_size: 32
+  num_trajs: -1
+
+  # loss_fcn: "mean_squared_error"
+  loss_fcn: "percent_error"
+  # loss_fcn: "percent_error_plus_nmse"
+
+  # activation: tanh
+  activation: leaky_relu
+  # activation: elu
+
+  feature_layer: sph_4D_rinv_vel
+  # feature_layer: sph_4D_rinv_vinv
+  output_layer: mlp_4D
+  # output_layer: mlp_4D_unit_scaled
+  # output_layer: mlp_simple
+  planar_constraint: true
+
+  rtol: 0.000001
+  atol: 0.00000001
+```
+![[Pasted image 20251118115653.png]]
+![[Pasted image 20251118115706.png]]
+![[Pasted image 20251118115716.png]]
+![[Pasted image 20251118115729.png]]
+![[Pasted image 20251118115734.png]]
+![[Pasted image 20251118115840.png]]
+"width tends to give immediate gains, lwhile depth is powerful but riskier in neural ODEs due to solver stability" what does this mean exactly? seems to be true - Wider layers give each time step more expressive power without changing the ODE’s depth, so you usually see quick improvements and training stays stable. Adding depth stacks more transformations into the dynamics function, which can represent richer behavior, but it makes the differential equation stiffer/harder to solve—optimizers and solvers have to cope with deeper Jacobians, which can cause instability or require tiny step sizes. So width is the safer knob for immediate gains, while depth can help but carries a higher risk of solver issues.
+
+What if we add a final activation to increase expressiveness?
+
+## adding final activation - jnn.tanh
+run_id: 4uronz2w
+time to run:
+config is same as before, `final_activation` was implemented into `self.mlp` in `Func` class in `neuralODE`. For now, we are s
+
 # November 11
 Is there a way we can view the acceleration magnitude and direction similar to how we applied the model and viewed the feature layer components?
 
