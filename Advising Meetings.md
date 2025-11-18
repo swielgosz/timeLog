@@ -82,6 +82,12 @@ Turns out, we have very little data at periapsis for highly eccentric orbits!
 
 # v3 - updating segmentation to occur after train/val split
 
+**run_id**: 3gd0rl4o
+
+Running for 5000 steps to be safe after 1000 was not converged.
+Time to run: 2:47
+
+
 # November 11
 Is there a way we can view the acceleration magnitude and direction similar to how we applied the model and viewed the feature layer components?
 
