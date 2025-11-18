@@ -400,6 +400,7 @@ we need to enforce that the force is always attractive
 let's do this
 
 ## adding attraction component to loss:
+
 ![[Pasted image 20251118134317.png]]
 ![[Pasted image 20251118134324.png]]
 ![[Pasted image 20251118134332.png]]
