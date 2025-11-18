@@ -1,6 +1,7 @@
 # November 18
 
-
+Debugging this behavior:
+![[Pasted image 20251112102231.png]]
 # November 11
 Is there a way we can view the acceleration magnitude and direction similar to how we applied the model and viewed the feature layer components?
 
