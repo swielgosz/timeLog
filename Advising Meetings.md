@@ -9,6 +9,9 @@ Right now, we segment our data and _then_ we split it into training and validati
 
 ![[Pasted image 20251118105057.png]]
 eek!
+
+update this:
+![[Pasted image 20251118105809.png]]
 ## v0- baseline
 Debugging this behavior:
 ![[Pasted image 20251112102231.png]]
@@ -73,7 +76,11 @@ Loss decreases more but validation gap gets worse:
 ![[Pasted image 20251118102156.png]]
 ![[Pasted image 20251118102207.png]]
 
-Previously, 2 wasn't sufficient but maybe 3 is? Keeping batch size the same for now
+We're looking real whacky around periapsis... let's look at our datasets
+
+Turns out, we have very little data at periapsis for highly eccentric orbits!
+
+# v3 - updating segmentation to occur after train/val split
 
 # November 11
 Is there a way we can view the acceleration magnitude and direction similar to how we applied the model and viewed the feature layer components?
