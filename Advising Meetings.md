@@ -35,7 +35,7 @@ parameters:
 ```
 
 
-Trying to speed up training so I can debug better. Let's try lower depth. Previously, 2 wasn't sufficient but maybe 3 is? Keeping batch size the same for now
+Trying to speed up training so I can debug better. Let's try longer segments first, then maybe lower depth.  Previously, 2 wasn't sufficient but maybe 3 is? Keeping batch size the same for now
 
 # November 11
 Is there a way we can view the acceleration magnitude and direction similar to how we applied the model and viewed the feature layer components?
