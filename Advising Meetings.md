@@ -61,7 +61,8 @@ parameters:
 ![[Pasted image 20251125103904.png]]
 ![[Pasted image 20251125103920.png]]
 ![[Pasted image 20251125103943.png]]
-![[Pasted image 20251125103933.png]]
+![[Pasted image 20251125111642.png]]
+
 ![[Pasted image 20251125104007.png]]
 
 Notes:
@@ -78,8 +79,10 @@ runtime: 1:17
 ![[Pasted image 20251125105938.png]]
 ![[Pasted image 20251125110105.png]]
 ![[Pasted image 20251125110040.png]]
-![[Pasted image 20251125110024.png]]
+![[Pasted image 20251125111415.png]]
 ![[Pasted image 20251125105950.png]]
+Results are comparable.
+
 # November 18
  next week:
  - direciton fixed
