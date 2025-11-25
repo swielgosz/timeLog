@@ -212,7 +212,7 @@ def mlp_4D_activation(mlp_output, state, scalar=1.0):
     return jnp.concatenate((state[3:6], acc_pred), axis=0)
 ```
 run_id: ke3mcj2t
-runtime:
+runtime: 1:13
 config:
 ``` python
 parameters:
@@ -257,6 +257,62 @@ Worst case:
 ![[Pasted image 20251125122521.png]]
 ![[Pasted image 20251125122531.png]]
 ![[Pasted image 20251125122547.png]]
+
+## v6 - final activation w/ sigmoid instead of softplus
+run_id: 4actbiif
+runtime: 1:08
+![[Pasted image 20251125123122.png]]
+![[Pasted image 20251125123131.png]]
+![[Pasted image 20251125123148.png]]
+![[Pasted image 20251125123206.png]]
+![[Pasted image 20251125123212.png]]
+## v7 - final activation, loss is position + rmse
+Differences: wjith final activaiton, go back to percent error + rmse loss
+run_id: ftx7brwd
+runtime: 1:17
+config:
+``` python
+parameters:
+
+  length_strategy:
+                      [[
+                        [0.0, 1.0],
+                      ]]
+  lr_strategy: [[0.001]]
+  steps_strategy: [[2000]]
+  segment_length_strategy: [[4,]]
+
+  width: 64
+  depth: 2
+  train_val_split: 0.8
+  batch_size: 32
+  num_trajs: -1
+
+  # loss_fcn: "mean_squared_error"
+  # loss_fcn: "percent_error_with_attraction"
+  # loss_fcn: "percent_error"
+  loss_fcn: "percent_error_plus_nmse"
+
+  # activation: tanh
+  activation: leaky_relu
+  # activation: elu
+
+  feature_layer: sph_4D_rinv_vel
+  # feature_layer: sph_4D_rinv_vinv
+  output_layer: mlp_4D_activation
+  # output_layer: mlp_4D_unit_scaled
+  # output_layer: mlp_simple_hybrid
+  # output_layer: mlp_4D
+  planar_constraint: true
+
+  rtol: 0.000001
+  atol: 0.00000001
+  note: final activaiton is sigmoid for acc, tanh for direction vector
+  ```
+``
+![[Pasted image 20251125123636.png]]
+![[Pasted image 20251125123845.png]]
+![[Pasted image 20251125123856.png]]
 # November 18
  next week:
  - direciton fixed
