@@ -1,3 +1,9 @@
+# November 25
+Recap:
+- We discovered that our modle was having toruble training because 
+
+
+
 # November 18
  next week:
  - direciton fixed
