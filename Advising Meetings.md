@@ -22,9 +22,56 @@ def mlp_4D(mlp_output, state, scalar=1.0):
     return jnp.concatenate((state[3:6], acc_pred), axis=0)```
 I stripped back the model (returned to leaky relu, percent error). I will refer to this as the baseline for the day
 
-## baseline
-![[Pasted image 20251125103904.png]]
+## v0 (baseline)
+run_id: nx9r8tau
+runtime: 1:34 
+config:
+``` python
+data:
+  dataset_name : "complex_TBP_planar_4"
+  problem: '2BP'
 
+parameters:
+
+  length_strategy:
+                      [[
+                        [0.0, 1.0],
+                      ]]
+  lr_strategy: [[0.001]]
+  steps_strategy: [[3000]]
+  segment_length_strategy: [[4,]]
+
+  width: 32
+  depth: 2
+  train_val_split: 0.8
+  batch_size: 32
+  num_trajs: -1
+
+  loss_fcn: "percent_error"
+
+  activation: leaky_relu
+
+  feature_layer: sph_4D_rinv_vel
+  output_layer: mlp_4D
+  planar_constraint: true
+
+  rtol: 0.000001
+  atol: 0.00000001
+  ```
+![[Pasted image 20251125103904.png]]
+![[Pasted image 20251125103920.png]]
+![[Pasted image 20251125103943.png]]
+![[Pasted image 20251125103933.png]]
+![[Pasted image 20251125104007.png]]
+
+Notes:
+- direction is fixed!
+- acceleration is turning radial near periapsis
+- we could enforce that acceleration is radial but it would be nice to keep the loss fairly generalized. to see if we can get a bit closer, let's try a loss which is a combination of percent error and rmse to enforce
+
+## v1 - RMSE + percent error loss
+Difference: change loss function from percent error to RMSE + percent error. RMSE is scaled so that it is a similar scale to the percent error component of loss
+run_id:
 # November 18
  next week:
  - direciton fixed
