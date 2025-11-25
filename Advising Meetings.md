@@ -70,8 +70,13 @@ Notes:
 - we could enforce that acceleration is radial but it would be nice to keep the loss fairly generalized. to see if we can get a bit closer, let's try a loss which is a combination of percent error and rmse to enforce
 
 ## v1 - RMSE + percent error loss
-Difference: change loss function from percent error to RMSE + percent error. RMSE is scaled so that it is a similar scale to the percent error component of loss
-run_id:
+Differences: 
+- change loss function from percent error to RMSE + percent error. RMSE is scaled so that it is a similar scale to the percent error component of loss
+- decrease to 2000 steps
+run_id: vhrfc9z7
+runtime: 1:17
+config:
+
 # November 18
  next week:
  - direciton fixed
