@@ -136,6 +136,18 @@ config:
   atol: 0.00000001
   ```
 
+![[Pasted image 20251125115931.png]]
+![[Pasted image 20251125115948.png]]
+About comparable with 32x2. 
+![[Pasted image 20251125120811.png]]
+![[Pasted image 20251125120803.png]]
+![[Pasted image 20251125120750.png]]
+## v4 - 64x2
+run_id: zjiht8pb
+runtime: 1:10
+config:
+![[Pasted image 20251125120852.png]]
+
 # November 18
  next week:
  - direciton fixed
