@@ -200,7 +200,63 @@ Outputs for healthy orbit 0:
 ![[Pasted image 20251125121751.png]]
 vs orbit where we start near periapsis:
 ![[Pasted image 20251125121824.png]]
-# v5 - final activaiton
+# v5 - final activation
+Difference: apply softplus to acc mag and tanh to direction (I don't take abs of r_mag because we use softplus)
+``` python
+def mlp_4D_activation(mlp_output, state, scalar=1.0):
+    r_mag = mlp_output[0:1]
+    r_dir = mlp_output[1:4]
+    r_mag_activated = jnn.softplus(r_mag)
+    r_dir_activated = jnn.tanh(r_dir)
+    acc_pred = r_mag_activated * r_dir_activated
+    return jnp.concatenate((state[3:6], acc_pred), axis=0)
+```
+run_id: ke3mcj2t
+runtime:
+config:
+``` python
+parameters:
+
+  length_strategy:
+                      [[
+                        [0.0, 1.0],
+                      ]]
+  lr_strategy: [[0.001]]
+  steps_strategy: [[2000]]
+  segment_length_strategy: [[4,]]
+
+  width: 64
+  depth: 2
+  train_val_split: 0.8
+  batch_size: 32
+  num_trajs: -1
+
+  # loss_fcn: "mean_squared_error"
+  # loss_fcn: "percent_error_with_attraction"
+  loss_fcn: "percent_error"
+  # loss_fcn: "percent_error_plus_nmse"
+
+  # activation: tanh
+  activation: leaky_relu
+  # activation: elu
+
+  feature_layer: sph_4D_rinv_vel
+  # feature_layer: sph_4D_rinv_vinv
+  output_layer: mlp_4D_activation
+  # output_layer: mlp_4D_unit_scaled
+  # output_layer: mlp_simple_hybrid
+  # output_layer: mlp_4D
+  planar_constraint: true
+
+  rtol: 0.000001
+  atol: 0.00000001
+```
+![[Pasted image 20251125122417.png]]
+![[Pasted image 20251125122426.png]]
+Worst case:
+![[Pasted image 20251125122521.png]]
+![[Pasted image 20251125122531.png]]
+![[Pasted image 20251125122547.png]]
 # November 18
  next week:
  - direciton fixed
