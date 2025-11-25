@@ -75,8 +75,11 @@ Differences:
 - decrease to 2000 steps
 run_id: vhrfc9z7
 runtime: 1:17
-config:
-
+![[Pasted image 20251125105938.png]]
+![[Pasted image 20251125110105.png]]
+![[Pasted image 20251125110040.png]]
+![[Pasted image 20251125110024.png]]
+![[Pasted image 20251125105950.png]]
 # November 18
  next week:
  - direciton fixed
