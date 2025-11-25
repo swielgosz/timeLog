@@ -1,6 +1,13 @@
 # November 25
 Recap:
-- We discovered that our modle was having toruble training because 
+- We discovered that our model was having toruble training because our output layer introduced an unexpected failure mode. The model was predicting acceleration (signed) and its unit vector (also signed), but only cares about the _product_ of these quantities, e.g. it only "sees" the final acceleration vector which gets integrated to compute loss.
+``` python
+def mlp_4D_signed(mlp_output, state, scalar=1.0):
+    r_mag = mlp_output[0:1] # This is signed!
+    r_dir = mlp_output[1:4]
+    acc_pred = r_mag * r_dir
+    return jnp.concatenate((state[3:6], acc_pred), axis=0)
+```
 
 
 
