@@ -1,4 +1,6 @@
 # November 25
+Questions for John:
+- Is putting an activation directly in the output layer "normal"?
 Recap:
 - We discovered that our model was having toruble training because our output layer introduced an unexpected failure mode. The model was predicting acceleration (signed) and its unit vector (also signed), but only cares about the _product_ of these quantities, e.g. it only "sees" the final acceleration vector which gets integrated to compute loss. Because of this, we were seeing randomly flip flopping acceleration direction vector
 ``` python
@@ -9,7 +11,19 @@ def mlp_4D_signed(mlp_output, state, scalar=1.0):
     return jnp.concatenate((state[3:6], acc_pred), axis=0)
 ```
 - Example of direction randomly flip flopping:![[Pasted image 20251118100654.png]]
-I fixed this by enforcing that attraction was always attractive. If $\theta$ is the angle from the acceleration to the position vector, then $\theta = 180^\circ$ must always be true for the force to be attractive. To enforce this, I check dot product of the position and acceleration vectors and penalize positive values (this assumes that they align)
+I fixed this by enforcing that acceleration and position are always opposite each other. If $\theta$ is the angle from the acceleration to the position vector, then $\theta = 180^\circ$ must always be true for the force to be attractive. To enforce this, I check dot product of the position and acceleration vectors and penalize positive values (this assumes that they align). However, I didn't actually check that the force is attractive. Because of this, I could get results where acceleration and position were in the opposite directions of what they should be:
+![[Pasted image 20251118115254.png]]
+To fix this, we can just enforce that the acceleration magnitude is truly a magnitude, i.e. it should always be positive and the model just learns its direction.  We updated the model to use the following output:
+``` python
+def mlp_4D(mlp_output, state, scalar=1.0):
+    r_mag = jnp.abs(mlp_output[0:1])
+    r_dir = mlp_output[1:4]
+    acc_pred = r_mag * r_dir
+    return jnp.concatenate((state[3:6], acc_pred), axis=0)```
+I stripped back the model (returned to leaky relu, percent error). I will refer to this as the baseline for the day
+
+## baseline
+![[Pasted image 20251125103904.png]]
 
 # November 18
  next week:
