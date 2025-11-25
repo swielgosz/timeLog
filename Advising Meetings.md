@@ -1,6 +1,6 @@
 # November 25
 Recap:
-- We discovered that our model was having toruble training because our output layer introduced an unexpected failure mode. The model was predicting acceleration (signed) and its unit vector (also signed), but only cares about the _product_ of these quantities, e.g. it only "sees" the final acceleration vector which gets integrated to compute loss.
+- We discovered that our model was having toruble training because our output layer introduced an unexpected failure mode. The model was predicting acceleration (signed) and its unit vector (also signed), but only cares about the _product_ of these quantities, e.g. it only "sees" the final acceleration vector which gets integrated to compute loss. Because of this, we were seeing randomly flip flopping acceleration direction vector
 ``` python
 def mlp_4D_signed(mlp_output, state, scalar=1.0):
     r_mag = mlp_output[0:1] # This is signed!
@@ -8,7 +8,7 @@ def mlp_4D_signed(mlp_output, state, scalar=1.0):
     acc_pred = r_mag * r_dir
     return jnp.concatenate((state[3:6], acc_pred), axis=0)
 ```
-
+- Example of direction randomly flip flopping:![[Pasted image 20251118100654.png]]
 
 
 # November 18
