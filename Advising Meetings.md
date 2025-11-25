@@ -84,26 +84,33 @@ runtime: 1:17
 Results are comparable. I'll return to percent error since it's lighter weight, but keep this in mind as back up.
 Our network is fairly shallow. I want to experiment with increasing expressiveness, so let's 1) switch from 32x2 model to 16x4 or 32x4, then 2) add a final activation. I'm also wondering if the segments could be too short? Let's decrease from 90 to 36 segments
 
-## v2 - percent error loss, longer segments
-Differences:
-- use percent error loss rather than percent error + rmse to make the model lighter
-- segment orboits into 36 segments rather than 90
-run_id: h8h0htoa
-runtime: 1:09
+## v2 - update architecture from 32x2 to 16x4
+Differences: 
+- return to percent error loss
+- update from width 32 depth 2 to width 16 depth 4.
+run_id: wy4pijq6
+runtime: 1:11
+![[Pasted image 20251125115339.png]]
+
+![[Pasted image 20251125115404.png]]
+
+Not looking as good as 32x2. Let's try 32x4 for fun
+
+## v3 - 32x4
+run_id: 5qetg6ll
+runtime: 1:12
 config:
 ``` python
-parameters:
-
   length_strategy:
                       [[
                         [0.0, 1.0],
                       ]]
   lr_strategy: [[0.001]]
   steps_strategy: [[2000]]
-  segment_length_strategy: [[10,]]
+  segment_length_strategy: [[4,]]
 
   width: 32
-  depth: 2
+  depth: 4
   train_val_split: 0.8
   batch_size: 32
   num_trajs: -1
@@ -127,8 +134,8 @@ parameters:
 
   rtol: 0.000001
   atol: 0.00000001
-```
-![[Pasted image 20251125114415.png]]
+  ```
+
 # November 18
  next week:
  - direciton fixed
