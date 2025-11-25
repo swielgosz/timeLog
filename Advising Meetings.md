@@ -9,7 +9,7 @@ def mlp_4D_signed(mlp_output, state, scalar=1.0):
     return jnp.concatenate((state[3:6], acc_pred), axis=0)
 ```
 - Example of direction randomly flip flopping:![[Pasted image 20251118100654.png]]
-
+I fixed this by enforcing that attraction was always attractive. If $\theta$ is the angle from the acceleration to the position vector, then $\theta = 180^\circ$ must always be true for the force to be attractive. To enforce this, I check dot product of the position and acceleration vectors and penalize positive values (this assumes that they align)
 
 # November 18
  next week:
