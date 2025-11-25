@@ -253,17 +253,18 @@ parameters:
 ```
 ![[Pasted image 20251125122417.png]]
 ![[Pasted image 20251125122426.png]]
-Worst case:
-![[Pasted image 20251125122521.png]]
-![[Pasted image 20251125122531.png]]
-![[Pasted image 20251125122547.png]]
+![[Pasted image 20251125124843.png]]
+![[Pasted image 20251125124851.png]]
+![[Pasted image 20251125124859.png]]
+
+
 
 ## v6 - final activation w/ sigmoid instead of softplus
 run_id: 4actbiif
 runtime: 1:08
 ![[Pasted image 20251125123122.png]]
 ![[Pasted image 20251125123131.png]]
-![[Pasted image 20251125123148.png]]
+![[Pasted image 20251125124550.png]]
 ![[Pasted image 20251125123206.png]]
 ![[Pasted image 20251125123212.png]]
 ## v7 - final activation, loss is position + rmse
@@ -313,6 +314,10 @@ parameters:
 ![[Pasted image 20251125123636.png]]
 ![[Pasted image 20251125123845.png]]
 ![[Pasted image 20251125123856.png]]
+Notabl;y,  tracks better than previously in the case that IC is near periapsis: ![[Pasted image 20251125123943.png]]
+orbit 0:![[Pasted image 20251125124113.png]]
+![[Pasted image 20251125124435.png]]
+
 # November 18
  next week:
  - direciton fixed
