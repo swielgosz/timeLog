@@ -82,7 +82,7 @@ runtime: 1:17
 ![[Pasted image 20251125111415.png]]
 ![[Pasted image 20251125105950.png]]
 Results are comparable. I'll return to percent error since it's lighter weight, but keep this in mind as back up.
-Our network is fairly shallow. I want to experiment with increasing expressiveness, so let's 1) add 
+Our network is fairly shallow. I want to experiment with increasing expressiveness, so let's 1) switch from 32x2 model to 16x4 or 32x4, then 2) add a final activation. I'm also wondering if the segments could be too short? Let's decrease from 90 to 36 segments
 
 # November 18
  next week:
