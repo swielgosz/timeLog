@@ -81,7 +81,8 @@ runtime: 1:17
 ![[Pasted image 20251125110040.png]]
 ![[Pasted image 20251125111415.png]]
 ![[Pasted image 20251125105950.png]]
-Results are comparable.
+Results are comparable. I'll return to percent error since it's lighter weight, but keep this in mind as back up.
+Our network is fairly shallow. I want to experiment with increasing expressiveness, so let's 1) add 
 
 # November 18
  next week:
