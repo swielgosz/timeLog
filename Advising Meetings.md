@@ -318,6 +318,26 @@ Notabl;y,  tracks better than previously in the case that IC is near periapsis: 
 orbit 0:![[Pasted image 20251125124113.png]]
 ![[Pasted image 20251125124435.png]]
 
+
+\begin{table}
+\caption{Mean Acceleration Error for Different Datasets}
+\label{tab:mean_acc_err}
+\begin{tabular}{lccc}
+\toprule
+\diagbox{Train}{Test} & Single & Simple & Complex \\
+\midrule
+Single & 14.454852 & 14.194813 & 20.099958 \\
+Simple & 15.344963 & 14.996629 & 16.371222 \\
+Complex & 2.1322267 & 2.1185184 & 2.0743387 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Best results:
+Single & 45.34824 & 46.23542 & 38.12336 \\
+Simple & 12.4346895 & 12.926439 & 8.13189 \\
+Complex & 1.8970726 & 1.9041611 & 1.8519293
+
 # November 18
  next week:
  - direciton fixed
