@@ -1,4 +1,8 @@
 # November 25
+Dataset:
+![[Pasted image 20251125121057.png]]
+and orbit 2 is our validation orbit
+![[Pasted image 20251111133754.png]]
 Questions for John:
 - Is putting an activation directly in the output layer "normal"?
 Recap:
@@ -146,8 +150,57 @@ About comparable with 32x2.
 run_id: zjiht8pb
 runtime: 1:10
 config:
-![[Pasted image 20251125120852.png]]
+``` python
+parameters:
 
+  length_strategy:
+                      [[
+                        [0.0, 1.0],
+                      ]]
+  lr_strategy: [[0.001]]
+  steps_strategy: [[2000]]
+  segment_length_strategy: [[4,]]
+
+  width: 64
+  depth: 2
+  train_val_split: 0.8
+  batch_size: 32
+  num_trajs: -1
+
+  # loss_fcn: "mean_squared_error"
+  # loss_fcn: "percent_error_with_attraction"
+  loss_fcn: "percent_error"
+  # loss_fcn: "percent_error_plus_nmse"
+
+  # activation: tanh
+  activation: leaky_relu
+  # activation: elu
+
+  feature_layer: sph_4D_rinv_vel
+  # feature_layer: sph_4D_rinv_vinv
+  # output_layer: mlp_4D_activation
+  # output_layer: mlp_4D_unit_scaled
+  # output_layer: mlp_simple_hybrid
+  output_layer: mlp_4D
+  planar_constraint: true
+
+  rtol: 0.000001
+  atol: 0.00000001```
+
+![[Pasted image 20251125121721.png]]
+![[Pasted image 20251125121713.png]]
+
+![[Pasted image 20251125120852.png]]
+This looks great! We're not getting the radial acceleration that was apparent in narrower networks. Behavior looks good across most of the orbits:
+![[Pasted image 20251125121354.png]]![[Pasted image 20251125121405.png]]
+but notably had a tough time had trouble when the orbit IC is near periapsis:
+![[Pasted image 20251125121556.png]]
+
+Outputs for healthy orbit 0:
+![[Pasted image 20251125121751.png]]
+vs orbit where we start near periapsis:
+![[Pasted image 20251125121824.png]]
+# v5 - final activaiton
 # November 18
  next week:
  - direciton fixed
