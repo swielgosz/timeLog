@@ -22,6 +22,18 @@
             }
           },
           {
+            "id": "8588bf83a2678ce2",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.10.6"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.10.6"
+            }
+          },
+          {
             "id": "32dac6e62407ca4b",
             "type": "leaf",
             "state": {
@@ -63,7 +75,8 @@
               "title": "Untitled 1"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -213,7 +226,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "df097145813889a2",
+  "active": "8588bf83a2678ce2",
   "lastOpenFiles": [
     "Advising Meetings.md",
     "Fall 2025.md",
