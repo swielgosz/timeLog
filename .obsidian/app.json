@@ -1,6 +1,6 @@
 {
   "attachmentFolderPath": "Attachments",
   "showUnsupportedFiles": false,
-  "readableLineLength": true,
+  "readableLineLength": false,
   "showInlineTitle": true
 }
