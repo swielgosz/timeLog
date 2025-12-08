@@ -75,7 +75,8 @@
               "title": "Untitled 1"
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -225,10 +226,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "df097145813889a2",
+  "active": "79aaf6c82dddee37",
   "lastOpenFiles": [
-    "Untitled 1.md",
     "Fall 2025.md",
+    "Untitled 1.md",
     "Attachments/Pasted image 20251205172815.png",
     "Attachments/Pasted image 20251205172803.png",
     "Advising Meetings.md",
