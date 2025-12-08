@@ -89,8 +89,7 @@
               "title": "Untitled 2"
             }
           }
-        ],
-        "currentTab": 5
+        ]
       }
     ],
     "direction": "vertical"
@@ -240,7 +239,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "4c1b4839e2155505",
+  "active": "df097145813889a2",
   "lastOpenFiles": [
     "Untitled 2.md",
     "Untitled 1.md",
