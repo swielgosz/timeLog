@@ -2,5 +2,6 @@
   "attachmentFolderPath": "Attachments",
   "showUnsupportedFiles": false,
   "readableLineLength": false,
-  "showInlineTitle": true
+  "showInlineTitle": true,
+  "showLineNumber": true
 }
