@@ -25,12 +25,14 @@
             "id": "8c9ada01c0f8313d",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "Attachments/Pasted image 20251210172521.png"
+                "file": "Fall 2025.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "Pasted image 20251210172521"
+              "icon": "lucide-file",
+              "title": "Fall 2025"
             }
           },
           {
@@ -256,10 +258,10 @@
   },
   "active": "8c9ada01c0f8313d",
   "lastOpenFiles": [
+    "Attachments/Pasted image 20251210172521.png",
     "Attachments/W&B Chart 10_21_2025, 11_32_57 AM.png",
     "Attachments/heatmap_data_sensitivity_baseline.png",
     "Fall 2025.md",
-    "Attachments/Pasted image 20251210172521.png",
     "Running To Do List.md",
     "Advising Meetings.md",
     "Untitled 6.md",
