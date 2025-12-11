@@ -8,7 +8,8 @@ Before meeting:
 
 Questions:
 - Does the segment length affect generalization?
-- 
+- Should we try this again with validation data? This shouldn't really be necessary - this is what postprocessing is for. When we see how models generalize to unseen datasets, we are basically measuring generalization gap. However, we save the best model based on the lowest training loss and I can't say that the best training loss corresponds to the best validation loss for all of these models.
+
 # November 18:
 - [ ] Speed up run - we are running diffrax solver twice in the case that we save off intermediate details
 - [ ] unify teature_layers and output_layers formatting

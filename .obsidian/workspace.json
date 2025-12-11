@@ -105,7 +105,8 @@
               "title": "Untitled 5"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -255,8 +256,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "32dac6e62407ca4b",
+  "active": "8c9ada01c0f8313d",
   "lastOpenFiles": [
+    "Running To Do List.md",
     "Advising Meetings.md",
     "Fall 2025.md",
     "Attachments/Pasted image 20251210222819.png",
@@ -266,7 +268,6 @@
     "Attachments/Pasted image 20251210172521.png",
     "Attachments/W&B Chart 10_21_2025, 11_32_57 AM.png",
     "Attachments/heatmap_data_sensitivity_baseline.png",
-    "Running To Do List.md",
     "Untitled 6.md",
     "Untitled 5.md",
     "Untitled 4.md",
