@@ -2,6 +2,8 @@
 Before meeting:
 - [ ] Understand latent ODEs more. Am I using the "correct" kind? How do we aim to use it?
 - [ ] pretty stats visualizations
+- [ ] compile thoughts into powerpoint
+- [ ] Why does mlp_4D_signed work the best??
 
 
 # November 18:
