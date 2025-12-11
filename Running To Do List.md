@@ -3,9 +3,12 @@ Before meeting:
 - [ ] Understand latent ODEs more. Am I using the "correct" kind? How do we aim to use it?
 - [ ] pretty stats visualizations
 - [ ] compile thoughts into powerpoint
-- [ ] Why does mlp_4D_signed work the best??
+- [ ] Why does mlp_4D_signed work the best?? Does it?
+- [ ] Redo the heat map
 
-
+Questions:
+- Does the segment length affect generalization?
+- 
 # November 18:
 - [ ] Speed up run - we are running diffrax solver twice in the case that we save off intermediate details
 - [ ] unify teature_layers and output_layers formatting
