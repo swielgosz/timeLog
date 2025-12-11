@@ -1,1 +1,2 @@
-- quantify if the failure mode that we were seeing is still  
+- quantify if the failure mode that we were seeing is still happening
+- can we just not output temporary files
