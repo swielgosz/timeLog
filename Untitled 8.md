@@ -1,2 +1,3 @@
 - quantify if the failure mode that we were seeing is still happening
 - can we just not output temporary files
+- to draw meaningful conclusions we need different seeds. - probably get away with 3 or 5

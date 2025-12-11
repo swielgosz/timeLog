@@ -134,7 +134,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 8
       }
     ],
     "direction": "vertical"
@@ -284,10 +284,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "8c9ada01c0f8313d",
+  "active": "316dd9140fd51049",
   "lastOpenFiles": [
-    "Untitled 8.md",
     "Fall 2025.md",
+    "Untitled 8.md",
     "Running To Do List.md",
     "Untitled 7.md",
     "Untitled 5.md",
