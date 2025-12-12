@@ -64,7 +64,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -214,11 +214,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "8c9ada01c0f8313d",
+  "active": "487f5bac6997f294",
   "lastOpenFiles": [
+    "Advising Meetings.md",
     "Fall 2025.md",
     "Running To Do List.md",
-    "Advising Meetings.md",
     "Untitled 1.md",
     "Untitled.md",
     "Untitled 8.md",
