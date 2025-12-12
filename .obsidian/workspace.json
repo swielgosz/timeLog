@@ -36,105 +36,21 @@
             }
           },
           {
-            "id": "79aaf6c82dddee37",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Untitled 1.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Untitled 1"
-            }
-          },
-          {
-            "id": "4c1b4839e2155505",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Untitled 2.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Untitled 2"
-            }
-          },
-          {
             "id": "487f5bac6997f294",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Untitled 3.md",
+                "file": "Fall 2025.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Untitled 3"
-            }
-          },
-          {
-            "id": "8e8688e4268088ea",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Untitled 4.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Untitled 4"
-            }
-          },
-          {
-            "id": "3b918279e546f8f6",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Untitled 5.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Untitled 5"
-            }
-          },
-          {
-            "id": "a61b5aa66fcd24c0",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Untitled 7.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Untitled 7"
-            }
-          },
-          {
-            "id": "316dd9140fd51049",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Untitled 8.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Untitled 8"
+              "title": "Fall 2025"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -284,13 +200,19 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "8c9ada01c0f8313d",
+  "active": "487f5bac6997f294",
   "lastOpenFiles": [
-    "Running To Do List.md",
+    "Untitled.md",
     "Untitled 8.md",
-    "Fall 2025.md",
     "Untitled 7.md",
+    "Untitled 6.md",
     "Untitled 5.md",
+    "Untitled 4.md",
+    "Untitled 3.md",
+    "Untitled 2.md",
+    "Untitled 1.md",
+    "Fall 2025.md",
+    "Running To Do List.md",
     "Advising Meetings.md",
     "Attachments/Pasted image 20251210222819.png",
     "Attachments/Pasted image 20251210222559.png",
@@ -299,16 +221,10 @@
     "Attachments/Pasted image 20251210172521.png",
     "Attachments/W&B Chart 10_21_2025, 11_32_57 AM.png",
     "Attachments/heatmap_data_sensitivity_baseline.png",
-    "Untitled 6.md",
-    "Untitled 4.md",
-    "Untitled 3.md",
-    "Untitled 2.md",
-    "Untitled 1.md",
     "Attachments/Pasted image 20251205172815.png",
     "Attachments/Pasted image 20251205172803.png",
     "Attachments/Pasted image 20251204174610.png",
     "code.md",
-    "Untitled.md",
     "sensitivity analysis.md",
     "Attachments/multi_dataset_xy_baseline 1 1.pdf",
     "Archive/Research Notes.md",
