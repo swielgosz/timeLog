@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Fall 2025.md",
+                "file": "Advising Meetings.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Fall 2025"
+              "title": "Advising Meetings"
             }
           },
           {
@@ -64,7 +64,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -214,10 +214,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3629250f5b4990f6",
+  "active": "8c9ada01c0f8313d",
   "lastOpenFiles": [
-    "Untitled 1.md",
     "Fall 2025.md",
+    "Untitled 1.md",
     "Untitled.md",
     "Untitled 8.md",
     "Untitled 7.md",
