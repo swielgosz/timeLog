@@ -578,7 +578,7 @@ time to run: 1:29
 ![[Pasted image 20251118115157.png]]
 ![[Pasted image 20251118115124.png]]
 ![[Pasted image 20251118115208.png]]
-![[Pasted image 20251118115228.png]]
+[[![[Pasted image 20251118115228.png]]]]
 ![[Pasted image 20251118115234.png]]
 ![[Pasted image 20251118115254.png]]
 
