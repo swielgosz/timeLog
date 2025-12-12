@@ -2,6 +2,8 @@ Submit paper top of the year - 6 months until review
 Expect John to be asking for plots soonish for program applciations
 No group meetings during break
 No official 1:1s during break -  restart 1/20. He's still available. We can set a time and waive if not necesary
+for Zaratan:
+	test different core counts, memory configs, gpu if using. 
 
 # December 2
 
