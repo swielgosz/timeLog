@@ -1,3 +1,7 @@
+# End of December:
+- [ ] FIX COMMITS
+- [ ] Figure out journal paper visua
+
 # December 11
 Before meeting:
 - [ ] Understand latent ODEs more. Am I using the "correct" kind? How do we aim to use it?
