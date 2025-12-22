@@ -2,7 +2,7 @@
 - [ ] FIX COMMITS
 - [ ] Figure out journal paper visualizations
 - [ ] Figure out journal paper "plot" - I think the latent ODE linearization will be in the conference paper but will we have latent ODEs in the journal?
-- [ ] mlp_4D must be worse in some aspects? 
+- [ ] Figure out when mlp_4D is worse
 
 # December 11
 Before meeting:
