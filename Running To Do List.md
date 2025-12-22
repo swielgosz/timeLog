@@ -1,6 +1,7 @@
 # End of December:
 - [ ] FIX COMMITS
-- [ ] Figure out journal paper visua
+- [ ] Figure out journal paper visualizations
+- [ ] Figure out journal paper "plot" - I think the latent ODE linearization will be in the conference paper but will we have latent ODEs in the journal?
 
 # December 11
 Before meeting:
