@@ -83,12 +83,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Running To Do List.md",
+                "file": "Fall 2025.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Running To Do List"
+              "title": "Fall 2025"
             }
           }
         ],
@@ -244,8 +244,8 @@
   },
   "active": "0eec502664e97819",
   "lastOpenFiles": [
-    "Fall 2025.md",
     "Running To Do List.md",
+    "Fall 2025.md",
     "Untitled.md",
     "Untitled 1.md",
     "Untitled 2.md",
