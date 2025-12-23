@@ -97,12 +97,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Fall 2025.md",
+                "file": "Technical Notes/3BP Lectures Shane Ross.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Fall 2025"
+              "title": "3BP Lectures Shane Ross"
             }
           }
         ],
@@ -258,8 +258,8 @@
   },
   "active": "c7a1d6bdc38cc541",
   "lastOpenFiles": [
-    "Journal Planning.md",
     "Fall 2025.md",
+    "Journal Planning.md",
     "sensitivity analysis.md",
     "Running To Do List.md",
     "Untitled 1.md",
