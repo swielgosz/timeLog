@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Fall 2025.md",
+                "file": "Technical Notes/Latent ODEs.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Fall 2025"
+              "title": "Latent ODEs"
             }
           },
           {
@@ -256,10 +256,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "487f5bac6997f294",
+  "active": "417cbbe704296a5f",
   "lastOpenFiles": [
-    "Journal Planning.md",
     "Fall 2025.md",
+    "Journal Planning.md",
     "Technical Notes/Latent ODEs.md",
     "Technical Notes/Periodic Orbit Discovery.md",
     "Technical Notes/3BP Lectures Shane Ross.md",
