@@ -35,8 +35,7 @@
               "title": "Latent ODEs"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -93,7 +92,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "8b5870f707c309dd",
@@ -186,10 +186,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "487f5bac6997f294",
+  "active": "32dac6e62407ca4b",
   "lastOpenFiles": [
-    "Fall 2025.md",
     "Technical Notes/Latent ODEs.md",
+    "Fall 2025.md",
     "Running To Do List.md",
     "Advising Meetings.md",
     "Journal Planning.md",
