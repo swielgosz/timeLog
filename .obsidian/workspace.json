@@ -106,7 +106,7 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -256,10 +256,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "c7a1d6bdc38cc541",
+  "active": "487f5bac6997f294",
   "lastOpenFiles": [
-    "Technical Notes/Periodic Orbit Discovery.md",
     "Technical Notes/Latent ODEs.md",
+    "Technical Notes/Periodic Orbit Discovery.md",
     "Technical Notes/3BP Lectures Shane Ross.md",
     "Fall 2025.md",
     "Journal Planning.md",
