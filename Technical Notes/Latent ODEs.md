@@ -8,5 +8,10 @@ Latent ODEs for Irregularly-Sampled Time Series (Reading Papers) https://www.you
 	Associated paper is in Zotero
 FFJORD: FREE-FORM CONTINUOUS DYNAMICS FOR  SCALABLE REVERSIBLE GENERATIVE MODELS
 	I can't remember where I originally saw this referenced - might not be the most crucial
-	
+
+
 # Parts of an autoencoder
+
+# Questions
+What is the difference between stochastic vs not stochastic latent ODEs?
+what is the difference between MLP and GRU as the encoder?
