@@ -50,7 +50,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -201,7 +201,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "abe6a23c1020c49d",
+  "active": "487f5bac6997f294",
   "lastOpenFiles": [
     "metrics.md",
     "Fall 2025.md",
