@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Spring 2026.md",
+                "file": "02 Advising Meetings.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Spring 2026"
+              "title": "02 Advising Meetings"
             }
           },
           {
@@ -216,14 +216,15 @@
   },
   "active": "6d8cfbb7095985d8",
   "lastOpenFiles": [
+    "01 Spring 2026.md",
+    "Journal Planning.md",
+    "code.md",
+    "Technical Notes/Periodic Orbit Discovery.md",
     "Archive/Fall 2025.md",
-    "Spring 2026.md",
     "Technical Notes/Latent ODEs.md",
     "metrics.md",
     "Running To Do List.md",
-    "Advising Meetings.md",
-    "Journal Planning.md",
-    "Technical Notes/Periodic Orbit Discovery.md",
+    "02 Advising Meetings.md",
     "Technical Notes/3BP Lectures Shane Ross.md",
     "sensitivity analysis.md",
     "Untitled 1.md",
@@ -244,7 +245,6 @@
     "Attachments/Pasted image 20251205172815.png",
     "Attachments/Pasted image 20251205172803.png",
     "Attachments/Pasted image 20251204174610.png",
-    "code.md",
     "Attachments/multi_dataset_xy_baseline 1 1.pdf",
     "Archive/Research Notes.md",
     "Technical Notes/GENERATING PERIODIC ORBITS IN THE CIRCULAR RESTRICTED THREEBODY PROBLEM WITH APPLICATIONS TO LUNAR SOUTH POLE COVERAGE - Grebow Thesis.md",

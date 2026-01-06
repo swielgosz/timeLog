@@ -4,3 +4,4 @@ We need to heavily extend the results of the conference paper. This will include
 - [ ] 3D orbits
 	- [ ] extend 2BP to 3D
 	- [ ] extend CR3BP to more than just Lyapunov orbits
+

@@ -1,3 +1,8 @@
+# January 9
+To do before meeting:
+- [ ] Paper draft
+- [ ] Clean code
+
 Submit paper top of the year - 6 months until review
 Expect John to be asking for plots soonish for program applciations
 No group meetings during break
