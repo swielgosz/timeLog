@@ -63,8 +63,7 @@
               "title": "metrics"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -214,13 +213,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "6d8cfbb7095985d8",
+  "active": "32dac6e62407ca4b",
   "lastOpenFiles": [
+    "02 Advising Meetings.md",
     "01 Spring 2026.md",
     "Running To Do List.md",
     "Journal Planning.md",
     "Archive/Fall 2025.md",
-    "02 Advising Meetings.md",
     "code.md",
     "Technical Notes/Periodic Orbit Discovery.md",
     "Technical Notes/Latent ODEs.md",
