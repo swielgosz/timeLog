@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Journal Planning.md",
+                "file": "01 Spring 2026.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Journal Planning"
+              "title": "01 Spring 2026"
             }
           },
           {
@@ -63,8 +63,7 @@
               "title": "metrics"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -214,10 +213,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "6d8cfbb7095985d8",
+  "active": "32dac6e62407ca4b",
   "lastOpenFiles": [
-    "01 Spring 2026.md",
     "Journal Planning.md",
+    "01 Spring 2026.md",
     "02 Advising Meetings.md",
     "Running To Do List.md",
     "Archive/Fall 2025.md",

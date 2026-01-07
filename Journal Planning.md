@@ -10,6 +10,15 @@ Our TBP planar was named `<complex|simple>_TBP_planar_<num_orbits>_<train|test>`
 Let's follow the same convention for nonplanar
 
 ## Sensitivities to study
-- Effect of amount of training data
-- Effect of segmentation strategy
-- 
+What are the effects of:
+- **training data quantity**
+- segment length strategy
+- learning rate strategy
+- steps strategy
+- batch size
+- loss function
+- feature layer
+- output layer
+- activation function
+- segment then train/test split or vice versa
+
