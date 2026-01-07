@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 Spring 2026.md",
+                "file": "Journal Planning.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01 Spring 2026"
+              "title": "Journal Planning"
             }
           },
           {
@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "02 Advising Meetings.md",
+                "file": "Journal Planning.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "02 Advising Meetings"
+              "title": "Journal Planning"
             }
           },
           {
@@ -63,7 +63,8 @@
               "title": "metrics"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -213,12 +214,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "32dac6e62407ca4b",
+  "active": "6d8cfbb7095985d8",
   "lastOpenFiles": [
-    "02 Advising Meetings.md",
     "01 Spring 2026.md",
-    "Running To Do List.md",
     "Journal Planning.md",
+    "02 Advising Meetings.md",
+    "Running To Do List.md",
     "Archive/Fall 2025.md",
     "code.md",
     "Technical Notes/Periodic Orbit Discovery.md",
