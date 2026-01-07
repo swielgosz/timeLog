@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Archive/Fall 2025.md",
+                "file": "Journal Planning.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Fall 2025"
+              "title": "Journal Planning"
             }
           },
           {
@@ -63,8 +63,7 @@
               "title": "metrics"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -214,17 +213,17 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "6d8cfbb7095985d8",
+  "active": "32dac6e62407ca4b",
   "lastOpenFiles": [
+    "Archive/Fall 2025.md",
+    "02 Advising Meetings.md",
     "01 Spring 2026.md",
     "Journal Planning.md",
     "code.md",
     "Technical Notes/Periodic Orbit Discovery.md",
-    "Archive/Fall 2025.md",
     "Technical Notes/Latent ODEs.md",
     "metrics.md",
     "Running To Do List.md",
-    "02 Advising Meetings.md",
     "Technical Notes/3BP Lectures Shane Ross.md",
     "sensitivity analysis.md",
     "Untitled 1.md",
