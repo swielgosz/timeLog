@@ -271,3 +271,45 @@ if __name__ == "__main__":
 Used in `feature_diagnostics.py` imports and calls plot_feature_series and plot_feature_scatter, and `postprocess.py` calls export_training_feature_snapshots and run_feature_dynamics_capture
 
 # neuralODE.py
+`get_output_features`
+``` python
+    def get_output_features(self, y, *, post_activation=False):
+        _, mlp_out, outputs = self._evaluate_layers(y)
+        if post_activation:
+            # Return the post-activation acceleration components (without velocities).
+            if self.output_layer_name in {
+                "mlp_4D",
+                "mlp_4D_scaled",
+                "mlp_4D_unit",
+                "mlp_4D_unit_scaled",
+            }:
+                r_mag = jnp.abs(mlp_out[0:1])
+                r_dir = mlp_out[1:4]
+                return jnp.concatenate((r_mag, r_dir), axis=0)
+            if self.output_layer_name == "mlp_4D_signed":
+                r_mag = mlp_out[0:1]
+                r_dir = mlp_out[1:4]
+                return jnp.concatenate((r_mag, r_dir), axis=0)
+            if self.output_layer_name == "mlp_4D_activation":
+                r_mag = jnn.sigmoid(mlp_out[0:1])
+                r_dir = jnn.tanh(mlp_out[1:4])
+                return jnp.concatenate((r_mag, r_dir), axis=0)
+            # For other output layers, fall back to the actual acceleration part of outputs.
+            return outputs[3:]
+        if self.output_layer_name in {
+            "mlp_4D",
+            "mlp_4D_scaled",
+            "mlp_4D_unit",
+            "mlp_4D_unit_scaled",
+        }:
+            r_mag = jnp.abs(mlp_out[0:1])
+            r_dir = mlp_out[1:4]
+            return jnp.concatenate((r_mag, r_dir), axis=0)
+        if self.output_layer_name == "mlp_4D_signed":
+            r_mag = mlp_out[0:1]
+            r_dir = mlp_out[1:4]
+            return jnp.concatenate((r_mag, r_dir), axis=0)
+        return mlp_out
+```
+
+Let's deal with the segmentation curriculum first
