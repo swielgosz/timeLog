@@ -2,10 +2,12 @@ IT IS TIME. Let's clean this up.
 
 We don't need to commit the yaml files (or can do this last)
 What did  I do first?
-I think I worked on TrainingPhaseVisualizer around f
+I think I worked on TrainingPhaseVisualizer around first. I was implementing segmentation strategy.
+
+Acceleration metrics were near the last
 
 # Files to get rid of
-## `train_separatedata.py`
+## train_separatedata.py
 Unlike train.py, this uses a distinct dataset for validation, e.g. we have `<dataset>_train` for training and `<dataset>_test` and forces train_val_split to 1.0 so that validation loss is computed only based on the validation dataset. 
 Code:
 ``` python
@@ -180,4 +182,82 @@ def main():
 if __name__ == "__main__":
     main()
 ```
-## 
+## list_crashed_runs.py
+Lists crashed run ids from a queried W&B group. I was using this to debug why sweeps were crashing, but I believe this was rectified so the script is no longer needed.
+``` python
+"""
+List failed/crashed WandB runs in a group to help spot the run that broke a sweep.
+
+Usage:
+    python scripts/training/list_crashed_runs.py
+
+Adjust GROUP/PROJECT/ENTITY below as needed.
+"""
+
+import wandb
+
+# Configure here
+GROUP = "sweep-2BP-12-7"
+PROJECT = "neuralODEs"
+ENTITY = "mlds-lab"
+
+
+def _safe_summary_val(run, key, default=0):
+    """Safely pull a numeric summary value without raising on malformed data."""
+    try:
+        summary = getattr(run, "summary", None)
+        if summary is None:
+            return default
+        val = summary.get(key, default)
+        if isinstance(val, (int, float)):
+            return val
+        return default
+    except Exception:  # pylint: disable=broad-except
+        return default
+
+
+def main():
+    api = wandb.Api()
+    runs = api.runs(
+        f"{ENTITY}/{PROJECT}",
+        filters={
+            "$and": [
+                {"group": GROUP},
+                {"state": {"$in": ["failed", "crashed"]}},
+            ],
+        },
+    )
+
+    crashed = sorted(
+        runs,
+        key=lambda r: (
+            _safe_summary_val(r, "_timestamp", 0),
+            _safe_summary_val(r, "_runtime", 0),
+        ),
+    )
+
+    if not crashed:
+        print("No crashed/failed runs found for the given group.")
+        return
+
+    print(f"Crashed/failed runs in group '{GROUP}':\n")
+    for r in crashed:
+        runtime = _safe_summary_val(r, "_runtime", "n/a")
+        ts = _safe_summary_val(r, "_timestamp", "n/a")
+        try:
+            exit_code = r.summary.get("exit_code", "n/a")
+        except Exception:  # pylint: disable=broad-except
+            exit_code = "n/a"
+        # Config can occasionally be non-dict; guard it.
+        cfg = r.config if isinstance(r.config, dict) else {}
+        seg = cfg.get("parameters", {}).get("segment_length_strategy") or cfg.get(
+            "segment_length_strategy",
+        )
+        print(
+            f"{r.id} | state={r.state} | exit={exit_code} | runtime={runtime} | ts={ts} | segment_length_strategy={seg}",
+        )
+
+
+if __name__ == "__main__":
+    main()
+```
