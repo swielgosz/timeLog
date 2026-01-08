@@ -261,3 +261,11 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+
+
+# Notes
+`feature_inputs.py`:
+- It provides plotting utilities to visualize feature-layer outputs over time and as aggregate distributions.
+- plot_feature_series(...) plots per-feature time series (with optional truth reference and error curves, plus a periapsis marker).
+- plot_feature_scatter(...) shows a per-feature value distribution across all samples.
+Used in `feature_diagnostics.py` imports and calls plot_feature_series and plot_feature_scatter, and `postprocess.py` calls export_training_feature_snapshots and run_feature_dynamics_capture
