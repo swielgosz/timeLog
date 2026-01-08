@@ -313,3 +313,5 @@ Used in `feature_diagnostics.py` imports and calls plot_feature_series and plot_
 ```
 
 Let's deal with the segmentation curriculum first
+
+Laebels aren't handled the same between output_layers and feature_layers?
