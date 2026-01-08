@@ -4,6 +4,8 @@
 - [ ] Figure out journal paper "plot" - I think the latent ODE linearization will be in the conference paper but will we have latent ODEs in the journal?
 - [ ] Figure out when mlp_4D is worse
 
+# January
+- [ ] rectify feature labeling in feature_layers and output_layers
 # December 11
 Before meeting:
 - [ ] Understand latent ODEs more. Am I using the "correct" kind? How do we aim to use it?
@@ -26,4 +28,4 @@ Questions:
 	- [ ] if datasets are very large - will we have to break them up to save/upload them for memory purposes? for the time being, curiosity should be fine. ETA: the size limit on artifact uploads to wandb is 5gb per file, so we shouldn't have to worry about this
 - [ ] new acceleration metric - time averaged acceleration error?
 - [ ] add a config for cpu vs gpu
-- [ ] 
+
