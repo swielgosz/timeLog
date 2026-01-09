@@ -14,7 +14,15 @@ Extending conference results. We were originally planning to include latent ODEs
 
 Increase network size and perform more rigorous experiments on seeding results. 
 Can we learn dynamics that are not obvious?
-- 4BP - if we have CRTBP, can we compensate for those pieces. Use latent ODEs- 
+- 4BP - if we have CRTBP, can we compensate for those pieces. Use latent ODEs- how more powerful are these
+- Can latent ODEs learn time varying forces?
+
+Neural ODEs, latent ODEs learn underlying dynamics. SRP, drag, 4 body effects affect our motion. 
+If you're observing a trajectory, can we learn the dynamics models?
+Sensitivity study to get an idea of what errors we should actually be expecting. Where is dangerous and helpful.
+Study 3 forces, see how well we can recover these. 
+May need to write and validate 
+What if we only observe part of the trajectory? Dark side fo the moon. What if we have state estimates? What if we want this to become more 
 # December 2
 
 Submit paper top of the year - 6 months until review
