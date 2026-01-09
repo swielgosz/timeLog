@@ -8,6 +8,9 @@ To do before meeting:
 ![[Pasted image 20260109060514.png]]
 This run had a 
 
+## Storyboard
+Extending conference results. We were originally planning to include latent ODEs. We want to show that we can force linearization in latent space 
+
 # December 2
 
 Submit paper top of the year - 6 months until review
