@@ -84,8 +84,14 @@ And this is where the ODE-RNN comes in:
 	•	Outputs (\mu_{z_0}, \sigma_{z_0})
 	•	Defines the approximate posterior
 
-In this case:
+In this case, the ODE-RNN is not the generative model — it is the encoder. The Neural ODE + decoder is the generative model.
 
-The ODE-RNN is not the generative model — it is the encoder.
+2BP analogy (to lock it in)
 
-The Neural ODE + decoder is the generative model.
+Think of:
+	•	ODE evolution = propagating an orbit
+	•	RNN update = incorporating a tracking measurement
+
+That’s exactly what’s happening.
+
+If you were learning just gravity, you wouldn’t want the jumps.
