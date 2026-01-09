@@ -12,6 +12,7 @@ Without length strat:
 ## Storyboard
 Extending conference results. We were originally planning to include latent ODEs. We want to show that we can force linearization in latent space 
 
+Increase network size and perform more rigorous experiments on seeding results. 
 # December 2
 
 Submit paper top of the year - 6 months until review
