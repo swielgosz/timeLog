@@ -4,9 +4,10 @@ To do before meeting:
 - [ ] Clean code
 - [ ] Plan visualizations and create
 
+Training on nonplanar dataset, with length strategy: ![[Pasted image 20260109060514.png]]
 
-![[Pasted image 20260109060514.png]]
-This run had a 
+Without length strat:
+![[Pasted image 20260109062448.png]]
 
 ## Storyboard
 Extending conference results. We were originally planning to include latent ODEs. We want to show that we can force linearization in latent space 
