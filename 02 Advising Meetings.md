@@ -13,6 +13,8 @@ Without length strat:
 Extending conference results. We were originally planning to include latent ODEs. We want to show that we can force linearization in latent space 
 
 Increase network size and perform more rigorous experiments on seeding results. 
+Can we learn dynamics that are not obvious?
+- 4BP - if we have CRTBP, can we compensate for those pieces. Use latent ODEs- 
 # December 2
 
 Submit paper top of the year - 6 months until review
