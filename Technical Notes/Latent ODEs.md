@@ -29,8 +29,6 @@ This lets the network model temporal dependencies such as:
 	•	Earlier states of a dynamical system
 ---
 
-
-
 **Mathematical Form**
 A simple (vanilla) RNN can be written as:
 $$
@@ -38,19 +36,22 @@ $$
 h_t = \tanh(W_x x_t + W_h h_{t-1} + b) \\
 y_t = W_y h_t
 \end{gathered}
-$$Where:
+$$
+Where:
 - $x_t$ = input at time t
 - $h_t$ = hidden state (the “memory”)
 - $y_t$ = output
 - $W_x, W_h, W_y$ = learned weight matrices
 The **same weights** are reused at every time step.
 
-Where:
-	•	x_t = input at time t
-	•	h_t = hidden state (the “memory”)
-	•	y_t = output
-	•	W_x, W_h, W_y = learned weight matrices
+Example - predicting vibration faults in a rotating machine. You record vibration signals over time and want to detect or predict a fault. Each data sample is a time series, not a single vector. At each timestep $t$ you observe acceleration, maybe temp, RPM, etc. But the system's health status depends on patterns over many previous time steps, not just the instantaneous value. An RNN processes the signal one timestep at a time, carries a hidden state that summarizes the recent history, and learns temporal signatures like growing harmonics or periodic instability.
 
+Variants to address vanishing and exploding gradient issues:
+- LSTM (Long Short-Term Memory)
+	- Uses gates (input, forget, output)
+	- Can retain information over long time spans
+- GRU (Gated Recurrent Unit)
+	- Simpler than LSTM
+	- Fewer parameters, often similar performance
 
-The same weights are reused at every time step.
-![[Pasted image 20260108230822.png]]
+![[Pasted image 20260108230822.png|500]]
