@@ -58,3 +58,6 @@ Variants to address vanishing and exploding gradient issues:
 
 **What this paper introduces**
 RNNs are not suitable for irregularly-sampled time series data. Better approach is to construct a continuous-time model with a latent state defined at all times. 
+
+Introduces two different ways to use the ODE-RNN:
+1. Standalone autoregressive model. An AR model is one where future values are predicted using past values of the same variable. This is the generative model portion of the paper. 
