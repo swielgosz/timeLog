@@ -5,6 +5,9 @@ To do before meeting:
 - [ ] Plan visualizations and create
 
 
+![[Pasted image 20260109060514.png]]
+This run had a 
+
 # December 2
 
 Submit paper top of the year - 6 months until review
