@@ -58,6 +58,34 @@ Variants to address vanishing and exploding gradient issues:
 
 **What this paper introduces**
 RNNs are not suitable for irregularly-sampled time series data. Better approach is to construct a continuous-time model with a latent state defined at all times. 
+![[Pasted image 20260109003931.png]]
 
 Introduces two different ways to use the ODE-RNN:
 1. Standalone autoregressive model. An AR model is one where future values are predicted using past values of the same variable. This is the generative model portion of the paper. 
+	In a standalone ODE-RNN, the hidden state h(t):
+		1.	Evolves continuously according to an ODE when nothing is observed
+		2.	Jumps discretely via an RNN cell when a new observation arrives
+		There is no latent variable z_0, no variational posterior, no encoder/decoder split. The model directly generates the next observation.
+2. ODE-RNN as a recognition network (latent ODE)
+Here the structure is:
+
+Generative model (Latent ODE)
+
+z_0 \sim p(z_0)
+\dot{z}(t) = f_\theta(z(t))
+x_{t_i} \sim p(x \mid z(t_i))
+
+Recognition model
+
+q(z_0 \mid \{x_{t_i}, t_i\})
+
+And this is where the ODE-RNN comes in:
+	•	The ODE-RNN processes observations
+	•	Outputs (\mu_{z_0}, \sigma_{z_0})
+	•	Defines the approximate posterior
+
+In this case:
+
+The ODE-RNN is not the generative model — it is the encoder.
+
+The Neural ODE + decoder is the generative model.
