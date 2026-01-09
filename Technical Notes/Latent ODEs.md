@@ -55,3 +55,6 @@ Variants to address vanishing and exploding gradient issues:
 	- Fewer parameters, often similar performance
 
 ![[Pasted image 20260108230822.png|500]]
+
+**What this paper introduces**
+RNNs are not suitable for irregularly-sampled time series data. Better approach is to construct a continuous-time model with a latent state defined at all times. 
