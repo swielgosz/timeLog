@@ -22,7 +22,10 @@ If you're observing a trajectory, can we learn the dynamics models?
 Sensitivity study to get an idea of what errors we should actually be expecting. Where is dangerous and helpful.
 Study 3 forces, see how well we can recover these. 
 May need to write and validate 
-What if we only observe part of the trajectory? Dark side fo the moon. What if we have state estimates? What if we want this to become more 
+What if we only observe part of the trajectory? Dark side fo the moon. What if we have state estimates? What if we want this to become more.
+NRHO would be cool
+
+loop timer- go through activities
 # December 2
 
 Submit paper top of the year - 6 months until review
