@@ -106,7 +106,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -256,10 +256,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "7eff39a0fef23c59",
+  "active": "eac241d9f27ff094",
   "lastOpenFiles": [
-    "02 Advising Meetings.md",
     "Michael Defense Questions.md",
+    "02 Advising Meetings.md",
     "Technical Notes/Latent ODEs.md",
     "Attachments/Pasted image 20260109062448.png",
     "Attachments/Pasted image 20260109060514.png",
