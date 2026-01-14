@@ -22,3 +22,4 @@ What are the effects of:
 - activation function
 - segment then train/test split or vice versa
 
+We want to use neuralODEs and latentODEs 
