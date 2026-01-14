@@ -31,4 +31,4 @@ For the novelty aspect, we want to use and compare neuralODEs and latentODEs for
 - drag
 - for latent ODEs, can we exploit them to for learning dynamics say when an orbit is on the dark side of the moon?
 
-This is similar to what was done in SALAMANDER. Let's give that 
+This is similar to what was done in SALAMANDER. Let's give that a reread. I do know that they used Universal Differential Equations. I don't know the exact distinction between neural ODEs and UDEs. 
