@@ -22,4 +22,13 @@ What are the effects of:
 - activation function
 - segment then train/test split or vice versa
 
-We want to use neuralODEs and latentODEs 
+## Paper Goals
+We need to perform sensitivity studies to find expected bounds on performance. This is more conference level.
+
+For the novelty aspect, we want to use and compare neuralODEs and latentODEs for the purpose of modeling unknown force components:
+- SRP
+- 4BP from CR3BP approx
+- drag
+- for latent ODEs, can we exploit them to for learning dynamics say when an orbit is on the dark side of the moon?
+
+This is similar to what was done in SALAMANDER. Let's give that 
