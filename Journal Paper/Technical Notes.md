@@ -11,3 +11,9 @@ Takeaways:
 ## Background
 ### SciML
 Mechanistic models are derived from known physical laws. You probably know the structure of the system and use dasta to estimate parameters. Non-mechanistic models are data driven and are black box predictive models which do not need knowledge of the system. However, they lack interpretability and are not strongly generalizable. Author proposes combining these
+
+... Neural Networks, ResNET, Neural ODEs ...
+## Universal Differential Equations
+Domain models are augmented with data-driven techniques: $\frac{dh(t)}{dt}=f(h(t),t,\theta,\alpha,\beta)$. This makes training more data-efficient. 
+
+Side tangent - this is not a very clear explanation. Let's look elsewhere. 
