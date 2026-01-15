@@ -17,3 +17,6 @@ Mechanistic models are derived from known physical laws. You probably know the s
 Domain models are augmented with data-driven techniques: $\frac{dh(t)}{dt}=f(h(t),t,\theta,\alpha,\beta)$. This makes training more data-efficient. 
 
 Side tangent - this is not a very clear explanation. Let's look elsewhere. 
+
+**Patrick Kidger Thesis**
+"Endowing a model with any known structure of a problem is known as giving the model an inductive bias."
