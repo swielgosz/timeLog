@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 Spring 2026.md",
+                "file": "Journal Paper/Technical Notes.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01 Spring 2026"
+              "title": "Technical Notes"
             }
           },
           {
@@ -216,9 +216,9 @@
   },
   "active": "6d8cfbb7095985d8",
   "lastOpenFiles": [
+    "01 Spring 2026.md",
     "Journal Paper/Technical Notes.md",
     "Technical Notes/Latent ODEs.md",
-    "01 Spring 2026.md",
     "Journal Paper/Journal Planning.md",
     "Journal Paper",
     "02 Advising Meetings.md",
