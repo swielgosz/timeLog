@@ -23,4 +23,3 @@ Side tangent - this is not a very clear explanation. Let's look elsewhere.
 
 So when we say we want to learn the unknown portion of $f = f_{known} + f_{NODE}$, this is a neural UDE.
 
-Let's try to implement an example. 
