@@ -1,3 +1,12 @@
 This work investigates the potential of neural ordinary differential equations (neural ODEs) for modeling spacecraft dynamics. As a proof of concept, we evaluate their ability to learn accelerations in canonical astrodynamics problems, including the planar two-body and circular restricted three-body problems. We characterize the strengths, limitations, and practical caveats of the approach, assessing both accuracy and generalization across datasets of varying complexity. Results demonstrate that neural ODEs have potential as accurate, data-driven surrogates for traditional models, offering a flexible approach to modeling complex dynamics in support of improved space mission design and analysis.
 
 This work investigates the use of a neural ordinary differential equation (neural ODE) framework that augments known governing dynamics with a learned model to 
+
+This work > _The proposed approach formulates the dynamics as a universal differential equation, where known physical laws define the nominal dynamics and a neural ODE learns a corrective term capturing unknown forces._
+
+This work investigates the potential of neural ordinary differential equations (neural ODEs) for modeling unknown spacecraft dynamics using a hybrid of mechanistic and non-mechanistic models. Specifically, the proposed approach formulates the dynamics as a universal differential equation, where known physical laws define the nominal dynamics and a neural ODE learns a corrective term capturing unknown forces. As a proof of concept, we demonstrate. the ability of the neural ODE to learn perturbations 
+
+This work investigates the potential of neural ordinary differential equations (neural ODEs) for modeling unknown perturbations on a spacecraft using a hybrid of mechanistic and non-mechanistic models.
+Specifically, the proposed approach formulates the dynamics as a universal differential equation, where known physical laws define the nominal dynamics and a neural ODE learns a corrective term capturing unknown forces.
+Learning such corrective dynamics is particularly important for autonomous spacecraft operations, where discrepancies between baseline physics models and true system behavior can accumulate and degrade long-term prediction, guidance, and control performance.
+As a proof of concept, we demonstrate the ability of the neural ODE to learn perturbative dynamics from data.
