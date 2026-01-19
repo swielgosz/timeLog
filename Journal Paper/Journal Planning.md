@@ -32,3 +32,27 @@ For the novelty aspect, we want to use and compare neuralODEs and latentODEs for
 - for latent ODEs, can we exploit them to for learning dynamics say when an orbit is on the dark side of the moon?
 
 This is similar to what was done in SALAMANDER. Let's give that a reread. I do know that they used Universal Differential Equations. I don't know the exact distinction between neural ODEs and UDEs. 
+
+Given:
+  - Known dynamics: f_known(x, t)
+  - Unknown forcing: f_theta(x, t) (neural network, outputs acceleration/derivative)
+  - Observed trajectories: { (t_i, x_obs(t_i)) }
+
+Define UDE dynamics:
+  dx/dt = f_known(x, t) + f_theta(x, t; θ)
+
+Training loop:
+  initialize θ
+  for each epoch:
+    for each trajectory batch:
+      x0 = observed initial state
+      t_eval = observation times
+      # integrate UDE forward
+      x_pred(t_eval) = ODESolve(dx/dt, x0, t_eval, θ)
+      # loss compares predicted trajectory to observed data
+      loss = MSE(x_pred(t_eval), x_obs(t_eval))
+      # backprop through ODE solver to update θ
+      θ ← θ - η * ∂loss/∂θ
+
+Output:
+  learned forcing model f_theta(x, t) embedded in the ODE
