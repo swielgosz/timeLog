@@ -71,6 +71,17 @@ Note to self - source code is included in this paper. It is written in Julia.
 		- Advantages:
 			- inductive biases - hypothesis space is restricted to physically plausible solutions
 			- data efficiency
-			- extrapolat. better generalization to new regimes, longer time horizons, changed parameters
-			- interpretabi
+			- extrapolation. better generalization to new regimes, longer time horizons, changed parameters
+			- interpretability - learned components can be inspected and reasoned about
+		- But really, PINNs aren't mechanistic/ Pinn vs UDE/mechanistic neural ODE
+			- PINN:
+				- neural netwrok approximates the solution
+				- physics enforced by penalizing residuals
+				- dynamics are not explicitly integrated
+				- `NN(x,t) → u(x,t) # loss enforces PDE/ODE`
+			- UDE/mechanistic neural ODE
+				- Physics defines the time evolution
+				- Neural network augments dynamics
+				- Solver enforces physics exactly
+				- `dx/dt = physics(x,t) + NN(x,t) # integrate forward in time`
 
