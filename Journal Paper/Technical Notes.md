@@ -30,6 +30,47 @@ Most of the rest of the paper is numerical examples. For now, move on to learnin
 Note to self - source code is included in this paper. It is written in Julia. 
 
 ## Introduction
-- Mechanistic mode
+- Mechanistic models are used in areas where small training datasets result in inaccurate models
+	- Mechanistic models are constrained to be predictive
+	- A mechanistic model in machine learning is a model whose structure is derived from first-principles knowledge of the system (e.g., physical laws), with learning used only to estimate parameters or augment missing components.
+	- Pure physics<── Hybrid (physics + ML)──→ Pure ML
 
+| **Type**               | **Example**                    | **What ML learns** |
+| ---------------------- | ------------------------------ | ------------------ |
+| Fully mechanistic      | Newton’s equations             | Nothing            |
+| Parametric mechanistic | Mass, drag coefficients        | Parameters         |
+| **Hybrid / UDE**       | Known dynamics + NN correction | Missing forces     |
+| Black-box ML           | MLP mapping state → next state | Everything         |
+- Mechanistic models vs standard ML models:
+	- Standard ML (black box):
+		`state_t  ──► neural network ──► state_{t+1}` 
+		- no explicit notion of physics
+		- learns correlations
+		- poor extrapolation is common
+		- limited interpretability
+	- Mechanistic ML (hybrid):
+		`dx/dt = known_physics(x, t) + learned_component(x, t)`
+		- physics defines structure
+		- ML fills gaps
+		- strong inductive bias
+		- better extrapolation and stability
+		- Examples in ML:
+			- Physics-informed parameter learning
+				- Governing equations are fixed, ML estimates unknown parameters
+				- Example: learning drag coefficient, thrust efficiency
+			- Universal Differential Equations
+				- Differential equations with learned terms
+				- Neural networks represent unknown physics
+				- Widely used with neural ODE solvers
+			- Physics-informed neural networks (PINNs)
+				- neural networks trained to satisfy PDEs/ODEs
+				- Physics enforced through loss terms
+			- Gray box models
+				- Partial mechanistic structure
+				- Data-driven submodels embedded inside
+		- Advantages:
+			- inductive biases - hypothesis space is restricted to physically plausible solutions
+			- data efficiency
+			- extrapolat. better generalization to new regimes, longer time horizons, changed parameters
+			- interpretabi
 
