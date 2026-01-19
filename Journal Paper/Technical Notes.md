@@ -21,5 +21,10 @@ Side tangent - this is not a very clear explanation. Let's look elsewhere.
 **Patrick Kidger Thesis**
 "Endowing a model with any known structure of a problem is known as giving the model an inductive bias."
 
-So when we say we want to learn the unknown portion of $f = f_{known} + f_{NODE}$, this is a neural UDE.
+So when we say we want to learn the unknown portion of $f = f_{known} + f_{NODE}$, this is a neural ODE.
+
+---
+# Universal Differential Equations for Scientific  Machine Learning
+Note to self - source code can be found here
+
 

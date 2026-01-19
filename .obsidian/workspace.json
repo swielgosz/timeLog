@@ -76,9 +76,23 @@
               "icon": "lucide-file",
               "title": "Untitled"
             }
+          },
+          {
+            "id": "3be019074464097b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Journal Paper/Technical Notes.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Technical Notes"
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -228,7 +242,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "4363097a9b9987dc",
+  "active": "3be019074464097b",
   "lastOpenFiles": [
     "Untitled.md",
     "Journal Paper/Technical Notes.md",
