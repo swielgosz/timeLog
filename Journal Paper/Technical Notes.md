@@ -23,8 +23,13 @@ Side tangent - this is not a very clear explanation. Let's look elsewhere.
 
 So when we say we want to learn the unknown portion of $f = f_{known} + f_{NODE}$, this is a neural ODE.
 
+Most of the rest of the paper is numerical examples. For now, move on to learning UDEs
+
 ---
 # Universal Differential Equations for Scientific  Machine Learning
-Note to self - source code can be found here
+Note to self - source code is included in this paper. It is written in Julia. 
+
+## Introduction
+- Mechanistic mode
 
 
