@@ -215,3 +215,16 @@ I don't think I need these versions with "internal steps"
         return result
 
 ```
+
+# Final activation 
+``` python
+        self.mlp = eqx.nn.MLP(
+            in_size=in_size,
+            out_size=out_size,
+            width_size=width,
+            depth=depth,
+            activation=getattr(jnn, config.parameters.activation),
+            # final_activation=jnn.tanh,
+            key=key,
+        )
+```
