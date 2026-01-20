@@ -83,12 +83,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 Spring 2026.md",
+                "file": "cleaning code/backup.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01 Spring 2026"
+              "title": "backup"
             }
           }
         ],
@@ -244,15 +244,15 @@
   },
   "active": "3be019074464097b",
   "lastOpenFiles": [
-    "Journal Paper/Journal Planning.md",
+    "cleaning code/Cleaning Code.md",
     "01 Spring 2026.md",
+    "Journal Paper/Journal Planning.md",
     "Lit Review Color Code.md",
     "Journal Paper/Technical Notes.md",
     "Untitled.md",
     "Technical Notes/Latent ODEs.md",
     "Journal Paper",
     "02 Advising Meetings.md",
-    "cleaning code/Cleaning Code.md",
     "metrics.md",
     "Michael Defense Questions.md",
     "Attachments/Pasted image 20260109062448.png",

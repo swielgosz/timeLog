@@ -127,3 +127,91 @@ def percent_error_with_attraction_loss(
 
 percent_error_with_attraction_loss.supports_components = True
 ```
+
+# Solve with feature capture
+I don't think I need these versions with "internal steps"
+``` python
+    def solve_with_feature_capture(
+        self,
+        ts,
+        y0,
+        *,
+        capture_internal_steps=False,
+        capture_accel=True,
+        capture_output_features=False,
+        output_features_post_activation=False,
+    ):
+        """
+        Solve the ODE while also recording feature-layer outputs along the trajectory.
+        """
+        ts = jnp.asarray(ts)
+        y0 = jnp.asarray(y0)
+        if ts.shape[0] < 2:
+            raise ValueError("Need at least two time samples to capture features.")
+        dt0 = ts[1] - ts[0]
+        feature_fn = lambda t, y, args: self.func.feature_layer(y)
+        subs = {
+            "states": SubSaveAt(ts=ts, fn=save_y),
+            "features": SubSaveAt(ts=ts, fn=feature_fn),
+        }
+        if capture_internal_steps:
+            subs["feature_steps"] = SubSaveAt(steps=True, fn=feature_fn)
+        if capture_accel:
+            subs["accelerations"] = SubSaveAt(
+                ts=ts,
+                fn=lambda t, y, args: self.func(t, y, args),
+            )
+            if capture_internal_steps:
+                subs["accel_steps"] = SubSaveAt(
+                    steps=True,
+                    fn=lambda t, y, args: self.func(t, y, args),
+                )
+        if capture_output_features:
+            output_fn = lambda t, y, args: self.func.get_output_features(
+                y,
+                post_activation=output_features_post_activation,
+            )
+
+            subs["output_features"] = SubSaveAt(ts=ts, fn=output_fn)
+            if capture_internal_steps:
+                subs["output_step_features"] = SubSaveAt(
+                    steps=True,
+                    fn=output_fn,
+                )
+
+        solution = diffrax.diffeqsolve(
+            diffrax.ODETerm(self.func),
+            diffrax.Tsit5(),
+            t0=float(ts[0]),
+            t1=float(ts[-1]),
+            dt0=float(dt0),
+            y0=y0,
+            stepsize_controller=diffrax.PIDController(
+                rtol=self.rtol,
+                atol=self.atol,
+            ),
+            saveat=diffrax.SaveAt(subs=subs),
+        )
+        result = {
+            "ts": solution.ts["states"],
+            "states": solution.ys["states"],
+            "features": solution.ys["features"],
+        }
+        if capture_internal_steps and "feature_steps" in solution.ys:
+            result["step_ts"] = solution.ts["feature_steps"]
+            result["step_features"] = solution.ys["feature_steps"]
+        if capture_accel and "accelerations" in solution.ys:
+            result["accelerations"] = solution.ys["accelerations"]
+        if capture_accel and capture_internal_steps and "accel_steps" in solution.ys:
+            result["step_accelerations"] = solution.ys["accel_steps"]
+        if capture_output_features and "output_features" in solution.ys:
+            result["output_features"] = solution.ys["output_features"]
+        if (
+            capture_output_features
+            and capture_internal_steps
+            and "output_step_features" in solution.ys
+        ):
+            result["step_output_features"] = solution.ys["output_step_features"]
+        return result
+
+```
