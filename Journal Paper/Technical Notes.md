@@ -102,3 +102,5 @@ posed on this mean motion. Notice also that the force of drag opposes the veloci
 satellite, we must also consider companion aerodynamic forces such as lift and side forces. Remember that although the atmosphere is rotating, it does so with a “profile”
 that follows a little behind the Earth. Due to friction with the Earth, the atmosphere closest to the Earth rotates a little faster than higher altitudes. The velocity vector relative to
 the rotating atmosphere is
+
+![[Pasted image 20260121105029.png]]-
