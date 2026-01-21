@@ -92,4 +92,13 @@ We will consider drag and SRP in the 2BP. Atmospheric drag has the most influenc
 We want a model that is good enough to account for atmospheric density . Drag is nonconservative - energy is lost due to friction. Drag primarily changes the SMA and eccentricity of the orbit. 
 
 Equation for aerodynamic drag:
-$\vec{a}_{drag}=-\frac{1}{2}$ 
+$\vec{a}_{drag}=-\frac{1}{2}\frac{c_dA}{m}\rho\nu^2_{rel}\frac{\vec{v}_{rel}}{|\vec{v}_{rel}|}$  
+- $c_D$ is the dimensionless coefficient of drag which reflects the satellite's susceptibility to drag forces. It is ~2.2 for flat plate modle in upper atmosphere. Spheres have $c_D$ of 2.0 to 2.1. It is satellite configuration specific and usually limited to three significant figures. 
+- $\rho$ is the atmospheric density - most difficult parameter to determine
+- $A$ is the exposed cross-sectional area which is the are normal to the satellites velocity vector. 
+- $m$ is satellite's mass
+- $v_{rel}$ is the velocity vector relative to the atmosphere. From Vallado: "In actuality, the Earth’s atmosphere has a mean motion due to the Earth’s rotation, and the winds are superim-
+posed on this mean motion. Notice also that the force of drag opposes the velocity vector at all times. This is a primary use for the NTW coordinate system. For a nonspherical
+satellite, we must also consider companion aerodynamic forces such as lift and side forces. Remember that although the atmosphere is rotating, it does so with a “profile”
+that follows a little behind the Earth. Due to friction with the Earth, the atmosphere closest to the Earth rotates a little faster than higher altitudes. The velocity vector relative to
+the rotating atmosphere is
