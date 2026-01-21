@@ -5,42 +5,9 @@
 ## Step 1 - minimum working example
 Forced harmonic oscillator:
  $\ddot{x}(t) \;+\; \omega^{2} x(t) \;=\; \epsilon\,\bigl(x(t) - x_{\text{shift}}\bigr)^{3}$
+
+Training procedure:
 ```
-## Algorithm: Training a UDE with Enforced Known Physics
-
-**Goal**  
-Learn an unknown forcing term while strictly enforcing known physical dynamics.
-
----
-
-### Given
-- Time samples: `t[0], …, t[N]`
-- Observed states: `y[i] = (x[i], v[i])`
-- Known frequency: `ω`
-- Neural network: `fθ(x, v, t)` (learned forcing only)
-
----
-
-### Enforced Known Physics
-The known dynamics are **hard-coded** and never learned:
-
-- `dx/dt = v`
-- `dv/dt = −ω² x`
-
----
-
-### UDE Model (Physics + Residual)
-The full dynamics used for integration are
-
-- `dx/dt = v`
-- `dv/dt = −ω² x  +  fθ(x, v, t)`
-
-The neural network **cannot modify** the `−ω² x` term.
-
----
-
-### Training Procedure
-
 initialize neural network parameters θ
 initialize optimizer (e.g. Adam)
 
@@ -67,21 +34,9 @@ for each training step:
 
     # 5. Update residual only
     backpropagate total_loss
-    update θ (parameters of fθ only
+    update θ (parameters of fθ only)
+```  
 
----
-
-### Output
-- Trained residual force model `fθ`
-
----
-
-### Key Property
-- The known physics term `−ω² x` is **never optimized**
-- All learning is confined to the residual `fθ`
-- This guarantees physical structure is preserved```
-  
-  
 Training data:
 ![[Pasted image 20260121120448.png]]
 
