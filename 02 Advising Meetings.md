@@ -1,3 +1,16 @@
+# January 21
+# Learning perturbations
+## Step 1 - minimum working example
+Forced harmonic oscillator:
+ $\ddot{x}(t) \;+\; \omega^{2} x(t) \;=\; \epsilon\,\bigl(x(t) - x_{\text{shift}}\bigr)^{3}$
+
+![[Pasted image 20260121115232.png]]
+
+
+
+
+
+
 # January 9
 To do before meeting:
 - [ ] Paper draft
