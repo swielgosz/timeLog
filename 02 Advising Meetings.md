@@ -1,7 +1,7 @@
 # January 21
 # Learning perturbations
 ---
-# Vanilla neural ODEs
+
 ## Step 1 - minimum working example
 Forced harmonic oscillator:
  $\ddot{x}(t) \;+\; \omega^{2} x(t) \;=\; \epsilon\,\bigl(x(t) - x_{\text{shift}}\bigr)^{3}$
@@ -47,13 +47,14 @@ Results:
 
 ![[Pasted image 20260121115232.png]]
 
+Repeat with latent model
 ## Drag
 Using simplified drag model from Vallado. At a reference height of 300 km, area=10 m^2 and mass = 1000 kg for one revolution:
 ![[Pasted image 20260121123412.png]]
 For 100:
 ![[Pasted image 20260121123500.png]]
-
-
+Training on 1 orbit:
+![[Pasted image 20260121124449.png]]
 
 # January 9
 To do before meeting:
