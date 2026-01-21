@@ -2,6 +2,10 @@
 # Learning perturbations
 ---
 try putting neural ODE around an asteroid with other little masses around. 
+
+tangential - 
+
+put vis in dictionary and pickle it for later visualization
 ## Step 1 - minimum working example
 Forced harmonic oscillator:
  $\ddot{x}(t) \;+\; \omega^{2} x(t) \;=\; \epsilon\,\bigl(x(t) - x_{\text{shift}}\bigr)^{3}$
