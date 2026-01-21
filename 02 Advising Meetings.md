@@ -1,8 +1,18 @@
 # January 21
 # Learning perturbations
+---
+# Vanilla neural ODEs
 ## Step 1 - minimum working example
 Forced harmonic oscillator:
  $\ddot{x}(t) \;+\; \omega^{2} x(t) \;=\; \epsilon\,\bigl(x(t) - x_{\text{shift}}\bigr)^{3}$
+
+Training data:
+![[Pasted image 20260121120448.png]]
+
+Loss:
+![[Pasted image 20260121120833.png]]
+
+Results:
 
 ![[Pasted image 20260121115232.png]]
 
