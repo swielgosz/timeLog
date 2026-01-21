@@ -85,3 +85,11 @@ Note to self - source code is included in this paper. It is written in Julia.
 				- Solver enforces physics exactly
 				- `dx/dt = physics(x,t) + NN(x,t) # integrate forward in time`
 
+# Perturbations (Vallado Chapter 8)
+We will consider drag and SRP in the 2BP. Atmospheric drag has the most influence on a satellite near Earth, and more distant satellites are affected by SRP and third-body effects moreso than oblateness and drag. 
+
+## Atmospheric Drag
+We want a model that is good enough to account for atmospheric density . Drag is nonconservative - energy is lost due to friction. Drag primarily changes the SMA and eccentricity of the orbit. 
+
+Equation for aerodynamic drag:
+$\vec{a}_{drag}=-\frac{1}{2}$ 
