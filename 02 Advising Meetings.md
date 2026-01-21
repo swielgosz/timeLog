@@ -47,8 +47,11 @@ Results:
 
 ![[Pasted image 20260121115232.png]]
 
-
-
+## Drag
+Using simplified drag model from Vallado. At a reference height of 300 km, area=10 m^2 and mass = 1000 kg for one revolution:
+![[Pasted image 20260121123412.png]]
+For 100:
+![[Pasted image 20260121123500.png]]
 
 
 
