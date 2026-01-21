@@ -59,6 +59,8 @@ For 100:
 Training on 1 orbit:
 ![[Pasted image 20260121124449.png]]
 
+SRP:
+![[Pasted image 20260121132014.png]]
 # January 9
 To do before meeting:
 - [ ] Paper draft
