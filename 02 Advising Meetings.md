@@ -6,6 +6,10 @@
 Forced harmonic oscillator:
  $\ddot{x}(t) \;+\; \omega^{2} x(t) \;=\; \epsilon\,\bigl(x(t) - x_{\text{shift}}\bigr)^{3}$
 
+Training data:
+![[Pasted image 20260121120448.png]]
+
+## Vanilla neural ODE
 Training procedure:
 ```
 initialize neural network parameters θ
@@ -37,9 +41,6 @@ for each training step:
     update θ (parameters of fθ only)
 ```  
 
-Training data:
-![[Pasted image 20260121120448.png]]
-
 Loss:
 ![[Pasted image 20260121120833.png]]
 
@@ -47,7 +48,9 @@ Results:
 
 ![[Pasted image 20260121115232.png]]
 
-Repeat with latent model
+## Latent neural ODE
+![[Pasted image 20260121125045.png]]
+![[Pasted image 20260121125029.png]]
 ## Drag
 Using simplified drag model from Vallado. At a reference height of 300 km, area=10 m^2 and mass = 1000 kg for one revolution:
 ![[Pasted image 20260121123412.png]]
