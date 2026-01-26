@@ -486,5 +486,811 @@ if __name__ == "__main__":
     main()
 ```
 
- # 
-# `train_latent_UDE_forced_oscillator`
+# Vanilla UDE
+These learn the perturbation forces using a classic neural ODE, not latent
+
+## train_UDE.py
+``` python
+"""
+Train a UDE on the forced oscillator dataset.
+
+Known dynamics: xdot = v, vdot = -omega^2 x
+Unknown dynamics: f_theta(x, v, t) (neural network)
+"""
+
+import os
+
+# Force CPU platform (must be set before importing jax)
+os.environ["JAX_PLATFORMS"] = "cpu"
+os.environ["CUDA_VISIBLE_DEVICES"] = ""
+
+import equinox as eqx
+import jax
+import jax.numpy as jnp
+import jax.random as jr
+import numpy as np
+import optax
+from diffrax import ODETerm, PIDController, SaveAt, Tsit5, diffeqsolve
+from equinox import Module
+from equinox.nn import MLP
+from mldsml.wandb_utils import load_dataset
+
+from neuralODE.data import format_data, sample_data
+
+
+class ForcingNet(Module):
+    mlp: MLP
+
+    def __init__(self, width, depth, *, key):
+        self.mlp = MLP(
+            in_size=3,
+            out_size=1,
+            width_size=width,
+            depth=depth,
+            activation=jax.nn.tanh,
+            key=key,
+        )
+
+    def __call__(self, x, v, t):
+        return self.mlp(jnp.array([x, v, t]))[0]
+
+
+class UDEDynamics(Module):
+    net: ForcingNet
+    omega: float
+
+    def __init__(self, omega, width, depth, *, key):
+        self.net = ForcingNet(width, depth, key=key)
+        self.omega = float(omega)
+
+    def __call__(self, t, y, args=None):
+        x, v = y
+        forcing = self.net(x, v, t)
+        accel = -(self.omega**2) * x + forcing
+        return jnp.array([v, accel])
+
+
+def solve_trajectory(model, ts, y0, rtol=1e-6, atol=1e-9):
+    sol = diffeqsolve(
+        ODETerm(model),
+        Tsit5(),
+        t0=float(ts[0]),
+        t1=float(ts[-1]),
+        dt0=float(ts[1] - ts[0]),
+        y0=y0,
+        stepsize_controller=PIDController(rtol=rtol, atol=atol),
+        saveat=SaveAt(ts=ts),
+    )
+    return sol.ys
+
+
+def mse_loss(model, ts, ys, mask):
+    y0 = ys[0]
+    pred = solve_trajectory(model, ts, y0)
+    mask_f = mask.astype(jnp.float32)
+    resid = (pred - ys) * mask_f[:, None]
+    denom = jnp.maximum(mask_f.sum() * ys.shape[-1], 1.0)
+    return jnp.sum(resid**2) / denom
+
+
+def train(model, ts, ys, mask, *, lr=1e-3, steps=2000):
+    optim = optax.adam(lr)
+    opt_state = optim.init(eqx.filter(model, eqx.is_inexact_array))
+
+    loss_and_grad = eqx.filter_value_and_grad(mse_loss)
+    losses = []
+
+    for step in range(steps):
+        loss, grads = loss_and_grad(model, ts, ys, mask)
+        updates, opt_state = optim.update(
+            grads,
+            opt_state,
+            params=eqx.filter(model, eqx.is_inexact_array),
+        )
+        model = eqx.apply_updates(model, updates)
+        losses.append(float(loss))
+        if step % 200 == 0 or step == steps - 1:
+            print(f"step {step:05d} loss {float(loss):.6e}")
+    return model, losses
+
+
+def plot_results(ts, ys, preds, forcing_true, forcing_pred, out_path):
+    import matplotlib.pyplot as plt
+
+    t = np.array(ts)
+    y = np.array(ys)
+    y_hat = np.array(preds)
+
+    fig, axes = plt.subplots(2, 1, figsize=(9, 7), sharex=True)
+    axes[0].plot(t, y[:, 0], label="x true")
+    axes[0].plot(t, y_hat[:, 0], "--", label="x pred")
+    axes[0].plot(t, y[:, 1], label="v true")
+    axes[0].plot(t, y_hat[:, 1], "--", label="v pred")
+    axes[0].set_ylabel("State")
+    axes[0].legend()
+
+    axes[1].plot(t, forcing_true, label="forcing true")
+    axes[1].plot(t, forcing_pred, "--", label="forcing pred")
+    axes[1].set_xlabel("Time")
+    axes[1].set_ylabel("Acceleration")
+    axes[1].legend()
+
+    fig.tight_layout()
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    fig.savefig(out_path, dpi=160)
+    plt.close(fig)
+
+
+def plot_losses(losses, out_path):
+    import matplotlib.pyplot as plt
+
+    steps = np.arange(len(losses))
+    fig, ax = plt.subplots(figsize=(7, 4))
+    ax.plot(steps, losses, label="train loss")
+    ax.set_xlabel("Step")
+    ax.set_ylabel("MSE loss")
+    ax.set_yscale("log")
+    ax.legend()
+    fig.tight_layout()
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    fig.savefig(out_path, dpi=160)
+    plt.close(fig)
+
+
+def main():
+    dataset_name = "forced_oscillator_1traj"
+    data_dict = load_dataset(
+        dataset_name,
+        version="latest",
+        project="neuralODEs",
+        entity="mlds-lab",
+    )
+    data_dict = sample_data(data_dict, 1)
+    data_jnp = format_data(data_dict)
+
+    ts = data_jnp["t"][0]
+    ys = data_jnp["y"][0]
+    mask = data_jnp["mask"][0]
+
+    traj_key = sorted(data_dict.keys())[0]
+    metadata = data_dict[traj_key].get("metadata", {})
+    omega = float(metadata.get("omega", 1.0))
+    forcing_meta = metadata.get("forcing", {})
+    epsilon = float(forcing_meta.get("epsilon", 1.0))
+    x_shift = float(forcing_meta.get("x_shift", 0.0))
+
+    seed = 11
+    key = jr.PRNGKey(seed)
+    model = UDEDynamics(omega=omega, width=64, depth=3, key=key)
+
+    model, losses = train(model, ts, ys, mask, lr=1e-3, steps=2000)
+
+    preds = solve_trajectory(model, ts, ys[0])
+    forcing_true = epsilon * (ys[:, 0] - x_shift) ** 3
+    forcing_pred = jax.vmap(model.net)(ys[:, 0], ys[:, 1], ts)
+
+    plot_path = "scripts/training/plots/ude_forced_oscillator_fit.png"
+    plot_results(
+        ts,
+        ys,
+        preds,
+        forcing_true,
+        forcing_pred,
+        plot_path,
+    )
+    loss_plot_path = "scripts/training/plots/ude_forced_oscillator_loss.png"
+    plot_losses(losses, loss_plot_path)
+    print(f"Saved plot to {plot_path}")
+    print(f"Saved loss plot to {loss_plot_path}")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+## `train_UDE_tangential_thrust.py`
+``` python
+"""
+Train a UDE to recover tangential thrust on top of 2BP dynamics.
+
+Known dynamics: rdot = v, vdot = -mu r / r^3
+Unknown dynamics: a_theta(r, v, t) (neural network)
+"""
+
+import os
+
+# Force CPU platform (must be set before importing jax)
+os.environ["JAX_PLATFORMS"] = "cpu"
+os.environ["CUDA_VISIBLE_DEVICES"] = ""
+
+import equinox as eqx
+import jax
+import jax.numpy as jnp
+import jax.random as jr
+import numpy as np
+import optax
+from diffrax import ODETerm, PIDController, SaveAt, Tsit5, diffeqsolve
+from equinox import Module
+from equinox.nn import MLP
+from mldsml.wandb_utils import load_dataset
+
+from neuralODE import constants
+from neuralODE.data import format_data, sample_data
+from neuralODE.normalization import Normalization2BP
+
+
+class PerturbationNet(Module):
+    mlp: MLP
+
+    def __init__(self, width, depth, *, key):
+        self.mlp = MLP(
+            in_size=7,
+            out_size=3,
+            width_size=width,
+            depth=depth,
+            activation=jax.nn.tanh,
+            key=key,
+        )
+
+    def __call__(self, r, v, t):
+        return self.mlp(jnp.concatenate([r, v, jnp.array([t])], axis=0))
+
+
+class UDEDynamics(Module):
+    net: PerturbationNet
+    mu: float
+
+    def __init__(self, mu, width, depth, *, key):
+        self.net = PerturbationNet(width, depth, key=key)
+        self.mu = float(mu)
+
+    def perturbation(self, t, y):
+        r = y[:3]
+        v = y[3:]
+        return self.net(r, v, t)
+
+    def __call__(self, t, y, args=None):
+        r = y[:3]
+        v = y[3:]
+        r_norm = jnp.linalg.norm(r)
+        a_grav = -self.mu * r / r_norm**3
+        a_perturb = self.net(r, v, t)
+        return jnp.concatenate([v, a_grav + a_perturb], axis=0)
+
+
+def solve_trajectory(model, ts, y0, rtol=1e-5, atol=1e-7, max_steps=100000):
+    sol = diffeqsolve(
+        ODETerm(model),
+        Tsit5(),
+        t0=float(ts[0]),
+        t1=float(ts[-1]),
+        dt0=float(ts[1] - ts[0]),
+        y0=y0,
+        stepsize_controller=PIDController(rtol=rtol, atol=atol),
+        saveat=SaveAt(ts=ts),
+        max_steps=max_steps,
+    )
+    return sol.ys
+
+
+def solve_base_trajectory(ts, y0, mu=1.0, rtol=1e-4, atol=1e-7, max_steps=100000):
+    def base_rhs(t, y, args=None):
+        r = y[:3]
+        v = y[3:]
+        r_norm = jnp.linalg.norm(r)
+        a_grav = -mu * r / r_norm**3
+        return jnp.concatenate([v, a_grav], axis=0)
+
+    sol = diffeqsolve(
+        ODETerm(base_rhs),
+        Tsit5(),
+        t0=float(ts[0]),
+        t1=float(ts[-1]),
+        dt0=float(ts[1] - ts[0]),
+        y0=y0,
+        stepsize_controller=PIDController(rtol=rtol, atol=atol),
+        saveat=SaveAt(ts=ts),
+        max_steps=max_steps,
+    )
+    return sol.ys
+
+
+def percent_error_loss(model, ts, ys, mask, *, l2_weight=0.0):
+    y0 = ys[0]
+    pred = solve_trajectory(model, ts, y0)
+    mask_f = mask.astype(jnp.float32)
+    y_true = ys[1:]
+    y_pred = pred[1:]
+    mask_f = mask_f[1:]
+
+    threshold = 1e-8
+    true_norm = jnp.linalg.norm(y_true, axis=-1)
+    safe_denominator = jnp.where(true_norm < threshold, threshold, true_norm)
+    per_step = jnp.linalg.norm(y_true - y_pred, axis=-1) / safe_denominator * 100.0
+    per_step = per_step * mask_f
+    denom = jnp.maximum(mask_f.sum(), 1.0)
+    data_loss = jnp.sum(per_step) / denom
+    perturbs = jax.vmap(model.perturbation)(ts, ys)
+    pert_loss = jnp.mean(jnp.sum(perturbs**2, axis=-1))
+    return data_loss + l2_weight * pert_loss
+
+
+def train(model, ts, ys, mask, *, lr=1e-2, steps=5000, l2_weight=1e-2):
+    optim = optax.adam(lr)
+    opt_state = optim.init(eqx.filter(model, eqx.is_inexact_array))
+    loss_and_grad = eqx.filter_value_and_grad(
+        lambda m, t, y, msk: percent_error_loss(m, t, y, msk, l2_weight=l2_weight),
+    )
+    losses = []
+
+    for step in range(steps):
+        loss, grads = loss_and_grad(model, ts, ys, mask)
+        updates, opt_state = optim.update(
+            grads,
+            opt_state,
+            params=eqx.filter(model, eqx.is_inexact_array),
+        )
+        model = eqx.apply_updates(model, updates)
+        losses.append(float(loss))
+        if step % 200 == 0 or step == steps - 1:
+            print(f"step {step:05d} loss {float(loss):.6e}")
+    return model, losses
+
+
+def _tangential_unit(v):
+    v_norm = np.linalg.norm(v, axis=-1, keepdims=True)
+    return np.where(v_norm > 0.0, v / v_norm, 0.0)
+
+
+def plot_results(ts, ys, preds, base_preds, thrust_true, thrust_pred, out_path):
+    import matplotlib.pyplot as plt
+
+    t = np.array(ts)
+    y = np.array(ys)
+    y_hat = np.array(preds)
+    y_base = np.array(base_preds)
+
+    fig, axes = plt.subplots(4, 1, figsize=(9, 11), sharex=False)
+
+    pos_colors = plt.rcParams["axes.prop_cycle"].by_key()["color"]
+    axes[0].plot(t, y[:, 0], color=pos_colors[0], label="x true")
+    axes[0].plot(t, y_hat[:, 0], "--", color=pos_colors[0], label="x pred")
+    axes[0].plot(t, y[:, 1], color=pos_colors[1], label="y true")
+    axes[0].plot(t, y_hat[:, 1], "--", color=pos_colors[1], label="y pred")
+    axes[0].set_ylabel("Position")
+    axes[0].legend(ncol=2)
+
+    axes[1].plot(t, y[:, 3], color=pos_colors[2], label="vx true")
+    axes[1].plot(t, y_hat[:, 3], "--", color=pos_colors[2], label="vx pred")
+    axes[1].plot(t, y[:, 4], color=pos_colors[3], label="vy true")
+    axes[1].plot(t, y_hat[:, 4], "--", color=pos_colors[3], label="vy pred")
+    axes[1].set_ylabel("Velocity")
+    axes[1].legend(ncol=2)
+
+    axes[2].plot(t, thrust_true, label="thrust true")
+    axes[2].plot(t, thrust_pred, "--", label="thrust pred")
+    axes[2].set_xlabel("Time")
+    axes[2].set_ylabel("Acceleration (km/s^2)")
+    axes[2].legend()
+
+    axes[3].plot(y_base[:, 0], y_base[:, 1], "--", label="base")
+    axes[3].plot(y[:, 0], y[:, 1], label="perturbed true")
+    axes[3].plot(y_hat[:, 0], y_hat[:, 1], "--", label="perturbed pred")
+    axes[3].set_xlabel("x")
+    axes[3].set_ylabel("y")
+    axes[3].set_title("XY trajectory")
+    axes[3].axis("equal")
+    axes[3].legend()
+
+    fig.tight_layout()
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    fig.savefig(out_path, dpi=160)
+    plt.close(fig)
+
+
+def plot_losses(losses, out_path):
+    import matplotlib.pyplot as plt
+
+    steps = np.arange(len(losses))
+    fig, ax = plt.subplots(figsize=(7, 4))
+    ax.plot(steps, losses, label="train loss")
+    ax.set_xlabel("Step")
+    ax.set_ylabel("Percent error loss")
+    ax.set_yscale("log")
+    ax.legend()
+    fig.tight_layout()
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    fig.savefig(out_path, dpi=160)
+    plt.close(fig)
+
+
+def main():
+    dataset_name = "simple_TBP_tangential_thrust_example"
+    data_dict = load_dataset(
+        dataset_name,
+        version="latest",
+        project="neuralODEs",
+        entity="mlds-lab",
+    )
+    data_dict = sample_data(data_dict, 1)
+    normalizer = Normalization2BP(
+        l_char=constants.RADIUS_EARTH,
+        mu=constants.MU_EARTH,
+    )
+    data_dict = normalizer.normalize_dataset(data_dict)
+    a_char = normalizer.l_char / (normalizer.t_char**2)
+    data_jnp = format_data(data_dict)
+
+    ts = data_jnp["t"][0]
+    ys = data_jnp["y"][0]
+    mask = data_jnp["mask"][0]
+
+    traj_key = sorted(data_dict.keys())[0]
+    metadata = data_dict[traj_key].get("metadata", {})
+    thrust_meta = metadata.get("thrust", {})
+    thrust_mag = float(thrust_meta.get("accel_km_s2", 0.0))
+
+    seed = 11
+    key = jr.PRNGKey(seed)
+    model = UDEDynamics(mu=1.0, width=64, depth=3, key=key)
+    model, losses = train(
+        model,
+        ts,
+        ys,
+        mask,
+        lr=1e-3,
+        steps=5000,
+        l2_weight=1e-2,
+    )
+
+    preds = solve_trajectory(model, ts, ys[0])
+    base_preds = solve_base_trajectory(ts, ys[0], mu=1.0)
+    r = np.array(ys[:, :3])
+    v = np.array(ys[:, 3:])
+    tangential = _tangential_unit(v)
+    thrust_true = np.linalg.norm((thrust_mag / a_char) * tangential, axis=-1)
+    thrust_pred = np.linalg.norm(
+        np.array(jax.vmap(model.perturbation)(ts, ys)),
+        axis=-1,
+    )
+
+    plot_path = "scripts/training/plots/ude_tangential_thrust_fit.png"
+    plot_results(
+        ts,
+        ys,
+        preds,
+        base_preds,
+        thrust_true,
+        thrust_pred,
+        plot_path,
+    )
+    loss_plot_path = "scripts/training/plots/ude_tangential_thrust_loss.png"
+    plot_losses(losses, loss_plot_path)
+    print(f"Saved plot to {plot_path}")
+    print(f"Saved loss plot to {loss_plot_path}")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+
+# Latent UDE
+Learn perturbations using a latent model
+
+## `train_latent_UDE_forced_oscillator`
+``` python
+"""
+Train a latent UDE on the forced oscillator dataset.
+
+Known dynamics: xdot = v, vdot = -omega^2 x
+Unknown dynamics: f_theta(x, v, t) (neural network)
+
+Latent ODE structure:
+- Encoder (GRU) infers a latent initial condition z0
+- z0 is decoded to a physical initial state y0
+- ODE solve uses known dynamics + learned forcing
+"""
+
+import os
+from typing import Iterator, Tuple
+
+# Force CPU platform (must be set before importing jax)
+os.environ["JAX_PLATFORMS"] = "cpu"
+os.environ["CUDA_VISIBLE_DEVICES"] = ""
+os.environ.setdefault("OMP_NUM_THREADS", "1")
+os.environ.setdefault(
+    "XLA_FLAGS",
+    "--xla_cpu_multi_thread_eigen=false intra_op_parallelism_threads=1",
+)
+
+import equinox as eqx
+import jax
+import jax.numpy as jnp
+import jax.random as jr
+import numpy as np
+import optax
+from diffrax import ODETerm, SaveAt, Tsit5, diffeqsolve
+from equinox import Module
+from equinox.nn import MLP
+from mldsml.wandb_utils import load_dataset
+
+from neuralODE.data import format_data, sample_data
+
+
+class ForcingNet(Module):
+    mlp: MLP
+
+    def __init__(self, width, depth, *, key):
+        self.mlp = MLP(
+            in_size=3,
+            out_size=1,
+            width_size=width,
+            depth=depth,
+            activation=jax.nn.tanh,
+            key=key,
+        )
+
+    def __call__(self, x, v, t):
+        return self.mlp(jnp.array([x, v, t]))[0]
+
+
+class UDEDynamics(Module):
+    net: ForcingNet
+    omega: float
+
+    def __init__(self, omega, width, depth, *, key):
+        self.net = ForcingNet(width, depth, key=key)
+        self.omega = float(omega)
+
+    def __call__(self, t, y, args=None):
+        x, v = y
+        forcing = self.net(x, v, t)
+        accel = -(self.omega**2) * x + forcing
+        return jnp.array([v, accel])
+
+
+class LatentUDE(Module):
+    dynamics: UDEDynamics
+    rnn_cell: eqx.nn.GRUCell
+    hidden_to_latent: eqx.nn.Linear
+    latent_to_state: eqx.nn.MLP
+    hidden_size: int
+    latent_size: int
+
+    def __init__(
+        self,
+        *,
+        data_size,
+        hidden_size,
+        latent_size,
+        width_size,
+        depth,
+        omega,
+        key,
+    ):
+        dkey, gkey, hlkey, lskey = jr.split(key, 4)
+        self.dynamics = UDEDynamics(
+            omega=omega, width=width_size, depth=depth, key=dkey
+        )
+        self.rnn_cell = eqx.nn.GRUCell(data_size + 1, hidden_size, key=gkey)
+        self.hidden_to_latent = eqx.nn.Linear(hidden_size, 2 * latent_size, key=hlkey)
+        self.latent_to_state = eqx.nn.MLP(
+            latent_size,
+            data_size,
+            width_size=width_size,
+            depth=depth,
+            key=lskey,
+        )
+        self.hidden_size = hidden_size
+        self.latent_size = latent_size
+
+    def encode(self, ts, ys, *, key):
+        data = jnp.concatenate([ts[:, None], ys], axis=1)
+        h = jnp.zeros((self.hidden_size,))
+        for data_i in reversed(data):
+            h = self.rnn_cell(data_i, h)
+        stats = self.hidden_to_latent(h)
+        mean, logstd = stats[: self.latent_size], stats[self.latent_size :]
+        logstd = jnp.clip(logstd, -5.0, 2.0)
+        std = jnp.exp(logstd)
+        z = mean + jr.normal(key, (self.latent_size,)) * std
+        return z, mean, logstd
+
+    def decode(self, ts, z0):
+        y0 = self.latent_to_state(z0)
+        dt0 = jnp.maximum(jnp.asarray(ts[1] - ts[0]), jnp.asarray(1e-6))
+        sol = diffeqsolve(
+            ODETerm(self.dynamics),
+            Tsit5(),
+            t0=ts[0],
+            t1=ts[-1],
+            dt0=dt0,
+            y0=y0,
+            saveat=SaveAt(ts=ts),
+            max_steps=4096,
+        )
+        return sol.ys
+
+
+def kl_div(mean, logstd):
+    var = jnp.exp(2.0 * logstd)
+    return 0.5 * jnp.sum(var + mean**2 - 1.0 - 2.0 * logstd)
+
+
+def pe_plus_nmse(y_true, y_pred, eps=1e-8):
+    norm_true = jnp.linalg.norm(y_true, axis=-1)
+    denom = jnp.maximum(norm_true, eps)
+    mpe = jnp.linalg.norm(y_true - y_pred, axis=-1) / denom * 100.0
+    mpe_mean = jnp.mean(mpe)
+    mse = jnp.mean((y_true - y_pred) ** 2)
+    ref_power = jnp.mean(y_true**2) + eps
+    nrmse = jnp.sqrt(mse / ref_power + eps) * 100.0
+    return mpe_mean + nrmse, mpe_mean, nrmse
+
+
+def loss_fn(model: LatentUDE, t_batch, y_batch, key, kl_weight=1e-3):
+    B = y_batch.shape[0]
+    keys = jr.split(key, B)
+
+    def single_loss(ti, yi, ki):
+        z0, mean, logstd = model.encode(ti, yi, key=ki)
+        y_hat = model.decode(ti, z0)
+        pe_rmse, _, _ = pe_plus_nmse(yi, y_hat)
+        kl = kl_div(mean, logstd)
+        return pe_rmse + kl_weight * kl
+
+    losses = jax.vmap(single_loss)(t_batch, y_batch, keys)
+    return jnp.mean(losses)
+
+
+@eqx.filter_jit
+def train_step(model, opt_state, t_batch, y_batch, key, optimizer, kl_weight):
+    grad_fn = eqx.filter_value_and_grad(
+        lambda m, tb, yb, k: loss_fn(m, tb, yb, k, kl_weight),
+        has_aux=False,
+    )
+    loss, grads = grad_fn(model, t_batch, y_batch, key)
+    params = eqx.filter(model, eqx.is_inexact_array)
+    updates, opt_state = optimizer.update(grads, opt_state, params)
+    model = eqx.apply_updates(model, updates)
+    return model, opt_state, loss
+
+
+def dataloader(data: Tuple[jnp.ndarray, jnp.ndarray], batch_size: int, key) -> Iterator:
+    t_shared, ys = data
+    n = ys.shape[0]
+    idx = jr.permutation(key, n)
+    for start in range(0, n, batch_size):
+        batch_idx = idx[start : start + batch_size]
+        yield (
+            jnp.repeat(t_shared[None, :], len(batch_idx), axis=0),
+            ys[batch_idx],
+        )
+
+
+def plot_results(ts, ys, preds, forcing_true, forcing_pred, out_path):
+    import matplotlib.pyplot as plt
+
+    t = np.array(ts)
+    y = np.array(ys)
+    y_hat = np.array(preds)
+
+    fig, axes = plt.subplots(2, 1, figsize=(9, 7), sharex=True)
+    axes[0].plot(t, y[:, 0], label="x true")
+    axes[0].plot(t, y_hat[:, 0], "--", label="x pred")
+    axes[0].plot(t, y[:, 1], label="v true")
+    axes[0].plot(t, y_hat[:, 1], "--", label="v pred")
+    axes[0].set_ylabel("State")
+    axes[0].legend()
+
+    axes[1].plot(t, forcing_true, label="forcing true")
+    axes[1].plot(t, forcing_pred, "--", label="forcing pred")
+    axes[1].set_xlabel("Time")
+    axes[1].set_ylabel("Acceleration")
+    axes[1].legend()
+
+    fig.tight_layout()
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    fig.savefig(out_path, dpi=160)
+    plt.close(fig)
+
+
+def plot_losses(losses, out_path):
+    import matplotlib.pyplot as plt
+
+    steps = np.arange(len(losses))
+    fig, ax = plt.subplots(figsize=(7, 4))
+    ax.plot(steps, losses, label="train loss")
+    ax.set_xlabel("Step")
+    ax.set_ylabel("Loss")
+    ax.set_yscale("log")
+    ax.legend()
+    fig.tight_layout()
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    fig.savefig(out_path, dpi=160)
+    plt.close(fig)
+
+
+def main():
+    dataset_name = "forced_oscillator_1traj"
+    data_dict = load_dataset(
+        dataset_name,
+        version="latest",
+        project="neuralODEs",
+        entity="mlds-lab",
+    )
+    data_dict = sample_data(data_dict, 1)
+    data_jnp = format_data(data_dict)
+
+    ts = data_jnp["t"]
+    ys = data_jnp["y"]
+    mask = data_jnp["mask"].astype(bool)
+    valid_mask = jnp.all(mask, axis=0)
+    ts = ts[:, valid_mask]
+    ys = ys[:, valid_mask, :]
+    t_shared = ts[0]
+
+    traj_key = sorted(data_dict.keys())[0]
+    metadata = data_dict[traj_key].get("metadata", {})
+    omega = float(metadata.get("omega", 1.0))
+    forcing_meta = metadata.get("forcing", {})
+    epsilon = float(forcing_meta.get("epsilon", 1.0))
+    x_shift = float(forcing_meta.get("x_shift", 0.0))
+
+    seed = 11
+    key = jr.PRNGKey(seed)
+    model = LatentUDE(
+        data_size=2,
+        hidden_size=16,
+        latent_size=4,
+        width_size=64,
+        depth=2,
+        omega=omega,
+        key=key,
+    )
+
+    optimizer = optax.adam(1e-3)
+    opt_state = optimizer.init(eqx.filter(model, eqx.is_inexact_array))
+
+    steps = 2000
+    batch_size = 4
+    train_key = key
+    losses = []
+    for step in range(steps):
+        train_key, data_key, step_key = jr.split(train_key, 3)
+        for t_batch, y_batch in dataloader((t_shared, ys), batch_size, data_key):
+            model, opt_state, loss = train_step(
+                model,
+                opt_state,
+                t_batch,
+                y_batch,
+                step_key,
+                optimizer,
+                kl_weight=1e-3,
+            )
+        losses.append(float(loss))
+        if step % 200 == 0 or step == steps - 1:
+            print(f"step {step:05d} loss {float(loss):.6e}")
+
+    z0, _, _ = model.encode(t_shared, ys[0], key=jr.PRNGKey(0))
+    preds = model.decode(t_shared, z0)
+    forcing_true = epsilon * (ys[0, :, 0] - x_shift) ** 3
+    forcing_pred = jax.vmap(model.dynamics.net)(
+        ys[0, :, 0],
+        ys[0, :, 1],
+        t_shared,
+    )
+
+    plot_path = "scripts/training/plots/latent_ude_forced_oscillator_fit.png"
+    plot_results(t_shared, ys[0], preds, forcing_true, forcing_pred, plot_path)
+    loss_plot_path = "scripts/training/plots/latent_ude_forced_oscillator_loss.png"
+    plot_losses(losses, loss_plot_path)
+    print(f"Saved plot to {plot_path}")
+    print(f"Saved loss plot to {loss_plot_path}")
+
+
+if __name__ == "__main__":
+    main()
+```
+
