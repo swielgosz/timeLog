@@ -688,7 +688,7 @@ if __name__ == "__main__":
     main()
 ```
 
-## `train_UDE_tangential_thrust.py`
+## train_UDE_tangential_thrust.py
 ``` python
 """
 Train a UDE to recover tangential thrust on top of 2BP dynamics.
@@ -965,6 +965,677 @@ def main():
         plot_path,
     )
     loss_plot_path = "scripts/training/plots/ude_tangential_thrust_loss.png"
+    plot_losses(losses, loss_plot_path)
+    print(f"Saved plot to {plot_path}")
+    print(f"Saved loss plot to {loss_plot_path}")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+## train_UDE_drag.py
+``` python
+"""
+Train a UDE to recover atmospheric drag on top of 2BP dynamics.
+
+Known dynamics: rdot = v, vdot = -mu r / r^3
+Unknown dynamics: a_drag(r, v, t) (neural network)
+"""
+
+import os
+
+# Force CPU platform (must be set before importing jax)
+os.environ["JAX_PLATFORMS"] = "cpu"
+os.environ["CUDA_VISIBLE_DEVICES"] = ""
+
+import equinox as eqx
+import jax
+import jax.numpy as jnp
+import jax.random as jr
+import numpy as np
+import optax
+from diffrax import ODETerm, PIDController, SaveAt, Tsit5, diffeqsolve
+from equinox import Module
+from equinox.nn import MLP
+from mldsml.wandb_utils import load_dataset
+
+from neuralODE import constants
+from neuralODE.data import format_data, sample_data
+from neuralODE.normalization import Normalization2BP
+
+
+class PerturbationNet(Module):
+    mlp: MLP
+
+    def __init__(self, width, depth, *, key):
+        self.mlp = MLP(
+            in_size=6,
+            out_size=3,
+            width_size=width,
+            depth=depth,
+            activation=jax.nn.tanh,
+            key=key,
+        )
+
+    def __call__(self, r, v):
+        return self.mlp(jnp.concatenate([r, v], axis=0))
+
+
+class UDEDynamics(Module):
+    net: PerturbationNet
+    mu: float
+
+    def __init__(self, mu, width, depth, *, key):
+        self.net = PerturbationNet(width, depth, key=key)
+        self.mu = float(mu)
+
+    def perturbation(self, t, y):
+        r = y[:3]
+        v = y[3:]
+        return self.net(r, v)
+
+    def __call__(self, t, y, args=None):
+        r = y[:3]
+        v = y[3:]
+        r_norm = jnp.linalg.norm(r)
+        a_grav = -self.mu * r / r_norm**3
+        a_perturb = self.net(r, v)
+        return jnp.concatenate([v, a_grav + a_perturb], axis=0)
+
+
+def solve_trajectory(model, ts, y0, rtol=1e-4, atol=1e-6, max_steps=100000):
+    sol = diffeqsolve(
+        ODETerm(model),
+        Tsit5(),
+        t0=float(ts[0]),
+        t1=float(ts[-1]),
+        dt0=float(ts[1] - ts[0]),
+        y0=y0,
+        stepsize_controller=PIDController(rtol=rtol, atol=atol),
+        saveat=SaveAt(ts=ts),
+        max_steps=max_steps,
+    )
+    return sol.ys
+
+
+def solve_base_trajectory(ts, y0, mu=1.0, rtol=1e-4, atol=1e-7, max_steps=100000):
+    def base_rhs(t, y, args=None):
+        r = y[:3]
+        v = y[3:]
+        r_norm = jnp.linalg.norm(r)
+        a_grav = -mu * r / r_norm**3
+        return jnp.concatenate([v, a_grav], axis=0)
+
+    sol = diffeqsolve(
+        ODETerm(base_rhs),
+        Tsit5(),
+        t0=float(ts[0]),
+        t1=float(ts[-1]),
+        dt0=float(ts[1] - ts[0]),
+        y0=y0,
+        stepsize_controller=PIDController(rtol=rtol, atol=atol),
+        saveat=SaveAt(ts=ts),
+        max_steps=max_steps,
+    )
+    return sol.ys
+
+
+def percent_error_loss(model, ts, ys, mask, *, l2_weight=0.0):
+    y0 = ys[0]
+    pred = solve_trajectory(model, ts, y0)
+    mask_f = mask.astype(jnp.float32)
+    y_true = ys[1:]
+    y_pred = pred[1:]
+    mask_f = mask_f[1:]
+
+    threshold = 1e-8
+    true_norm = jnp.linalg.norm(y_true, axis=-1)
+    safe_denominator = jnp.where(true_norm < threshold, threshold, true_norm)
+    per_step = jnp.linalg.norm(y_true - y_pred, axis=-1) / safe_denominator * 100.0
+    per_step = per_step * mask_f
+    denom = jnp.maximum(mask_f.sum(), 1.0)
+    data_loss = jnp.sum(per_step) / denom
+    perturbs = jax.vmap(model.perturbation)(ts, ys)
+    pert_loss = jnp.mean(jnp.sum(perturbs**2, axis=-1))
+    return data_loss + l2_weight * pert_loss
+
+
+def train(model, ts, ys, mask, *, lr=1e-2, steps=5000, l2_weight=1e-2):
+    optim = optax.adam(lr)
+    opt_state = optim.init(eqx.filter(model, eqx.is_inexact_array))
+    loss_and_grad = eqx.filter_value_and_grad(
+        lambda m, t, y, msk: percent_error_loss(m, t, y, msk, l2_weight=l2_weight),
+    )
+    losses = []
+
+    for step in range(steps):
+        loss, grads = loss_and_grad(model, ts, ys, mask)
+        updates, opt_state = optim.update(
+            grads,
+            opt_state,
+            params=eqx.filter(model, eqx.is_inexact_array),
+        )
+        model = eqx.apply_updates(model, updates)
+        losses.append(float(loss))
+        if step % 200 == 0 or step == steps - 1:
+            print(f"step {step:05d} loss {float(loss):.6e}")
+    return model, losses
+
+
+def _drag_accel_km_s2(
+    r_km,
+    v_km_s,
+    *,
+    cd_area_over_m,
+    rho_ref_kg_m3,
+    h_ref_km,
+    scale_height_km,
+    omega_earth,
+    body_radius_km,
+):
+    r_m = r_km * 1e3
+    v_m_s = v_km_s * 1e3
+    r_norm = np.linalg.norm(r_m, axis=-1, keepdims=True)
+    h_m = np.maximum(r_norm - body_radius_km * 1e3, 0.0)
+    rho = rho_ref_kg_m3 * np.exp(-(h_m - h_ref_km * 1e3) / (scale_height_km * 1e3))
+    omega_vec = np.array([0.0, 0.0, omega_earth])
+    v_rel = v_m_s - np.cross(omega_vec, r_m)
+    v_rel_norm = np.linalg.norm(v_rel, axis=-1, keepdims=True)
+    a_drag_m_s2 = -0.5 * cd_area_over_m * rho * v_rel_norm * v_rel
+    return a_drag_m_s2 / 1e3
+
+
+def _denorm_states(y_norm, l_char, v_char):
+    y = np.array(y_norm)
+    r = y[:, :3] * l_char
+    v = y[:, 3:] * v_char
+    return r, v
+
+
+def plot_results(
+    ts,
+    ys,
+    preds,
+    base_preds,
+    drag_true,
+    drag_pred,
+    out_path,
+    t_char,
+    l_char,
+    v_char,
+):
+    import matplotlib.pyplot as plt
+
+    t = np.array(ts) * t_char
+    y = np.array(ys)
+    y_hat = np.array(preds)
+    y_base = np.array(base_preds)
+
+    r_true, v_true = _denorm_states(y, l_char, v_char)
+    r_pred, v_pred = _denorm_states(y_hat, l_char, v_char)
+    r_base, v_base = _denorm_states(y_base, l_char, v_char)
+
+    fig, axes = plt.subplots(4, 1, figsize=(9, 11), sharex=False)
+
+    pos_colors = plt.rcParams["axes.prop_cycle"].by_key()["color"]
+    axes[0].plot(t, r_base[:, 0], color=pos_colors[0], label="x (base)")
+    axes[0].plot(t, r_true[:, 0], ":", color=pos_colors[0], label="x (drag)")
+    axes[0].plot(t, r_base[:, 1], color=pos_colors[1], label="y (base)")
+    axes[0].plot(t, r_true[:, 1], ":", color=pos_colors[1], label="y (drag)")
+    axes[0].set_ylabel("Position (km)")
+    axes[0].legend(ncol=2)
+
+    axes[1].plot(t, v_base[:, 0], color=pos_colors[2], label="vx (base)")
+    axes[1].plot(t, v_true[:, 0], ":", color=pos_colors[2], label="vx (drag)")
+    axes[1].plot(t, v_base[:, 1], color=pos_colors[3], label="vy (base)")
+    axes[1].plot(t, v_true[:, 1], ":", color=pos_colors[3], label="vy (drag)")
+    axes[1].set_ylabel("Velocity (km/s)")
+    axes[1].legend(ncol=2)
+
+    axes[2].plot(t, drag_true, label="drag true (norm)")
+    axes[2].plot(t, drag_pred, "--", label="drag pred (norm)")
+    axes[2].set_xlabel("Time (s)")
+    axes[2].set_ylabel("Acceleration (norm)")
+    axes[2].legend()
+
+    axes[3].plot(r_base[:, 0], r_base[:, 1], "--", label="base")
+    axes[3].plot(r_true[:, 0], r_true[:, 1], label="drag true")
+    axes[3].plot(r_pred[:, 0], r_pred[:, 1], "--", label="drag pred")
+    axes[3].set_xlabel("x (km)")
+    axes[3].set_ylabel("y (km)")
+    axes[3].set_title("XY trajectory")
+    axes[3].axis("equal")
+    axes[3].legend()
+
+    fig.tight_layout()
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    fig.savefig(out_path, dpi=160)
+    plt.close(fig)
+
+
+def plot_losses(losses, out_path):
+    import matplotlib.pyplot as plt
+
+    steps = np.arange(len(losses))
+    fig, ax = plt.subplots(figsize=(7, 4))
+    ax.plot(steps, losses, label="train loss")
+    ax.set_xlabel("Step")
+    ax.set_ylabel("Percent error loss")
+    ax.set_yscale("log")
+    ax.legend()
+    fig.tight_layout()
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    fig.savefig(out_path, dpi=160)
+    plt.close(fig)
+
+
+def main():
+    dataset_name = "simple_2BP_drag_example"
+    data_dict = load_dataset(
+        dataset_name,
+        version="latest",
+        project="neuralODEs",
+        entity="mlds-lab",
+    )
+    data_dict = sample_data(data_dict, 1)
+    normalizer = Normalization2BP(
+        l_char=constants.RADIUS_EARTH,
+        mu=constants.MU_EARTH,
+    )
+    data_dict = normalizer.normalize_dataset(data_dict)
+    a_char = normalizer.l_char / (normalizer.t_char**2)
+    data_jnp = format_data(data_dict)
+
+    ts = data_jnp["t"][0]
+    ys = data_jnp["y"][0]
+    mask = data_jnp["mask"][0]
+
+    traj_key = sorted(data_dict.keys())[0]
+    metadata = data_dict[traj_key].get("metadata", {})
+    drag_meta = metadata.get("drag", {})
+
+    seed = 11
+    key = jr.PRNGKey(seed)
+    model = UDEDynamics(mu=1.0, width=64, depth=3, key=key)
+    model, losses = train(
+        model,
+        ts,
+        ys,
+        mask,
+        lr=1e-3,
+        steps=5000,
+        l2_weight=1e-2,
+    )
+
+    preds = solve_trajectory(model, ts, ys[0])
+    base_preds = solve_base_trajectory(ts, ys[0], mu=1.0)
+
+    r_km, v_km_s = _denorm_states(
+        np.array(ys),
+        normalizer.l_char,
+        normalizer.v_char,
+    )
+    drag_true_km_s2 = _drag_accel_km_s2(
+        r_km,
+        v_km_s,
+        cd_area_over_m=float(drag_meta.get("cd_area_over_m", 0.0)),
+        rho_ref_kg_m3=float(drag_meta.get("rho_ref_kg_m3", 0.0)),
+        h_ref_km=float(drag_meta.get("h_ref_km", 0.0)),
+        scale_height_km=float(drag_meta.get("scale_height_km", 1.0)),
+        omega_earth=float(drag_meta.get("omega_earth", 0.0)),
+        body_radius_km=constants.RADIUS_EARTH,
+    )
+    drag_true = np.linalg.norm(drag_true_km_s2, axis=-1) / a_char
+    drag_pred = np.linalg.norm(
+        np.array(jax.vmap(model.perturbation)(ts, ys)),
+        axis=-1,
+    )
+
+    plot_path = "scripts/training/plots/ude_drag_fit.png"
+    plot_results(
+        ts,
+        ys,
+        preds,
+        base_preds,
+        drag_true,
+        drag_pred,
+        plot_path,
+        normalizer.t_char,
+        normalizer.l_char,
+        normalizer.v_char,
+    )
+    loss_plot_path = "scripts/training/plots/ude_drag_loss.png"
+    plot_losses(losses, loss_plot_path)
+    print(f"Saved plot to {plot_path}")
+    print(f"Saved loss plot to {loss_plot_path}")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+## train_UDE_const_drag.py
+``` python
+"""
+Train a UDE to recover constant-density quadratic drag on top of 2BP dynamics.
+
+Known dynamics: rdot = v, vdot = -mu r / r^3
+Unknown dynamics: a_drag(r, v, t) (neural network)
+"""
+
+import os
+
+# Force CPU platform (must be set before importing jax)
+os.environ["JAX_PLATFORMS"] = "cpu"
+os.environ["CUDA_VISIBLE_DEVICES"] = ""
+
+import equinox as eqx
+import jax
+import jax.numpy as jnp
+import jax.random as jr
+import numpy as np
+import optax
+from diffrax import ODETerm, PIDController, SaveAt, Tsit5, diffeqsolve
+from equinox import Module
+from equinox.nn import MLP
+from mldsml.wandb_utils import load_dataset
+
+from neuralODE import constants
+from neuralODE.data import format_data, sample_data
+from neuralODE.normalization import Normalization2BP
+
+
+class PerturbationNet(Module):
+    mlp: MLP
+
+    def __init__(self, width, depth, *, key):
+        self.mlp = MLP(
+            in_size=6,
+            out_size=3,
+            width_size=width,
+            depth=depth,
+            activation=jax.nn.tanh,
+            key=key,
+        )
+
+    def __call__(self, r, v):
+        return self.mlp(jnp.concatenate([r, v], axis=0))
+
+
+class UDEDynamics(Module):
+    net: PerturbationNet
+    mu: float
+
+    def __init__(self, mu, width, depth, *, key):
+        self.net = PerturbationNet(width, depth, key=key)
+        self.mu = float(mu)
+
+    def perturbation(self, t, y):
+        r = y[:3]
+        v = y[3:]
+        return self.net(r, v)
+
+    def __call__(self, t, y, args=None):
+        r = y[:3]
+        v = y[3:]
+        r_norm = jnp.linalg.norm(r)
+        a_grav = -self.mu * r / r_norm**3
+        a_perturb = self.net(r, v)
+        return jnp.concatenate([v, a_grav + a_perturb], axis=0)
+
+
+def solve_trajectory(model, ts, y0, rtol=1e-5, atol=1e-7, max_steps=100000):
+    sol = diffeqsolve(
+        ODETerm(model),
+        Tsit5(),
+        t0=float(ts[0]),
+        t1=float(ts[-1]),
+        dt0=float(ts[1] - ts[0]),
+        y0=y0,
+        stepsize_controller=PIDController(rtol=rtol, atol=atol),
+        saveat=SaveAt(ts=ts),
+        max_steps=max_steps,
+    )
+    return sol.ys
+
+
+def solve_base_trajectory(ts, y0, mu=1.0, rtol=1e-4, atol=1e-7, max_steps=100000):
+    def base_rhs(t, y, args=None):
+        r = y[:3]
+        v = y[3:]
+        r_norm = jnp.linalg.norm(r)
+        a_grav = -mu * r / r_norm**3
+        return jnp.concatenate([v, a_grav], axis=0)
+
+    sol = diffeqsolve(
+        ODETerm(base_rhs),
+        Tsit5(),
+        t0=float(ts[0]),
+        t1=float(ts[-1]),
+        dt0=float(ts[1] - ts[0]),
+        y0=y0,
+        stepsize_controller=PIDController(rtol=rtol, atol=atol),
+        saveat=SaveAt(ts=ts),
+        max_steps=max_steps,
+    )
+    return sol.ys
+
+
+def percent_error_loss(model, ts, ys, mask, *, l2_weight=0.0):
+    y0 = ys[0]
+    pred = solve_trajectory(model, ts, y0)
+    mask_f = mask.astype(jnp.float32)
+    y_true = ys[1:]
+    y_pred = pred[1:]
+    mask_f = mask_f[1:]
+
+    threshold = 1e-8
+    true_norm = jnp.linalg.norm(y_true, axis=-1)
+    safe_denominator = jnp.where(true_norm < threshold, threshold, true_norm)
+    per_step = jnp.linalg.norm(y_true - y_pred, axis=-1) / safe_denominator * 100.0
+    per_step = per_step * mask_f
+    denom = jnp.maximum(mask_f.sum(), 1.0)
+    data_loss = jnp.sum(per_step) / denom
+    perturbs = jax.vmap(model.perturbation)(ts, ys)
+    pert_loss = jnp.mean(jnp.sum(perturbs**2, axis=-1))
+    return data_loss + l2_weight * pert_loss
+
+
+def train(model, ts, ys, mask, *, lr=1e-2, steps=5000, l2_weight=1e-2):
+    optim = optax.adam(lr)
+    opt_state = optim.init(eqx.filter(model, eqx.is_inexact_array))
+    loss_and_grad = eqx.filter_value_and_grad(
+        lambda m, t, y, msk: percent_error_loss(m, t, y, msk, l2_weight=l2_weight),
+    )
+    losses = []
+
+    for step in range(steps):
+        loss, grads = loss_and_grad(model, ts, ys, mask)
+        updates, opt_state = optim.update(
+            grads,
+            opt_state,
+            params=eqx.filter(model, eqx.is_inexact_array),
+        )
+        model = eqx.apply_updates(model, updates)
+        losses.append(float(loss))
+        if step % 200 == 0 or step == steps - 1:
+            print(f"step {step:05d} loss {float(loss):.6e}")
+    return model, losses
+
+
+def _drag_accel_km_s2(
+    r_km,
+    v_km_s,
+    *,
+    cd_area_over_m,
+    rho_kg_m3,
+    omega_earth,
+):
+    rho_kg_km3 = rho_kg_m3 * 1e9
+    omega_vec = np.array([0.0, 0.0, omega_earth])
+    v_rel = v_km_s - np.cross(omega_vec, r_km)
+    v_rel_norm = np.linalg.norm(v_rel, axis=-1, keepdims=True)
+    return -0.5 * cd_area_over_m * rho_kg_km3 * v_rel_norm * v_rel
+
+
+def _denorm_states(y_norm, l_char, v_char):
+    y = np.array(y_norm)
+    r = y[:, :3] * l_char
+    v = y[:, 3:] * v_char
+    return r, v
+
+
+def plot_results(
+    ts,
+    ys,
+    preds,
+    base_preds,
+    drag_true,
+    drag_pred,
+    out_path,
+    t_char,
+    l_char,
+    v_char,
+):
+    import matplotlib.pyplot as plt
+
+    t = np.array(ts) * t_char
+    y = np.array(ys)
+    y_hat = np.array(preds)
+    y_base = np.array(base_preds)
+
+    r_true, v_true = _denorm_states(y, l_char, v_char)
+    r_pred, v_pred = _denorm_states(y_hat, l_char, v_char)
+    r_base, v_base = _denorm_states(y_base, l_char, v_char)
+
+    fig, axes = plt.subplots(4, 1, figsize=(9, 11), sharex=False)
+
+    pos_colors = plt.rcParams["axes.prop_cycle"].by_key()["color"]
+    axes[0].plot(t, r_base[:, 0], color=pos_colors[0], label="x (base)")
+    axes[0].plot(t, r_true[:, 0], ":", color=pos_colors[0], label="x (drag)")
+    axes[0].plot(t, r_base[:, 1], color=pos_colors[1], label="y (base)")
+    axes[0].plot(t, r_true[:, 1], ":", color=pos_colors[1], label="y (drag)")
+    axes[0].set_ylabel("Position (km)")
+    axes[0].legend(ncol=2)
+
+    axes[1].plot(t, v_base[:, 0], color=pos_colors[2], label="vx (base)")
+    axes[1].plot(t, v_true[:, 0], ":", color=pos_colors[2], label="vx (drag)")
+    axes[1].plot(t, v_base[:, 1], color=pos_colors[3], label="vy (base)")
+    axes[1].plot(t, v_true[:, 1], ":", color=pos_colors[3], label="vy (drag)")
+    axes[1].set_ylabel("Velocity (km/s)")
+    axes[1].legend(ncol=2)
+
+    axes[2].plot(t, drag_true, label="drag true (norm)")
+    axes[2].plot(t, drag_pred, "--", label="drag pred (norm)")
+    axes[2].set_xlabel("Time (s)")
+    axes[2].set_ylabel("Acceleration (norm)")
+    axes[2].legend()
+
+    axes[3].plot(r_base[:, 0], r_base[:, 1], "--", label="base")
+    axes[3].plot(r_true[:, 0], r_true[:, 1], label="drag true")
+    axes[3].plot(r_pred[:, 0], r_pred[:, 1], "--", label="drag pred")
+    axes[3].set_xlabel("x (km)")
+    axes[3].set_ylabel("y (km)")
+    axes[3].set_title("XY trajectory")
+    axes[3].axis("equal")
+    axes[3].legend()
+
+    fig.tight_layout()
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    fig.savefig(out_path, dpi=160)
+    plt.close(fig)
+
+
+def plot_losses(losses, out_path):
+    import matplotlib.pyplot as plt
+
+    steps = np.arange(len(losses))
+    fig, ax = plt.subplots(figsize=(7, 4))
+    ax.plot(steps, losses, label="train loss")
+    ax.set_xlabel("Step")
+    ax.set_ylabel("Percent error loss")
+    ax.set_yscale("log")
+    ax.legend()
+    fig.tight_layout()
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    fig.savefig(out_path, dpi=160)
+    plt.close(fig)
+
+
+def main():
+    dataset_name = "simple_2BP_const_drag_example"
+    data_dict = load_dataset(
+        dataset_name,
+        version="latest",
+        project="neuralODEs",
+        entity="mlds-lab",
+    )
+    data_dict = sample_data(data_dict, 1)
+    normalizer = Normalization2BP(
+        l_char=constants.RADIUS_EARTH,
+        mu=constants.MU_EARTH,
+    )
+    data_dict = normalizer.normalize_dataset(data_dict)
+    a_char = normalizer.l_char / (normalizer.t_char**2)
+    data_jnp = format_data(data_dict)
+
+    ts = data_jnp["t"][0]
+    ys = data_jnp["y"][0]
+    mask = data_jnp["mask"][0]
+
+    traj_key = sorted(data_dict.keys())[0]
+    metadata = data_dict[traj_key].get("metadata", {})
+    drag_meta = metadata.get("drag", {})
+
+    seed = 11
+    key = jr.PRNGKey(seed)
+    model = UDEDynamics(mu=1.0, width=64, depth=3, key=key)
+    model, losses = train(
+        model,
+        ts,
+        ys,
+        mask,
+        lr=1e-3,
+        steps=5000,
+        l2_weight=1e-2,
+    )
+
+    preds = solve_trajectory(model, ts, ys[0])
+    base_preds = solve_base_trajectory(ts, ys[0], mu=1.0)
+
+    r_km, v_km_s = _denorm_states(
+        np.array(ys),
+        normalizer.l_char,
+        normalizer.v_char,
+    )
+    drag_true_km_s2 = _drag_accel_km_s2(
+        r_km,
+        v_km_s,
+        cd_area_over_m=float(drag_meta.get("cd_area_over_m", 0.0)),
+        rho_kg_m3=float(drag_meta.get("rho_kg_m3", 0.0)),
+        omega_earth=float(drag_meta.get("omega_earth", 0.0)),
+    )
+    drag_true = np.linalg.norm(drag_true_km_s2, axis=-1) / a_char
+    drag_pred = np.linalg.norm(
+        np.array(jax.vmap(model.perturbation)(ts, ys)),
+        axis=-1,
+    )
+
+    plot_path = "scripts/training/plots/ude_const_drag_fit.png"
+    plot_results(
+        ts,
+        ys,
+        preds,
+        base_preds,
+        drag_true,
+        drag_pred,
+        plot_path,
+        normalizer.t_char,
+        normalizer.l_char,
+        normalizer.v_char,
+    )
+    loss_plot_path = "scripts/training/plots/ude_const_drag_loss.png"
     plot_losses(losses, loss_plot_path)
     print(f"Saved plot to {plot_path}")
     print(f"Saved loss plot to {loss_plot_path}")
