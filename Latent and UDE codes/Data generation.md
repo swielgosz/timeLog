@@ -1310,4 +1310,4 @@ if __name__ == "__main__":
     plot_path = "scripts/data_gen/plots/forced_oscillator_example.png"
     plot_trajectory_components(traj, params, plot_path)
     print(f"Saved plot to {plot_path}")
-```
+26```
