@@ -1,6 +1,10 @@
 We are testing the sensitivity of our model to changes in model and training pipeline parameters. 
 - Model sensitivities: feature layers, output layers, feature transforms/normalizations, architecture
 - Pipeline sensitivities: optimization settings, data splits, batch/epoch schedule, augmentation, random seed, learning rate
+## Model Architecture
+wandbgroup: "sweep-architecture-batch_size-v1"
+script: analyze_model_size_heatmap
+
 ## Seeding
 The purpose of this experiment is to test the effect of changing the seeding of the model.  
 Config:
@@ -54,7 +58,13 @@ parameters:
 ```
 We sweep over 20 initial seeds and observe the distribution of mean acceleration error as a violin plot. The name of the wandb group is "sweep-seeds-v2". We train on 10 complex orbits and test the performance of the differently seeded models on 10 independent validation orbits.
 
+![[Pasted image 20260128125722.png]]
+Performance generally has low variance due to seeding, but there are a couple notable outliers. 
+
+
 # Generalization Capabilities
+We want to test how well models can generalize to orbits of different shapes. 
 analyze_orbit_generalization_residuals.py
 This tests the ability
 ![[Pasted image 20260128125230.png]]
+
