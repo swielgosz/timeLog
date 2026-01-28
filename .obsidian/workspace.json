@@ -161,8 +161,7 @@
               "title": "Technical Notes"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -312,10 +311,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f90060874b700032",
+  "active": "32dac6e62407ca4b",
   "lastOpenFiles": [
-    "cleaning code/backup.md",
     "Sensitivity Analysis.md",
+    "cleaning code/backup.md",
     "Untitled 2.md",
     "01 Spring 2026.md",
     "cleaning code/Cleaning Code.md",
