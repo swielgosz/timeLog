@@ -73,6 +73,8 @@ vs 10 simple orbits:
 
 analyze_orbit_generalization_residuals.py
 This tests the ability
+![[Pasted image 20260128134702.png]]
+
 ![[Pasted image 20260128125230.png]]
 
 ## Segment ratio vs number of training orbits

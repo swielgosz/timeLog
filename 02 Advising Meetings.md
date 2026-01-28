@@ -2,6 +2,12 @@
 Inspect why trends are behaving "weirdly"
 Consistent behavior ndicates "good model" - hanspeterschaub.info/Papers/grads/JohnMartin.pdf
 
+We are not particularly sensitive to architecture
+If architecture isn't producing the treds that are expected, 
+Run different architectures across 4 or 5 seeds, reuse visualizations and scripts to perform that study. Want to find a quanitatively informed best model architecture of the ones we've tried. If configs are not "doing the job", 1. maybe neuralODEs are just underpowered during 
+
+maybe churn some latent odes in the background and perform these studies
+read about other use cases for neuralODE - are there any other comprehensive studies that use them or are we alone in this
 
 # January 21
 # Learning perturbations

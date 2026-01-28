@@ -49,7 +49,8 @@
               "title": "02 Advising Meetings"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -199,10 +200,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f90060874b700032",
+  "active": "98c9b0afab2dcad6",
   "lastOpenFiles": [
-    "02 Advising Meetings.md",
     "Sensitivity Analysis.md",
+    "Attachments/Pasted image 20260128134702.png",
+    "02 Advising Meetings.md",
     "Attachments/Pasted image 20260128132421.png",
     "Attachments/Pasted image 20260128131602.png",
     "Attachments/Pasted image 20260128131520.png",
@@ -228,7 +230,6 @@
     "Attachments/Pasted image 20260121125045.png",
     "Attachments/Pasted image 20260121125029.png",
     "Attachments/Pasted image 20260121124449.png",
-    "Attachments/Pasted image 20260121123500.png",
     "Lit Review Color Code.md",
     "Journal Paper",
     "Michael Defense Questions.md",
