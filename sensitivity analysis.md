@@ -6,6 +6,8 @@ wandbgroup: "sweep-architecture-batch_size-v1"
 script: analyze_model_size_heatmap
 
 ![[Pasted image 20260128131520.png]]
+![[Pasted image 20260128132421.png]]
+
 ## Seeding
 The purpose of this experiment is to test the effect of changing the seeding of the model.  
 Config:
@@ -74,3 +76,5 @@ analyze_orbit_generalization_residuals.py
 This tests the ability
 ![[Pasted image 20260128125230.png]]
 
+## Segment ratio vs number of training orbits
+![[Pasted image 20260128131602.png]]
