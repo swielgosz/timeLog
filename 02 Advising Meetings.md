@@ -8,7 +8,7 @@ Run different architectures across 4 or 5 seeds, reuse visualizations and script
 
 maybe churn some latent odes in the background and perform these studies
 read about other use cases for neuralODE - are there any other comprehensive studies that use them or are we alone in this
-
+repeat with different input/output layers with different sees. try this with latent odes as well. maybe start with model size like we did for neuralODEs. 
 # January 21
 # Learning perturbations
 ---
