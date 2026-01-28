@@ -5,6 +5,7 @@ We are testing the sensitivity of our model to changes in model and training pip
 wandbgroup: "sweep-architecture-batch_size-v1"
 script: analyze_model_size_heatmap
 
+![[Pasted image 20260128131520.png]]
 ## Seeding
 The purpose of this experiment is to test the effect of changing the seeding of the model.  
 Config:
@@ -63,7 +64,12 @@ Performance generally has low variance due to seeding, but there are a couple no
 
 
 # Generalization Capabilities
-We want to test how well models can generalize to orbits of different shapes. 
+We want to test how well models can generalize to orbits of different shapes. This experiment takes a model and applies it to a grid of semi-major axes and accentricities
+
+When we train on 100 complex orbits:
+
+vs 10 simple orbits:
+
 analyze_orbit_generalization_residuals.py
 This tests the ability
 ![[Pasted image 20260128125230.png]]
