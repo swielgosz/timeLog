@@ -1,3 +1,8 @@
+# January 28
+Inspect why trends are behaving "weirdly"
+Consistent behavior ndicates "good model" - hanspeterschaub.info/Papers/grads/JohnMartin.pdf
+
+
 # January 21
 # Learning perturbations
 ---

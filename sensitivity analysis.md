@@ -7,7 +7,6 @@ script: analyze_model_size_heatmap
 
 ![[Pasted image 20260128131520.png]]
 ![[Pasted image 20260128132421.png]]
-
 ## Seeding
 The purpose of this experiment is to test the effect of changing the seeding of the model.  
 Config:

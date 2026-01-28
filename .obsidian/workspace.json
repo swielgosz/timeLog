@@ -34,6 +34,20 @@
               "icon": "lucide-file",
               "title": "01 Spring 2026"
             }
+          },
+          {
+            "id": "98c9b0afab2dcad6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "02 Advising Meetings.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "02 Advising Meetings"
+            }
           }
         ]
       }
@@ -187,17 +201,17 @@
   },
   "active": "f90060874b700032",
   "lastOpenFiles": [
+    "02 Advising Meetings.md",
+    "Sensitivity Analysis.md",
     "Attachments/Pasted image 20260128132421.png",
     "Attachments/Pasted image 20260128131602.png",
     "Attachments/Pasted image 20260128131520.png",
     "Attachments/Pasted image 20260128125722.png",
     "Attachments/Pasted image 20260128125230.png",
     "01 Spring 2026.md",
-    "Sensitivity Analysis.md",
     "Journal Paper/Technical Notes.md",
     "cleaning code/Cleaning Code.md",
     "metrics.md",
-    "02 Advising Meetings.md",
     "Archive/Fall 2025.md",
     "Resources.md",
     "Latent and UDE codes/Data generation.md",
@@ -215,7 +229,6 @@
     "Attachments/Pasted image 20260121125029.png",
     "Attachments/Pasted image 20260121124449.png",
     "Attachments/Pasted image 20260121123500.png",
-    "Attachments/Pasted image 20260121123412.png",
     "Lit Review Color Code.md",
     "Journal Paper",
     "Michael Defense Questions.md",
