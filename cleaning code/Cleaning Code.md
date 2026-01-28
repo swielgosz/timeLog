@@ -1106,3 +1106,51 @@ def fetch_run_data(run_id, project="neuralODEs"):
 
     return history
 ```
+
+``` python
+class AccelerationMetric:
+    def __init__(self, true_dynamics):
+        self.name = "acceleration_error"
+        self.true_dynamics = true_dynamics
+
+    def __call__(self, model, ti, yi, mask_i):
+        metric_acc_error = self.compute_acceleration_errors(
+            model,
+            self.true_dynamics,
+            ti,
+            yi,
+            mask_i,
+        )
+        return jnp.mean(metric_acc_error)
+
+    def eval_dynamics(dynamics, ti, yi):
+        """Vectorize a dynamics function over (batch, time)."""
+
+        state_deriv_pred = jax.vmap(
+            lambda t_seq, y_seq: jax.vmap(
+                dynamics,
+                in_axes=(0, 0),
+            )(t_seq, y_seq),
+        )(ti, yi)
+
+        return state_deriv_pred
+
+    def compute_acceleration_errors(self, model, true_dynamics, ti, yi, mask_i):
+        """
+        Compute percent acceleration errors for every orbit and timestep, respecting masks.
+
+        Returns a 1D array of errors (percentage) for all valid samples so that
+        callers can aggregate however they like (mean, std, quantiles, etc.).
+        """
+        true_acc = self.eval_dynamics(true_dynamics, ti, yi)[..., 3:]
+        pred_acc = self.eval_dynamics(model.func, ti, yi)[..., 3:]
+
+        numer = jnp.linalg.norm(true_acc - pred_acc, axis=-1)
+        denom = jnp.linalg.norm(true_acc, axis=-1)
+        denom_safe = jnp.where(denom > 0, denom, 1.0)
+        acc_error = numer / denom_safe * 100.0
+
+        nan_mask = ~jnp.isnan(acc_error)
+        full_mask = jnp.logical_and(nan_mask, mask_i)
+        return acc_error[full_mask]
+        ```
