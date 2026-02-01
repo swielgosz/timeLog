@@ -3,6 +3,6 @@ Creating a tar copy of my repo without large files: `tar -czf /workspaces/neural
 ```
 cd /workspaces/neuralODEs
 git ls-files -z --cached --modified --others --exclude-standard | \
-  tar --null -T - -czf /workspaces/neuralODEs/neuralODEs_backup_2026-01-26.tar.gz \
+  tar --null -T - -czf /workspaces/neuralODEs/neuralODEs_backup_2026-02-01.tar.gz \
   --exclude='**/wandb/*' --exclude='**/artifacts/*' --exclude='*.eqx'
 ```

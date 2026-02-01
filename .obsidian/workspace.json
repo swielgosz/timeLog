@@ -39,12 +39,14 @@
             "id": "188c9d04f3713f4c",
             "type": "leaf",
             "state": {
-              "type": "release-notes",
+              "type": "markdown",
               "state": {
-                "currentVersion": "1.11.5"
+                "file": "Software Tips.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.11.5"
+              "icon": "lucide-file",
+              "title": "Software Tips"
             }
           },
           {
