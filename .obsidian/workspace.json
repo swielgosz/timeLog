@@ -36,6 +36,18 @@
             }
           },
           {
+            "id": "188c9d04f3713f4c",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.11.5"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.11.5"
+            }
+          },
+          {
             "id": "98c9b0afab2dcad6",
             "type": "leaf",
             "state": {
@@ -50,7 +62,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -200,7 +212,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3be019074464097b",
+  "active": "188c9d04f3713f4c",
   "lastOpenFiles": [
     "02 Advising Meetings.md",
     "Sensitivity Analysis.md",
