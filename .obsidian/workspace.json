@@ -64,7 +64,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -214,8 +214,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "188c9d04f3713f4c",
+  "active": "3be019074464097b",
   "lastOpenFiles": [
+    "Software Tips.md",
     "02 Advising Meetings.md",
     "Sensitivity Analysis.md",
     "Attachments/Pasted image 20260128134702.png",
@@ -236,7 +237,6 @@
     "Untitled 1.md",
     "Untitled 2.md",
     "cleaning code/backup.md",
-    "Software Tips.md",
     "Latent and UDE codes/Training Scripts.md",
     "Latent and UDE codes",
     "Technical Notes/Latent ODEs.md",
