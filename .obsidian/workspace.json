@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Software Tips.md",
+                "file": "01 Spring 2026.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Software Tips"
+              "title": "01 Spring 2026"
             }
           },
           {
@@ -78,7 +78,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -228,15 +228,15 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "5519fa7817a0d99c",
+  "active": "188c9d04f3713f4c",
   "lastOpenFiles": [
+    "Software Tips.md",
+    "Technical Notes/The Vanishing Gradient Problem for Stiff Neural Differential Equations.md",
     "01 Spring 2026.md",
     "Attachments/Pasted image 20260203143543.png",
-    "Technical Notes/The Vanishing Gradient Problem for Stiff Neural Differential Equations.md",
     "Technical Notes/Latent ODEs.md",
     "Reverse-mode automatic differentiation of ODE solutions.md",
     "Journal Paper/Technical Notes.md",
-    "Software Tips.md",
     "02 Advising Meetings.md",
     "Sensitivity Analysis.md",
     "Attachments/Pasted image 20260128134702.png",
