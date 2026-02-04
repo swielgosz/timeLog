@@ -9,7 +9,7 @@ Adaptive solvers will reject unstable steps and prevent divergence in early trai
 
 This supports the finding that increasing depth does not necessarily improve results: "When the neural network is deep and the dynamics are stiff, gradients may vanish due to both repeated nonlinear transformations and the numerical damping imposed by the integrator’s stability function, making some parameters effectively untrainable." (from aforementioned paper). And from "Improving Neural ODE Training with Temporal Adaptive Batch Normalization": "Previous studies on Neural ODEs parameterize the learnable temporal derivatives using a shallow neural network with a limited number of parameters [7, 30]. Without special treatment, merely stacking additional layers in the temporal derivatives does not necessarily enhance Neural ODE performance. Furthermore, deeper networks might increase the stiffness of the ODE system, leading to challenges with the ODE solver, such as excessively small step sizes or even failures due to infinite state values, as shown in Figure 1". Depth of the MLP controls nonlinearity of the vector field, so increasing depth too much results in sharper, more twisted vector fields. Increasing width can help expressivity and optimization more reliably than increasing depth, but can still result in stiffer learned vector fields. 
 
-Width also does not improve results. Width results in smoother Jacobians, fewer extreme eigenvalues, and adjoint gradients decay slower. If we increase width too much, stiffness again increases and solver steps decrease and training becomes unstable since it can represent sharp vector fields. We can combat this through solver-step penalties, Lipschitz regularization, spectral norm constraints, or Jacobian regularization. The Jacobians in question:
+Width also does not always improve results. Width results in smoother Jacobians, fewer extreme eigenvalues, and adjoint gradients decay slower. However, if we increase width too much, stiffness again increases and solver steps decrease and training becomes unstable since it can represent sharp vector fields. We can combat this through solver-step penalties, Lipschitz regularization, spectral norm constraints, or Jacobian regularization. The Jacobians in question:
 1. State Jacobian of the learned vector field: 
 	$J_f(x) \;=\; \frac{\partial f_\theta(x)}{\partial x}$
 	where 
@@ -27,6 +27,7 @@ Width also does not improve results. Width results in smoother Jacobians, fewer 
 	Bad $J_f$ = bad $J_\Phi$. Stiff vector field means ill-conditioned STM, and vanishing gradients in time. Vanishing gradients are usually due to $J_\Phi(t)$ collapsing due to large negative eigenvalues of $J_f$. 
 3. Jacobian wrt parameters $\partial f_\theta / \partial \theta$.
 	This affects optimization conditioning, how noisy gradients are, how easy it is for SGD to move through the vector field. Solver pathologies are driven by the state Jacobian, not this one. 
+We record the state Jacobian of the learned vector field. We record the spectral radius as the max absolute real part of the eigenvalues
 
 I wanted to check to make sure the neural ODE itself is not becoming stiff. Here is a an example of training on complex_TBP_planar_10_train. 
 ![[Pasted image 20260203215720.png]]
