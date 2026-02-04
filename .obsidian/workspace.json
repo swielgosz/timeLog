@@ -118,7 +118,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -268,9 +268,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "4690dd3613cc4af9",
+  "active": "f58cd3c607879e74",
   "lastOpenFiles": [
     "Sensitivity Analysis.md",
+    "Attachments/Pasted image 20260128125230.png",
     "02 Advising Meetings.md",
     "Attachments/Pasted image 20260204123704.png",
     "Untitled.md",
@@ -290,7 +291,6 @@
     "Attachments/Pasted image 20260128131602.png",
     "Attachments/Pasted image 20260128131520.png",
     "Attachments/Pasted image 20260128125722.png",
-    "Attachments/Pasted image 20260128125230.png",
     "cleaning code/Cleaning Code.md",
     "metrics.md",
     "Resources.md",
