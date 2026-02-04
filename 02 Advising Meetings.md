@@ -1,4 +1,9 @@
 # February 4
+Referenced the paper "The Vanishing Gradient Problem for Stiff Neural Differential Equations". Neural ODEs can become stiff during training, even if true data dynamics are non-stiff, which can cause vanishing gradients. If the network learns sharp, highly curved vector fields then Jacobian eigenvalues blow up, the system becomes stiff, solver takes tiny steps, and gradients collapse.
+
+For neural ODEs
+$\frac{d \lambda}{dt} = - \left( \frac{\partial f_\theta}{\partial x} \right)^T \lambda$
+If the Jacobian has large negative eigenvalues (stiff decay modes), $\lambda(t) \sim e^{-\alpha t}$ so gradients decay exponent
 ![[Pasted image 20260203215720.png]]
 
 # January 28
