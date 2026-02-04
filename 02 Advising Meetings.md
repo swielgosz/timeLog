@@ -7,6 +7,8 @@ If the Jacobian has large negative eigenvalues (stiff decay modes), $\lambda(t) 
 
 Adaptive solvers will reject unstable steps and prevent divergence in early training. They can be dangerous if they mask model errors. If the NN learns a stiff, wildly curved vector field then the solver will take tiny steps, reject steps, and compensate numerically. When the solver shrinks its steps to handle stiffness, the adjoint becomes ill-conditioned, gradients vanish, and long-horizon behavior plateaus. 
 
+This supports the finding that increasing depth does not necessarily improve results: "When the neural network is deep and the dynamics are stiff, gradients may vanish due to both repeated nonlinear transformations and the numerical damping imposed by the integrator’s stability function, making some parameters effectively untrainable." (from aforementioned paper). 
+
 To check the 
 
 I wanted to check to make sure the neural ODE itself is not becoming stiff. Here is a an example of training on complex_TBP_planar_10_train. 
