@@ -69,12 +69,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "02 Advising Meetings.md",
+                "file": "01 Spring 2026.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "02 Advising Meetings"
+              "title": "01 Spring 2026"
             }
           }
         ],
@@ -230,18 +230,19 @@
   },
   "active": "188c9d04f3713f4c",
   "lastOpenFiles": [
+    "01 Spring 2026.md",
+    "Attachments/Pasted image 20260203233745.png",
     "02 Advising Meetings.md",
     "Archive/Fall 2025.md",
-    "01 Spring 2026.md",
+    "Technical Notes/The Vanishing Gradient Problem for Stiff Neural Differential Equations.md",
+    "Sensitivity Analysis.md",
     "Journal Paper/Technical Notes.md",
     "Archive/Research Notes.md",
     "Attachments/Pasted image 20260203215720.png",
-    "Technical Notes/The Vanishing Gradient Problem for Stiff Neural Differential Equations.md",
     "Software Tips.md",
     "Attachments/Pasted image 20260203143543.png",
     "Technical Notes/Latent ODEs.md",
     "Reverse-mode automatic differentiation of ODE solutions.md",
-    "Sensitivity Analysis.md",
     "Attachments/Pasted image 20260128134702.png",
     "Attachments/Pasted image 20260128132421.png",
     "Attachments/Pasted image 20260128131602.png",
@@ -260,7 +261,6 @@
     "Latent and UDE codes/Training Scripts.md",
     "Latent and UDE codes",
     "Attachments/Pasted image 20260121132014.png",
-    "Attachments/Pasted image 20260121125045.png",
     "Lit Review Color Code.md",
     "Journal Paper",
     "Michael Defense Questions.md",
@@ -268,7 +268,6 @@
     "cleaning code",
     "code.md",
     "Technical Notes/Periodic Orbit Discovery.md",
-    "Technical Notes/3BP Lectures Shane Ross.md",
     "Attachments/multi_dataset_xy_baseline 1 1.pdf",
     "Attachments/multi_dataset_xy_fixnu0 1.pdf",
     "Attachments/multi_dataset_xy_baseline 1.pdf",
