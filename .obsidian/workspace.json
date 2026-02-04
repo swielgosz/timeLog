@@ -22,6 +22,18 @@
             }
           },
           {
+            "id": "4690dd3613cc4af9",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "Attachments/Pasted image 20260128125230.png"
+              },
+              "icon": "lucide-image",
+              "title": "Pasted image 20260128125230"
+            }
+          },
+          {
             "id": "3be019074464097b",
             "type": "leaf",
             "state": {
@@ -106,7 +118,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -256,11 +268,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f58cd3c607879e74",
+  "active": "4690dd3613cc4af9",
   "lastOpenFiles": [
-    "Attachments/Pasted image 20260204123704.png",
     "Sensitivity Analysis.md",
     "02 Advising Meetings.md",
+    "Attachments/Pasted image 20260204123704.png",
     "Untitled.md",
     "01 Spring 2026.md",
     "Archive/Fall 2025.md",
@@ -290,7 +302,6 @@
     "cleaning code/backup.md",
     "Latent and UDE codes/Training Scripts.md",
     "Latent and UDE codes",
-    "Attachments/Pasted image 20260121132014.png",
     "Lit Review Color Code.md",
     "Journal Paper",
     "Michael Defense Questions.md",
