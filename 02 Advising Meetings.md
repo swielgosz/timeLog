@@ -34,7 +34,8 @@ Width also does not always improve results. Width results in smoother Jacobians,
 We record the state Jacobian of the learned vector field. We the max absolute real part of the eigenvalues because large negative real parts indicate stiff, fast-decaying modes (solver shrinks dt) and large positive real parts indicate unstable, exploding modes. Pure imaginary parts (like in the spectral radius) just indicate oscillations, which does not give us info about stiffness just oscillatory behavior (which we have in 2BP anyway). We also record the spread ratio = p95/p05. We have eigenvalues of the state Jacobian, take their real parts and absolute values so we have a vector of nonnegative scalars. p05 is the 5th percentile of that vector, e.g. it is the value such that 5% of the directions in state space have local exponential rates at or below this number and 95% are at or above it. This means 5% of eigenmodes are slower than or equal to p05. So p05 is the slow mode, and p95 is the fast mode. The spread_ratio can tell us about conditioning. 
 
 I wanted to check to make sure the neural ODE itself is not becoming stiff. Here is a an example of training on complex_TBP_planar_10_train. Run id 3frpgcw1
-![[Pasted image 20260203215720.png]]
+![[Pasted image 20260204130243.png]]
+![[Pasted image 20260204130139.png]]
 
 ![[Pasted image 20260204123704.png]]
 
