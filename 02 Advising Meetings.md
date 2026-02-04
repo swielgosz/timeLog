@@ -36,6 +36,8 @@ We record the state Jacobian of the learned vector field. We the max absolute re
 I wanted to check to make sure the neural ODE itself is not becoming stiff. Here is a an example of training on complex_TBP_planar_10_train. 
 ![[Pasted image 20260203215720.png]]
 
+![[Pasted image 20260204123704.png]]
+
 
 --- 
 # January 28
