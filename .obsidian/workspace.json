@@ -62,6 +62,18 @@
             }
           },
           {
+            "id": "8775601855677a6e",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "Attachments/Pasted image 20260204130139.png"
+              },
+              "icon": "lucide-image",
+              "title": "Pasted image 20260204130139"
+            }
+          },
+          {
             "id": "188c9d04f3713f4c",
             "type": "leaf",
             "state": {
@@ -270,13 +282,13 @@
   },
   "active": "5519fa7817a0d99c",
   "lastOpenFiles": [
+    "Attachments/Pasted image 20260204130139.png",
+    "02 Advising Meetings.md",
     "01 Spring 2026.md",
     "Technical Notes/The Vanishing Gradient Problem for Stiff Neural Differential Equations.md",
     "Sensitivity Analysis.md",
     "Archive/Fall 2025.md",
-    "02 Advising Meetings.md",
     "Attachments/Pasted image 20260204130243.png",
-    "Attachments/Pasted image 20260204130139.png",
     "Attachments/Pasted image 20260128125230.png",
     "Attachments/Pasted image 20260204123704.png",
     "Untitled.md",
