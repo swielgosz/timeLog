@@ -1,3 +1,6 @@
+# February 4
+![[Pasted image 20260203215720.png]]
+
 # January 28
 Inspect why trends are behaving "weirdly"
 Consistent behavior ndicates "good model" - hanspeterschaub.info/Papers/grads/JohnMartin.pdf
