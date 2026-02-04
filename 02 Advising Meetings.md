@@ -1,5 +1,12 @@
 # February 4
+Program with Simon:
+- astrodynamics package - all relevant classes of orbits. Lyapunov, NRHO, resonant, maybe QPO and manifold. Don't need to write it from scratch - look at open source materials and make sure we have access to orbits we're interested in. Corresponding dynamics. Visualization. Simon will probably have orbit theory, I have more ML. Corresponding training pipelines. 
+- Include undergrad for 30 min of program meeting
+
+
 Justification for the $\delta \dot{x} = A(t)\delta X$ if lambda is >= 0 maybe our Jacobian is larger and pushes the loss, and 
+tensorboard you can look at distirbution of gradient updates across batches 
+study over batch sizes - how do the gradients change. do we have tighter distributions with more orbtis
 Look for more uses for neural ODEs. Look at related articles - journal articles top tier universities. Berkley, stanford MIT and Europe. ESA.
 Look for repositories 
 Referenced the paper "The Vanishing Gradient Problem for Stiff Neural Differential Equations". Neural ODEs can become stiff during training, even if true data dynamics are non-stiff, which can cause vanishing gradients. If the network learns sharp, highly curved vector fields then Jacobian eigenvalues blow up, the system becomes stiff, solver takes tiny steps, and gradients collapse.
