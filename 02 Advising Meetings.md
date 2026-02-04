@@ -9,18 +9,24 @@ Adaptive solvers will reject unstable steps and prevent divergence in early trai
 
 This supports the finding that increasing depth does not necessarily improve results: "When the neural network is deep and the dynamics are stiff, gradients may vanish due to both repeated nonlinear transformations and the numerical damping imposed by the integrator’s stability function, making some parameters effectively untrainable." (from aforementioned paper). And from "Improving Neural ODE Training with Temporal Adaptive Batch Normalization": "Previous studies on Neural ODEs parameterize the learnable temporal derivatives using a shallow neural network with a limited number of parameters [7, 30]. Without special treatment, merely stacking additional layers in the temporal derivatives does not necessarily enhance Neural ODE performance. Furthermore, deeper networks might increase the stiffness of the ODE system, leading to challenges with the ODE solver, such as excessively small step sizes or even failures due to infinite state values, as shown in Figure 1". Depth of the MLP controls nonlinearity of the vector field, so increasing depth too much results in sharper, more twisted vector fields. Increasing width can help expressivity and optimization more reliably than increasing depth, but can still result in stiffer learned vector fields. 
 
-Width also does not improve results. Width results in smoother Jacobians, fewer extreme eigenvalues, and adjoint gradients decay slower. If we increase width too much, stiffness again increases and solver steps decrease and training becomes unstable since it can represent sharp vector fields. We can combat this through solver-step penalties, Lipschitz regularization, spectral norm constraints, or Jacobian regularization. The Jacobian in question is mainly the state Jacobian of the learned vector field: 
-$J_f(x) \;=\; \frac{\partial f_\theta(x)}{\partial x}$
-where 
-$\dot{x}(t) = f_\theta(x(t))$.
-This Jacobian controls local stability, stiffness, and gradient flow through time. The sensitivity of the trajectory to perturbations evolves as $\frac{d}{dt} \delta x(t) = J_f(x(t)) \, \delta x(t)$, so the spectrum of $J_f$ controls:
-- stiffness (large negative eigenvalues)
-- chaotic behavior (large positive eigenvalues)
-- vanishing gradients (contractive flows)
-- exploding gradients (expansive flows)
-- solver step size (adaptive solvers shrink dt if eigenvalues are lar)
-
-To check the 
+Width also does not improve results. Width results in smoother Jacobians, fewer extreme eigenvalues, and adjoint gradients decay slower. If we increase width too much, stiffness again increases and solver steps decrease and training becomes unstable since it can represent sharp vector fields. We can combat this through solver-step penalties, Lipschitz regularization, spectral norm constraints, or Jacobian regularization. The Jacobians in question:
+1. State Jacobian of the learned vector field: 
+	$J_f(x) \;=\; \frac{\partial f_\theta(x)}{\partial x}$
+	where 
+	$\dot{x}(t) = f_\theta(x(t))$.
+	This Jacobian controls local stability, stiffness, and gradient flow through time. The sensitivity of the trajectory to perturbations evolves as $\frac{d}{dt} \delta x(t) = J_f(x(t)) \, \delta x(t)$, so the spectrum of $J_f$ controls:
+	- stiffness (large negative eigenvalues)
+	- chaotic behavior (large positive eigenvalues)
+	- vanishing gradients (contractive flows)
+	- exploding gradients (expansive flows)
+	- solver step size (adaptive solvers shrink dt if eigenvalues are large)
+	Deeper MLPs induce Jacobians with larger operator norm and worse conditioning. Wider but shallow networks tned to give smoother $f_\theta(x)$, smaller, better-conditioned $J_f(x)$, less stiffness, more stable adjoints. 
+2. Jacobian of the flow map, e.g. the trajectory snesitivity/STM: $\partial \Phi_t / \partial x_0$.
+	$J_\Phi(t) = \frac{\partial x(t)}{\partial x_0}$
+	This is what explodes/vanishes in the adjoint method. It evolves via $\frac{d}{dt} J_\Phi(t) = J_f(x(t)) \, J_\Phi(t)$.
+	Bad $J_f$ = bad $J_\Phi$. Stiff vector field means ill-conditioned STM, and vanishing gradients in time. Vanishing gradients are usually due to $J_\Phi(t)$ collapsing due to large negative eigenvalues of $J_f$. 
+3. Jacobian wrt parameters $\partial f_\theta / \partial \theta$.
+	This affects optimization conditioning, how noisy gradients are, how easy it is for SGD to move through the vector field. Solver pathologies are driven by the state Jacobian, not this one. 
 
 I wanted to check to make sure the neural ODE itself is not becoming stiff. Here is a an example of training on complex_TBP_planar_10_train. 
 ![[Pasted image 20260203215720.png]]
