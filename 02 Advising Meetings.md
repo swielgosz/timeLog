@@ -1,4 +1,7 @@
 # February 4
+Justification for the $\delta \dot{x} = A(t)\delta X$ if lambda is >= 0 maybe our Jacobian is larger and pushes the loss, and 
+Look for more uses for neural ODEs. Look at related articles - journal articles top tier universities. Berkley, stanford MIT and Europe. ESA.
+Look for repositories 
 Referenced the paper "The Vanishing Gradient Problem for Stiff Neural Differential Equations". Neural ODEs can become stiff during training, even if true data dynamics are non-stiff, which can cause vanishing gradients. If the network learns sharp, highly curved vector fields then Jacobian eigenvalues blow up, the system becomes stiff, solver takes tiny steps, and gradients collapse.
 
 For neural ODEs
@@ -34,6 +37,7 @@ Width also does not always improve results. Width results in smoother Jacobians,
 We record the state Jacobian of the learned vector field. We the max absolute real part of the eigenvalues because large negative real parts indicate stiff, fast-decaying modes (solver shrinks dt) and large positive real parts indicate unstable, exploding modes. Pure imaginary parts (like in the spectral radius) just indicate oscillations, which does not give us info about stiffness just oscillatory behavior (which we have in 2BP anyway). We also record the spread ratio = p95/p05. We have eigenvalues of the state Jacobian, take their real parts and absolute values so we have a vector of nonnegative scalars. p05 is the 5th percentile of that vector, e.g. it is the value such that 5% of the directions in state space have local exponential rates at or below this number and 95% are at or above it. This means 5% of eigenmodes are slower than or equal to p05. So p05 is the slow mode, and p95 is the fast mode. The spread_ratio can tell us about conditioning. 
 
 I wanted to check to make sure the neural ODE itself is not becoming stiff. Here is a an example of training on complex_TBP_planar_10_train. Run id 3frpgcw1
+Replot without trajectories 
 ![[Pasted image 20260204130243.png]]
 ![[Pasted image 20260204130139.png]]
 
