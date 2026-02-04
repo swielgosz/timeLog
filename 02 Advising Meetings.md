@@ -21,13 +21,17 @@ Width also does not always improve results. Width results in smoother Jacobians,
 	- exploding gradients (expansive flows)
 	- solver step size (adaptive solvers shrink dt if eigenvalues are large)
 	Deeper MLPs induce Jacobians with larger operator norm and worse conditioning. Wider but shallow networks tned to give smoother $f_\theta(x)$, smaller, better-conditioned $J_f(x)$, less stiffness, more stable adjoints. 
+	Each eigenvalue $\lambda_i$ corresponds to a local exponential rate in some direction of state space:
+	- $\Re(\lambda_i) < 0$: contraction (stable / decaying mode)
+    - $\Re(\lambda_i) > 0$: expansion (unstable / diverging mode)
+	- $\Re(\lambda_i) \approx 0$: neutral direction
 2. Jacobian of the flow map, e.g. the trajectory snesitivity/STM: $\partial \Phi_t / \partial x_0$.
 	$J_\Phi(t) = \frac{\partial x(t)}{\partial x_0}$
 	This is what explodes/vanishes in the adjoint method. It evolves via $\frac{d}{dt} J_\Phi(t) = J_f(x(t)) \, J_\Phi(t)$.
 	Bad $J_f$ = bad $J_\Phi$. Stiff vector field means ill-conditioned STM, and vanishing gradients in time. Vanishing gradients are usually due to $J_\Phi(t)$ collapsing due to large negative eigenvalues of $J_f$. 
 3. Jacobian wrt parameters $\partial f_\theta / \partial \theta$.
 	This affects optimization conditioning, how noisy gradients are, how easy it is for SGD to move through the vector field. Solver pathologies are driven by the state Jacobian, not this one. 
-We record the state Jacobian of the learned vector field. We record the spectral radius as the max absolute real part of the eigenvalues
+We record the state Jacobian of the learned vector field. We the max absolute real part of the eigenvalues because large negative real parts indicate stiff, fast-decaying modes (solver shrinks dt) and large positive real parts indicate unstable, exploding modes. Pure imaginary parts (like in the spectral radius) just indicate oscillations, which does not give us info about stiffness just oscillatory behavior (which we have in 2BP anyway). We also record the spread ratio
 
 I wanted to check to make sure the neural ODE itself is not becoming stiff. Here is a an example of training on complex_TBP_planar_10_train. 
 ![[Pasted image 20260203215720.png]]
