@@ -62,6 +62,18 @@
             }
           },
           {
+            "id": "e8c011cc58a546a5",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.11.7"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.11.7"
+            }
+          },
+          {
             "id": "8775601855677a6e",
             "type": "leaf",
             "state": {
@@ -130,7 +142,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -280,7 +292,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "5519fa7817a0d99c",
+  "active": "e8c011cc58a546a5",
   "lastOpenFiles": [
     "Attachments/Pasted image 20260204130139.png",
     "02 Advising Meetings.md",
