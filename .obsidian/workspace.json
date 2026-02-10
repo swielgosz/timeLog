@@ -107,12 +107,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 Spring 2026.md",
+                "file": "Journal Paper/Technical Notes.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01 Spring 2026"
+              "title": "Technical Notes"
             }
           },
           {
@@ -296,11 +296,11 @@
   },
   "active": "98c9b0afab2dcad6",
   "lastOpenFiles": [
+    "01 Spring 2026.md",
     "02 Advising Meetings.md",
     "Sensitivity Analysis.md",
     "Journal Paper/Technical Notes.md",
     "Attachments/Pasted image 20260204130139.png",
-    "01 Spring 2026.md",
     "Technical Notes/The Vanishing Gradient Problem for Stiff Neural Differential Equations.md",
     "Archive/Fall 2025.md",
     "Attachments/Pasted image 20260204130243.png",
