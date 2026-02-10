@@ -1,44 +1,53 @@
 # February 10
-**Neural ODE training difficulty and improvement – code repositories**
-1.	ANODE – Accurate gradients for Neural ODEs (2019)
+## Neural ODE training difficulty and improvement – code repositories
+- [ ]  ANODE – Accurate gradients for Neural ODEs (2019)
 Paper: ANODE: Unconditionally Accurate Memory-Efficient Gradients for Neural ODEs
 Code: https://github.com/amirgholami/anode
 Notes: Fixes issues with the adjoint method by using discretize-then-optimize and checkpointing for stable gradients.
 
-2.	Regularized Neural ODEs (RNODE)
+- [ ]  Regularized Neural ODEs (RNODE)
 Paper: How to Train Your Neural ODE: the World of Jacobian and Kinetic Regularization
 Code: https://github.com/cfinlay/ffjord-rnode
 Notes: Adds Jacobian norm and kinetic energy regularization to reduce stiffness and number of function evaluations during training.
 
-3.	Simulation-Free Training of Neural ODEs
+- [ ]  Simulation-Free Training of Neural ODEs
 Paper: Simulation-Free Training of Neural ODEs on Paired Data
 Code: https://github.com/seminkim/simulation-free-node
 Notes: Avoids backpropagating through the ODE solver by using flow matching to reduce training cost and instability.
 
-Additional Neural ODE codebases (general reference)
-	4.	Easy Neural ODE (JAX + Haiku)
+## Additional Neural ODE codebases (general reference)
+- [ ]  Easy Neural ODE (JAX + Haiku)
 Code: https://github.com/jacobjinkelly/easy-neural-ode
 Notes: JAX-based Neural ODE, Latent ODE, FFJORD examples with training scripts.
-	5.	Awesome Neural ODE (curated list of repos and papers)
+- [ ]  Awesome Neural ODE (curated list of repos and papers)
 Code: https://github.com/Zymrael/awesome-neural-ode
 Notes: Useful index of papers, tools, and implementations across Neural ODE research.
-	6.	Neural ODE tutorial notebook (PyTorch)
+- [ ]  Neural ODE tutorial notebook (PyTorch)
 Code: https://github.com/cagatayyildiz/neural-ode-tutorial
 Notes: Simple tutorial-style implementation of Neural ODE training.
 
-Related solver and training behavior repositories
-	7.	HeavyBallNODE
+## **Related solver and training behavior repositories**
+- [ ]  HeavyBallNODE
 Paper: Heavy Ball Neural ODEs
 Code: https://github.com/hedixia/HeavyBallNODE
 Notes: Adds momentum to continuous-depth models to improve optimization and conditioning.
-	8.	Lyapunov-based Neural ODE training
+
+- [ ]  Lyapunov-based Neural ODE training
 Paper: Learning stable dynamics with Lyapunov constraints
 Code: https://github.com/ivandariojr/LyapunovLearning
 Notes: Enforces stability constraints during Neural ODE training.
-	9.	Adaptive step-size Neural ODE experiments
+
+- [ ]  Adaptive step-size Neural ODE experiments
 Paper: Training Neural ODEs with adaptive step size control
 Code: https://github.com/Allauzen/adaptive-step-size-neural-ode
 Notes: Studies how adaptive solvers interact with training dynamics and stability.
+
+## Other papers
+- [ ] A guide to neural ordinary differential equations: Machine learning for data-driven digital engineering (in Zotero)
+
+## Other videos/resources
+- https://www.youtube.com/watch?v=wTgYDg_zPcg[Neural ODE Code Walkthrough]
+
 # SALAMANDER
 ## Motivation
 Systems of interest have partially known dynamics. Unknown forces can lead to simulation biases, which basically means our model results are skewed. As we move toward relying more on autonomous systems in complex missions, it is important to be able to model these unknown forces and correct the base level of dynamics. Neural networks have been used to perform orbit prediction, but they are completely data driven which is data inefficient and the models are longer to train. 
