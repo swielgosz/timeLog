@@ -3,7 +3,14 @@
 [Reverse Mode Automatic Differentiation - 26 min](https://www.youtube.com/watch?v=EEbnprb_YTU)
 [MIT OpenCourseWare - Adjoint Differentiation of ODE Solutions 58 min](https://www.youtube.com/watch?v=cvBHoCAUkD4)
 [Parallel Computing and SciML - Chris Rackaukas 1 hr 36 min](https://www.youtube.com/watch?v=KCTfPyVIxpc)
-[Neur]
+[Neural ODE - Pullback/vJp/adjoint rule 1 hr 42 min](https://www.youtube.com/watch?v=u8NL6CwSoRg) - for ODE
+[Adjoint State Method for an ODE | Adjoint Sensitivity Analysis 42 min - Machine Learning & Simulation](https://www.youtube.com/watch?v=k6s2G5MZv-I) - more introductory
+
+Let's watch in the following order:
+1. Overview: [Reverse Mode Automatic Differentiation - 26 min](https://www.youtube.com/watch?v=EEbnprb_YTU)
+2. Adjoint Method: [Adjoint State Method for an ODE | Adjoint Sensitivity Analysis 42 min - Machine Learning & Simulation](https://www.youtube.com/watch?v=k6s2G5MZv-I) 
+3. Adjoint method for ODEs: [Parallel Computing and SciML - Chris Rackaukas 1 hr 36 min](https://www.youtube.com/watch?v=KCTfPyVIxpc)
+> **The adjoint method is the continuous-time formulation of reverse-mode automatic differentiation for differential equation solvers.**
 ## Neural ODE training difficulty and improvement – code repositories
 - [ ]  ANODE – Accurate gradients for Neural ODEs (2019)
 Paper: ANODE: Unconditionally Accurate Memory-Efficient Gradients for Neural ODEs
