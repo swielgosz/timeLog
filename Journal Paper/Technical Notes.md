@@ -47,6 +47,8 @@ Notes: Studies how adaptive solvers interact with training dynamics and stabilit
 
 ## Other videos/resources
 - https://www.youtube.com/watch?v=wTgYDg_zPcg[Neural ODE Code Walkthrough]
+- https://www.uu.nl/sites/default/files/an_introduction_to_scientific_modelling_with_neural_ODEs.pdf Patrick Kidger walkthrough to neural ODEs (corresponding video at https://www.youtube.com/watch?v=7QBLRzkMi4c)
+- 
 
 # SALAMANDER
 ## Motivation
