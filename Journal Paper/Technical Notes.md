@@ -1,4 +1,9 @@
 # February 10
+## Reverse mode auto diff
+[Reverse Mode Automatic Differentiation - 26 min](https://www.youtube.com/watch?v=EEbnprb_YTU)
+[MIT OpenCourseWare - Adjoint Differentiation of ODE Solutions 58 min](https://www.youtube.com/watch?v=cvBHoCAUkD4)
+[Parallel Computing and SciML - Chris Rackaukas 1 hr 36 min](https://www.youtube.com/watch?v=KCTfPyVIxpc)
+[Neur]
 ## Neural ODE training difficulty and improvement – code repositories
 - [ ]  ANODE – Accurate gradients for Neural ODEs (2019)
 Paper: ANODE: Unconditionally Accurate Memory-Efficient Gradients for Neural ODEs

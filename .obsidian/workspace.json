@@ -144,7 +144,7 @@
             }
           }
         ],
-        "currentTab": 8
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -294,10 +294,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f58cd3c607879e74",
+  "active": "98c9b0afab2dcad6",
   "lastOpenFiles": [
-    "Journal Paper/Technical Notes.md",
     "01 Spring 2026.md",
+    "Journal Paper/Technical Notes.md",
     "02 Advising Meetings.md",
     "Sensitivity Analysis.md",
     "Attachments/Pasted image 20260204130139.png",
