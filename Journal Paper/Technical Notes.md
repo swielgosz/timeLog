@@ -59,6 +59,8 @@ parameters:
   rtol: 0.000001
   atol: 0.00000001
 ```
+
+![[Pasted image 20260211123237.png]]
 # February 10
 ## Reverse mode auto diff
 [Reverse Mode Automatic Differentiation - 26 min](https://www.youtube.com/watch?v=EEbnprb_YTU)

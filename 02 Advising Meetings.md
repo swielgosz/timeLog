@@ -1,3 +1,67 @@
+# February 11
+Run id jrq509xt
+Segment length 18. no length strat:
+``` config
+wandb:
+  group: "segment-18-2-11"  # Change this to your desired group name
+
+data:
+  # dataset_name : ["complex_TBP_planar_1_train", "complex_TBP_planar_10_train", "complex_TBP_planar_100_train"]
+  dataset_name : ["complex_TBP_planar_10_train"]
+  # dataset_name : ["simple_TBP_planar_1_train","complex_TBP_planar_1_train","simple_TBP_planar_10_train","complex_TBP_planar_10_train","simple_TBP_planar_100_train","complex_TBP_planar_100_train"]
+  problem: '2BP'
+
+parameters:
+  # solver_stats_jacobian_debug: true
+  # solver_stats_frequency: 100   # log every N global steps
+  # solver_stats_samples: 5       
+  # solver_stats_jacobian: true
+  # solver_stats_jacobian_max_dim: 32
+  # # solver_stats_use_all_samples: true
+  # solver_stats_jacobian_eps: 1.0
+  # solver_stats_jacobian_percentiles: [5.0, 95.0]
+  # EXHAUSTIVE LENGTH STRATEGY
+  length_strategy:    [
+                        # [0.0, 0.1],
+                        # [0.0,1.0],[0.0,1.0],],
+                        [[0.0,1.0],]
+                      ]
+
+  lr_strategy: [[0.001, 0.0001]]
+  steps_strategy: [[500,500]]
+  segment_length_strategy: [[18,]]
+
+
+  width: [64]
+  depth: [2]
+  train_val_split: 1
+  batch_size: [256]
+  num_trajs: -1
+  seed: [2345]
+  # loss_fcn: "mean_squared_error"
+  loss_fcn: percent_error_plus_nmse
+  # loss_fcn: multi_step_rollout_percent_error_plus_nmse
+  # rollout_steps: 8        # optional, default = full segment
+  # rollout_stride: 1       # optional, default = 1
+
+  activation: [leaky_relu]
+  # activation: leaky_relu
+  # activation: elu
+
+  # feature_layer: [sph_4D_rinv_vel_loga_energy]
+  # feature_layer: [sph_4D_rinv_vel_logra]
+  feature_layer: [sph_4D_rinv_vel]
+  # output_layer: [mlp_4D_signed, mlp_4D_unit, mlp_4D_unit_softplus, mlp_4D_logmag_unit_exp]
+  output_layer: [mlp_4D_signed]
+  planar_constraint: true
+  
+
+  rtol: 0.000001
+  atol: 0.00000001
+```
+
+![[Pasted image 20260211123237.png]]
+![[Pasted image 20260211123308.png]]
 # February 4
 Program with Simon:
 - astrodynamics package - all relevant classes of orbits. Lyapunov, NRHO, resonant, maybe QPO and manifold. Don't need to write it from scratch - look at open source materials and make sure we have access to orbits we're interested in. Corresponding dynamics. Visualization. Simon will probably have orbit theory, I have more ML. Corresponding training pipelines. 
