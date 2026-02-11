@@ -62,8 +62,15 @@ parameters:
 
 ![[Pasted image 20260211123237.png]]
 ![[Pasted image 20260211123308.png]]
+![[Pasted image 20260211130433.png]]
+![[Pasted image 20260211130409.png]]
+
 ![[Pasted image 20260211125425.png]]
-![[Pasted image 20260211125440.png]]
+![[Pasted image 20260211130444.png]]
+
+--- 
+
+
 With length strat:
 7bwn7zzx
 ```
@@ -76,16 +83,19 @@ With length strat:
   lr_strategy: [[0.001, 0.001, 0.0001]]
   steps_strategy: [[200,200, 500 ]]
 ```
+![[Pasted image 20260211130545.png]]
+![[Pasted image 20260211130525.png]]
 ![[Pasted image 20260211130028.png]]
 ![[Pasted image 20260211130008.png]]
 ![[Pasted image 20260211130056.png]]
 ![[Pasted image 20260211130134.png]]
  
  ---
+
   
 
 No segmentation, using length strat:
-run id 
+run id aa9qd97n
 ```
 config
 wandb:
@@ -150,7 +160,11 @@ parameters:
 ![[Pasted image 20260211125026.png]]
 ![[Pasted image 20260211125046.png]]
 
+---
 
+segment length 4, no length sttat
+![[Pasted image 20260211130636.png]]
+![[Pasted image 20260211130625.png]]
 # February 4
 Program with Simon:
 - astrodynamics package - all relevant classes of orbits. Lyapunov, NRHO, resonant, maybe QPO and manifold. Don't need to write it from scratch - look at open source materials and make sure we have access to orbits we're interested in. Corresponding dynamics. Visualization. Simon will probably have orbit theory, I have more ML. Corresponding training pipelines. 
