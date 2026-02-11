@@ -144,7 +144,7 @@
             }
           }
         ],
-        "currentTab": 9
+        "currentTab": 8
       }
     ],
     "direction": "vertical"
@@ -294,8 +294,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "d494a9ea427fb1c7",
+  "active": "f58cd3c607879e74",
   "lastOpenFiles": [
+    "Untitled.md",
     "Journal Paper/Technical Notes.md",
     "01 Spring 2026.md",
     "Technical Notes/The Vanishing Gradient Problem for Stiff Neural Differential Equations.md",
@@ -306,7 +307,6 @@
     "Attachments/Pasted image 20260204130243.png",
     "Attachments/Pasted image 20260128125230.png",
     "Attachments/Pasted image 20260204123704.png",
-    "Untitled.md",
     "Attachments/Pasted image 20260203233745.png",
     "Archive/Research Notes.md",
     "Attachments/Pasted image 20260203215720.png",
