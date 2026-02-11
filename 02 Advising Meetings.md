@@ -1,5 +1,7 @@
 # February 11
 Look at baseline for reject steps - we should also compare tolerances 
+work on latent linear ODE - identify chaos and penalize things in terms of jacobian
+pivot to latent, regularized forms of neural ODEs
 
 Run id jrq509xt
 Segment length 18. no length strat:
