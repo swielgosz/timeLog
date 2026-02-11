@@ -1,4 +1,6 @@
 # February 11
+Look at baseline for reject steps - we should also compare tolerances 
+
 Run id jrq509xt
 Segment length 18. no length strat:
 ``` config
