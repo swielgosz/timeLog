@@ -162,9 +162,12 @@ parameters:
 
 ---
 
-segment length 4, no length sttat
-![[Pasted image 20260211130636.png]]
-![[Pasted image 20260211130625.png]]
+segment length 4, no length strat
+run id: 86ab7651
+
+ --- 
+ 
+
 # February 4
 Program with Simon:
 - astrodynamics package - all relevant classes of orbits. Lyapunov, NRHO, resonant, maybe QPO and manifold. Don't need to write it from scratch - look at open source materials and make sure we have access to orbits we're interested in. Corresponding dynamics. Visualization. Simon will probably have orbit theory, I have more ML. Corresponding training pipelines. 
