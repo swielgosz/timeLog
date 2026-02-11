@@ -1,5 +1,5 @@
 # February 11
-Run id 93vlhapi
+Run id jrq509xt
 Segment length 18. no length strat:
 ``` config
 wandb:
@@ -28,17 +28,15 @@ parameters:
                       ]
 
   lr_strategy: [[0.001, 0.0001]]
-  steps_strategy: [[1000,500]]
+  steps_strategy: [[500,500]]
   segment_length_strategy: [[18,]]
 
 
   width: [64]
   depth: [2]
   train_val_split: 1
-  batch_size: [128]
+  batch_size: [256]
   num_trajs: -1
-  # seed: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,]
-  # seed: [0,1,2,3,4]
   seed: [2345]
   # loss_fcn: "mean_squared_error"
   loss_fcn: percent_error_plus_nmse
