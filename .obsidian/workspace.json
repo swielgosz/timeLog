@@ -144,7 +144,7 @@
             }
           }
         ],
-        "currentTab": 8
+        "currentTab": 9
       }
     ],
     "direction": "vertical"
@@ -294,7 +294,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f58cd3c607879e74",
+  "active": "d494a9ea427fb1c7",
   "lastOpenFiles": [
     "Journal Paper/Technical Notes.md",
     "01 Spring 2026.md",

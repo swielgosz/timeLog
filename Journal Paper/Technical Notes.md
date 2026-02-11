@@ -11,6 +11,11 @@ Let's watch in the following order:
 2. Adjoint Method: [Adjoint State Method for an ODE | Adjoint Sensitivity Analysis 42 min - Machine Learning & Simulation](https://www.youtube.com/watch?v=k6s2G5MZv-I) 
 3. Adjoint method for ODEs: [Parallel Computing and SciML - Chris Rackaukas 1 hr 36 min](https://www.youtube.com/watch?v=KCTfPyVIxpc)
 > **The adjoint method is the continuous-time formulation of reverse-mode automatic differentiation for differential equation solvers.**
+
+### Reverse Mode Automatic Differentiation - Nathan Sprague
+Side tangent: Reverse-mode autodiff is neither opt-disc nor disc-opt by itself. Opt-disc vs disc-opt are about what computational graph you differentiate through when ODE solvers are involved.
+Reverse-mode autodiff is backprop through a computation graph: $\frac{\partial L}{\partial \theta}$ computed efficiently when you have many parameters and a scalar loss. It does not decide whether you differentiate through an ODE solver, use adjoints, whether solver is continuous or discrete.
+Disc-opt pipelin
 ## Neural ODE training difficulty and improvement – code repositories
 - [ ]  ANODE – Accurate gradients for Neural ODEs (2019)
 Paper: ANODE: Unconditionally Accurate Memory-Efficient Gradients for Neural ODEs
