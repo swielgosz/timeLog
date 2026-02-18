@@ -21,7 +21,10 @@ Prescriptive config, segmentation:
 ![[5de52ce2-36b7-4ea5-956a-7c28d42a7ac7.pdf]]
 ![[cf4796d9-aba4-4ba3-bd80-4a44b61e2312.pdf]]
 
-run_id mnckgvj1 is same as above but with kl weight = 1e-2
+Same as above but not segmentation:
+![[Pasted image 20260218124017.png]]
+
+
 # February 11
 Look at baseline for reject steps - we should also compare tolerances 
 work on latent linear ODE - identify chaos and penalize things in terms of jacobian
