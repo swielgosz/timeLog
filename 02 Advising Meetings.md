@@ -1,4 +1,12 @@
 # February 18
+new training losses:
+- `percent _error_plus_nmse` 7amlq8af
+- `steer_temporal` 9ox59bvo
+- `optimal_transport` csxlmnxv
+- `jacobian_norm` e68r5zxc
+- `l2_weight_norm` jph6m5ep
+
+
 run id lr8kkoly 
 Prescriptive config, segmentation:
 ``` 
