@@ -93,12 +93,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 Spring 2026.md",
+                "file": "Latent and UDE codes/Training Scripts.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01 Spring 2026"
+              "title": "Training Scripts"
             }
           },
           {
@@ -116,7 +116,7 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -158,7 +158,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tmp/ray",
+                "query": "train_latent",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -169,7 +169,8 @@
               "title": "Search"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
@@ -266,11 +267,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f58cd3c607879e74",
+  "active": "5519fa7817a0d99c",
   "lastOpenFiles": [
-    "Archive/Fall 2025.md",
-    "cleaning code/backup.md",
+    "Latent and UDE codes/Training Scripts.md",
     "01 Spring 2026.md",
+    "cleaning code/backup.md",
+    "cleaning code/Cleaning Code.md",
+    "Archive/Fall 2025.md",
     "02 Advising Meetings.md",
     "Attachments/Pasted image 20260213114657.png",
     "Attachments/Pasted image 20260213114635.png",
@@ -290,7 +293,6 @@
     "Software Tips.md",
     "Technical Notes/Latent ODEs.md",
     "Reverse-mode automatic differentiation of ODE solutions.md",
-    "cleaning code/Cleaning Code.md",
     "metrics.md",
     "Resources.md",
     "Latent and UDE codes/Data generation.md",
@@ -298,7 +300,6 @@
     "Journal Paper/Untitled.md",
     "Untitled 1.md",
     "Untitled 2.md",
-    "Latent and UDE codes/Training Scripts.md",
     "Latent and UDE codes",
     "Lit Review Color Code.md",
     "Journal Paper",

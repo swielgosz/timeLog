@@ -874,4 +874,319 @@ if __name__ == "__main__":
         plt.show()
 ```
 
-``
+## HeatMapExperiment
+``` python
+import os
+from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from typing import Any, Callable, Dict, List
+
+import jax
+import jax.numpy as jnp
+import numpy as np
+from jaxtyping import Array
+from mldsml.experimentBase import ExperimentBase
+from tqdm import tqdm
+
+from neuralODE.neuralODE import NeuralODE
+from neuralODE.normalization import NormalizeLEO2BP
+
+# neuralODE_path = neuralODE.__path__[0]
+
+
+class HeatMapExperiment(ExperimentBase):
+    """
+    Experiment to evaluate a Neural ODE model's performance across a grid of orbits
+    with different shapes and orientations, generating data for heat map visualization.
+
+    This experiment:
+    1. Evaluates a model on a grid of orbits of varying (sma, eccentricity)
+    2. Calculates acceleration error metrics for each orbit
+    3. Aggregates results by (sma, eccentricity) combinations
+    4. Prepares data suitable for heat map visualization
+    """
+
+    def __init__(
+        self,
+        model: NeuralODE,
+        true_dynamics: Callable[[float, Array], Array],
+        dataset_name: str,
+        num_workers: int | None = None,
+        **kwargs,
+    ) -> None:
+        # Ensure model is a NeuralODE instance
+        if not isinstance(model, NeuralODE):
+            raise TypeError("model must be an instance of NeuralODE")
+
+        self.model = model
+        self.true_dynamics = true_dynamics
+        self.dataset_name = dataset_name
+        self.num_workers = num_workers
+
+        # Load the dataset
+        self.dataset = self._load_dataset(dataset_name)
+
+        super().__init__(
+            model=model,
+            true_dynamics=true_dynamics,
+            dataset_name=dataset_name,
+            **kwargs,
+        )
+
+    def _load_dataset(self, dataset_name: str) -> Dict:
+        """Load and normalize the dataset"""
+        try:
+            # Load dataset from wandb or local file
+            # data_path = f"/workspaces/neuralODEs/files/datasets/{dataset_name}.json"
+            # data_dict = load_data(data_path)
+            from mldsml.wandb_utils import load_dataset
+
+            data_dict = load_dataset(
+                "2BP_grid_test",
+                version="latest",
+                project="neuralODEs",
+                entity="mlds-lab",
+            )
+
+            # Normalize dataset for neural ODE
+            normalizer = NormalizeLEO2BP()
+            data_dict_normalized = normalizer.normalize_dataset(data_dict)
+
+            return data_dict_normalized
+        except Exception as e:
+            raise ValueError(f"Failed to load dataset {dataset_name}: {str(e)}")
+
+    def generate_data(self) -> Dict[str, Any]:
+        """
+        Evaluate the model on all orbits in the dataset and
+        calculate acceleration error metrics.
+        """
+        # Create storage for results
+        orbit_results = []
+
+        orbit_items = list(self.dataset.items())
+        max_workers = self.num_workers or min(32, (os.cpu_count() or 1))
+
+        if max_workers > 1:
+            with ThreadPoolExecutor(max_workers=max_workers) as executor:
+                futures = [
+                    executor.submit(self._process_orbit, orbit_key, orbit_data)
+                    for orbit_key, orbit_data in orbit_items
+                ]
+                for future in tqdm(
+                    as_completed(futures),
+                    total=len(futures),
+                    desc="Evaluating orbits",
+                ):
+                    orbit_results.append(future.result())
+        else:
+            for orbit_key, orbit_data in tqdm(
+                orbit_items,
+                desc="Evaluating orbits",
+            ):
+                orbit_results.append(self._process_orbit(orbit_key, orbit_data))
+
+        # Aggregate results by semi-major axis and eccentricity
+        heat_map_data = self._aggregate_results(orbit_results)
+
+        return {
+            "orbit_results": orbit_results,
+            "heat_map_data": heat_map_data,
+        }
+
+    def _process_orbit(
+        self, orbit_key: str, orbit_data: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        # Extract metadata and trajectory data
+        metadata = orbit_data.get("metadata", {})
+        t = jnp.array(orbit_data["t"])
+        y = jnp.array(orbit_data["y"])
+
+        # Get state dimension
+        n_dim = y.shape[0] // 2
+
+        # Calculate accelerations at each point along the true trajectory
+        true_acc = jax.vmap(lambda ti, yi: self.true_dynamics(ti, yi)[n_dim:])(
+            t,
+            y.T,
+        )
+
+        # Calculate predicted accelerations at the same points
+        pred_acc = jax.vmap(lambda ti, yi: self.model.func(ti, yi)[n_dim:])(
+            t,
+            y.T,
+        )
+
+        # Calculate acceleration residuals and error metrics
+        acc_residuals = true_acc - pred_acc
+        error_metrics = self._compute_error_metrics(true_acc, pred_acc)
+
+        # Store results for this orbit
+        return {
+            "orbit_key": orbit_key,
+            "sma": metadata.get("sma"),
+            "eccentricity": metadata.get("eccentricity"),
+            "inclination": metadata.get("inclination"),
+            "raan": metadata.get("raan"),
+            "argument_of_periapsis": metadata.get("argument_of_periapsis"),
+            "true_anomaly": metadata.get("true_anomaly"),
+            "time": t.tolist(),
+            "acc_residuals": acc_residuals.tolist(),
+            **error_metrics,
+        }
+
+    def _compute_error_metrics(
+        self,
+        true_acc: Array,
+        pred_acc: Array,
+    ) -> Dict[str, float]:
+        """
+        Compute various error metrics between true and predicted accelerations.
+        Denormalizes accelerations to physical units first.
+        """
+        # Create normalizer to get scaling factors
+        normalizer = NormalizeLEO2BP()
+
+        # Calculate acceleration scaling factor (v_char / t_char)
+        acc_scale = normalizer.v_char / normalizer.t_char
+
+        # Denormalize accelerations to physical units
+        true_acc_physical = true_acc * acc_scale
+        pred_acc_physical = pred_acc * acc_scale
+
+        # Calculate residuals in physical units
+        residuals = jnp.abs(true_acc_physical - pred_acc_physical)
+
+        # Calculate magnitude of acceleration vectors
+        true_acc_norms = jnp.linalg.norm(true_acc_physical, axis=1)
+        pred_acc_norms = jnp.linalg.norm(pred_acc_physical, axis=1)
+        residual_norms = jnp.linalg.norm(residuals, axis=1)
+
+        # Avoid division by zero for percent error calculation
+        safe_true_acc_norms = jnp.where(true_acc_norms > 1e-10, true_acc_norms, 1e-10)
+        percent_errors = (residual_norms / safe_true_acc_norms) * 100.0
+
+        # --- Element-wise absolute relative error ---
+        # Shape: (timesteps, 3)
+        safe_true_acc_elem = jnp.where(
+            jnp.abs(true_acc_physical) > 1e-10,
+            jnp.abs(true_acc_physical),
+            1e-10,
+        )
+        elem_abs_rel_error = residuals / safe_true_acc_elem  # shape (timesteps, 3)
+        mean_elem_abs_rel_error = float(jnp.mean(elem_abs_rel_error))
+        max_elem_abs_rel_error = float(jnp.max(elem_abs_rel_error))
+
+        # Mean absolute error of acceleration norms
+        mean_abs_error_acc_norm = float(
+            jnp.mean(jnp.abs(true_acc_norms - pred_acc_norms)),
+        )
+
+        return {
+            "percent_error": percent_errors,  # <-- new metric
+        }
+
+    def _aggregate_results(self, orbit_results: List[Dict]) -> Dict[str, Any]:
+        """
+        Aggregate results by semi-major axis and eccentricity for heat map visualization.
+
+        Args:
+            orbit_results: List of per-orbit results
+
+        Returns:
+            Dict with heat map data
+        """
+        # Extract unique values of semi-major axis and eccentricity
+        sma_values = sorted(list(set(r["sma"] for r in orbit_results)))
+        ecc_values = sorted(list(set(r["eccentricity"] for r in orbit_results)))
+
+        # Create dictionaries to store aggregated error metrics
+        metrics = [
+            "percent_error",  # <-- new metric
+        ]
+
+        # Initialize dictionary to collect results
+        aggregated = defaultdict(list)
+
+        # Group results by (sma, ecc) combination
+        for r in orbit_results:
+            key = (r["sma"], r["eccentricity"])
+            aggregated[key].append({m: r[m] for m in metrics})
+
+        # Create validity mask (True for valid cells)
+        valid_mask = np.zeros((len(sma_values), len(ecc_values)), dtype=bool)
+
+        # First, mark which combinations are physically possible
+        for i, sma in enumerate(sma_values):
+            for j, ecc in enumerate(ecc_values):
+                # Check if orbit would crash into Earth
+                perigee = sma * (1.0 - ecc)
+                if perigee > 6371000:  # Earth radius in meters
+                    valid_mask[i, j] = True
+
+        # Update valid_mask based on which combinations actually have data
+        for sma, ecc in aggregated.keys():
+            sma_idx = sma_values.index(sma)
+            ecc_idx = ecc_values.index(ecc)
+            valid_mask[sma_idx, ecc_idx] = True
+
+        # Calculate average metrics for each (sma, ecc) combination
+        heat_maps = {}
+        count_map = np.zeros((len(sma_values), len(ecc_values)))
+
+        for metric in metrics:
+            # Initialize with NaNs to represent invalid orbits
+            heat_map = np.full((len(sma_values), len(ecc_values)), np.nan)
+
+            for (sma, ecc), results in aggregated.items():
+                sma_idx = sma_values.index(sma)
+                ecc_idx = ecc_values.index(ecc)
+
+                # Average the metric over all orientations with this (sma, ecc)
+                metric_values = [r[metric] for r in results if metric in r]
+                if metric_values:  # Only update if there are values
+                    heat_map[sma_idx, ecc_idx] = np.mean(metric_values)
+                    count_map[sma_idx, ecc_idx] = len(metric_values)
+
+            heat_maps[metric] = heat_map
+
+        return {
+            "sma_values": sma_values,
+            "ecc_values": ecc_values,
+            "heat_maps": heat_maps,
+            "counts": count_map.tolist(),
+            "valid_mask": valid_mask.tolist(),  # Include the validity mask
+        }
+
+    def upload(self, run_id: str) -> None:
+        """Upload experiment data to wandb"""
+        import json
+
+        import wandb
+
+        try:
+            # Create artifact for the experiment data
+            with wandb.init(id=run_id, resume="allow") as resumed_run:
+                artifact = wandb.Artifact(
+                    f"heatmap_experiment_{self.dataset_name}",
+                    type="experiment_data",
+                )
+
+                # Convert data to JSON-serializable format
+                json_data = {
+                    "heat_map_data": self.data["heat_map_data"],
+                    # Don't include full orbit results to save space
+                    # "orbit_results": self.data["orbit_results"]
+                }
+
+                # Save as JSON file in the artifact
+                with artifact.new_file("heatmap_data.json") as f:
+                    json.dump(json_data, f, default=str)
+
+                # Log the artifact
+                resumed_run.log_artifact(artifact)
+
+                print(f"Heat map data uploaded to wandb run {run_id}")
+        except Exception as e:
+            print(f"Error uploading heat map data: {str(e)}")
+```
