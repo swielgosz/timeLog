@@ -1,5 +1,27 @@
 # February 18
+run id lr8kkoly 
+Prescriptive config, segmentation:
+``` 
+        "length_strategy": [
+            [0.0, 0.1],
+            [0.0, 0.25],
+            [0.00, 0.5],
+            [0.0, 1.0],
+            [0.0, 1.0],
+        ],
+        "segment_length_strategy": [40],
+        "steps_strategy": [500, 500, 500, 500, 1000],  # None,
+        "lr_strategy": [1e-3, 1e-3, 1e-3, 1e-3, 1e-4],
+        
+        kl = 1e-3
+```
 
+![[media_images_reconstruction_2999_e3139021f37575ad467e.png]]
+![[6f0c636b-eea0-4685-980e-7efaf1e66405.pdf]]
+![[5de52ce2-36b7-4ea5-956a-7c28d42a7ac7.pdf]]
+![[cf4796d9-aba4-4ba3-bd80-4a44b61e2312.pdf]]
+
+run_id mnckgvj1 is same as above but with kl weight = 1e-2
 # February 11
 Look at baseline for reject steps - we should also compare tolerances 
 work on latent linear ODE - identify chaos and penalize things in terms of jacobian
