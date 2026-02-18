@@ -1,3 +1,5 @@
+# February 18
+
 # February 11
 Look at baseline for reject steps - we should also compare tolerances 
 work on latent linear ODE - identify chaos and penalize things in terms of jacobian
