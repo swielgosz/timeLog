@@ -16,13 +16,16 @@ Prescriptive config, segmentation:
         kl = 1e-3
 ```
 
-![[media_images_reconstruction_2999_e3139021f37575ad467e.png]]
-![[6f0c636b-eea0-4685-980e-7efaf1e66405.pdf]]
-![[5de52ce2-36b7-4ea5-956a-7c28d42a7ac7.pdf]]
-![[cf4796d9-aba4-4ba3-bd80-4a44b61e2312.pdf]]
+![[media_images_reconstruction_2999_e3139021f37575ad467e.png|500]]
 
 Same as above but not segmentation:
-![[Pasted image 20260218124017.png]]
+![[Pasted image 20260218124017.png|500]]
+
+![[W&B Chart 2_18_2026, 12_41_37 PM.png|500]]
+
+![[W&B Chart 2_18_2026, 12_43_25 PM.png|500]]
+
+![[W&B Chart 2_18_2026, 12_43_41 PM.png|500]]
 
 
 # February 11
