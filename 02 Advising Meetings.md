@@ -6,6 +6,50 @@ new training losses:
 - `jacobian_norm` e68r5zxc
 - `l2_weight_norm` jph6m5ep
 
+## Seeding followup
+
+## Stability
+steer_temporal
+![[Pasted image 20260218132155.png]]
+percent_error_plus_nmse![[accel_field_with_orbits_7amlq8af.png]]
+
+![[jacobian_orbit_eig_hist_7amlq8af.png]]
+
+![[jacobian_orbit_xy_heatmap_7amlq8af.png]]
+
+![[solver_dt_vs_jac_7amlq8af.png]]
+
+optimal_transport
+![[accel_field_with_orbits_csxlmnxv.png]]
+
+![[jacobian_orbit_eig_hist_csxlmnxv.png]]
+
+![[jacobian_orbit_xy_heatmap_csxlmnxv.png]]
+
+![[solver_dt_orbit_grid_csxlmnxv.png]]
+
+![[solver_dt_vs_jac_csxlmnxv.png]]
+jacobian_norm
+![[accel_field_with_orbits_e68r5zxc.png]]
+
+![[jacobian_orbit_eig_hist_e68r5zxc.png]]
+
+![[jacobian_orbit_xy_heatmap_e68r5zxc.png]]
+
+![[solver_dt_orbit_grid_e68r5zxc.png]]
+
+![[solver_dt_vs_jac_e68r5zxc.png]]
+l2_weight_norm
+![[accel_field_with_orbits_jph6m5ep.png|500]]
+
+![[jacobian_orbit_eig_hist_jph6m5ep.png|750]]
+
+![[jacobian_orbit_xy_heatmap_jph6m5ep.png|1000]]
+
+![[solver_dt_orbit_grid_jph6m5ep.png|750]]
+
+![[solver_dt_vs_jac_jph6m5ep.png|750]]
+
 
 run id lr8kkoly 
 Prescriptive config, segmentation:
