@@ -270,4 +270,12 @@ h_0^{ODE} → (Neural ODE) → h(t): the Neural ODE integrates dh/dt = f_theta(h
 h(t) → (hidden_to_data) → y_hat(t): at each saved time point, the linear hidden_to_data layer projects h(t) from the hidden space down into the observation space, giving you the reconstructed observation y_hat(t). These are compared against the actual observations x to compute the reconstruction loss in the ELBO.
 
 --- 
-D
+hidden_size is the dimension of the GRU's hidden state and also the dimension of the space where the Neural ODE dynamics live. It needs to be large enough to represent complex dynamics — in Kidger's example it's set to 16. This is the workhorse space where most of the computation happens.
+
+latent_size is the dimension of the bottleneck latent space z. This is the VAE's compressed representation — the space you sample z_0 from, and the space the KL divergence is computed in. It's typically smaller than hidden_size because it's meant to be a compact, regularized summary of the initial condition. In Kidger's example it's also 16, but in more complex problems you'd often make it smaller than hidden_size to force the model to compress information.
+
+The relationship between them is: the encoder compresses all the observations down into a latent_size dimensional distribution (via hidden_to_latent), you sample a latent_size vector z_0, then latent_to_hidden expands it back up into a hidden_size dimensional vector h_0 to initialize the ODE. The latent space is the information bottleneck, and the hidden space is where the dynamics are rich enough to generate realistic trajectories.
+
+So loosely: latent_size controls how compressed your initial condition representation is, and hidden_size controls how expressive your dynamics model is.
+
+---
