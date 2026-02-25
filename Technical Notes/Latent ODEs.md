@@ -125,11 +125,27 @@ An autoregressive model says: I want to learn each of those conditional distribu
 So the big picture is: the joint probability of a whole sequence can be broken into a product of one-step-ahead predictions, and a recurrent model (RNN or ODE-RNN) is a natural way to parameterize those predictions because it maintains a running summary of history.
 
 ### 3.2 Latent ODEs: a Latent-variable Construction
+Intro information:
+
 We've been discussing the autoregressive approach. In that framing, the ODE-RNN directly models the conditional distributions p(x_i | x_{i-1}, ..., x_0) by maintaining a hidden state that summarizes history and predicting the next observation from it. There's no latent variable — the hidden state is directly tied to the observations.
 
 The latent variable construction is a different and more powerful approach. Instead of directly modeling the observations autoregressively, you postulate that there exists some underlying latent state z that evolves continuously according to an ODE, and the observations x_i are noisy projections of that latent state. This is the "Latent ODE" model of the paper's title, and it's more in the spirit of a variational autoencoder — you have an encoder that infers the initial latent state z_0 from the data, an ODE that evolves z_0 forward in time, and a decoder that maps the latent state to observations.
 
 The key conceptual difference is that in the autoregressive case the model is generative in a sequential, causal way — it predicts one step ahead at a time. In the latent variable case, the model posits a clean underlying dynamical system that generates all the observations, which is a much more natural fit for physical systems like orbital mechanics where you believe there really is a true underlying continuous trajectory being noisily observed.
+
+
+
+
+In a latent variable model, you have observed data x and a latent variable z that you believe generated x. What you want is the posterior p(z | x) — that is, "given the data I observed, what is the distribution over latent states that could have produced it?" This tells you what the underlying state probably was.
+
+The problem is that computing p(z | x) exactly requires evaluating p(z | x) = p(x | z) * p(z) / p(x), and the denominator p(x) requires integrating over all possible values of z, which is generally intractable for complex models.
+
+So instead you introduce an approximate posterior q_phi(z | x), which is a simpler, tractable distribution (usually Gaussian) that you train to be as close as possible to the true posterior p(z | x). This is the "approximation" — you're not computing the true posterior, you're finding the best approximation to it within some family of distributions. The parameters phi are learned, typically via an encoder network that takes x as input and outputs the parameters of the Gaussian (a mean and variance).
+
+In the context of the Latent ODE paper, the approximate posterior is over the initial latent state z_0. The encoder (which is actually an ODE-RNN running backwards over the observations) looks at all the data and produces a distribution q_phi(z_0 | x_0, ..., x_n). You then sample z_0 from that distribution, run it forward through the ODE, and decode. The training objective pushes q_phi to be close to the true posterior while also making the reconstructions accurate — this is the standard variational autoencoder (VAE) framework.
+
+
+
 
 **Why don't we use the autoregressive method? Could we still propagate dynamics forward in time?**
 Good question. In the autoregressive case you can propagate forward by feeding predictions back in as inputs — you predict x_i, treat it as an observation, use it to update the hidden state, then predict x_{i+1}, and so on. This is called autoregressive rollout.
@@ -138,3 +154,17 @@ The problem is that errors accumulate. Each prediction is slightly wrong, and wh
 
 This is actually one of the key motivations for the latent variable construction in the paper. In the Latent ODE, you infer z_0 from the data once, then let the ODE propagate it forward continuously. There's no feedback of noisy predictions — the ODE just integrates forward cleanly, and the decoder reads off observations wherever you want them. This makes long-horizon propagation much more stable, which for your astrodynamics application is probably very important since you'd want to propagate orbits over many revolutions.
 
+
+The authors use an ODE-RNN in their latent ODE model to find an approximate posterior from which to sample the initial condition, yes?
+Yes, exactly. The ODE-RNN is used as the encoder — it runs backwards over the observations and produces the parameters of the approximate posterior q_phi(z_0 | x_0, ..., x_n), which is typically a Gaussian with some mean and variance. You then sample an initial latent state z_0 from that distribution, run it forward through the Latent ODE, and decode the latent states into observations.
+
+So the ODE-RNN in this context isn't doing the dynamics propagation — it's doing inference. It's looking at all the irregularly-sampled observations and summarizing them into a distribution over plausible initial conditions. The actual forward propagation is handled by a separate Neural ODE operating in latent space.
+
+![[Pasted image 20260224230028.png]]
+On the left (the encoder), the wavy lines between the GRU updates represent the ODE being integrated between observations. The waves look different from each other, but that's not because different ODEs are being used — it's because the hidden state is at a different point in state space each time, so the same vector field f_theta produces different trajectories depending on where you are. The ODE is the same function, it's just being evaluated along different parts of the state space with different time gaps.
+
+Think of it like a river current — the same underlying flow field governs everything, but a leaf dropped at different points will trace out a different path because it starts in a different location.
+
+The GRU boxes are then the observation update steps, where each incoming x_i corrects the hidden state. So the sequence runs right to left (backwards in time), alternating between ODE propagation and GRU updates, until you've processed all observations and output the mean mu and variance sigma of q(z_0 | x_0, ..., x_N).
+
+On the right (the decoder), you sample z_0, then run a single forward ODE solve from t_0 to t_N using the same learned dynamics f, reading off latent states z_1, z_i, z_N at the observation times and decoding them to reconstructions x_hat.
