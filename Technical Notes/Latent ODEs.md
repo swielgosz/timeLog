@@ -201,3 +201,17 @@ The two terms are in tension. The reconstruction term wants the encoder to produ
 The decoder ODE is the Neural ODE that learns the dynamics in latent space. It takes z_0 as an initial condition and integrates forward using a learned vector field f_theta to produce z_1, z_i, ..., z_N at whatever time points you want. This is the heart of the model — it's the part that's learning a continuous, smooth dynamical system in latent space that generates the data.
 
 In your astrodynamics context, this is the part that would be learning something analogous to orbital mechanics, just operating in a learned latent space rather than directly in Cartesian coordinates.
+
+**Differences between Patrick Kidger and the paper**
+The biggest one is in the encoder. In the paper, the encoder is a proper ODE-RNN — it alternates between ODE steps and GRU updates as it runs backwards through the observations. In Kidger's implementation, the encoder is just a plain GRU with no ODE between observations. You can see this in the _latent method — it simply loops backwards through the data calling rnn_cell at each observation without any ODE integration in between. This simplification means the encoder doesn't explicitly model the continuous-time dynamics between observations during inference, but it's simpler to implement and often works fine in practice.
+
+The decoder follows the same framework as the paper. latent_to_hidden maps z_0 into the initial hidden state, then diffeqsolve integrates the learned vector field forward, and hidden_to_data decodes the latent states into observations at each time point.
+
+One other interesting detail is that Kidger concatenates the time t directly onto each observation as an extra input to the GRU (data_size + 1 in the GRU input size). This is a way of giving the encoder some awareness of the timing of observations even without the ODE between steps.
+
+The loss function is also the standard ELBO — reconstruction loss plus KL divergence — consistent with the paper.
+
+So in summary: same decoder and same training objective as the paper, but a simplified encoder that drops the ODE-RNN in favor of a plain GRU with time concatenated as a feature.
+
+From his thesis:
+"Special cases of neural CDEs In light of this, there have now been several proposals in which the hidden state of an RNN is updated in continuous time between observations; popular examples are GRU-D or ODE-RNNs [Che+18a; RCD19; De +19]. These are special cases or discretisations of neural CDEs. (Exercise for the reader!"
