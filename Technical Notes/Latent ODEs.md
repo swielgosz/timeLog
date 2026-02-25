@@ -112,4 +112,29 @@ The intuition is a two-phase cycle repeating at each observation: first predict 
 
 In your 2BP/CR3BP setting, the ODE step could encode meaningful dynamics rather than just being a black box — the hidden state between observations evolves according to learned orbital mechanics, and the RNN step corrects it when new measurements come in. This is very natural for astrodynamics where you might have sparse or irregular tracking data.
 
-"Autoregressive models make a one-step-ahead prediction conditioned on the history of observations, i.e. they factor the joint density p(x) = ∏  i pθ(xi|xi−1, . . . , x0). As in standard RNNs, we can use  an ODE-RNN to specify the conditional distributions pθ(xi|xi−1...x0) (Algorithm 1)."
+"Autoregressive models make a one-step-ahead prediction conditioned on the history of observations, i.e. they factor the joint density p(x) = ∏  i pθ(xi|xi−1, . . . , x0). As in standard RNNs, we can use  an ODE-RNN to specify the conditional distributions pθ(xi|xi−1...x0) (Algorithm 1)." meaning:
+
+Say you have a sequence of observations x_0, x_1, x_2, ..., x_n — for example, a time series of satellite positions. The joint density p(x) is simply the probability of observing that entire sequence together. It answers the question: "how likely is this whole trajectory?"
+
+A conditional distribution p(x_i | x_{i-1}, ..., x_0) is the probability of the next observation x_i given everything you've seen so far. It answers: "given the history of the trajectory up to now, how likely is the next observation to be x_i?"
+
+The key identity is just the chain rule of probability. You can always decompose a joint probability over a sequence as p(x) = p(x_0) * p(x_1 | x_0) * p(x_2 | x_1, x_0) * ..., which is written compactly as p(x) = prod_i p_theta(x_i | x_{i-1}, ..., x_0). This is not an assumption — it's always exactly true by the rules of probability. The product just means you're multiplying together the probability of each observation given all previous ones.
+
+An autoregressive model says: I want to learn each of those conditional distributions p_theta(x_i | x_{i-1}, ..., x_0). But storing the full history at every step is expensive, so instead you compress the history into a hidden state h_{i-1} and approximate p_theta(x_i | x_{i-1}, ..., x_0) ≈ p_theta(x_i | h_{i-1}). This is exactly what an RNN does — the hidden state is a lossy summary of the history, and you use it to predict the next observation. The ODE-RNN just replaces the discrete hidden state transition with a continuous ODE between observations, which is especially useful when the time gaps are irregular.
+
+So the big picture is: the joint probability of a whole sequence can be broken into a product of one-step-ahead predictions, and a recurrent model (RNN or ODE-RNN) is a natural way to parameterize those predictions because it maintains a running summary of history.
+
+### 3.2 Latent ODEs: a Latent-variable Construction
+We've been discussing the autoregressive approach. In that framing, the ODE-RNN directly models the conditional distributions p(x_i | x_{i-1}, ..., x_0) by maintaining a hidden state that summarizes history and predicting the next observation from it. There's no latent variable — the hidden state is directly tied to the observations.
+
+The latent variable construction is a different and more powerful approach. Instead of directly modeling the observations autoregressively, you postulate that there exists some underlying latent state z that evolves continuously according to an ODE, and the observations x_i are noisy projections of that latent state. This is the "Latent ODE" model of the paper's title, and it's more in the spirit of a variational autoencoder — you have an encoder that infers the initial latent state z_0 from the data, an ODE that evolves z_0 forward in time, and a decoder that maps the latent state to observations.
+
+The key conceptual difference is that in the autoregressive case the model is generative in a sequential, causal way — it predicts one step ahead at a time. In the latent variable case, the model posits a clean underlying dynamical system that generates all the observations, which is a much more natural fit for physical systems like orbital mechanics where you believe there really is a true underlying continuous trajectory being noisily observed.
+
+**Why don't we use the autoregressive method? Could we still propagate dynamics forward in time?**
+Good question. In the autoregressive case you can propagate forward by feeding predictions back in as inputs — you predict x_i, treat it as an observation, use it to update the hidden state, then predict x_{i+1}, and so on. This is called autoregressive rollout.
+
+The problem is that errors accumulate. Each prediction is slightly wrong, and when you feed that wrong prediction back in as if it were a real observation, the next prediction is conditioned on corrupted input. Over many steps the errors compound and the trajectory drifts. This is sometimes called exposure bias — during training the model always sees real observations, but at inference time it sees its own (imperfect) predictions.
+
+This is actually one of the key motivations for the latent variable construction in the paper. In the Latent ODE, you infer z_0 from the data once, then let the ODE propagate it forward continuously. There's no feedback of noisy predictions — the ODE just integrates forward cleanly, and the decoder reads off observations wherever you want them. This makes long-horizon propagation much more stable, which for your astrodynamics application is probably very important since you'd want to propagate orbits over many revolutions.
+
