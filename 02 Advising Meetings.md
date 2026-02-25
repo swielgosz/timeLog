@@ -2,6 +2,12 @@
 Periodic orbits - continuation, differential correction, multiple shooting, etc. Can we apply those tools to the phase space learned by latentODEs. 
 What if we lift dynamics to latent space that is larger, candidate transfers maybe. 
 Example - doing transfer from L1 to L2 using intersection of Poincare maps. 
+Latent ODEs might break - for example we only change delta v irl but there is coupling between where you are and where to actuate. 
+Look for periodic orbits. 
+Continue known periodic orbits in latent space and see what happens.
+After generating a large number of these trajectories (all families, not just lyapunov). see if we can connect outputs with differential correct and enforce periodicity in the latent space. 
+/github/copilot/instructions
+include in agents file that agent is responsible for writing its own research notes. Use asked me for X, I tried this, it didn't work so I did this. e.g. transfers aren't conecting and I want to know why. tell it area where you think issue is, 
 
 Tested on separate datasets:
 ![[Pasted image 20260225131101.png]]
