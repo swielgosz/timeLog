@@ -10,6 +10,7 @@ After generating a large number of these trajectories (all families, not just ly
 include in agents file that agent is responsible for writing its own research notes. Use asked me for X, I tried this, it didn't work so I did this. e.g. transfers aren't conecting and I want to know why. tell it area where you think issue is, 
 train latent ODE
 look at eigenvectors - positive eigenvalue will have tangential trajectory?
+confirm lessons learned on ASC dataset - WRITE THIS DOWN
 
 Tested on separate datasets:
 ![[Pasted image 20260225131101.png]]
