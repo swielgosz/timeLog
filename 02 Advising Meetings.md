@@ -3,8 +3,9 @@ Tested on separate datasets:
 ![[Pasted image 20260225131101.png]]
 ![[Pasted image 20260225131228.png]]
 
-Testing on train:
-
+Testing on training dataset:
+![[Pasted image 20260225132349.png]]
+![[Pasted image 20260225132359.png]]
 # February 18
 new training losses:
 - `percent _error_plus_nmse` 7amlq8af
