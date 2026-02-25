@@ -13,12 +13,24 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Technical Notes/Latent ODEs.md",
+                "file": "02 Advising Meetings.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Latent ODEs"
+              "title": "02 Advising Meetings"
+            }
+          },
+          {
+            "id": "ca1aa80a5b0585af",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "Attachments/Pasted image 20260225131101.png"
+              },
+              "icon": "lucide-image",
+              "title": "Pasted image 20260225131101"
             }
           },
           {
@@ -267,12 +279,15 @@
   },
   "active": "e8c011cc58a546a5",
   "lastOpenFiles": [
+    "Attachments/Pasted image 20260225131228.png",
+    "Attachments/Pasted image 20260225131101.png",
+    "02 Advising Meetings.md",
+    "Technical Notes/Latent ODEs.md",
     "Attachments/Pasted image 20260224230028.png",
     "Technical Notes/3BP Lectures Shane Ross.md",
     "Journal Paper/Technical Notes.md",
     "01 Spring 2026.md",
     "Attachments/Pasted image 20260204130139.png",
-    "02 Advising Meetings.md",
     "Attachments/Pasted image 20260218132155.png",
     "Attachments/solver_dt_vs_jac_7amlq8af.png",
     "Attachments/jacobian_orbit_xy_heatmap_7amlq8af.png",
@@ -280,8 +295,6 @@
     "Attachments/accel_field_with_orbits_7amlq8af.png",
     "Attachments/solver_dt_vs_jac_csxlmnxv.png",
     "Attachments/solver_dt_orbit_grid_csxlmnxv.png",
-    "Attachments/jacobian_orbit_xy_heatmap_csxlmnxv.png",
-    "Attachments/jacobian_orbit_eig_hist_csxlmnxv.png",
     "Attachments/cf4796d9-aba4-4ba3-bd80-4a44b61e2312.pdf",
     "Attachments/5de52ce2-36b7-4ea5-956a-7c28d42a7ac7.pdf",
     "Attachments/6f0c636b-eea0-4685-980e-7efaf1e66405.pdf",
@@ -295,7 +308,6 @@
     "Sensitivity Analysis.md",
     "Archive/Research Notes.md",
     "Software Tips.md",
-    "Technical Notes/Latent ODEs.md",
     "Reverse-mode automatic differentiation of ODE solutions.md",
     "metrics.md",
     "Resources.md",
