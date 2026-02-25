@@ -168,3 +168,36 @@ Think of it like a river current — the same underlying flow field governs ever
 The GRU boxes are then the observation update steps, where each incoming x_i corrects the hidden state. So the sequence runs right to left (backwards in time), alternating between ODE propagation and GRU updates, until you've processed all observations and output the mean mu and variance sigma of q(z_0 | x_0, ..., x_N).
 
 On the right (the decoder), you sample z_0, then run a single forward ODE solve from t_0 to t_N using the same learned dynamics f, reading off latent states z_1, z_i, z_N at the observation times and decoding them to reconstructions x_hat.
+
+So they're both ODEs with the same structural form, but they're learning different things. The encoder ODE is learning something about how to propagate an inference state backwards through irregular time gaps. The decoder ODE is learning the actual generative dynamics of the system. In your astrodynamics case, the decoder ODE is the one you'd care about — that's the one learning something like orbital mechanics.
+
+
+Re: my confusion about the jumps and updates in the ODE-RNN:
+Remember that in the encoder, the hidden state h is not the physical state of the system — it's an abstract summary of the observations seen so far (running backwards). So when a GRU update causes a big jump in h, that's not saying the physical system jumped — it's saying "I just received a new observation and I'm updating my belief about what z_0 probably was." The hidden state is an inference object, not a physical one.
+
+So the sequence is: the ODE smoothly propagates h between observation times, then the GRU does a potentially large correction when a new observation arrives. The ODE is saying "given my current summary of the data, let me evolve it forward to the next time point." The GRU is saying "now that I've seen x_i, let me update my summary to account for this new information."
+
+The "jumps" are fine because h doesn't need to be smooth or physically meaningful — it just needs to, by the end of the backwards pass, encode enough information for the final output to produce a good mu and sigma for q(z_0 | x_0, ..., x_N).
+
+This is again very analogous to a Kalman filter. In Kalman filtering you also have a predict step (smooth ODE-like propagation) and an update step (potentially large correction when a measurement arrives). The measurement update can cause a big jump in your state estimate, and that's not a problem — it just means the new observation was informative.
+
+
+Re: my confusion about NN *g* in the paper:
+After the ODE-RNN has run backwards through all the observations, you're left with a single hidden state vector h — a fixed-size summary of all the data. But what you actually want is the parameters of a Gaussian distribution over z_0, namely a mean mu and a variance sigma. These live in a different space than h and have different requirements (sigma has to be positive, for instance).
+
+So g is just a small neural network that takes that final hidden state h and maps it to mu and sigma. It's essentially a learned projection from "summary of all observations" to "parameters of the distribution over initial conditions." In practice it's often just a linear layer or a shallow MLP.
+
+So the full pipeline is: the ODE-RNN processes all observations and produces h, then g reads h and outputs mu and sigma, then you sample z_0 from the resulting Gaussian N(mu, sigma), and then the decoder ODE propagates z_0 forward to generate the trajectory. g is the bridge between the inference network and the generative model.
+
+
+**"We jointly train the encoder and decoder by maximizing the evidence lower bound (ELBO):**
+$ELBO(theta, phi) = E_{z0 ~ q_phi(z0 | {xi, ti})} [log p_theta(x0, ..., xN)] - KL[q_phi(z0 | {xi, ti}) || p(z0)]$
+The first term, E[log p_theta(x_0, ..., x_N)], is the reconstruction term. You sample a z_0 from your approximate posterior q_phi, run it forward through the decoder ODE, decode the latent states into reconstructed observations x_hat, and then measure how well those reconstructions match the actual observations. The expectation means you do this averaging over samples of z_0. This term is pushing the model to actually explain the data well.
+
+The second term, KL[q_phi(z_0 | {x_i, t_i}) || p(z_0)], is the regularization term. KL divergence is a measure of how different two distributions are — here it's measuring how far your approximate posterior q_phi(z_0 | data) is from the prior p(z_0), which is typically just a standard Gaussian N(0, I). This term penalizes the encoder for producing a posterior that strays too far from the prior. It stops the model from just memorizing the data by encoding everything into z_0.
+
+The two terms are in tension. The reconstruction term wants the encoder to produce a very specific z_0 that explains the data perfectly. The KL term wants the posterior to stay close to the prior and not be too confident or specific. The ELBO balances these two pressures, and maximizing it trains all the parameters — the encoder phi (the ODE-RNN and g) and the decoder theta (the decoder ODE and the observation model) — jointly end to end.
+
+The decoder ODE is the Neural ODE that learns the dynamics in latent space. It takes z_0 as an initial condition and integrates forward using a learned vector field f_theta to produce z_1, z_i, ..., z_N at whatever time points you want. This is the heart of the model — it's the part that's learning a continuous, smooth dynamical system in latent space that generates the data.
+
+In your astrodynamics context, this is the part that would be learning something analogous to orbital mechanics, just operating in a learned latent space rather than directly in Cartesian coordinates.
