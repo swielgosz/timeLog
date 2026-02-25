@@ -97,3 +97,5 @@ Think of:
 That’s exactly what’s happening.
 
 If you were learning just gravity, you wouldn’t want the jumps.
+
+"We generalize state transitions in RNNs to continuous-time dynamics specified by a neural network, as in NeuralODEs"
