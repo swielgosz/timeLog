@@ -27,6 +27,8 @@ This lets the network model temporal dependencies such as:
 	•	Words earlier in a sentence
 	•	Previous sensor readings in a time series
 	•	Earlier states of a dynamical system
+They don't learn long-range dependencies well, but variants like LSTMs and GRUs addressed this. 
+
 ---
 
 **Mathematical Form**
