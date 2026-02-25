@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "02 Advising Meetings.md",
+                "file": "01 Spring 2026.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "02 Advising Meetings"
+              "title": "01 Spring 2026"
             }
           },
           {
@@ -51,12 +51,14 @@
             "id": "4690dd3613cc4af9",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "Attachments/Pasted image 20260128125230.png"
+                "file": "02 Advising Meetings.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "Pasted image 20260128125230"
+              "icon": "lucide-file",
+              "title": "02 Advising Meetings"
             }
           },
           {
@@ -279,22 +281,23 @@
   },
   "active": "e8c011cc58a546a5",
   "lastOpenFiles": [
+    "02 Advising Meetings.md",
+    "Technical Notes/The Vanishing Gradient Problem for Stiff Neural Differential Equations.md",
+    "Sensitivity Analysis.md",
+    "Attachments/Pasted image 20260128125230.png",
+    "01 Spring 2026.md",
     "Attachments/Pasted image 20260225132359.png",
     "Attachments/Pasted image 20260225132349.png",
     "Attachments/Pasted image 20260225131228.png",
     "Attachments/Pasted image 20260225131101.png",
-    "02 Advising Meetings.md",
     "Technical Notes/Latent ODEs.md",
     "Attachments/Pasted image 20260224230028.png",
     "Technical Notes/3BP Lectures Shane Ross.md",
     "Journal Paper/Technical Notes.md",
-    "01 Spring 2026.md",
     "Attachments/Pasted image 20260204130139.png",
     "Attachments/Pasted image 20260218132155.png",
     "Attachments/solver_dt_vs_jac_7amlq8af.png",
     "Attachments/jacobian_orbit_xy_heatmap_7amlq8af.png",
-    "Attachments/jacobian_orbit_eig_hist_7amlq8af.png",
-    "Attachments/accel_field_with_orbits_7amlq8af.png",
     "Attachments/cf4796d9-aba4-4ba3-bd80-4a44b61e2312.pdf",
     "Attachments/5de52ce2-36b7-4ea5-956a-7c28d42a7ac7.pdf",
     "Attachments/6f0c636b-eea0-4685-980e-7efaf1e66405.pdf",
@@ -304,8 +307,6 @@
     "cleaning code/Cleaning Code.md",
     "Archive/Fall 2025.md",
     "Untitled.md",
-    "Technical Notes/The Vanishing Gradient Problem for Stiff Neural Differential Equations.md",
-    "Sensitivity Analysis.md",
     "Archive/Research Notes.md",
     "Software Tips.md",
     "Reverse-mode automatic differentiation of ODE solutions.md",

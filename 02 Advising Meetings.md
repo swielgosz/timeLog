@@ -8,6 +8,8 @@ Continue known periodic orbits in latent space and see what happens.
 After generating a large number of these trajectories (all families, not just lyapunov). see if we can connect outputs with differential correct and enforce periodicity in the latent space. 
 /github/copilot/instructions
 include in agents file that agent is responsible for writing its own research notes. Use asked me for X, I tried this, it didn't work so I did this. e.g. transfers aren't conecting and I want to know why. tell it area where you think issue is, 
+train latent ODE
+look at eigenvectors - positive eigenvalue will have tangential trajectory?
 
 Tested on separate datasets:
 ![[Pasted image 20260225131101.png]]
@@ -16,6 +18,8 @@ Tested on separate datasets:
 Testing on training dataset:
 ![[Pasted image 20260225132349.png]]
 ![[Pasted image 20260225132359.png]]
+
+
 # February 18
 new training losses:
 - `percent _error_plus_nmse` 7amlq8af
