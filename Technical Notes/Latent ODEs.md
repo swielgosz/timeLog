@@ -133,9 +133,7 @@ The latent variable construction is a different and more powerful approach. Inst
 
 The key conceptual difference is that in the autoregressive case the model is generative in a sequential, causal way — it predicts one step ahead at a time. In the latent variable case, the model posits a clean underlying dynamical system that generates all the observations, which is a much more natural fit for physical systems like orbital mechanics where you believe there really is a true underlying continuous trajectory being noisily observed.
 
-
-
-
+---
 In a latent variable model, you have observed data x and a latent variable z that you believe generated x. What you want is the posterior p(z | x) — that is, "given the data I observed, what is the distribution over latent states that could have produced it?" This tells you what the underlying state probably was.
 
 The problem is that computing p(z | x) exactly requires evaluating p(z | x) = p(x | z) * p(z) / p(x), and the denominator p(x) requires integrating over all possible values of z, which is generally intractable for complex models.
@@ -144,8 +142,7 @@ So instead you introduce an approximate posterior q_phi(z | x), which is a simpl
 
 In the context of the Latent ODE paper, the approximate posterior is over the initial latent state z_0. The encoder (which is actually an ODE-RNN running backwards over the observations) looks at all the data and produces a distribution q_phi(z_0 | x_0, ..., x_n). You then sample z_0 from that distribution, run it forward through the ODE, and decode. The training objective pushes q_phi to be close to the true posterior while also making the reconstructions accurate — this is the standard variational autoencoder (VAE) framework.
 
-
-
+---
 
 **Why don't we use the autoregressive method? Could we still propagate dynamics forward in time?**
 Good question. In the autoregressive case you can propagate forward by feeding predictions back in as inputs — you predict x_i, treat it as an observation, use it to update the hidden state, then predict x_{i+1}, and so on. This is called autoregressive rollout.
@@ -212,6 +209,25 @@ One other interesting detail is that Kidger concatenates the time t directly ont
 The loss function is also the standard ELBO — reconstruction loss plus KL divergence — consistent with the paper.
 
 So in summary: same decoder and same training objective as the paper, but a simplified encoder that drops the ODE-RNN in favor of a plain GRU with time concatenated as a feature.
+
+In Kidger's work:
+z is the latent space — it's the low-dimensional probabilistic bottleneck of the VAE. You sample z_0 from the approximate posterior q(z_0 | data), and it represents a compressed, probabilistic encoding of the initial condition. This is what the KL term in the ELBO regularizes toward the prior N(0, I).
+
+h is the hidden state space — it's the working memory of the Neural ODE as it propagates forward. Since the Neural ODE's vector field f_theta is an MLP that needs sufficient capacity to represent complex dynamics, h is typically higher dimensional than z. The latent_to_hidden MLP maps z_0 up into this richer hidden space before the ODE integration begins.
+
+Because the GRU runs backwards through the observations, the "final" state of the GRU is actually the hidden state after processing the earliest observation — which corresponds to t_0. So it's more accurate to call it h_0 coming out of the GRU.
+
+But to avoid confusion, the corrected flow is:
+
+observation space → GRU (running backwards) → h_0^{RNN} → (hidden_to_latent) → mu, sigma → sample z_0 → (latent_to_hidden) → h_0^{ODE} → (Neural ODE) → h(t) → (hidden_to_data) → y_hat(t)
+
+I've distinguished h_0^{RNN} and h_0^{ODE} because they are different things living in different spaces — the GRU's final hidden state and the initial hidden state for the ODE respectively — even though both correspond to time t_0. The latent_to_hidden MLP bridges between them via z_0.
+
+hidden_to_latent takes the GRU's final hidden state h_0^{RNN} and projects it into the parameters of the latent distribution — specifically it outputs a vector that gets split into mu and sigma (or log_sigma in practice).
+
+So its job is to answer the question: "given everything the GRU saw in the data, what should the distribution over z_0 be?" It translates from the GRU's hidden space (which is a deterministic summary of the data) into the parameters of a probability distribution over the latent space.
+
+In Kidger's code you can see this directly — hidden_to_latent is a Linear layer mapping from hidden_size to 2 * latent_size, because it needs to output both mu and sigma, each of size latent_size, concatenated together.
 
 From his thesis:
 "Special cases of neural CDEs In light of this, there have now been several proposals in which the hidden state of an RNN is updated in continuous time between observations; popular examples are GRU-D or ODE-RNNs [Che+18a; RCD19; De +19]. These are special cases or discretisations of neural CDEs. (Exercise for the reader!"
