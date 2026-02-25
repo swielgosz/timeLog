@@ -151,11 +151,14 @@ The problem is that errors accumulate. Each prediction is slightly wrong, and wh
 
 This is actually one of the key motivations for the latent variable construction in the paper. In the Latent ODE, you infer z_0 from the data once, then let the ODE propagate it forward continuously. There's no feedback of noisy predictions — the ODE just integrates forward cleanly, and the decoder reads off observations wherever you want them. This makes long-horizon propagation much more stable, which for your astrodynamics application is probably very important since you'd want to propagate orbits over many revolutions.
 
+---
 
 The authors use an ODE-RNN in their latent ODE model to find an approximate posterior from which to sample the initial condition, yes?
 Yes, exactly. The ODE-RNN is used as the encoder — it runs backwards over the observations and produces the parameters of the approximate posterior q_phi(z_0 | x_0, ..., x_n), which is typically a Gaussian with some mean and variance. You then sample an initial latent state z_0 from that distribution, run it forward through the Latent ODE, and decode the latent states into observations.
 
 So the ODE-RNN in this context isn't doing the dynamics propagation — it's doing inference. It's looking at all the irregularly-sampled observations and summarizing them into a distribution over plausible initial conditions. The actual forward propagation is handled by a separate Neural ODE operating in latent space.
+
+---
 
 ![[Pasted image 20260224230028.png]]
 On the left (the encoder), the wavy lines between the GRU updates represent the ODE being integrated between observations. The waves look different from each other, but that's not because different ODEs are being used — it's because the hidden state is at a different point in state space each time, so the same vector field f_theta produces different trajectories depending on where you are. The ODE is the same function, it's just being evaluated along different parts of the state space with different time gaps.
@@ -168,6 +171,7 @@ On the right (the decoder), you sample z_0, then run a single forward ODE solve 
 
 So they're both ODEs with the same structural form, but they're learning different things. The encoder ODE is learning something about how to propagate an inference state backwards through irregular time gaps. The decoder ODE is learning the actual generative dynamics of the system. In your astrodynamics case, the decoder ODE is the one you'd care about — that's the one learning something like orbital mechanics.
 
+---
 
 Re: my confusion about the jumps and updates in the ODE-RNN:
 Remember that in the encoder, the hidden state h is not the physical state of the system — it's an abstract summary of the observations seen so far (running backwards). So when a GRU update causes a big jump in h, that's not saying the physical system jumped — it's saying "I just received a new observation and I'm updating my belief about what z_0 probably was." The hidden state is an inference object, not a physical one.
@@ -178,6 +182,7 @@ The "jumps" are fine because h doesn't need to be smooth or physically meaningfu
 
 This is again very analogous to a Kalman filter. In Kalman filtering you also have a predict step (smooth ODE-like propagation) and an update step (potentially large correction when a measurement arrives). The measurement update can cause a big jump in your state estimate, and that's not a problem — it just means the new observation was informative.
 
+---
 
 Re: my confusion about NN *g* in the paper:
 After the ODE-RNN has run backwards through all the observations, you're left with a single hidden state vector h — a fixed-size summary of all the data. But what you actually want is the parameters of a Gaussian distribution over z_0, namely a mean mu and a variance sigma. These live in a different space than h and have different requirements (sigma has to be positive, for instance).
@@ -186,6 +191,7 @@ So g is just a small neural network that takes that final hidden state h and map
 
 So the full pipeline is: the ODE-RNN processes all observations and produces h, then g reads h and outputs mu and sigma, then you sample z_0 from the resulting Gaussian N(mu, sigma), and then the decoder ODE propagates z_0 forward to generate the trajectory. g is the bridge between the inference network and the generative model.
 
+---
 
 **"We jointly train the encoder and decoder by maximizing the evidence lower bound (ELBO):**
 $ELBO(theta, phi) = E_{z0 ~ q_phi(z0 | {xi, ti})} [log p_theta(x0, ..., xN)] - KL[q_phi(z0 | {xi, ti}) || p(z0)]$
@@ -199,6 +205,8 @@ The decoder ODE is the Neural ODE that learns the dynamics in latent space. It t
 
 In your astrodynamics context, this is the part that would be learning something analogous to orbital mechanics, just operating in a learned latent space rather than directly in Cartesian coordinates.
 
+---
+
 **Differences between Patrick Kidger and the paper**
 The biggest one is in the encoder. In the paper, the encoder is a proper ODE-RNN — it alternates between ODE steps and GRU updates as it runs backwards through the observations. In Kidger's implementation, the encoder is just a plain GRU with no ODE between observations. You can see this in the _latent method — it simply loops backwards through the data calling rnn_cell at each observation without any ODE integration in between. This simplification means the encoder doesn't explicitly model the continuous-time dynamics between observations during inference, but it's simpler to implement and often works fine in practice.
 
@@ -210,14 +218,27 @@ The loss function is also the standard ELBO — reconstruction loss plus KL dive
 
 So in summary: same decoder and same training objective as the paper, but a simplified encoder that drops the ODE-RNN in favor of a plain GRU with time concatenated as a feature.
 
+Another take:
+The difference is entirely in the encoder — the decoder is the same in both.
+
+In the original paper's ODE-RNN encoder, the hidden state is evolved continuously between observations using an ODE, and then updated discretely at each observation using a GRU. So as it runs backwards through the data, it alternates: ODE step (evolve h continuously from t_i to t_{i-1}), then GRU update (incorporate observation x_{i-1}). This means the encoder explicitly models the continuous-time dynamics between observations during inference, and the irregular time gaps are handled naturally by integrating the ODE over longer or shorter intervals.
+
+In Kidger's implementation, there is no ODE in the encoder at all. The GRU just steps directly from observation to observation without any continuous-time propagation in between. The timestamp is concatenated onto each observation as a cheap workaround to give the GRU some awareness of time gaps, but there's no principled continuous-time dynamics between steps.
+
+So the original paper's encoder is a proper ODE-RNN (continuous between observations, discrete at observations), while Kidger's encoder is just a plain GRU with time as an extra feature. Both produce mu and sigma for the approximate posterior over z_0, and both then use the same Neural ODE decoder. Kidger's simplification works well in practice and is much easier to implement, but it loses the theoretical elegance of the ODE-RNN encoder.
+
+The flow for the ODE-RNN is:
+
+observation space → ODE step (backwards from t_N to t_{N-1}) → GRU update (incorporate x_{N-1}) → ODE step (backwards from t_{N-1} to t_{N-2}) → GRU update (incorporate x_{N-2}) → ... → ODE step (backwards to t_0) → GRU update (incorporate x_0) → h_0^{RNN} → (hidden_to_latent) → mu, sigma → sample z_0 → (latent_to_hidden) → h_0^{ODE} → (Neural ODE) → h(t) → (hidden_to_data) → y_hat(t)
+
+The alternating ODE step / GRU update pattern in the encoder is the key difference from Kidger. Everything from h_0^{RNN} onwards is the same.
+
+--- 
+
 In Kidger's work:
-z is the latent space — it's the low-dimensional probabilistic bottleneck of the VAE. You sample z_0 from the approximate posterior q(z_0 | data), and it represents a compressed, probabilistic encoding of the initial condition. This is what the KL term in the ELBO regularizes toward the prior N(0, I).
+z is the latent space — it's the low-dimensional probabilistic bottleneck of the VAE. You sample z_0 from the approximate posterior q(z_0 | data), and it represents a compressed, probabilistic encoding of the initial condition. This is what the KL term in the ELBO regularizes toward the prior N(0, I). h is the hidden state space — it's the working memory of the Neural ODE as it propagates forward. Since the Neural ODE's vector field f_theta is an MLP that needs sufficient capacity to represent complex dynamics, h is typically higher dimensional than z. The latent_to_hidden MLP maps z_0 up into this richer hidden space before the ODE integration begins.
 
-h is the hidden state space — it's the working memory of the Neural ODE as it propagates forward. Since the Neural ODE's vector field f_theta is an MLP that needs sufficient capacity to represent complex dynamics, h is typically higher dimensional than z. The latent_to_hidden MLP maps z_0 up into this richer hidden space before the ODE integration begins.
-
-Because the GRU runs backwards through the observations, the "final" state of the GRU is actually the hidden state after processing the earliest observation — which corresponds to t_0. So it's more accurate to call it h_0 coming out of the GRU.
-
-But to avoid confusion, the corrected flow is:
+Because the GRU runs backwards through the observations, the "final" state of the GRU is actually the hidden state after processing the earliest observation — which corresponds to t_0. Here's the flow:
 
 observation space → GRU (running backwards) → h_0^{RNN} → (hidden_to_latent) → mu, sigma → sample z_0 → (latent_to_hidden) → h_0^{ODE} → (Neural ODE) → h(t) → (hidden_to_data) → y_hat(t)
 
@@ -231,3 +252,22 @@ In Kidger's code you can see this directly — hidden_to_latent is a Linear laye
 
 From his thesis:
 "Special cases of neural CDEs In light of this, there have now been several proposals in which the hidden state of an RNN is updated in continuous time between observations; popular examples are GRU-D or ODE-RNNs [Che+18a; RCD19; De +19]. These are special cases or discretisations of neural CDEs. (Exercise for the reader!"
+
+--- 
+
+observation space → GRU (running backwards): you take your sequence of observations (x_0, x_1, ..., x_N) along with their timestamps, and feed them into the GRU in reverse order, starting from x_N and working back to x_0. At each step the GRU updates its hidden state to incorporate the new observation. In Kidger's implementation the timestamp is concatenated directly onto each observation as an extra input so the GRU is aware of the irregular time gaps.
+
+GRU → h_0^{RNN}: after processing all observations backwards, the GRU's final hidden state is h_0^{RNN} — a fixed-size vector summarizing all the information in the sequence, anchored at t_0.
+
+h_0^{RNN} → (hidden_to_latent) → mu, sigma: the linear layer projects h_0^{RNN} into a vector of size 2 * latent_size, which is then split into mu and sigma. These are the parameters of the approximate posterior q(z_0 | data) = N(mu, sigma).
+
+mu, sigma → sample z_0: you sample z_0 ~ N(mu, sigma) using the reparameterization trick, meaning z_0 = mu + sigma * epsilon where epsilon ~ N(0, I). This keeps the sampling step differentiable so gradients can flow back through it during training.
+
+z_0 → (latent_to_hidden) → h_0^{ODE}: the MLP maps z_0 from the low-dimensional latent space up into the higher-dimensional hidden space where the ODE dynamics live. This gives you the initial condition for the Neural ODE.
+
+h_0^{ODE} → (Neural ODE) → h(t): the Neural ODE integrates dh/dt = f_theta(h) forward in time from t_0 to t_N, saving the hidden state h(t) at whatever observation times you want. The same learned vector field f_theta governs the evolution at every time step.
+
+h(t) → (hidden_to_data) → y_hat(t): at each saved time point, the linear hidden_to_data layer projects h(t) from the hidden space down into the observation space, giving you the reconstructed observation y_hat(t). These are compared against the actual observations x to compute the reconstruction loss in the ELBO.
+
+--- 
+D
