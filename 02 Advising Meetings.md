@@ -1,4 +1,8 @@
 # February 24
+Periodic orbits - continuation, differential correction, multiple shooting, etc. Can we apply those tools to the phase space learned by latentODEs. 
+What if we lift dynamics to latent space that is larger, candidate transfers maybe. 
+Example - doing transfer from L1 to L2 using intersection of Poincare maps. 
+
 Tested on separate datasets:
 ![[Pasted image 20260225131101.png]]
 ![[Pasted image 20260225131228.png]]
