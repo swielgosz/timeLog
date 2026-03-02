@@ -3,6 +3,7 @@ TODO:
 - [ ] Review Jacobian stablity info
 - [ ] Redo sensitivity analyses from conference
 - [ ] Write up lessons learned and debugging info
+- [ ] Better understanding of latent ode vs ode-rnn. How does ode-rnn relate to CDEs?
 # February 24
 Periodic orbits - continuation, differential correction, multiple shooting, etc. Can we apply those tools to the phase space learned by latentODEs. 
 What if we lift dynamics to latent space that is larger, candidate transfers maybe. 
