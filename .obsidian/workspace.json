@@ -117,8 +117,7 @@
               "title": "Untitled"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -268,11 +267,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "4690dd3613cc4af9",
+  "active": "e8c011cc58a546a5",
   "lastOpenFiles": [
+    "02 Advising Meetings.md",
     "Sensitivity Analysis.md",
     "01 Spring 2026.md",
-    "02 Advising Meetings.md",
     "Technical Notes/The Vanishing Gradient Problem for Stiff Neural Differential Equations.md",
     "Attachments/Pasted image 20260128125230.png",
     "Attachments/Pasted image 20260225132359.png",
