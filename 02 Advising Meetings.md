@@ -1,3 +1,4 @@
+# March 4
 # February 24
 Periodic orbits - continuation, differential correction, multiple shooting, etc. Can we apply those tools to the phase space learned by latentODEs. 
 What if we lift dynamics to latent space that is larger, candidate transfers maybe. 
