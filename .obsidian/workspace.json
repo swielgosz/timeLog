@@ -13,12 +13,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 Spring 2026.md",
+                "file": "cleaning code/backup.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01 Spring 2026"
+              "title": "backup"
+            }
+          },
+          {
+            "id": "f542b44bf57df9d8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "cleaning code/3-3 backup.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "3-3 backup"
             }
           },
           {
@@ -117,7 +131,8 @@
               "title": "Untitled"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -267,8 +282,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "e8c011cc58a546a5",
+  "active": "f542b44bf57df9d8",
   "lastOpenFiles": [
+    "cleaning code/backup.md",
+    "cleaning code/3-3 backup.md",
+    "cleaning code/Cleaning Code.md",
+    "01 Spring 2026.md",
     "Attachments/Pasted image 20260303104958.png",
     "Attachments/Pasted image 20260303104453.png",
     "Attachments/Pasted image 20260303104445.png",
@@ -279,11 +298,9 @@
     "Attachments/Pasted image 20260302154542.png",
     "02 Advising Meetings.md",
     "Sensitivity Analysis.md",
-    "01 Spring 2026.md",
     "Technical Notes/The Vanishing Gradient Problem for Stiff Neural Differential Equations.md",
     "Attachments/Pasted image 20260128125230.png",
     "Attachments/Pasted image 20260225132359.png",
-    "Attachments/Pasted image 20260225132349.png",
     "Technical Notes/Latent ODEs.md",
     "Technical Notes/3BP Lectures Shane Ross.md",
     "Journal Paper/Technical Notes.md",
@@ -292,8 +309,6 @@
     "Attachments/6f0c636b-eea0-4685-980e-7efaf1e66405.pdf",
     "Technical Notes/GENERATING PERIODIC ORBITS IN THE CIRCULAR RESTRICTED THREEBODY PROBLEM WITH APPLICATIONS TO LUNAR SOUTH POLE COVERAGE - Grebow Thesis.md",
     "Latent and UDE codes/Training Scripts.md",
-    "cleaning code/backup.md",
-    "cleaning code/Cleaning Code.md",
     "Archive/Fall 2025.md",
     "Untitled.md",
     "Archive/Research Notes.md",
@@ -304,7 +319,6 @@
     "Latent and UDE codes/Data generation.md",
     "Journal Paper/Journal Planning.md",
     "Journal Paper/Untitled.md",
-    "Untitled 1.md",
     "Untitled 2.md",
     "Latent and UDE codes",
     "Lit Review Color Code.md",
