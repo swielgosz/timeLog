@@ -2,7 +2,12 @@
 - Emphasize end application rather than nitty gritty details
 - We are not locked into perturbation analysis
 - confirm that initial conditions are the same for the latentODE wandb upload and postprocessing
-- 
+
+Continuation methods:
+- most intuitive is jacobian, but commonly we do pseudo-arc length. Whatever latent trajectory we're on, we have some associated arc length and we can only perturb in some direcitons - unstable and stable manifolds, or the purely periodic. Compute monodromy matrix, perturb toward periodic mode, constrain to some pseudo-arc length.
+- There is probably a way to transfer from one type of periodic orbit to another
+- figure out reconstruction issues since we will need pseudo-arc length
+
 TODO:
 - [ ] Review Jacobian stablity info
 - [ ] Redo sensitivity analyses from conference
