@@ -1,5 +1,8 @@
 # March 4
-- Emphasize end app
+- Emphasize end application rather than nitty gritty details
+- We are not locked into perturbation analysis
+- confirm that initial conditions are the same for the latentODE wandb upload and postprocessing
+- 
 TODO:
 - [ ] Review Jacobian stablity info
 - [ ] Redo sensitivity analyses from conference
