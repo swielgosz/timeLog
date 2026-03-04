@@ -10,6 +10,12 @@ Continuation methods:
 - how to do latent orbit stuff well uses branching logic
 - challenges converting CR3BP to latent space - timescales and linearity. Different families take far longer than others. Would like to be able to gracefully handle this (Sundman transfer ?). Can we normalize such that all orbits can be propagated in the same fashion agnostic to geometric length. How to encourage linearity? How can we decrease extensive iterations, etc. 
 - Journal - show that models can accurately represent large portions of CR3BP phase space. how well can neuralODEs represent the CR3BP system? So far we have explored a narrow space of this? Can we generalize to 3D? How well can we learn existing dynamics? If we can define metrics to define how covered our phase space is in 
+- How much phase space is covered in test sets and how can we test that? 
+- could we characterize the differences between the learned latent space vs original space
+- add physics informed constraint and just say it's linear and see what the consequences are. it wouldj be must cheaper than integrating nonlinear. Get long orbits using linear form rather than integration
+- Both will need us to know how good they are in critical regions of phases space
+- come up with backup metrics, tests for qhat the quality is 
+- do continuation and linearization in parallel, two or three studies and see what falls out
 
 TODO:
 - [ ] Review Jacobian stablity info
