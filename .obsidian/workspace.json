@@ -132,7 +132,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -282,8 +282,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "4690dd3613cc4af9",
+  "active": "f542b44bf57df9d8",
   "lastOpenFiles": [
+    "Latent and UDE codes/Training Scripts.md",
     "Latent and UDE codes/Data generation.md",
     "02 Advising Meetings.md",
     "01 Spring 2026.md",
@@ -309,7 +310,6 @@
     "Attachments/5de52ce2-36b7-4ea5-956a-7c28d42a7ac7.pdf",
     "Attachments/6f0c636b-eea0-4685-980e-7efaf1e66405.pdf",
     "Technical Notes/GENERATING PERIODIC ORBITS IN THE CIRCULAR RESTRICTED THREEBODY PROBLEM WITH APPLICATIONS TO LUNAR SOUTH POLE COVERAGE - Grebow Thesis.md",
-    "Latent and UDE codes/Training Scripts.md",
     "Archive/Fall 2025.md",
     "Untitled.md",
     "Archive/Research Notes.md",
