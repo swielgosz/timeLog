@@ -11,6 +11,8 @@ TODO:
 - SSPI abstract accepted
 	- Abstract: This work investigates the potential of neural ordinary differential equations (neural ODEs) for modeling unknown perturbations acting on a spacecraft. Specifically, the proposed approach formulates the dynamics as a universal differential equation, where known physical laws define the nominal dynamics and a neural ODE learns a corrective term capturing unknown forces. Learning such corrective dynamics is particularly important for autonomous spacecraft operations, where discrepancies between baseline physics models and true system behavior can accumulate and degrade long-term prediction. In addition, we explore whether learning perturbative dynamics in a latent state space using latent ODEs can provide improved representation efficiency and robustness compared to modeling directly in the physical state space. As a proof of concept, we demonstrate the ability of the neural ODE to learn perturbative dynamics from data. Results indicate that neural ODE-based models show promise as accurate, data-driven surrogates for traditional spacecraft dynamics models, offering a flexible framework for representing complex and partially unknown dynamics in support of autonomous mission analysis and design.
 	  - Report due by March 27th. There are no details?
+- ASC - can Simon and I coauthor a paper?
+	- Maybe we can use KANs for perturbation analysis?
 
 ## Sensitivity Studies
 
