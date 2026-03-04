@@ -7,6 +7,9 @@ Continuation methods:
 - most intuitive is jacobian, but commonly we do pseudo-arc length. Whatever latent trajectory we're on, we have some associated arc length and we can only perturb in some direcitons - unstable and stable manifolds, or the purely periodic. Compute monodromy matrix, perturb toward periodic mode, constrain to some pseudo-arc length.
 - There is probably a way to transfer from one type of periodic orbit to another
 - figure out reconstruction issues since we will need pseudo-arc length
+- how to do latent orbit stuff well uses branching logic
+- challenges converting CR3BP to latent space - timescales and linearity. Different families take far longer than others. Would like to be able to gracefully handle this (Sundman transfer ?). Can we normalize such that all orbits can be propagated in the same fashion agnostic to geometric length. How to encourage linearity? How can we decrease extensive iterations, etc. 
+- Journal - show that models can accurately represent large portions of CR3BP phase space. how well can neuralODEs represent the CR3BP system? So far we have explored a narrow space of this? Can we generalize to 3D? How well can we learn existing dynamics? If we can define metrics to define how covered our phase space is in 
 
 TODO:
 - [ ] Review Jacobian stablity info
