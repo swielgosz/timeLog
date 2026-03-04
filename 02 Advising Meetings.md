@@ -1,4 +1,5 @@
 # March 4
+- Emphasize end app
 TODO:
 - [ ] Review Jacobian stablity info
 - [ ] Redo sensitivity analyses from conference
