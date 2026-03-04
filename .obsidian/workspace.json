@@ -132,7 +132,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -282,8 +282,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f542b44bf57df9d8",
+  "active": "4690dd3613cc4af9",
   "lastOpenFiles": [
+    "01 Spring 2026.md",
     "Attachments/Pasted image 20260303124552.png",
     "Attachments/Pasted image 20260303124545.png",
     "Attachments/Pasted image 20260303124537.png",
@@ -294,11 +295,9 @@
     "Attachments/Pasted image 20260303123345.png",
     "Attachments/Pasted image 20260303123338.png",
     "Attachments/Pasted image 20260303123325.png",
-    "Attachments/Pasted image 20260303122815.png",
     "cleaning code/3-3 backup.md",
     "cleaning code/backup.md",
     "cleaning code/Cleaning Code.md",
-    "01 Spring 2026.md",
     "02 Advising Meetings.md",
     "Sensitivity Analysis.md",
     "Technical Notes/The Vanishing Gradient Problem for Stiff Neural Differential Equations.md",
