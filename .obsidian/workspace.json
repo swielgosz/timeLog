@@ -65,12 +65,14 @@
             "id": "d060b4b56f57fc59",
             "type": "leaf",
             "state": {
-              "type": "release-notes",
+              "type": "markdown",
               "state": {
-                "currentVersion": "1.12.4"
+                "file": "01 Spring 2026.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.12.4"
+              "icon": "lucide-file",
+              "title": "01 Spring 2026"
             }
           },
           {
@@ -156,7 +158,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -306,7 +308,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "d060b4b56f57fc59",
+  "active": "f90060874b700032",
   "lastOpenFiles": [
     "01 Spring 2026.md",
     "Attachments/Pasted image 20260303124525.png",
