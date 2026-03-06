@@ -158,7 +158,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -308,12 +308,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f90060874b700032",
+  "active": "d060b4b56f57fc59",
   "lastOpenFiles": [
+    "02 Advising Meetings.md",
     "01 Spring 2026.md",
     "Attachments/Pasted image 20260303124525.png",
     "Latent and UDE codes/Training Scripts.md",
-    "02 Advising Meetings.md",
     "Sensitivity Analysis.md",
     "Latent and UDE codes/Data generation.md",
     "Attachments/Pasted image 20260303124552.png",
