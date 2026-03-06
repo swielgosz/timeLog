@@ -62,6 +62,18 @@
             }
           },
           {
+            "id": "d060b4b56f57fc59",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.12.4"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.12.4"
+            }
+          },
+          {
             "id": "4690dd3613cc4af9",
             "type": "leaf",
             "state": {
@@ -144,7 +156,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -294,7 +306,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f90060874b700032",
+  "active": "d060b4b56f57fc59",
   "lastOpenFiles": [
     "01 Spring 2026.md",
     "Attachments/Pasted image 20260303124525.png",
