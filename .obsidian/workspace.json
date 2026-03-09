@@ -172,7 +172,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -322,14 +322,14 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f542b44bf57df9d8",
+  "active": "d060b4b56f57fc59",
   "lastOpenFiles": [
+    "cleaning code/backup.md",
     "cleaning code/Cleaning Code.md",
     "01 Spring 2026.md",
     "Untitled 1.md",
     "Untitled.md",
     "Attachments/Pasted image 20260303124525.png",
-    "cleaning code/backup.md",
     "02 Advising Meetings.md",
     "Latent and UDE codes/Training Scripts.md",
     "Sensitivity Analysis.md",
