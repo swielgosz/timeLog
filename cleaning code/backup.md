@@ -1,3 +1,280 @@
+# LinearLatentODE
+``` python
+
+class LinearLatentODE(eqx.Module):
+    """
+    GRU encoder + globally linear latent flow with closed-form rollout.
+
+    The latent dynamics are:
+        dz/dtau = A z
+    and decode uses matrix exponentials:
+        z(tau) = exp(A * (tau - tau0)) z0
+
+    This is useful for long-horizon propagation where evaluating a linear flow
+    is often more stable and faster than integrating a nonlinear neural ODE.
+    """
+
+    rnn_cell: eqx.nn.GRUCell
+    hidden_to_latent: eqx.nn.Linear
+    latent_matrix: jnp.ndarray
+    latent_to_data: eqx.nn.Linear
+
+    latent_size: int
+    hidden_size: int
+    stability_shift: float = eqx.field(static=True)
+
+    def __init__(
+        self,
+        *,
+        data_size: int,
+        hidden_size: int,
+        latent_size: int,
+        key,
+        stability_shift: float = 0.0,
+        init_scale: float = 1e-2,
+        **kwargs,
+    ):
+        """
+        Initialize a linear latent ODE model.
+
+        Example usage:
+            model = LinearLatentODE(
+                data_size=6,
+                hidden_size=32,
+                latent_size=16,
+                key=jr.PRNGKey(0),
+                stability_shift=1e-3,
+            )
+            z0, _, _ = model.encode(ts, ys, key=jr.PRNGKey(1))
+            ys_hat = model.decode(ts, z0)
+        """
+        super().__init__(**kwargs)
+        gkey, hlkey, lkey, dkey = jr.split(key, 4)
+        self.rnn_cell = eqx.nn.GRUCell(data_size + 1, hidden_size, key=gkey)
+        self.hidden_to_latent = eqx.nn.Linear(hidden_size, 2 * latent_size, key=hlkey)
+        self.latent_matrix = init_scale * jr.normal(lkey, (latent_size, latent_size))
+        self.latent_to_data = eqx.nn.Linear(latent_size, data_size, key=dkey)
+        self.latent_size = latent_size
+        self.hidden_size = hidden_size
+        self.stability_shift = float(stability_shift)
+
+    def _effective_matrix(self) -> jnp.ndarray:
+        if self.stability_shift == 0.0:
+            return self.latent_matrix
+        return self.latent_matrix - self.stability_shift * jnp.eye(self.latent_size)
+
+    def encode(self, ts, ys, *, key):
+        data = jnp.concatenate([ts[:, None], ys], axis=1)
+        h = jnp.zeros((self.hidden_size,))
+        for data_i in reversed(data):
+            h = self.rnn_cell(data_i, h)
+        stats = self.hidden_to_latent(h)
+        mean, logstd = stats[: self.latent_size], stats[self.latent_size :]
+        std = jnp.exp(logstd)
+        z = mean + jr.normal(key, (self.latent_size,)) * std
+        return z, mean, logstd
+
+    def decode(self, taus, z0):
+        """
+        Decode along any monotone time-like coordinate `taus`.
+        """
+        dtaus = taus - taus[0]
+        A = self._effective_matrix()
+
+        def rollout(dt):
+            return expm(A * dt) @ z0
+
+        zs = jax.vmap(rollout)(dtaus)
+        return jax.vmap(self.latent_to_data)(zs)
+```
+# LatentReconstructionVisualizer
+```
+"""
+Visualization of latent ODE reconstruction quality for 2BP trajectories.
+
+Produces two figures:
+  1. Orbit grid — XY projections of true vs reconstructed trajectories (physical km),
+     annotated with per-orbit acceleration % error.
+  2. Error profiles — position error (km) and state % error vs normalized time,
+     with a thin line per orbit and a bold mean.
+
+Works with the data dict produced by LatentReconstructionExperiment.
+
+Example usage:
+    vis = LatentReconstructionVisualizer(experiment)
+    fig_orbits = vis.plot_orbit_grid(n_cols=3)
+    fig_errors = vis.plot_error_profiles()
+    fig_orbits.savefig("recon_orbits.pdf")
+    fig_errors.savefig("recon_errors.pdf")
+"""
+
+from __future__ import annotations
+
+from typing import Optional
+
+import matplotlib.pyplot as plt
+import mldsml.styles as styles
+import numpy as np
+from mldsml.visualizationBase import VisualizationBase
+
+from neuralODE.experiments.LatentReconstructionExperiment import (
+    LatentReconstructionExperiment,
+)
+
+
+class LatentReconstructionVisualizer(VisualizationBase):
+    """
+    Visualizer for LatentReconstructionExperiment results.
+
+    Args:
+        experiment: A LatentReconstructionExperiment with data already generated.
+    """
+
+    def __init__(self, experiment: LatentReconstructionExperiment) -> None:
+        plt.style.use(styles.DARK_SCIENTIFIC)
+        plt.rcParams["text.usetex"] = False
+        super().__init__(experiment)
+        self.exp = experiment
+        if self.exp.data is None:
+            raise ValueError("Call experiment.generate_data() before visualizing.")
+
+    @property
+    def _orbits(self) -> list:
+        return self.exp.data["orbits"]
+
+    @property
+    def _summary(self) -> dict:
+        return self.exp.data["summary"]
+
+    def plot_orbit_grid(
+        self,
+        n_cols: int = 3,
+        figsize: Optional[tuple] = None,
+    ) -> plt.Figure:
+        """
+        Grid of XY orbit projections (physical km), true vs reconstructed.
+
+        Each panel is annotated with the orbit's mean acceleration % error
+        (if available) and position RMSE.
+
+        Args:
+            n_cols:  Number of columns in the grid.
+            figsize: Override figure size; defaults to (4*n_cols, 4*n_rows).
+
+        Returns:
+            matplotlib Figure.
+        """
+        orbits = self._orbits
+        n = len(orbits)
+        n_cols = min(n_cols, n)
+        n_rows = int(np.ceil(n / n_cols))
+        fig, axes = plt.subplots(
+            n_rows,
+            n_cols,
+            figsize=figsize or (4 * n_cols, 4 * n_rows),
+            squeeze=False,
+        )
+
+        for idx, orb in enumerate(orbits):
+            row, col = divmod(idx, n_cols)
+            ax = axes[row][col]
+
+            true = orb["y_true_phys"]
+            pred = orb["y_hat_phys"]
+
+            ax.plot(true[:, 0], true[:, 1], lw=1.4, label="True")
+            ax.plot(pred[:, 0], pred[:, 1], lw=1.4, ls="--", label="Recon")
+
+            ax.set_aspect("equal", adjustable="box")
+            ax.set_xlabel("x [km]")
+            ax.set_ylabel("y [km]")
+
+            # Annotation
+            pos_rmse = float(np.sqrt(np.mean(orb["pos_error_km"] ** 2)))
+            title = f"Orbit {orb['orbit_idx']}  |  pos RMSE {pos_rmse:.1f} km"
+            if orb["accel_pct_error"] is not None:
+                title += f"\nacc err {orb['accel_pct_error']:.2f}%"
+            ax.set_title(title, fontsize=8)
+
+            if idx == 0:
+                ax.legend(fontsize=7)
+
+        # Hide unused panels
+        for idx in range(n, n_rows * n_cols):
+            row, col = divmod(idx, n_cols)
+            axes[row][col].set_visible(False)
+
+        summary = self._summary
+        suptitle = (
+            f"Latent ODE Reconstruction  |  N={summary['n_orbits']} orbits  |  "
+            f"mean pos err {summary['mean_pos_error_km']:.1f} km"
+        )
+        if summary["mean_accel_pct_error"] is not None:
+            suptitle += f"  |  mean acc err {summary['mean_accel_pct_error']:.2f}%"
+        fig.suptitle(suptitle, fontsize=10)
+        fig.tight_layout()
+        return fig
+
+    def plot_error_profiles(
+        self,
+        figsize: Optional[tuple] = None,
+    ) -> plt.Figure:
+        """
+        Position error (km) and state % error vs normalized time.
+
+        Thin lines = individual orbits.  Bold line = mean across orbits.
+
+        Returns:
+            matplotlib Figure with two vertically stacked subplots.
+        """
+        orbits = self._orbits
+        fig, (ax_pos, ax_pct) = plt.subplots(
+            2, 1, figsize=figsize or (8, 6), sharex=True,
+        )
+
+        alpha = max(0.15, 1.0 / len(orbits))
+        pos_curves = []
+        pct_curves = []
+
+        for orb in orbits:
+            t = orb["t_norm"]
+            pos_curves.append(orb["pos_error_km"])
+            pct_curves.append(orb["pct_error"])
+            ax_pos.plot(t, orb["pos_error_km"], lw=0.7, alpha=alpha)
+            ax_pct.plot(t, orb["pct_error"], lw=0.7, alpha=alpha)
+
+        # Bold mean
+        t_ref = orbits[0]["t_norm"]
+        ax_pos.plot(t_ref, np.mean(pos_curves, axis=0), lw=2.0, label="Mean")
+        ax_pct.plot(t_ref, np.mean(pct_curves, axis=0), lw=2.0, label="Mean")
+
+        ax_pos.set_ylabel("Position error [km]")
+        ax_pos.legend(fontsize=8)
+        ax_pos.set_yscale("log")
+
+        ax_pct.set_xlabel("Normalized time $t / t_{\\mathrm{char}}$")
+        ax_pct.set_ylabel("State % error")
+        ax_pct.set_yscale("log")
+
+        fig.suptitle("Reconstruction Error Profiles", fontsize=10)
+        fig.tight_layout()
+        return fig
+
+    def plot(
+        self,
+        n_cols: int = 3,
+    ) -> list[plt.Figure]:
+        """
+        Generate all standard plots.
+
+        Returns:
+            [fig_orbit_grid, fig_error_profiles]
+        """
+        return [
+            self.plot_orbit_grid(n_cols=n_cols),
+            self.plot_error_profiles(),
+        ]
+```
 # Feature layer
 ``` python
 def rhat_vhat_speed(y, eps=1e-8):
