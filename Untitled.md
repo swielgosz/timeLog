@@ -1,214 +1,261 @@
-import jax
+import os
+import pickle
+
 import jax.numpy as jnp
 import matplotlib.pyplot as plt
+import mldsml
 import numpy as np
-from mldsml.wandb_utils import load_dataset
+import ray
+from mldsml.wandb_utils import (
+    load_dataset,
+    query_runs_in_group,
+)
+from tables import make_tables
 
+import neuralODE
 from neuralODE import constants
+from neuralODE.data import (
+    format_data,
+)
+from neuralODE.dynamics import get_dynamics_class
+from neuralODE.experiments.IntegrationExperiment import IntegrationExperiment
+from neuralODE.metrics import AccelerationMetric
 from neuralODE.neuralODE import load_model_wandb
 from neuralODE.normalization import Normalization2BP
-from neuralODE.visualizers.TrainingDataVisualizer2BP import _initial_orbital_elements
-from neuralODE.visualizers.utils import prepare_save_path, save_pdf_and_png
+from neuralODE.visualizers.IntegrationVisualizer import ModIntegrationVisualizer
 
-# --- User-configurable experiment settings (no CLI parsing by request) ---
-RUN_ID = "42d35h60"
-PROJECT = "neuralODEs"
-ENTITY = "mlds-lab"
-OUTPUT_STEM = f"files/visualizations/jacobian_orbit_xy_heatmap_{RUN_ID}"
-NUM_REFERENCE_TRAJS = 5  # Use 4 or 5; script will cap to available
-SMA_QUANTILES = (0.1, 0.5, 0.9)
-ECC_QUANTILES = (0.1, 0.9)
-POINT_SIZE = 6
-POINT_ALPHA = 0.9
-COLORMAP = "magma"
+neuralODE_path = neuralODE.__path__[0]
+
+np.random.seed(42)  # For reproducibility
+# use style sheet
+
+mldsml_path = mldsml.__path__[0]
+plt.style.use(f"{mldsml_path}/styles/dark_scientific.mplstyle")
+ALL_DATASETS = ["single_TBP_planar", "simple_TBP_planar", "complex_TBP_planar"]
 
 
-def _select_reference_orbits(elements, *, num_reference, sma_q, ecc_q):
-    """Pick orbits near target (sma, ecc) quantiles; returns indices."""
-    if elements.size == 0:
-        return []
-
-    sma = elements[:, 0]
-    ecc = elements[:, 1]
-
-    sma_targets = np.quantile(sma, sma_q)
-    ecc_targets = np.quantile(ecc, ecc_q)
-
-    targets = [
-        (sma_targets[0], ecc_targets[0]),
-        (sma_targets[0], ecc_targets[-1]),
-        (sma_targets[len(sma_targets) // 2], np.quantile(ecc, 0.5)),
-        (sma_targets[-1], ecc_targets[0]),
-        (sma_targets[-1], ecc_targets[-1]),
-    ]
-
-    targets = targets[: max(1, num_reference)]
-
-    sma_range = max(np.ptp(sma), 1e-9)
-    ecc_range = max(np.ptp(ecc), 1e-9)
-
-    chosen = []
-    for target_sma, target_ecc in targets:
-        deltas = np.sqrt(
-            ((sma - target_sma) / sma_range) ** 2
-            + ((ecc - target_ecc) / ecc_range) ** 2,
-        )
-        for idx in np.argsort(deltas):
-            if int(idx) not in chosen:
-                chosen.append(int(idx))
-                break
-
-    return chosen
-
-
-def _compute_jacobian_metrics(model, t_val, y_val):
-    """Return (min_real, max_real) eigenvalue metrics for Jacobian at (t, y)."""
-
-    def _eval(y_in):
-        jac = jax.jacrev(lambda yy: model.func(t_val, yy))(y_in)
-        eigvals = jnp.linalg.eigvals(jac)
-        real_parts = jnp.real(eigvals)
-        return jnp.min(real_parts), jnp.max(real_parts)
-
-    min_real, max_real = _eval(y_val)
-    return float(min_real), float(max_real)
-
-
-def main():
-    if RUN_ID == "REPLACE_WITH_WANDB_RUN_ID":
-        raise ValueError("Set RUN_ID to the target wandb run id before executing.")
-
-    # Load model + config from wandb
-    config, model, run_obj = load_model_wandb(RUN_ID, project=PROJECT, entity=ENTITY)
-
-    # Load dataset in physical units
-    dataset_name = config.data.dataset_name
+def evaluate_acceleration_residuals(data_set, model, config, run_id):
+    dyn = get_dynamics_class(config.data.problem)
+    # Get average acceleration error over trajectories
     data_dict = load_dataset(
-        dataset_name,
+        data_set,
         version="latest",
-        project=PROJECT,
-        entity=ENTITY,
+        project="neuralODEs",
+        entity="mlds-lab",
     )
+    data_dict_jnp = format_data(data_dict)
 
-    orbit_keys = sorted(data_dict.keys())
-    elements = _initial_orbital_elements(data_dict)
-    if elements.shape[0] != len(orbit_keys):
-        raise ValueError(
-            "Mismatch between orbital element count and orbit keys; check dataset integrity.",
+    ts = data_dict_jnp["t"]
+    ys = data_dict_jnp["y"]
+    mask_ys = data_dict_jnp["mask"]
+    metric = AccelerationMetric(true_dynamics=dyn)
+    acc_error = metric(model, ts, ys, mask_ys)
+    # log_metric_to_existing_run(
+    #     f"mean_acc_err_{data_set}",
+    #     acc_error,
+    #     run_id,
+    # )
+    return acc_error
+
+
+def select_best_runs_by_train_dataset(runs):
+    """
+    Select the lowest-acceleration-error run per training dataset.
+
+    Selection metric is acceleration error evaluated on the run's own
+    training dataset.
+    """
+    best_by_dataset = {}
+    for run in runs:
+        try:
+            config, model, run_obj = load_model_wandb(
+                run.id,
+                project="neuralODEs",
+                entity="mlds-lab",
+            )
+            train_dataset = str(config.data.dataset_name)
+            acc_err = float(
+                evaluate_acceleration_residuals(
+                    train_dataset,
+                    model,
+                    config,
+                    run_obj.id,
+                ),
+            )
+        except Exception as exc:
+            print(f"[warn] skipping run {getattr(run, 'id', 'unknown')}: {exc}")
+            continue
+
+        current = best_by_dataset.get(train_dataset)
+        if current is None or acc_err < current["score"]:
+            best_by_dataset[train_dataset] = {
+                "score": acc_err,
+                "config": config,
+                "model": model,
+                "run_obj": run_obj,
+            }
+
+    selected = [best_by_dataset[key] for key in sorted(best_by_dataset.keys())]
+    print(
+        f"Selected {len(selected)} best runs "
+        f"(one per training dataset): {[str(s['config'].data.dataset_name) for s in selected]}",
+    )
+    for sel in selected:
+        print(
+            "  "
+            f"{sel['run_obj'].id} "
+            f"dataset={sel['config'].data.dataset_name} "
+            f"train_acc_err={sel['score']:.6f}",
         )
+    return selected
 
-    ref_indices = _select_reference_orbits(
-        elements,
-        num_reference=min(NUM_REFERENCE_TRAJS, len(orbit_keys)),
-        sma_q=SMA_QUANTILES,
-        ecc_q=ECC_QUANTILES,
+
+def random_sample_indices(data_dict, num_traj):
+    """
+    Randomly sample indices from the dataset.
+    """
+    num_samples = data_dict["y"].shape[0]
+    if num_traj > num_samples:
+        raise ValueError(
+            "num_traj cannot be greater than the number of samples in the dataset.",
+        )
+    return np.random.choice(num_samples, num_traj, replace=False)
+
+
+def plot_integrated_orbits(test_dataset, model, config, run_id):
+    # Plot the integrated orbits for each of the datasets via some form of integration visualizer
+    data_dict = load_dataset(
+        test_dataset,
+        version="latest",
+        project="neuralODEs",
+        entity="mlds-lab",
     )
-    if not ref_indices:
-        raise ValueError("No reference orbits selected.")
-
-    # Normalize the subset for model evaluation
     transform = Normalization2BP(
         l_char=constants.RADIUS_EARTH,
         mu=constants.MU_EARTH,
     )
-    subset_dict = {orbit_keys[i]: data_dict[orbit_keys[i]] for i in ref_indices}
-    subset_norm = transform.normalize_dataset(subset_dict)
+    data_dict = transform.normalize_dataset(data_dict)
+    data_idx = {
+        "single_TBP_planar": np.array([0]),
+        "simple_TBP_planar": np.array([0, 10, 20]),
+        "complex_TBP_planar": np.array([10, 50, 90]),
+    }
 
-    # Compute Jacobian metrics for each reference orbit
-    orbits_payload = []
-    for idx in ref_indices:
-        orbit_key = orbit_keys[idx]
-        phys_y = np.array(data_dict[orbit_key]["y"])
-        norm_y = np.array(subset_norm[orbit_key]["y"])
-        t_norm = np.array(subset_norm[orbit_key]["t"])
+    data_dict_jnp = format_data(data_dict)
+    indices = data_idx.get(test_dataset)
+    ICs = data_dict_jnp["y"][indices, 0, :]
+    times = data_dict_jnp["t"][indices]
 
-        if phys_y.shape[1] != norm_y.shape[1]:
-            raise ValueError(f"Orbit length mismatch for {orbit_key}.")
+    # filter the times for the last element in each row that isn't a nan
+    t0_idx_list = [np.where(~np.isnan(times[i]))[0][0] for i in range(len(times))]
+    tf_idx_list = [np.where(~np.isnan(times[i]))[0][-1] for i in range(len(times))]
 
-        x = phys_y[0, :]
-        y = phys_y[1, :]
+    tf_list = jnp.array([times[i][tf_idx_list[i]] for i in range(len(times))])
+    dt_list = jnp.array(
+        [(tf_list[i] - times[i][t0_idx_list[i]]) / 500 for i in range(len(times))],
+    )
 
-        min_real_vals = []
-        max_real_vals = []
-        for k in range(norm_y.shape[1]):
-            yk = jnp.asarray(norm_y[:, k])
-            tk = float(t_norm[k])
-            min_real, max_real = _compute_jacobian_metrics(model, tk, yk)
-            min_real_vals.append(min_real)
-            max_real_vals.append(max_real)
+    experiment = IntegrationExperiment(
+        model=model,
+        initial_conditions=ICs,
+        tf=tf_list,
+        dt=dt_list,
+        true_dynamics=get_dynamics_class(config.data.problem),
+    )
+    experiment.run()
+    vis = ModIntegrationVisualizer(experiment)
+    fig = vis.plot()
+    fig_small = vis.plot_small()
+    return fig, fig_small
+    # upload_fig_to_existing_run(f"IntegratedOrbits_{test_dataset}", fig, run_id)
 
-        sma_km, ecc = elements[idx, 0], elements[idx, 1]
-        label = f"a={sma_km:.0f} km, e={ecc:.3f}"
-        orbits_payload.append(
+
+@ray.remote(num_cpus=4, num_gpus=0)
+def evaluate_model(model, config, run_id):
+    train_data_set = config.data.dataset_name
+
+    # Get average acceleration error over trajectories
+
+    results = []
+    for data_set in ALL_DATASETS:
+        value = evaluate_acceleration_residuals(data_set, model, config, run_id)
+        results.append(
             {
-                "label": label,
-                "x": x,
-                "y": y,
-                "min_real": np.array(min_real_vals),
-                "max_real": np.array(max_real_vals),
+                "train_data_set": train_data_set,
+                "test_dataset": data_set,
+                "mean_acc_err": value,
             },
         )
 
-    # Compute global scales for color consistency
-    all_min = np.concatenate([o["min_real"] for o in orbits_payload])
-    all_max = np.concatenate([o["max_real"] for o in orbits_payload])
-    min_vmin, min_vmax = float(all_min.min()), float(all_min.max())
-    max_vmin, max_vmax = float(all_max.min()), float(all_max.max())
+    for dataset in ALL_DATASETS:
+        try:
+            fig, fig_small = plot_integrated_orbits(dataset, model, config, run_id)
 
-    # Plot
-    plt.style.use("dark_background")
-    fig, axes = plt.subplots(1, 2, figsize=(14, 6), constrained_layout=True)
-    fig.suptitle(
-        f"Jacobian Eigenvalue Heatmap in XY Plane ({run_obj.id})",
-        fontsize=12,
-    )
+            fig_path = f"{neuralODE_path}/../files/figures/IntegratedOrbits_{train_data_set}_{dataset}.pdf"
+            fig_small_path = f"{neuralODE_path}/../files/figures/IntegratedOrbits_{train_data_set}_{dataset}_small.pdf"
+            # save the figures
+            plt.figure(fig.number)
+            plt.savefig(fig_path)
+            plt.figure(fig_small.number)
+            plt.savefig(fig_small_path)
+            plt.close("all")  # Close all figures to free memory
+        except Exception as e:
+            raise e
+            print(f"Error plotting integrated orbits for {dataset}: {e}")
+            fig_path, fig_small_path = "example-image-a", "example-image-a"
 
-    ax_min, ax_max = axes
-
-    for orbit in orbits_payload:
-        sc_min = ax_min.scatter(
-            orbit["x"],
-            orbit["y"],
-            c=orbit["min_real"],
-            s=POINT_SIZE,
-            alpha=POINT_ALPHA,
-            cmap=COLORMAP,
-            vmin=min_vmin,
-            vmax=min_vmax,
-            label=orbit["label"],
-        )
-        sc_max = ax_max.scatter(
-            orbit["x"],
-            orbit["y"],
-            c=orbit["max_real"],
-            s=POINT_SIZE,
-            alpha=POINT_ALPHA,
-            cmap=COLORMAP,
-            vmin=max_vmin,
-            vmax=max_vmax,
+        results.append(
+            {
+                "train_data_set": train_data_set,
+                "test_dataset": dataset,
+                "integrated_orbits": fig_path,
+                "integrated_orbits_small": fig_small_path,
+            },
         )
 
-    ax_min.set_title("min(Re(λ))")
-    ax_max.set_title("max(Re(λ))")
-    for ax in axes:
-        ax.set_xlabel("x [km]")
-        ax.set_ylabel("y [km]")
-        ax.set_aspect("equal", "box")
-        ax.grid(alpha=0.2)
+    # for LO_dataset in LO_datasets:
+    #     plot_residuals(LO_dataset, model, config, run_id)
 
-    ax_min.legend(loc="upper right", fontsize=8, frameon=False)
-    fig.colorbar(sc_min, ax=ax_min, shrink=0.9, pad=0.02)
-    fig.colorbar(sc_max, ax=ax_max, shrink=0.9, pad=0.02)
+    return results
 
-    save_path, ext = prepare_save_path(OUTPUT_STEM, default_ext="pdf")
-    pdf_path, png_path = save_pdf_and_png(
-        fig,
-        save_path,
-        ext,
-        transparent_png=True,
-    )
-    print(f"Saved visualization to {pdf_path} and {png_path}")
+
+def main():
+    os.makedirs(f"{neuralODE_path}/../files/figures", exist_ok=True)
+    os.makedirs(f"{neuralODE_path}/../files/tables/", exist_ok=True)
+
+    runs = query_runs_in_group("conference-2BP-redo-v6")
+
+    selected_runs = select_best_runs_by_train_dataset(runs)
+    if not selected_runs:
+        raise RuntimeError("No runs selected for evaluation.")
+
+    # plot_integrated_orbits("single_TBP_planar", None, None, None)
+    ray.init()
+    results_all = []
+    futures_all = []
+    for selected in selected_runs:
+        config = selected["config"]
+        model = selected["model"]
+        run_id = selected["run_obj"]
+        # Evaluate the model
+        future = evaluate_model.remote(model, config, run_id.id)
+        futures_all.append(future)
+
+    for future in futures_all:
+        results = ray.get(future)
+
+        # Collect results from each run
+        results_all.extend(results)
+
+    os.makedirs(f"{neuralODE_path}/../files/results", exist_ok=True)
+    with open(
+        f"{neuralODE_path}/../files/results/2BP_results.pkl",
+        "wb",
+    ) as f:
+        pickle.dump(results_all, f)
+
+    make_tables(results_all)
 
 
 if __name__ == "__main__":
-    main()
+    results = main()
