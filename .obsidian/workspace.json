@@ -67,12 +67,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 Spring 2026.md",
+                "file": "Archive/Fall 2025.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01 Spring 2026"
+              "title": "Fall 2025"
             }
           },
           {
@@ -214,7 +214,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "ray/tmp ",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -225,7 +225,8 @@
               "title": "Search"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
@@ -324,9 +325,9 @@
   },
   "active": "d060b4b56f57fc59",
   "lastOpenFiles": [
+    "01 Spring 2026.md",
     "cleaning code/backup.md",
     "cleaning code/Cleaning Code.md",
-    "01 Spring 2026.md",
     "Untitled 1.md",
     "Untitled.md",
     "Attachments/Pasted image 20260303124525.png",
