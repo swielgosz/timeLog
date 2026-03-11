@@ -185,7 +185,8 @@
               "title": "Untitled 1"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -335,7 +336,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "e8c011cc58a546a5",
+  "active": "23ec67b43e84b10b",
   "lastOpenFiles": [
     "02 Advising Meetings.md",
     "01 Spring 2026.md",
