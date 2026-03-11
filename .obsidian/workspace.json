@@ -186,7 +186,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -336,10 +336,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "23ec67b43e84b10b",
+  "active": "f90060874b700032",
   "lastOpenFiles": [
-    "Technical Notes/Ergodic Coverage.md",
     "01 Spring 2026.md",
+    "Technical Notes/Ergodic Coverage.md",
     "Archive/Fall 2025.md",
     "Technical Notes/3BP Lectures Shane Ross.md",
     "cleaning code/backup.md",
