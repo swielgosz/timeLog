@@ -185,8 +185,7 @@
               "title": "Untitled 1"
             }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "vertical"
@@ -336,8 +335,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f90060874b700032",
+  "active": "e8c011cc58a546a5",
   "lastOpenFiles": [
+    "02 Advising Meetings.md",
     "01 Spring 2026.md",
     "Technical Notes/Ergodic Coverage.md",
     "Archive/Fall 2025.md",
@@ -347,7 +347,6 @@
     "Untitled 1.md",
     "Untitled.md",
     "Attachments/Pasted image 20260303124525.png",
-    "02 Advising Meetings.md",
     "Latent and UDE codes/Training Scripts.md",
     "Sensitivity Analysis.md",
     "Latent and UDE codes/Data generation.md",
