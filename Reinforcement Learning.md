@@ -1,7 +1,7 @@
 # RL Overview
 ## Markov decision process (MDP)
 MDP $(\mathcal S, \mathcal A, P, r, \gamma)$
-where $\mathcal{S}$ is the state space, $\mathcal{A}$ is the action space, $P(s_{t+1} \mid s_t, a_t)$ is the transition kernel, $r(s, a, s)$ or $r(s_t, a_t)$ is the reward function, and $\gamma$ is the discount factor.
+where $\mathcal{S}$ is the state space, $\mathcal{A}$ is the action space, $P(s_{t+1} \mid s_t, a_t)$ is the transition kernel, $r(s_t, a_t, s_{t+1})$ or $r(s_t, a_t)$ is the reward function, and $\gamma$ is the discount factor.
 
 **Transition kernel**
 A transition kernel is the conditional probability law of the next state given the current state and action. In the context of an MDP, it tells you how the next state is distributed given the current state and action.

@@ -200,7 +200,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -350,11 +350,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "68daf18b81b03983",
+  "active": "23ec67b43e84b10b",
   "lastOpenFiles": [
-    "Technical Notes/Ergodic Coverage.md",
-    "Reinforcement Learning.md",
     "01 Spring 2026.md",
+    "Reinforcement Learning.md",
+    "Technical Notes/Ergodic Coverage.md",
     "Attachments/Pasted image 20260313155908.png",
     "Attachments/recon_compare_orbit_grid 2.png",
     "Attachments/recon_compare_orbit_grid.pdf",
