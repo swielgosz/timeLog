@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Technical Notes/Ergodic Coverage.md",
+                "file": "01 Spring 2026.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Ergodic Coverage"
+              "title": "01 Spring 2026"
             }
           },
           {
@@ -352,9 +352,9 @@
   },
   "active": "23ec67b43e84b10b",
   "lastOpenFiles": [
+    "Technical Notes/Ergodic Coverage.md",
     "01 Spring 2026.md",
     "Reinforcement Learning.md",
-    "Technical Notes/Ergodic Coverage.md",
     "Attachments/Pasted image 20260313155908.png",
     "Attachments/recon_compare_orbit_grid 2.png",
     "Attachments/recon_compare_orbit_grid.pdf",
