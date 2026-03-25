@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 Spring 2026.md",
+                "file": "02 Advising Meetings.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01 Spring 2026"
+              "title": "02 Advising Meetings"
             }
           },
           {
@@ -243,12 +243,12 @@
   },
   "active": "e8c011cc58a546a5",
   "lastOpenFiles": [
+    "01 Spring 2026.md",
     "train_latent_2BP_compare.py.md",
     "train_latent_2BP_gru_jacobian_reg.py.md",
     "train_latent_2BP_mapper_jacobian_reg.py.md",
     "train_latent_2bp_oe.py.md",
     "losses.py.md",
-    "01 Spring 2026.md",
     "Latent and UDE codes/Training Scripts.md",
     "Reinforcement Learning.md",
     "cleaning code/backup.md",
