@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "losses.py.md",
+                "file": "01 Spring 2026.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "losses.py"
+              "title": "01 Spring 2026"
             }
           },
           {
@@ -91,7 +91,8 @@
               "title": "train_latent_2BP_compare.py"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -241,19 +242,19 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "e8c011cc58a546a5",
+  "active": "3ca203b88fc520a6",
   "lastOpenFiles": [
+    "losses.py.md",
+    "02 Advising Meetings.md",
     "01 Spring 2026.md",
     "train_latent_2BP_compare.py.md",
     "train_latent_2BP_gru_jacobian_reg.py.md",
     "train_latent_2BP_mapper_jacobian_reg.py.md",
     "train_latent_2bp_oe.py.md",
-    "losses.py.md",
     "Latent and UDE codes/Training Scripts.md",
     "Reinforcement Learning.md",
     "cleaning code/backup.md",
     "Attachments/Pasted image 20260303124525.png",
-    "02 Advising Meetings.md",
     "Archive/Fall 2025.md",
     "Technical Notes/The Vanishing Gradient Problem for Stiff Neural Differential Equations.md",
     "Technical Notes/3BP Lectures Shane Ross.md",
