@@ -258,10 +258,10 @@
   },
   "active": "3ca203b88fc520a6",
   "lastOpenFiles": [
-    "test_latent_autencoder_2BP.py.md",
-    "01 Spring 2026.md",
-    "losses.py.md",
     "02 Advising Meetings.md",
+    "01 Spring 2026.md",
+    "test_latent_autencoder_2BP.py.md",
+    "losses.py.md",
     "train_latent_2BP_compare.py.md",
     "train_latent_2BP_gru_jacobian_reg.py.md",
     "train_latent_2BP_mapper_jacobian_reg.py.md",
