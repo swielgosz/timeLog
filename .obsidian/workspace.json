@@ -36,6 +36,18 @@
             }
           },
           {
+            "id": "ad4a6e071ce1f0a9",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.12.7"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.12.7"
+            }
+          },
+          {
             "id": "3c660a5c60a252ab",
             "type": "leaf",
             "state": {
@@ -106,7 +118,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -256,7 +268,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3ca203b88fc520a6",
+  "active": "ad4a6e071ce1f0a9",
   "lastOpenFiles": [
     "02 Advising Meetings.md",
     "01 Spring 2026.md",
