@@ -1,3 +1,7 @@
+# April 1
+Latent ODE:
+![[Pasted image 20260401125841.png]]
+Koopman:
 
 
 # March 4
