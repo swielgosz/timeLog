@@ -1,7 +1,10 @@
 # April 1
 Latent ODE:
 ![[Pasted image 20260401125841.png]]
-Koopman:
+Koopman (no segmentation):
+![[Pasted image 20260401130205.png]]
+run_id: b1s2lngc
+![[Pasted image 20260401130424.png]]
 
 
 # March 4
