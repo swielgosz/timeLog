@@ -6,6 +6,16 @@ Diagnose the koopman stuff - this doesn't totally make sense
 What do we need to understand why things are not behaving the way that they should - 
 We want to evaluate specific parts of model performance:
 - reconstruction (encoding/decoding)
+- propagation
+- dynamics
+- mix of qualitative and quantitative
+- focus on what errors exist - dynamics, encoder, etc. 
+- define experiment which can quantify error, and then we can choose what metrics we want and fiddle with it
+- what is broken, and what circumstances? circular orbit, etc. 
+- can we decouple the encoder and decoder with the dynamics - what happens if we just sample from latent space (no encoder/decoder)
+	- hold latent var 2 at 0, vary var 1. integrate, decode etc
+	- is there an intuitive structure
+	- every metric will have figure etc
 Latent ODE:
 ![[Pasted image 20260401125841.png]]
 Koopman (no segmentation):
