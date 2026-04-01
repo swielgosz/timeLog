@@ -1,4 +1,11 @@
 # April 1
+We can beat down the uncertainty with GRU - especially good with noisy trajectories. We want an informative initial belief distribution 
+Double check intuition with kidger and otherwise - he was talking about sparse dataset with unknown state. Determine if there is value in doing this 
+Is there a reason why we would need to do this when we have perfect knowledge of the state? 
+Diagnose the koopman stuff - this doesn't totally make sense
+What do we need to understand why things are not behaving the way that they should - 
+We want to evaluate specific parts of model performance:
+- reconstruction (encoding/decoding)
 Latent ODE:
 ![[Pasted image 20260401125841.png]]
 Koopman (no segmentation):
