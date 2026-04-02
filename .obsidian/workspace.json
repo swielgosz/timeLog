@@ -117,7 +117,8 @@
               "title": "test_latent_autencoder_2BP.py"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -267,13 +268,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "e8c011cc58a546a5",
+  "active": "3ca203b88fc520a6",
   "lastOpenFiles": [
+    "02 Advising Meetings.md",
     "Attachments/Pasted image 20260401130424.png",
     "Attachments/Pasted image 20260401130205.png",
     "Attachments/Pasted image 20260401125841.png",
     "01 Spring 2026.md",
-    "02 Advising Meetings.md",
     "Attachments/Pasted image 20260331212450.png",
     "Attachments/Pasted image 20260331135318.png",
     "Attachments/Pasted image 20260331134937.png",
@@ -281,7 +282,6 @@
     "Attachments/Pasted image 20260331132613.png",
     "Attachments/Pasted image 20260331132208.png",
     "Attachments/Pasted image 20260331131432.png",
-    "Attachments/Pasted image 20260331131303.png",
     "test_latent_autencoder_2BP.py.md",
     "losses.py.md",
     "train_latent_2BP_compare.py.md",
