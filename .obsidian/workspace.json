@@ -160,7 +160,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "ray/tmp ",
+                "query": "bq8nr3my",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -171,7 +171,8 @@
               "title": "Search"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
@@ -268,7 +269,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3ca203b88fc520a6",
+  "active": "f3e8fd81ae422f24",
   "lastOpenFiles": [
     "02 Advising Meetings.md",
     "01 Spring 2026.md",
