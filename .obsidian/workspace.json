@@ -174,7 +174,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "transfer",
+                "query": "summary",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -283,7 +283,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3ca203b88fc520a6",
+  "active": "f3e8fd81ae422f24",
   "lastOpenFiles": [
     "02 Advising Meetings.md",
     "Archive/Fall 2025.md",
