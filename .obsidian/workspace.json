@@ -174,7 +174,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "bq8nr3my",
+                "query": "transfer",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -185,7 +185,8 @@
               "title": "Search"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
@@ -284,8 +285,9 @@
   },
   "active": "3ca203b88fc520a6",
   "lastOpenFiles": [
-    "Archive/Fall 2025.md",
     "02 Advising Meetings.md",
+    "Archive/Fall 2025.md",
+    "Archive/Research Notes.md",
     "01 Spring 2026.md",
     "Untitled 2.md",
     "Attachments/Pasted image 20260401130424.png",
@@ -318,7 +320,6 @@
     "Technical Notes/Periodic Orbit Discovery.md",
     "Technical Notes/Ergodic Coverage.md",
     "Technical Notes/Latent ODEs.md",
-    "Archive/Research Notes.md",
     "Archive/Research and Life Notes.md",
     "Attachments/recon_compare_orbit_grid.pdf",
     "Attachments/cf4796d9-aba4-4ba3-bd80-4a44b61e2312.pdf",
