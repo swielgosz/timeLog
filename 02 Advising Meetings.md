@@ -1,7 +1,8 @@
 # April 15
 be able to speak to transformers - don't need to process sequentially
 do presentation at high level first. don't need full derivations
-good for datasets with uncertainty - used for RL to construct datasets with some belief. co
+good for datasets with uncertainty - used for RL to construct datasets with some belief. connect to estimation and kalman filtering
+
 **Metrics**
 Encoder/decoder
 - **RMSE position / RMSE velocity**: For each orbit, compute the per-timestep position error norm, then take RMSE **over timesteps**. The reported number is then the **mean of that per-orbit RMSE over all orbits**. So it's mean-over-orbits of RMSE-over-time.
