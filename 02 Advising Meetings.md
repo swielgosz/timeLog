@@ -1,3 +1,16 @@
+# April 15
+**Metrics**
+Encoder/decoder
+- **RMSE position / RMSE velocity**: For each orbit, compute the per-timestep position error norm, then take RMSE **over timesteps**. The reported number is then the **mean of that per-orbit RMSE over all orbits**. So it's mean-over-orbits of RMSE-over-time.
+- **Mean position MAPE**: For each orbit, compute `|pos_err| / |pos_true|` at each timestep, average **over timesteps**. Reported number is the **mean of that over all orbits**.
+- **Mean accum pos error**: For each orbit, sum `pos_err * dt` **over timesteps** (a trapezoid-style integral over the arc). Reported number is the **mean of that integral over all orbits**.
+Pointwise Dynamics
+- **Mean accel error**: For each orbit, compute the % acceleration error at each of `n_grid` evenly-spaced arc points, average **over those timesteps** → one scalar per orbit (`mean_pct_errors`). Reported number is `np.mean(mean_pct_errors)` — **mean-over-orbits of mean-over-timesteps**.
+- **Median accel error**: Same per-orbit scalars, but `np.median` over orbits instead of mean.
+- **State-mismatch accel**: For each orbit, evaluate `a(ŷ_hat)` vs `a(y_true)` at each timestep, average the % error **over timesteps**. Reported number is the **mean of that over all orbits**.
+Propagation
+- **Mean final pos/vel error**: Take the error at the **last timestep only** for each orbit, then average **over orbits**. There is no time-averaging here — it's a single endpoint measurement per orbit.
+- **Mean accum pos error**: Same cumulative integral as Section 1 but in physical units (km·s), taken at the final timestep, then averaged over orbits.
 # April 1
 We can beat down the uncertainty with GRU - especially good with noisy trajectories. We want an informative initial belief distribution 
 Double check intuition with kidger and otherwise - he was talking about sparse dataset with unknown state. Determine if there is value in doing this 

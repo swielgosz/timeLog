@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Sequential Neural Networks.md",
+                "file": "02 Advising Meetings.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Sequential Neural Networks"
+              "title": "02 Advising Meetings"
             }
           },
           {
@@ -270,8 +270,8 @@
   },
   "active": "ba51c9e467c6cc8e",
   "lastOpenFiles": [
-    "01 Spring 2026.md",
     "Sequential Neural Networks.md",
+    "01 Spring 2026.md",
     "cleaning code/losses.py.md",
     "Lit Review Color Code.md",
     "02 Advising Meetings.md",
