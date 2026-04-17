@@ -117,8 +117,7 @@
               "title": "test_latent_autencoder_2BP.py"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -268,13 +267,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ba51c9e467c6cc8e",
+  "active": "3ca203b88fc520a6",
   "lastOpenFiles": [
+    "02 Advising Meetings.md",
     "Sequential Neural Networks.md",
     "01 Spring 2026.md",
     "cleaning code/losses.py.md",
     "Lit Review Color Code.md",
-    "02 Advising Meetings.md",
     "cleaning code/metrics.md",
     "Notebook Contents.md",
     "Reinforcement Learning.md",

@@ -1,9 +1,4 @@
 # April 15
-FFPU: table and chairs near Wonderland
-
-Table: wood, 24"x24" surface, 30" height. It's not too heavy but it's a bit awkward to carry so I recommend car pickup or multiple people
-
-Chairs: one is missing whatever fastener connects the seat to the rest but I've been using it like that for the last couple years anyway. I'm sure you can fix it for less than 50 cents with the right fastener
 
 be able to speak to transformers - don't need to process sequentially
 do presentation at high level first. don't need full derivations
