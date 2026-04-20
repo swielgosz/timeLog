@@ -4,6 +4,17 @@ Hopfield-> Jordean/Elman->RNN -> LSTM -> GRU -> Transformers
 # Motivation
 Seabstian Raschka Intro to Deep Learning:
 https://www.youtube.com/watch?v=q5YxK17tRm0&list=PLTKMiZHVd_2KJtIXOW0zFhFfBaJJilH51&index=126
+
+Andrew Ng:
+https://www.youtube.com/watch?v=S7oA5C43Rbc
+Examples:
+- Speech recognition: audio input x (sequence) -> text output y (sequenced)
+- Music generation: integer (not sequenced, maybe corresponds to genre) -> music note output sequence
+- Sentiment classification: e.g. "there is nothing to like in this movie" -> one syar review
+- DNA sequence analysis: input sequence -> output portion corresponding to a protein
+- Machine translation: french -> english
+- video activity recognition: given sequence of frames -> output activity (e.g. running)
+- Name entity recognition: given se
 # Relevance to RL
 
 # Relevance to filtering
