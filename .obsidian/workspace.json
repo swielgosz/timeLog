@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 Spring 2026.md",
+                "file": "Sequential Neural Networks.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01 Spring 2026"
+              "title": "Sequential Neural Networks"
             }
           },
           {
@@ -272,6 +272,7 @@
     "02 Advising Meetings.md",
     "Sequential Neural Networks.md",
     "01 Spring 2026.md",
+    "Untitled",
     "cleaning code/losses.py.md",
     "Lit Review Color Code.md",
     "cleaning code/metrics.md",
@@ -304,7 +305,6 @@
     "cleaning code/train_latent_2bp_oe.py.md",
     "Latent and UDE codes/Training Scripts.md",
     "cleaning code/backup.md",
-    "Technical Notes/The Vanishing Gradient Problem for Stiff Neural Differential Equations.md",
     "Attachments/recon_compare_orbit_grid.pdf",
     "Attachments/cf4796d9-aba4-4ba3-bd80-4a44b61e2312.pdf",
     "Attachments/5de52ce2-36b7-4ea5-956a-7c28d42a7ac7.pdf",
@@ -313,7 +313,6 @@
     "Journal Paper",
     "cleaning code",
     "Attachments/multi_dataset_xy_baseline 1 1.pdf",
-    "Attachments/multi_dataset_xy_fixnu0 1.pdf",
-    "Attachments/multi_dataset_xy_baseline 1.pdf"
+    "Attachments/multi_dataset_xy_fixnu0 1.pdf"
   ]
 }
