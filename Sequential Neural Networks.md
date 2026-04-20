@@ -28,6 +28,8 @@ Examples of supervised problems with input x and output y. Some have x and y as 
 # Temporal Convolutional Networks
 https://www.youtube.com/watch?v=rT77lBfAZm4
 What is a convolution? How is it different than regression?
+CNN: https://www.youtube.com/watch?v=QzY57FaENXg
+Feedforward vs CNN vs RNN: https://www.youtube.com/watch?v=u7obuspdQu4
 # RNN
 https://www.youtube.com/watch?v=AsNTP8Kwu80&list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-ME1&index=15
 https://www.youtube.com/watch?v=LHXXI4-IEns
