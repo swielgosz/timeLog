@@ -13,7 +13,7 @@ https://www.youtube.com/watch?v=YCzL96nL7j0&list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-
 Foundational paper: “Long Short-Term Memory” - Hochreiter & Schmidhuber, 1997.
 # GRU
 “Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation” — Cho et al., 2014.
-
+https://www.youtube.com/watch?v=IBs8D8PWMc8
 # Seq2Seq
 https://www.youtube.com/watch?v=L8HKweZIOmg&list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-ME1&index=18
 “Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation” — Cho et al., 2014
