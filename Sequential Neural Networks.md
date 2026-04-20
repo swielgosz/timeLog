@@ -2,7 +2,7 @@
 Hopfield-> Jordean/Elman->RNN -> LSTM -> GRU -> Transformers
 
 # Motivation
-
+https://www.youtube.com/watch?v=Ed8GTvkzkZE
 # Relevance to RL
 
 # Relevance to filtering
