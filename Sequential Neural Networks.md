@@ -2,7 +2,8 @@
 Hopfield-> Jordean/Elman->RNN -> LSTM -> GRU -> Transformers
 
 # Motivation
-https://www.youtube.com/watch?v=Ed8GTvkzkZE
+Seabstian Raschka Intro to Deep Learning:
+https://www.youtube.com/watch?v=q5YxK17tRm0&list=PLTKMiZHVd_2KJtIXOW0zFhFfBaJJilH51&index=126
 # Relevance to RL
 
 # Relevance to filtering
