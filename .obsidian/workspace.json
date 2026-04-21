@@ -53,12 +53,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "train_latent_2bp_oe.py.md",
+                "file": "Sequential Neural Networks.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "train_latent_2bp_oe.py"
+              "title": "Sequential Neural Networks"
             }
           },
           {
@@ -118,7 +118,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -175,7 +175,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "8b5870f707c309dd",
@@ -268,7 +269,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ba51c9e467c6cc8e",
+  "active": "3c660a5c60a252ab",
   "lastOpenFiles": [
     "01 Spring 2026.md",
     "Sequential Neural Networks.md",

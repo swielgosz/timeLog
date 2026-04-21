@@ -5,6 +5,8 @@ Hopfield-> Jordean/Elman->RNN -> LSTM -> GRU -> Transformers
 ## Seabstian Raschka Intro to Deep Learning:
 https://www.youtube.com/watch?v=q5YxK17tRm0&list=PLTKMiZHVd_2KJtIXOW0zFhFfBaJJilH51&index=126
 ![[L15_intro-rnn__slides.pdf]]
+
+
 ---
 
 ## Andrew Ng:
