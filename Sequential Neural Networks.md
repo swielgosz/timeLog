@@ -11,12 +11,28 @@ How do we know if our model uses sequence information? Logistic regression, MLPs
 
 Iris example: sepal length, sepal width, petal length, petal width.
 
-| SL  | SW  | PL  | PW  |
-| --- | --- | --- | --- |
-|     |     |     |     |
+|     | SL  | SW  | PL  | PW  |
+| --- | --- | --- | --- | --- |
+| 1   |     |     |     |     |
+| 2   |     |     |     |     |
+| ..  |     |     |     |     |
+| 150 |     |     |     |     |
+We split dataset into training and test set. We shuffle the dataset initially. If we evaluate the model on the test set and we shuffle the test set, performance should not be affected. This is an indication that there is no sequence information.
+The data is i.i.d. - independent and identically distributed. Each training sample is independent of each other and from the same distribution. So, we can do a thought experiment - if we shuffle the test set, will it affect our performance? Another sequence we have is in the order of our columns. If we swap the columns, will model performance be affected? If no, then we do not have sequential data. In general, MLPs and logistic regression don't use sequence info across features. 
 
+In sequence data order matters:
+- The movie my friend has not seen is good
+- The movie my friend has seen is not good
+Bag of words model does not work in this case.
+![[Pasted image 20260421102455.png]]
 
-
+Applications:
+- Text classification: we have time dimension over the words, and each document containing a sequence of words is a training example
+- Speech recognition (acoustic modeling) is a sequence of sounds
+- Language translation translates from one sequence to another
+- Stock market prediction - each stock has multiple associated sequenced feature vectors - price, news, etc. This could be associated with a time dimension. Each stock is a different sample
+- DNA sequence modeling - sequenced by character
+- 
 ---
 
 ## Andrew Ng:
