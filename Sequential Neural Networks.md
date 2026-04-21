@@ -44,6 +44,15 @@ For example, look at time step t. It receives the feature vector, indicated by $
 The same concept applies to multilayer RNNs:
 ![[Pasted image 20260421103645.png]]
 
+## Different Types of Sequence Modeling Tasks
+![[Pasted image 20260421105137.png]]
+Many to one - written review, outcome is whether it is positive or negative
+One to many (use together with CNN) - put in an image (someone playing tennis), output is a sequence of text describing the image
+Many-to-many - direct: video captioning to describe a sequence of images; delayed - translating between languages (you can't just translate word by word, you need the context of the entire sentence)
+
+## Backpropagation Through Time
+
+
 ---
 
 ## Andrew Ng:
@@ -96,8 +105,7 @@ Bonus:
 https://www.youtube.com/watch?v=PSs6nxngL6k&list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-ME1&index=19
 https://www.youtube.com/watch?v=zxQyTK8quyY&list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-ME1&index=20
 [Harvard NLP: Annotated "Attention Is All You Need](https://nlp.seas.harvard.edu/annotated-transformer/)
-[The Illustrated Transformer (simpli)]
-https://jalammar.github.io/illustrated-transformer/
+[The Illustrated Transformer (more simplified than above)](https://jalammar.github.io/illustrated-transformer/)
 
 Suggestions from John:
 be able to speak to transformers - don't need to process sequentially
