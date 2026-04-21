@@ -6,6 +6,16 @@ Hopfield-> Jordean/Elman->RNN -> LSTM -> GRU -> Transformers
 https://www.youtube.com/watch?v=q5YxK17tRm0&list=PLTKMiZHVd_2KJtIXOW0zFhFfBaJJilH51&index=126
 ![[L15_intro-rnn__slides.pdf]]
 
+### Sequence Modeling with RNNs
+How do we know if our model uses sequence information? Logistic regression, MLPs do not. There are two types of sequential data that can exist in training data: 1. across the training example axis, 2. across the feature axis. 
+
+Iris example: sepal length, sepal width, petal length, petal width.
+
+| SL  | SW  | PL  | PW  |
+| --- | --- | --- | --- |
+|     |     |     |     |
+
+
 
 ---
 
