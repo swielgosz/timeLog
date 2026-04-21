@@ -133,6 +133,7 @@ Single layer RNN:
 ![[Pasted image 20260421185600.png]]
 Multilayer RNN:
 ![[Pasted image 20260421185612.png]]
+![[Pasted image 20260421192324.png]]
 ## LSTM
 ![[Pasted image 20260421185956.png]]
 ## GRU
