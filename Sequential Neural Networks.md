@@ -95,6 +95,9 @@ Bonus:
 # Transformers
 https://www.youtube.com/watch?v=PSs6nxngL6k&list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-ME1&index=19
 https://www.youtube.com/watch?v=zxQyTK8quyY&list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-ME1&index=20
+[Harvard NLP: Annotated "Attention Is All You Need](https://nlp.seas.harvard.edu/annotated-transformer/)
+[The Illustrated Transformer (simpli)]
+https://jalammar.github.io/illustrated-transformer/
 
 Suggestions from John:
 be able to speak to transformers - don't need to process sequentially
