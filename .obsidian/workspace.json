@@ -117,8 +117,7 @@
               "title": "test_latent_autencoder_2BP.py"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -269,11 +268,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ba51c9e467c6cc8e",
+  "active": "3ca203b88fc520a6",
   "lastOpenFiles": [
+    "Sequential Neural Networks.md",
     "Attachments/Pasted image 20260421111727.png",
     "01 Spring 2026.md",
-    "Sequential Neural Networks.md",
     "Attachments/Pasted image 20260421110208.png",
     "Attachments/Pasted image 20260421110035.png",
     "Attachments/Pasted image 20260421110001.png",
@@ -302,7 +301,6 @@
     "cleaning code/test_latent_autencoder_2BP.py.md",
     "Archive/Fall 2025.md",
     "Archive/Research Notes.md",
-    "Attachments/Pasted image 20260401130424.png",
     "cleaning code/train_latent_2BP_compare.py.md",
     "cleaning code/train_latent_2BP_gru_jacobian_reg.py.md",
     "cleaning code/train_latent_2BP_mapper_jacobian_reg.py.md",
