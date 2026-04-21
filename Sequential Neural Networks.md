@@ -53,7 +53,12 @@ Many-to-many - direct: video captioning to describe a sequence of images; delaye
 ## Backpropagation Through Time
 Weight matrices in single hidden layer RNN:
 ![[Pasted image 20260421105925.png]]
-![[Pasted image 20260421110001.png]]
+You would find $W_{hx}$ and $W_{yh}$ in a regular MLP. 
+In the RNN, we also have $W_{hh}$. So, for an RNN we have two matrices for the hidden layer ($W_h$). We have $W_{hx}$ connecting the input to the hidden layer, and $W_{hh}$ connecting the previous hidden layer to the current hidden layer. We use the same matrices at each time step. So compared to the MLP, $W_{hh}$ is what's new.
+
+Computing the loss:
+![[Pasted image 20260421111727.png]]
+Loss depends on the task performed by the model. For example, if we are just predicting one label for a given text then we wouldn't need $L^{<t-1>}$ or $L^{
 ![[Pasted image 20260421110035.png]]
 This is problematic:
 ![[Pasted image 20260421110208.png]]
@@ -111,6 +116,9 @@ https://www.youtube.com/watch?v=PSs6nxngL6k&list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-
 https://www.youtube.com/watch?v=zxQyTK8quyY&list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-ME1&index=20
 [Harvard NLP: Annotated "Attention Is All You Need](https://nlp.seas.harvard.edu/annotated-transformer/)
 [The Illustrated Transformer (more simplified than above)](https://jalammar.github.io/illustrated-transformer/)
+
+# Other
+[Autoencoder vs VAE](https://towardsdatascience.com/difference-between-autoencoder-ae-and-variational-autoencoder-vae-ed7be1c038f2/)
 
 Suggestions from John:
 be able to speak to transformers - don't need to process sequentially
