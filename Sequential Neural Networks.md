@@ -94,7 +94,7 @@ Feedforward vs CNN vs RNN: https://www.youtube.com/watch?v=u7obuspdQu4
 # RNN
 https://www.youtube.com/watch?v=AsNTP8Kwu80&list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-ME1&index=15
 https://www.youtube.com/watch?v=LHXXI4-IEns
-https://towardsdatascience.com/recurrent-neural-networks-by-example-in-python-ffd204f99470/
+
 Foundational paper: "Finding Structure in Time" - Elman, 1990.
 # LSTM
 https://www.youtube.com/watch?v=YCzL96nL7j0&list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-ME1&index=16
@@ -137,6 +137,11 @@ Multilayer RNN:
 ![[Pasted image 20260421185956.png]]
 ## GRU
 ![[Pasted image 20260421185810.png]]
+
+LSTM v GRU: ![[Pasted image 20260421191316.png]]
+
+
+
 Suggestions from John:
 be able to speak to transformers - don't need to process sequentially
 do presentation at high level first. don't need full derivations
