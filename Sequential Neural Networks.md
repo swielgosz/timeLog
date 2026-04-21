@@ -104,7 +104,7 @@ Foundational paper: “Long Short-Term Memory” - Hochreiter & Schmidhuber, 199
 “Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation” — Cho et al., 2014.
 https://www.youtube.com/watch?v=IBs8D8PWMc8
 https://www.youtube.com/watch?v=8HyCNIVRbSU
-# Seq2Seq
+# Seq2Seq - Don't focus on this
 https://www.youtube.com/watch?v=L8HKweZIOmg&list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-ME1&index=18
 “Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation” — Cho et al., 2014
 “Sequence to Sequence Learning with Neural Networks” — Sutskever, Vinyals & Le, 2014.
@@ -120,7 +120,12 @@ https://www.youtube.com/watch?v=PSs6nxngL6k&list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-
 https://www.youtube.com/watch?v=zxQyTK8quyY&list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-ME1&index=20
 [Harvard NLP: Annotated "Attention Is All You Need](https://nlp.seas.harvard.edu/annotated-transformer/)
 [The Illustrated Transformer (more simplified than above)](https://jalammar.github.io/illustrated-transformer/)
+attention = the core computational tool
+transformer = the machine built around that tool
+LLM = a very large, trained instance of such a machine for language
 
+https://deeprevision.github.io/posts/001-transformer/
+![[Pasted image 20260421194059.png]]
 # Other
 [Autoencoder vs VAE](https://towardsdatascience.com/difference-between-autoencoder-ae-and-variational-autoencoder-vae-ed7be1c038f2/)
 
@@ -146,6 +151,10 @@ LSTM v GRU: ![[Pasted image 20260421191316.png]]
 ![[Pasted image 20260421192521.png]]
 ![[Pasted image 20260421192608.png]]
 ![[Pasted image 20260421192634.png]]
+
+## Transformer
+![[Pasted image 20260421194118.png]]
+
 Suggestions from John:
 be able to speak to transformers - don't need to process sequentially
 do presentation at high level first. don't need full derivations
