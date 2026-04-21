@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Sequential Neural Networks.md",
+                "file": "01 Spring 2026.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Sequential Neural Networks"
+              "title": "01 Spring 2026"
             }
           },
           {
@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "02 Advising Meetings.md",
+                "file": "Sequential Neural Networks.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "02 Advising Meetings"
+              "title": "Sequential Neural Networks"
             }
           },
           {
@@ -117,7 +117,8 @@
               "title": "test_latent_autencoder_2BP.py"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -267,12 +268,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3ca203b88fc520a6",
+  "active": "ba51c9e467c6cc8e",
   "lastOpenFiles": [
-    "Attachments/L15_intro-rnn__slides.pdf",
     "01 Spring 2026.md",
     "Sequential Neural Networks.md",
     "02 Advising Meetings.md",
+    "Attachments/L15_intro-rnn__slides.pdf",
     "Untitled",
     "cleaning code/losses.py.md",
     "Lit Review Color Code.md",
@@ -313,7 +314,6 @@
     "Latent and UDE codes",
     "Journal Paper",
     "cleaning code",
-    "Attachments/multi_dataset_xy_baseline 1 1.pdf",
-    "Attachments/multi_dataset_xy_fixnu0 1.pdf"
+    "Attachments/multi_dataset_xy_baseline 1 1.pdf"
   ]
 }

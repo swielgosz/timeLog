@@ -49,7 +49,10 @@ https://www.youtube.com/watch?v=L8HKweZIOmg&list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-
 
 # ODE-RNN (Latent ODE)
 “Latent ODEs for Irregularly-Sampled Time Series”
-
+Bonus: 
+- [Framing RNN as a kernel method: A neural ODE approach](https://www.youtube.com/watch?v=2_MF2LX9Q5E)
+- [ MIA Special Seminar: David Duvenaud, It's time to talk about irregularly-sampled time series](https://www.youtube.com/watch?v=iB2d99K_vk8)
+- [Latent Stochastic Differential Equations for Irregularly-Sampled Time Series - David Duvenaud](https://www.youtube.com/watch?v=93wr5vhI0F4)
 # Transformers
 https://www.youtube.com/watch?v=PSs6nxngL6k&list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-ME1&index=19
 https://www.youtube.com/watch?v=zxQyTK8quyY&list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-ME1&index=20
