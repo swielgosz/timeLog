@@ -141,8 +141,11 @@ Multilayer RNN:
 
 LSTM v GRU: ![[Pasted image 20260421191316.png]]
 
-
-
+## TCN
+![[Pasted image 20260421192432.png]]
+![[Pasted image 20260421192521.png]]
+![[Pasted image 20260421192608.png]]
+![[Pasted image 20260421192634.png]]
 Suggestions from John:
 be able to speak to transformers - don't need to process sequentially
 do presentation at high level first. don't need full derivations
