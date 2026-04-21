@@ -4,6 +4,26 @@
     "type": "split",
     "children": [
       {
+        "id": "055e50f8feded3ec",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ba51c9e467c6cc8e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Sequential Neural Networks.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Sequential Neural Networks"
+            }
+          }
+        ]
+      },
+      {
         "id": "62f223d0128204bd",
         "type": "tabs",
         "children": [
@@ -19,20 +39,6 @@
               },
               "icon": "lucide-file",
               "title": "01 Spring 2026"
-            }
-          },
-          {
-            "id": "ba51c9e467c6cc8e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Sequential Neural Networks.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Sequential Neural Networks"
             }
           },
           {
@@ -118,7 +124,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -269,8 +275,14 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ba51c9e467c6cc8e",
+  "active": "3c660a5c60a252ab",
   "lastOpenFiles": [
+    "Attachments/Pasted image 20260421185956.png",
+    "Attachments/Pasted image 20260421185810.png",
+    "Attachments/Pasted image 20260421185655.png",
+    "Attachments/Pasted image 20260421185612.png",
+    "Attachments/Pasted image 20260421185600.png",
+    "Attachments/Pasted image 20260421185526.png",
     "01 Spring 2026.md",
     "Sequential Neural Networks.md",
     "Attachments/Pasted image 20260421111727.png",
@@ -278,11 +290,6 @@
     "Attachments/Pasted image 20260421110035.png",
     "Attachments/Pasted image 20260421110001.png",
     "Attachments/Pasted image 20260421105925.png",
-    "Attachments/Pasted image 20260421105137.png",
-    "Attachments/Pasted image 20260421103645.png",
-    "Attachments/Pasted image 20260421103304.png",
-    "Attachments/Pasted image 20260421103002.png",
-    "Attachments/Pasted image 20260421102455.png",
     "02 Advising Meetings.md",
     "Attachments/L15_intro-rnn__slides.pdf",
     "Untitled",
