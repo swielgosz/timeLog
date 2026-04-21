@@ -32,7 +32,18 @@ Applications:
 - Language translation translates from one sequence to another
 - Stock market prediction - each stock has multiple associated sequenced feature vectors - price, news, etc. This could be associated with a time dimension. Each stock is a different sample
 - DNA sequence modeling - sequenced by character
-- 
+
+Overview:
+![[Pasted image 20260421103002.png]]
+We give a feature at time step t to the hidden state, which results in an output at timestep t. Additionally, the hidden layer(s) are receiving information from the previous time steps
+
+Here is the unfolded single layer RNN:
+![[Pasted image 20260421103304.png]]
+For example, look at time step t. It receives the feature vector, indicated by $x^{<t>}$ . It also receives input from the previous time step. So, we receive info from the feature vector at time t, as well as the hidden state of the previous time step t-1. So, the network is aware of the sequence. Left and right are equivalent representations 
+
+The same concept applies to multilayer RNNs:
+![[Pasted image 20260421103645.png]]
+
 ---
 
 ## Andrew Ng:
