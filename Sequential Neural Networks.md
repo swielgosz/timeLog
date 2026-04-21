@@ -51,7 +51,12 @@ One to many (use together with CNN) - put in an image (someone playing tennis), 
 Many-to-many - direct: video captioning to describe a sequence of images; delayed - translating between languages (you can't just translate word by word, you need the context of the entire sentence)
 
 ## Backpropagation Through Time
-
+Weight matrices in single hidden layer RNN:
+![[Pasted image 20260421105925.png]]
+![[Pasted image 20260421110001.png]]
+![[Pasted image 20260421110035.png]]
+This is problematic:
+![[Pasted image 20260421110208.png]]
 
 ---
 
