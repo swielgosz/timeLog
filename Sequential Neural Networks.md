@@ -58,8 +58,11 @@ In the RNN, we also have $W_{hh}$. So, for an RNN we have two matrices for the h
 
 Computing the loss:
 ![[Pasted image 20260421111727.png]]
-Loss depends on the task performed by the model. For example, if we are just predicting one label for a given text then we wouldn't need $L^{<t-1>}$ or $L^{
+Loss depends on the task performed by the model. For example, if we are just predicting one label for a given text then we technically wouldn't need $L^{<t-1>}$ or $L^{<t>}$. Some argue that you should still keep them and it helps with training the earlier layers. So some keep, some don't in many to one. In many to many, you keep multiple losses and just sum them up as shown. 
+
+Issues with RNN:
 ![[Pasted image 20260421110035.png]]
+The first two terms on the RHS are what we would have for a normal MLP, the sum term is for the other terms. 
 This is problematic:
 ![[Pasted image 20260421110208.png]]
 
