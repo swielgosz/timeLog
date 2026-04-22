@@ -175,3 +175,9 @@ GRU:
 No separate cell state - we combine hidden state and memory into one. This is a simpler architecture, fewer parameters, trains faster. Update gate is like forget and input combined. It decides whether to keep the old state or replace with new information. LSTM has two gates doing related jobs, while GRU merges them
 
 Reset gate allows 
+
+
+- Backpropagation through time
+- LSTM 
+- Methods sections - explanations that are commonly in ML papers
+- ask claude for latex equations for pedagogical equations for the topics of interest
