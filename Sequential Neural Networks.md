@@ -241,10 +241,15 @@ LSTM
 - The update gate controls how much past information is carried forward versus replaced with new information, while the reset gate controls how strongly past information is used when forming the candidate updated state
 - Introduce parts of the GRU
     - hidden state; this serves as both the working representation and the main memory pathway passed between timesteps and to the next layer or output
-    - element-wise multiplication operator and element-wise addition/interpolation
-    - logistic sigmoid activation functions for gates
-    - tanh activation for the candidate hidden state
-    - update gate - controls how much of the previous hidden state is preserved versus updated with new candidate information; give equation; terms are wrapped in sigmoid operator. 0 = mostly replace with new information; 1 = mostly keep previous information
-    - reset gate - controls how much of the previous hidden state is used when computing the candidate state; give equation; terms are wrapped in sigmoid operator. 0 = ignore most past information; 1 = use past information strongly
+    - update gate - controls how much of the previous hidden state is preserved versus updated with new candidate information; give equation; terms are wrapped in sigmoid operator. 0 = replace with new information; 1 = keep previous information
+    - reset gate - controls how much of the previous hidden state is used when computing the candidate state; give equation; terms are wrapped in sigmoid operator. 0 = ignore past information; 1 = use past information strongly
     - candidate hidden state - give equation; this is the proposed new state formed from the current input and the reset-modulated previous hidden state
     - final hidden state update - give equation; this combines the previous hidden state and candidate hidden state using the update gate
+    - overall - the reset gate helps decide how to form new information, and the update gate helps decide how much of that new information should actually replace the existing memory
+- Backpropagation
+- Training example
+Brief overview of original Sequence to Sequence paper (2014)
+- Sequence-to-sequence learning extended the idea of sequential neural networks by using an encoder network to read an input sequence into an internal representation and a decoder network to generate an output sequence from that representation. This made it possible to map variable-length input sequences to variable-length output sequences
+- The original paper used LSTMs for the encoder and decoder to translate English to French
+- The pieces of the model were not brand new, but the paper showed that the LSTM encoder-decoder architecture worked better than expected particularly in the case of long sentences
+- The encoder had to compress the entire input sentence into a single fixed-length vector 
