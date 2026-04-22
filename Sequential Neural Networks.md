@@ -203,4 +203,9 @@ Reset gate allows
 	- RNN (1990) --> LSTM (1997) --> GRU (2014); Seq2Seq (2014); Attention (2014). --> Transformer (2017)
 		- RNNs introduce sequential data processing, but have vanishing gradients
 		- LSTMs mitigate the vanishing gradient problem in RNNs by using input, output, and forget gates to regulate the flow of information and gradients through the network over time
-		- GRU simpl
+		- GRUs simplifies this by using fewer gates than LSTM, making it more compact but still helping preserve information over long sequences
+		- Seq2seq models show that a deep LSTM encoder-decoder can map variable-length input sequences to variable-length output sequences in an end-to-end framework
+		- Attention introduces a mechanism that lets the model align each output step with the most relevant parts of the input sequence
+		- Transformers build on attention by using self-attention to model relationships across an entire sequence without recurrence, enabling more effective long-range modeling and parallel training
+RNNs
+- How MLP and RNNs differ - MLPs process inputs independently, while RNNs are designed for sequential data by updating the hidden states at each sequence
