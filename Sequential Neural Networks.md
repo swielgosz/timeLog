@@ -208,4 +208,15 @@ Reset gate allows
 		- Attention introduces a mechanism that lets the model align each output step with the most relevant parts of the input sequence
 		- Transformers build on attention by using self-attention to model relationships across an entire sequence without recurrence, enabling more effective long-range modeling and parallel training
 RNNs
-- How MLP and RNNs differ - MLPs process inputs independently, while RNNs are designed for sequential data by updating the hidden states at each sequence
+- How MLPs and RNNs differ: MLPs process inputs independently, while RNNs are designed for sequential data and carry information forward through hidden states updated over time
+- Single layer RNN - compact vs unfolded view (this shows the input, hidden layer, and output at t-1, t, t+1)
+- Multilayer RNN - compact vs unfolded view
+- Backpropagation through time
+	- Weight matrices in an RNN -  we have an additional weight matrix describing how information is passed from the previous to current hidden state 
+	- Net input and activation 
+	- Loss function - there is a loss at each time step in the RNN. Total loss is the sum of the losses at each timestep
+	- Back propagation - show which terms are the same as MLP and what differs
+	- Vanishing/exploding gradients - one of the terms in backprop is a repeated multiplication which causes exploding or more commonly vanishing gradients in RNNs
+	- What is the solution? LSTMs!
+LSTM
+- At a high level, the LSTM introduces the concepts of gates within each cell which control the flow of information and gradients throught he model. 
