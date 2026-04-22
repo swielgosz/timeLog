@@ -189,5 +189,15 @@ Reset gate allows
 - how do we represent latent state - is output of a gRU always a latent disrtibtuion?
 
 # Outline
-1. Motivation
-2. 
+**Motivation**
+- What is sequential data? Give examples:
+	- Text (sentence is a sequence of words, word is a sequence of letters)
+	- Audio
+	- Spacecraft in orbit - trajectory, sensor measurements 
+- General types of problems we can solve with sequential NNs
+	- Many-to-one - sentiment classification; "this is my favorite movie of all time" --> 5 stars
+	- One-to-many - description of an image
+	- Many-to-many -  machine health monitoring; output signals --> health status
+	- Many-to-many (delayed) - translating languages (you the whole sentence before translating, you can't just translate word-by-word)
+- Timeline of sequential NNs and following models
+	- RNN (1990) --> LSTM 
