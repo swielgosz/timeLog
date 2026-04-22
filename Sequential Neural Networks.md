@@ -189,6 +189,8 @@ Reset gate allows
 - how do we represent latent state - is output of a gRU always a latent disrtibtuion?
 
 # Outline
+
+Main question - should I give the deriv
 **Motivation**
 - What is sequential data? Give examples:
 	- Text (sentence is a sequence of words, word is a sequence of letters)
@@ -211,7 +213,8 @@ RNNs
 - How MLPs and RNNs differ: MLPs process inputs independently, while RNNs are designed for sequential data and carry information forward through hidden states updated over time
 - Single layer RNN - compact vs unfolded view (this shows the input, hidden layer, and output at t-1, t, t+1)
 - Multilayer RNN - compact vs unfolded view
-- Backpropagation through time
+- Backpropagation through time - general strategy for unfolded sequential NN
+- Backpropagation through time - RNN specific
 	- Weight matrices in an RNN -  we have an additional weight matrix describing how information is passed from the previous to current hidden state 
 	- Net input and activation 
 	- Loss function - there is a loss at each time step in the RNN. Total loss is the sum of the losses at each timestep
@@ -230,5 +233,6 @@ LSTM
 	- forget gate - controls which information is remembered vs forgotten; can reset the cell state. Give equation - terms are wrapped in sigmoid operator. 0 = forget/reset; 1=remember
 	- input gate and input node. Give equations; these update the cell state.
 	- output gate - give equation. This updates value of hidden units
-- Backpropagation through time: https://www.geeksforgeeks.org/dsa/lstm-derivation-of-back-propagation-through-time/
+- Backpropagation through time derivation: https://www.geeksforgeeks.org/dsa/lstm-derivation-of-back-propagation-through-time/
 - Training loop example
+
