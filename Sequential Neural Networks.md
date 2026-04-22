@@ -155,7 +155,7 @@ LSTM v GRU: ![[Pasted image 20260421191316.png]]
 ## Transformer
 ![[Pasted image 20260421194118.png]]
 ![[Pasted image 20260421194701.png]]
-![[Pasted image 20260421194721.png]]
+
 Suggestions from John:
 be able to speak to transformers - don't need to process sequentially
 do presentation at high level first. don't need full derivations
