@@ -200,4 +200,7 @@ Reset gate allows
 	- Many-to-many -  machine health monitoring; output signals --> health status
 	- Many-to-many (delayed) - translating languages (you the whole sentence before translating, you can't just translate word-by-word)
 - Timeline of sequential NNs and following models
-	- RNN (1990) --> LSTM 
+	- RNN (1990) --> LSTM (1997) --> GRU (2014); Seq2Seq (2014); Attention (2014). --> Transformer (2017)
+		- RNNs introduce sequential data processing, but have vanishing gradients
+		- LSTMs mitigate the vanishing gradient problem in RNNs by using input, output, and forget gates to regulate the flow of information and gradients through the network over time
+		- GRU simpl
