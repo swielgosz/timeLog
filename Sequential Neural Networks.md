@@ -181,3 +181,4 @@ Reset gate allows
 - LSTM 
 - Methods sections - explanations that are commonly in ML papers
 - ask claude for latex equations for pedagogical equations for the topics of interest
+- use text prediction and trajectory for motivating 
