@@ -165,4 +165,13 @@ good for datasets with uncertainty - used for RL to construct datasets with some
 Idea behind LSTM and GRU is that a vanilla RNN repeatedly applied a nonlinear transformation. When you back propagate through many time steps, gradients will shrink or blow up. LSTMs, and subsequently GRUs, were introduced to create a path where information (and gradients) can flow more directly, with gates that learn when to keep, update, or forget information. 
 
 LSTM:
-LSTM has a separate
+LSTM has a separate memory cell (the cell state) that evolves mostly linearly, which allows gradients to flow backward through time wiithout repeatedly passing through squashing nonlinearities.
+
+Gates are learned switches. We have forget gate, input gate, output gate. Sigmoid outputs between 0 and 1 - this is like an on/off switch for memory. Since the network learns to preserve or erase information, the memory is adaptive instead of fixed.
+
+Updates are additive instead of purely multiplicative (for cell updates specifically). Additive structure avoids repeated multiplication and reduces gradient decay.
+
+GRU:
+No separate cell state - we combine hidden state and memory into one. This is a simpler architecture, fewer parameters, trains faster. Update gate is like forget and input combined. It decides whether to keep the old state or replace with new information. LSTM has two gates doing related jobs, while GRU merges them
+
+Reset gate allows 
