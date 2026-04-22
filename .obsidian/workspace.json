@@ -25,12 +25,14 @@
             "id": "ad4a6e071ce1f0a9",
             "type": "leaf",
             "state": {
-              "type": "release-notes",
+              "type": "markdown",
               "state": {
-                "currentVersion": "1.12.7"
+                "file": "Sequential Neural Networks.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.12.7"
+              "icon": "lucide-file",
+              "title": "Sequential Neural Networks"
             }
           },
           {
@@ -104,7 +106,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -161,8 +163,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "8b5870f707c309dd",
@@ -255,10 +256,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3c660a5c60a252ab",
+  "active": "ad4a6e071ce1f0a9",
   "lastOpenFiles": [
-    "01 Spring 2026.md",
     "Sequential Neural Networks.md",
+    "01 Spring 2026.md",
     "02 Advising Meetings.md",
     "Attachments/Pasted image 20260421194721.png",
     "Attachments/Pasted image 20260421194701.png",

@@ -219,4 +219,8 @@ RNNs
 	- Vanishing/exploding gradients - one of the terms in backprop is a repeated multiplication which causes exploding or more commonly vanishing gradients in RNNs
 	- What is the solution? LSTMs!
 LSTM
-- At a high level, the LSTM introduces the concepts of gates within each cell which control the flow of information and gradients throught he model. 
+- At a high level, the LSTM introduces gates within each cell that regulate what information is kept, updated, or passed forward, helping the model preserve relevant information over long sequences and improve the flow of gradients during training
+- The forget gate determines what past information should be retained or discarded, the input gate controls what new information is written into the cell, and the output gate determines what information is exposed to the next hidden state and output
+- On diagrams, highlight the similarities between  where information flows in RNN vs LSTM (e.g. how hidden state flows between time steps and layer)
+- Introduce parts of the LSTM
+	- cell state
