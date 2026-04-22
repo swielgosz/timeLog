@@ -178,7 +178,13 @@ Reset gate allows
 
 
 - Backpropagation through time
+- mechanics of the training of RNN as a baseline
 - LSTM 
 - Methods sections - explanations that are commonly in ML papers
 - ask claude for latex equations for pedagogical equations for the topics of interest
-- use text prediction and trajectory for motivating 
+- use text prediction and trajectory for motivating examples
+- type up the outline in bullets and send to John
+- connect to neuralODEs - these are generalizations of RNNs(?)
+- we can use these for hidden states -> use these to encode a latent state. VAE is a MLP historically, but now we use time sequence
+- how do we represent latent state - is output of a gRU always a latent disrtibtuion?
+- 

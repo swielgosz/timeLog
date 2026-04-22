@@ -103,8 +103,7 @@
               "title": "test_latent_autencoder_2BP.py"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -255,10 +254,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "a8a5096440d02563",
+  "active": "3ca203b88fc520a6",
   "lastOpenFiles": [
-    "02 Advising Meetings.md",
     "Sequential Neural Networks.md",
+    "02 Advising Meetings.md",
     "01 Spring 2026.md",
     "Attachments/Pasted image 20260421194721.png",
     "Attachments/Pasted image 20260421194701.png",
