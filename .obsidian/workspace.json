@@ -73,12 +73,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "train_latent_2BP_mapper_jacobian_reg.py.md",
+                "file": "02 Advising Meetings.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "train_latent_2BP_mapper_jacobian_reg.py"
+              "title": "02 Advising Meetings"
             }
           },
           {
@@ -124,7 +124,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -181,8 +181,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "8b5870f707c309dd",
@@ -275,8 +274,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3c660a5c60a252ab",
+  "active": "a8a5096440d02563",
   "lastOpenFiles": [
+    "Sequential Neural Networks.md",
+    "01 Spring 2026.md",
     "Attachments/Pasted image 20260421194721.png",
     "Attachments/Pasted image 20260421194701.png",
     "Attachments/Pasted image 20260421194118.png",
@@ -287,9 +288,6 @@
     "Attachments/Pasted image 20260421192432.png",
     "Attachments/Pasted image 20260421192324.png",
     "Attachments/Pasted image 20260421192310.png",
-    "Attachments/Pasted image 20260421192256.png",
-    "01 Spring 2026.md",
-    "Sequential Neural Networks.md",
     "02 Advising Meetings.md",
     "Attachments/L15_intro-rnn__slides.pdf",
     "Untitled",
