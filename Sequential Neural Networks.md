@@ -160,3 +160,9 @@ Suggestions from John:
 be able to speak to transformers - don't need to process sequentially
 do presentation at high level first. don't need full derivations
 good for datasets with uncertainty - used for RL to construct datasets with some belief. connect to estimation and kalman filtering
+
+# Notes
+Idea behind LSTM and GRU is that a vanilla RNN repeatedly applied a nonlinear transformation. When you back propagate through many time steps, gradients will shrink or blow up. LSTMs, and subsequently GRUs, were introduced to create a path where information (and gradients) can flow more directly, with gates that learn when to keep, update, or forget information. 
+
+LSTM:
+LSTM has a separate
