@@ -187,4 +187,7 @@ Reset gate allows
 - connect to neuralODEs - these are generalizations of RNNs(?)
 - we can use these for hidden states -> use these to encode a latent state. VAE is a MLP historically, but now we use time sequence
 - how do we represent latent state - is output of a gRU always a latent disrtibtuion?
-- 
+
+# Outline
+1. Motivation
+2. 
