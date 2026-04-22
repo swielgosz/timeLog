@@ -190,7 +190,8 @@ Reset gate allows
 
 # Outline
 
-Main question - should I give the deriv
+Main question - should I give the full derivation for back propagation for a generic recurrent network as well as RNN, LSTM, GRU? Or just generic representation and RNN, and show the results for LSTM for GRU?
+
 **Motivation**
 - What is sequential data? Give examples:
 	- Text (sentence is a sequence of words, word is a sequence of letters)
@@ -235,4 +236,15 @@ LSTM
 	- output gate - give equation. This updates value of hidden units
 - Backpropagation through time derivation: https://www.geeksforgeeks.org/dsa/lstm-derivation-of-back-propagation-through-time/
 - Training loop example
-
+**GRUs**
+- GRUs are similar to LSTMs in their use of gates to control the flow of past information, but GRUs simplify the architecture. They have no cell state, and they have two gates instead of three. They are lighter weight and train faster than LSTMs, and perform as well as LSTMs for most tasks. LSTMs are better if very long time history is needed.
+- The update gate controls how much past information is carried forward versus replaced with new information, while the reset gate controls how strongly past information is used when forming the candidate updated state
+- Introduce parts of the GRU
+    - hidden state; this serves as both the working representation and the main memory pathway passed between timesteps and to the next layer or output
+    - element-wise multiplication operator and element-wise addition/interpolation
+    - logistic sigmoid activation functions for gates
+    - tanh activation for the candidate hidden state
+    - update gate - controls how much of the previous hidden state is preserved versus updated with new candidate information; give equation; terms are wrapped in sigmoid operator. 0 = mostly replace with new information; 1 = mostly keep previous information
+    - reset gate - controls how much of the previous hidden state is used when computing the candidate state; give equation; terms are wrapped in sigmoid operator. 0 = ignore most past information; 1 = use past information strongly
+    - candidate hidden state - give equation; this is the proposed new state formed from the current input and the reset-modulated previous hidden state
+    - final hidden state update - give equation; this combines the previous hidden state and candidate hidden state using the update gate
