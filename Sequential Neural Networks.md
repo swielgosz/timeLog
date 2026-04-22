@@ -216,6 +216,7 @@ RNNs
 	- Net input and activation 
 	- Loss function - there is a loss at each time step in the RNN. Total loss is the sum of the losses at each timestep
 	- Back propagation - show which terms are the same as MLP and what differs
+	- Training loop - put these pieces together. Text + trajectory example
 	- Vanishing/exploding gradients - one of the terms in backprop is a repeated multiplication which causes exploding or more commonly vanishing gradients in RNNs
 	- What is the solution? LSTMs!
 LSTM
@@ -223,4 +224,11 @@ LSTM
 - The forget gate determines what past information should be retained or discarded, the input gate controls what new information is written into the cell, and the output gate determines what information is exposed to the next hidden state and output
 - On diagrams, highlight the similarities between  where information flows in RNN vs LSTM (e.g. how hidden state flows between time steps and layer)
 - Introduce parts of the LSTM
-	- cell state
+	- cell state; this is the internal long-term memory pathway while the hidden state is the short-term working representation passed to the next layer or used for output
+	- element-wise multiplication operator and element-wise addition operator
+	- logistic sigmoid activation functions
+	- forget gate - controls which information is remembered vs forgotten; can reset the cell state. Give equation - terms are wrapped in sigmoid operator. 0 = forget/reset; 1=remember
+	- input gate and input node. Give equations; these update the cell state.
+	- output gate - give equation. This updates value of hidden units
+- Backpropagation through time: https://www.geeksforgeeks.org/dsa/lstm-derivation-of-back-propagation-through-time/
+- Training loop example
