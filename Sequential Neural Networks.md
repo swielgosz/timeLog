@@ -161,6 +161,7 @@ be able to speak to transformers - don't need to process sequentially
 do presentation at high level first. don't need full derivations
 good for datasets with uncertainty - used for RL to construct datasets with some belief. connect to estimation and kalman filtering
 
+https://www.ibm.com/think/topics/attention-mechanism
 # Notes
 Idea behind LSTM and GRU is that a vanilla RNN repeatedly applied a nonlinear transformation. When you back propagate through many time steps, gradients will shrink or blow up. LSTMs, and subsequently GRUs, were introduced to create a path where information (and gradients) can flow more directly, with gates that learn when to keep, update, or forget information. 
 
@@ -252,4 +253,19 @@ Brief overview of original Sequence to Sequence paper (2014)
 - Sequence-to-sequence learning extended the idea of sequential neural networks by using an encoder network to read an input sequence into an internal representation and a decoder network to generate an output sequence from that representation. This made it possible to map variable-length input sequences to variable-length output sequences
 - The original paper used LSTMs for the encoder and decoder to translate English to French
 - The pieces of the model were not brand new, but the paper showed that the LSTM encoder-decoder architecture worked better than expected particularly in the case of long sentences
-- The encoder had to compress the entire input sentence into a single fixed-length vector 
+- The encoder had to compress the entire input sentence into a single fixed-length vector. As the input gets longer or more complex, this fixed-length vector becomes a bottleneck --> attention models!
+Attention Mechanism (2014)
+
+- Introduced to address the fixed-length vector bottleneck in early encoder-decoder translation models, where the full input sequence had to be compressed into a single representation before decoding. Instead, the decoder learns to **align** each output step with the most relevant encoder hidden states.  
+- Conceptually, at each decoding step the current decoder state acts like a **query**, and the encoder hidden states act like the source representations being searched over; the model computes **alignment scores**, converts them to **attention weights** with a softmax, and forms a **context vector** as a weighted sum of encoder states. IBM notes that this older mechanism is often described retroactively in query/key/value language, even though that framing became more standard later.  
+- In the Bahdanau formulation, this is **additive attention**: the decoder-side query-like vector and encoder-side key-like vector are combined with a small feedforward network to produce the alignment score, rather than using a dot product. This is why the 2014 mechanism is best thought of as a learned alignment layer on top of an RNN encoder-decoder, not yet the transformer-style attention block.  
+- During training, the model updates the encoder, decoder, and attention-layer weights jointly so that the learned attention weights place more emphasis on the source positions that help predict the correct next target token. In a diagram, emphasize that **each output token gets its own context vector**, rather than all outputs relying on one final encoder state.  
+- Structurally, this is still a **recurrent** encoder-decoder model: the encoder processes the source sequence sequentially, the decoder generates sequentially, and attention is an added mechanism that improves communication between them. In modern terms, this is closest to **cross-attention**, because the query comes from the decoder side and the keys/values come from the encoder side.  
+
+**Transformer / Attention Is All You Need (2017)**
+
+- The 2017 transformer does not just add attention to an RNN; it **replaces recurrence** with attention-based operations and feedforward layers, allowing the model to represent sequence relationships directly across the whole sequence. IBM summarizes this as “eschew[ing] recurrence and convolutions altogether in favor of only attention layers and standard feedforward layers.”  
+- The core operation is **self-attention**, where each token produces a **query vector**, **key vector**, and **value vector**. The query is what the token is “looking for,” the keys describe what other tokens contain, and the values provide the information that gets aggregated once relevance weights are computed.  
+- The transformer uses **scaled dot-product attention** rather than additive attention: similarity is computed with the dot product between queries and keys, then scaled before the softmax. IBM highlights the reason for scaling: large dot products can push the softmax into regimes with very small gradients, so scaling improves optimization and training stability.  
+- The transformer also introduces **multi-head attention**, where attention is performed multiple times in parallel using different learned projections of the same token embeddings. This lets different heads capture different types of relationships, and the resulting head outputs are concatenated and passed forward.  
+- During training, all tokens in a sequence can be processed **in parallel** rather than one timestep at a time, which is a major difference from RNN-based models. In a diagram, emphasize that token representations are updated by attending across the full sequence repeatedly through stacked attention blocks, rather than by passing a hidden state forward sequentially.
