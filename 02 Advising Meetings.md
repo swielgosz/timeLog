@@ -1,3 +1,6 @@
+# April 23
+I had more plots than ended up in the report 
+Section 4 
 # April 15
 
 be able to speak to transformers - don't need to process sequentially
