@@ -273,3 +273,13 @@ Attention Mechanism (2014)
 - The transformer uses scaled dot-product attention rather than additive attention: similarity is computed with the dot product between queries and keys, then scaled before the softmax to improve optimization
 - multi-head attention - attention is performed multiple times in parallel using different learned projections of the same token embeddings --> different heads capture different types of relationships, and the resulting head outputs are concatenated and passed forward
 - During training, all tokens in a sequence can be processed in parallel rather than one timestep at a time, which is a major difference from RNN-based models. In diagram, emphasize that token representations are updated by attending across the full sequence repeatedly through stacked attention blocks, rather than by passing a hidden state forward sequentially.
+
+The authors’ stated motivation was not “LSTMs are bad, so replace them.” It was more specific: they wanted a recurrent hidden unit for their **RNN encoder-decoder** that had better memory and trainability than a plain RNN, but was **simpler than an LSTM**.
+
+  
+
+In the original Cho et al. paper, they say they propose “a rather sophisticated hidden unit” to improve both **memory capacity** and **ease of training** in the encoder-decoder model. Then, in the GRU section, they state that the proposed unit was “motivated by the LSTM unit” but is “much simpler to compute and implement.”  
+
+  
+
+So the closest answer is: they wanted the benefit of LSTM-style gated memory, but with fewer moving parts.
