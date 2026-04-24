@@ -283,3 +283,5 @@ In the original Cho et al. paper, they say they propose “a rather sophisticate
   
 
 So the closest answer is: they wanted the benefit of LSTM-style gated memory, but with fewer moving parts.
+
+https://kartik2112.medium.com/lstm-back-propagation-behind-the-scenes-andrew-ng-style-notations-7207b8606cb2
