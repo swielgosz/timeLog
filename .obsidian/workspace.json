@@ -104,8 +104,23 @@
               "icon": "lucide-file",
               "title": "test_latent_autencoder_2BP.py"
             }
+          },
+          {
+            "id": "4f40bf28eef427ce",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Untitled.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Untitled"
+            }
           }
-        ]
+        ],
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -255,10 +270,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3ca203b88fc520a6",
+  "active": "4f40bf28eef427ce",
   "lastOpenFiles": [
-    "Sequential Neural Networks.md",
+    "Untitled.md",
     "01 Spring 2026.md",
+    "Sequential Neural Networks.md",
     "02 Advising Meetings.md",
     "Attachments/Pasted image 20260421194721.png",
     "Attachments/Pasted image 20260421194701.png",
