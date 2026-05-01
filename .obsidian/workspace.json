@@ -119,8 +119,7 @@
               "title": "Untitled"
             }
           }
-        ],
-        "currentTab": 7
+        ]
       }
     ],
     "direction": "vertical"
@@ -270,7 +269,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "a61c6822175e1e20",
+  "active": "3ca203b88fc520a6",
   "lastOpenFiles": [
     "Untitled.md",
     "01 Spring 2026.md",
