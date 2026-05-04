@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "latentODE.py.md",
+                "file": "01 Spring 2026.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "latentODE.py"
+              "title": "01 Spring 2026"
             }
           },
           {
@@ -271,9 +271,9 @@
   },
   "active": "3ca203b88fc520a6",
   "lastOpenFiles": [
+    "latentODE.py.md",
     "Latent and UDE codes/Training Scripts.md",
     "01 Spring 2026.md",
-    "latentODE.py.md",
     "Sequential Neural Networks.md",
     "02 Advising Meetings.md",
     "Attachments/Pasted image 20260421194721.png",
