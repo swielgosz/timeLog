@@ -35,7 +35,8 @@
               "title": "Untitled"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -185,24 +186,25 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3ca203b88fc520a6",
+  "active": "ea01097301a3f3aa",
   "lastOpenFiles": [
+    "Attachments/Pasted image 20260506113423.png",
+    "Attachments/Pasted image 20260506113412.png",
+    "Attachments/Pasted image 20260506113407.png",
+    "Attachments/Pasted image 20260506113403.png",
+    "Attachments/Pasted image 20260506113341.png",
+    "Attachments/Pasted image 20260506113327.png",
+    "01 Spring 2026.md",
     "Untitled.md",
     "Attachments/Pasted image 20260506111420.png",
     "Attachments/Pasted image 20260506111408.png",
-    "01 Spring 2026.md",
     "Attachments/Pasted image 20260506110428.png",
     "Attachments/Pasted image 20260506110229.png",
     "Attachments/Pasted image 20260506110202.png",
-    "Attachments/Pasted image 20260505113454.png",
-    "Attachments/Pasted image 20260505113443.png",
-    "Attachments/Pasted image 20260505113429.png",
-    "Attachments/Pasted image 20260505113357.png",
     "latentODE.py.md",
     "Latent and UDE codes/Training Scripts.md",
     "Sequential Neural Networks.md",
     "02 Advising Meetings.md",
-    "Attachments/Pasted image 20260421194721.png",
     "Attachments/L15_intro-rnn__slides.pdf",
     "Untitled",
     "cleaning code/losses.py.md",

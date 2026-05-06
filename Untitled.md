@@ -8,3 +8,8 @@ inspect_latent_space:
 ![[Pasted image 20260506111420.png]]
 test_latent_encoder:
 ![[Pasted image 20260506111408.png]]
+
+post_latent_diagnostics:
+![[Pasted image 20260506113327.png]]
+![[Pasted image 20260506113341.png]]
+![[Pasted image 20260506113412.png]]![[Pasted image 20260506113423.png]]
