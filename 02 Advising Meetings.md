@@ -1,3 +1,460 @@
+# May 5
+Goals for today: the latent ODE models are losing information about the physical structure of the 2BP dynamics. The latent space is not structured well, so we consequently cannot accurately learn latent dynamics. Today I want to focus on systematically implementing changes to improve the latent structure and overall model. And taking good notes!
+
+## The Problem
+The latent ODE models are not preserving physical structure of the 2BP dynamics. 
+![[Pasted image 20260505113357.png]]
+![[Pasted image 20260505113443.png|500]]
+
+![[Pasted image 20260505113454.png]]
+![[Pasted image 20260505113429.png]]
+
+
+## Possible Solutions
+1. More intelligent design of training data representation:
+Recall that when we were focused on improving the neuralODE results, in addition to scaling the data as is standard such that $\mu^*=1$, we also spent time designing feature layers that allowed the model to more easily learn the dynamics of the problem. Typically, our feature layer is $[1/r,x/r/y/r,z/r,v_x,v_y,v_z]$ . This encodes the inverse relationship between gravity and distance. The direction components tell the network which way to point the acceleration. 
+
+The encoder acts on the training data and converts it to some latent representation before passing the latent representation through the MLP which learns latent dynamics. Thus, the notion of a feature layer within the dynamics MLP no longer exists in the same way as in the vanilla neural ODE because we do not have a representation of the training data in physical space at this point. This isn't a big deal for the latent ODE - we can just transform the training data before passing it through the model. Feature layers are just more convenient.
+
+So, we want to represent the data in a way that gives it a more meaningful latent structure. How do we want our orbits to be structured? Ideally, the model should learn to group orbits in a way that groups like energy levels, SMA, and eccentricity. Recall that when we were designing the vanilla neural ODE, we did not want to encode energy because we wanted a proof of concept showing that the models can learn dynamics without it knowing that energy is conserved. However, I don't think we need to maintain this restriction anymore because we are moving towards the goal of encoding CR3BP dynamics using a linear latent model to perform downstream analysis, rather than learning dynamics from scratch. So now, we can include energy in our training data and/or in the loss function. Is there a way that we can encourage further intelligent grouping in our model?
+
+2. A hyperparameter search, particularly of variables like the latent_size and hidden_size, may show if the latent space is not expressive enough or alternatively too large to the point that we are unable to generalize well. I don't necessarily expect this to solve everything, but I would like to gain a better understanding of how to size the different parts of the architecture and how important this is or is not.
+3. The encoder itself may need improvement/adjustment when we use it (but recall we are also testing an MLP to learn the initial latent condition since our data is not noisy). One known failure mode here is KL collapse, where the encoder learns to ignore its input entirely and outputs the same distribution regardless of the observed trajectory. This would explain the lack of physical structure in the latent space. A quick diagnostic we can check is whether the KL term in the loss goes to zero during training, and whether the posterior mean and variance are roughly the same across all inputs.
+4. Can we design loss functions that encourage physical structure in latent space? With vanilla neural ODEs, we avoided penalties like energy drift because we wanted to see if the model could learn the dynamics without this knowledge as a proof of concept. However, we are now going a different direction with the goal of developing a linear latent model eventually for the CR3BP. I think it is now appropriate to bake in knowledge like energy being conserved for 2BP, or JC being conserved in the CR3BP. Perhaps including this in the loss will encourage a better structured latent space.
+
+
+## Implementing latent model changes
+### 1 - Testing feature layers
+Let us begin with our most stripped back latent ODE model. This includes an mlp encoder to directly map y0 to a latent state, which is suitable since we have clean data with no noise. The latent dynamics are parameterized nolinearly via a free MLP. The decoder is linear. So, our full pipeline is currently `y[0] → MLP → (μ, log σ) → sample z_0 ~ N(μ, σ) → MLP (latent_to_hidden) → h_0 → MLP ODE → h(t) → linear decode → ŷ(t)`
+
+I understand why this came to be since it was based on Kidger's model, but looking at it now I have a couple issues with it. If we are using an MLP in place of a GRU as an encoder in the case of noiseless data, there is no reason to sample z_0 from a distribution then have *another* MLP transforming from latent to hidden (both of these design choices were artifacts of the GRU encoder version). Let's take a closer look at some of the encoder related design choices.
+
+---
+#### *Tangent - double checking some of the encoder related code*
+*Question - I currently have the encoding mlp map the first observed state to (mean, logstd) of z0. Does this make sense?* 
+
+*Answer - We shouldn't need a distribution since it's a 1:1 mapping. This seems unlikely to be hurting anything significantly, but still is unnecessary. Also, our full pipeline is more complicated than it needs to be if we are just using an MLP to map y\[0\] to an initial hidden state. Is there a good reason for this, or is this just redundant? In fact, is it just redundant or is it harmful? How would we have a mean and std for our mlp encoder when we don't even have noise for which we need to estimate a posterior. We already have a flag to turn this off an dI believe it was only included to match the formatting of the GRU pipeline, but we should probably just remove the option to use an MLP encoder to estimate a posterior.*
+*<details>**
+**Prior — your belief about `z_0` before seeing any data. In the latent ODE this is N(0,I) — a default assumption that latent initial conditions are roughly centered near zero with unit variance.**
+**Posterior — your updated belief about `z_0` after seeing the observation `y[0]` (or a trajectory segment). This is what the encoder outputs: given this specific observation, where in latent space did this trajectory probably start?**
+**The KL term penalizes the posterior for deviating from the prior. The tension is:**
+**- Reconstruction loss pushes the posterior to be **specific** — encode as much information as possible about this particular trajectory**
+**- KL term pushes the posterior back toward the prior — don't deviate too far from N(0,I)**
+**</details>*
+*Question - Kidger's pipeline is `ys + ts → GRU → hidden → **Linear** (hidden_to_latent) → (μ, log σ) → sample z_0 → **MLP** (latent_to_hidden) → h_0 → MLP ODE → h(t) → **Linear** (hidden_to_data) → ŷ(t)` - why is there both an encoder (GRU) and latent to hidden mlp?*
+
+ *Answer - In Kidger's design there are actually three separate spaces:*
+- ***hidden space** (`hidden_size`) — the GRU's internal state, sized to give the RNN enough capacity to process the sequence*
+- ***latent space** (`latent_size`) — the VAE bottleneck, intentionally small to force compression*
+- ***hidden space again** (`hidden_size`) — the ODE state space, sized to give the dynamics enough capacity*
+*So the flow compresses down and then expands back up:*
+*`GRU hidden (hidden_size) → linear → z (latent_size) → MLP → h_0 (hidden_size) → ODE`*
+*The bottleneck through `z` is what forces the model to learn a compact, meaningful representation. If you went directly from the GRU hidden state to the ODE initial condition you'd skip the compression entirely and lose the structured latent space.*
+*In your case with `y0_mlp`, the GRU is replaced by an MLP that goes directly from `y[0]` to `(μ, log σ)` in latent space, so the first compression step is handled by that MLP instead. The `latent_to_hidden` expansion back up to ODE state space is the same.*
+
+*Question - why is there a linear layer from hidden to latent but an MLP from latent to hidden?*
+
+*Answer -*
+***Hidden → latent (Linear):** The GRU hidden state already contains a rich nonlinear representation of the trajectory — the GRU cells themselves are nonlinear. So a simple linear projection down to `(μ, log σ)` is sufficient. Adding an MLP here would be redundant nonlinearity on top of what the GRU already did.*
+***Latent → hidden (MLP):** Going the other direction, `z_0` is a small compressed vector and you need to expand it into a rich enough initial condition to drive the ODE dynamics. A linear map from a small latent space to a larger hidden space is severely limited — it can only produce initial conditions that lie on a low-dimensional linear subspace of `h` space. An MLP can produce initial conditions anywhere in `h` space, giving the ODE dynamics much more to work with.*
+
+*In short: compression can be linear because the nonlinearity already happened in the GRU. Expansion needs to be nonlinear because you're asking a small vector to seed a high-dimensional dynamical system.*
+
+*Question - due to how we followed this logic, when we use an MLP to encode , we have `y[0] → MLP → z_0 → MLP (latent_to_hidden) → h_0 → MLP ODE → h(t) → linear decode → ŷ(t)`. The MLP between z_0 and h_0 seems redundant, doesn't it?*
+
+*Answer - yes, that is redundant. You could collapse the two into a single MLP going directly from `y[0]` to `h_0` and nothing would be lost. The `latent_to_hidden` only has a distinct role when there's a meaningful bottleneck at `z` — either because the stochastic encoder forces compression via the KL term, or because you want to sample from the prior at test time (drawing `z ~ N(0,I)` and decoding). If you're doing neither, `z_0` is just an intermediate activation with no special meaning and the two MLPs are redundant. Single MLP now maps encoder features directly to `h0` (bypassing the redundant `z → h` bottleneck) when `encoder_type=y0_mlp` and `use_stochastic_encoder=false`, and the encoder feature layer now includes specific orbital energy as an input feature.*
+
+*Question - do we need to include time in our encoder? Our dynamics are autonomous, but I'm not sure if/how it affects the* 
+
+*Answer - it isn't necessary to include if the timesteps are equal since timesteps are processed sequentially, e.g. the recurrence itself is the temporal mechanism. However, if dt is not fixed, we need to pass time to the encoder. This is only true for the GRU though, not the MLP since the MLP will directly encode y\[0\] to h\[0\]. Recall that when we generate our 2BP training data, we sample at equal true anomalies so we do not have equal dt.*
+
+*Follow up - does it make sense to directly encode from y\[0\] to h\[0\] in the case where we have noiseless data? We don't need to use a GRU encoder, but should we still include some notion of time history of data when we get our initial hidden state to pass into the dynamics mlp?*
+
+*Answer - y[0] is theoretically sufficient since the initial state fully determines the entire trajectory, so we do have mathematical justification. However, there may be a practical advantage to using a short prefix of observations. The MLP has to learn the appropriate mapping from the initial condition which may be difficulty. If we have a GRU, it could make it easier to identify the orbit's energy and angular momentum.*
+
+*Follow up - can we use a GRU that does not sample form a distribution? e.g. we maintain the idea of observing a few time samples in our encoder to bake in information about the orbital energy, but we do not bake in stochasticity?*
+
+*Answer - we can do this. We don't need to learn a distribution using the GRU - we can just directly learn the mapping from physical space to hidden space and skip the sampling and `latent_to_hidden` MLP.  Now all three encoder types (`y0_mlp`, `prefix_gru`, `backward_gru`) output `h0` directly when `use_stochastic_encoder: false` — no `(μ, log σ)` split,  no `latent_to_hidden` step. The stochastic path is unchanged.*
+
+---
+
+Important details from the tangent:
+- there is no reason for deterministic encoders (whether it be MLP, GRU) to be mapping to a distribution from which to sample z_0
+- Similarly, there is no reason to have a deterministic encoder followed by a latent_to_hidden mlp
+- Our updated pipelines
+
+**Stochastic (`use_stochastic_encoder: true`):** `y[0] → feature layer → MLP or GRU → (μ, log σ) → sample z_0 ~ N(μ, σ) → MLP (latent_to_hidden) → h_0 → MLP ODE → h(t) → linear decode → ŷ(t)`
+
+**Deterministic, old (`use_stochastic_encoder: false`, before today):** `y[0] → feature layer → MLP or GRU → (μ, log σ) → take μ as z_0 → MLP (latent_to_hidden) → h_0 → MLP ODE → h(t) → linear decode → ŷ(t)`
+
+**Deterministic, new (`use_stochastic_encoder: false`, after today):** `y[0] → feature layer → MLP or GRU → h_0 → MLP ODE → h(t) → linear decode → ŷ(t)`
+
+Everything is stripped back and we are ready to begin.
+
+---
+
+**Baseline - no feature layer (cartesian_only)**
+> [!note]- config.yaml
+> 
+> ```python
+> wandb:
+>   group: "test-latent-v2"
+> 
+> data:
+>   dataset_name: ["complex_TBP_planar_100_train"]
+>   problem: "2BP"
+> 
+> parameters:
+>   # Train on full trajectories from the start — no curriculum.
+>   length_strategy: [[[0.0, 1.0],[0.0, 1.0],[0.0, 1.0],[0.0, 1.0],[0.0, 1.0]]]
+>   lr_strategy: [[1e-2,1e-2,1e-2,1e-2,1e-2]]
+>   steps_strategy: [[500, 500, 500, 500, 1000]]
+>   segment_length_strategy: [[18, 36, 90, 180, 360]]
+> 
+>   width: [16]
+>   depth: [2]
+>   train_val_split: 0.8
+>   batch_size: [128]
+>   num_trajs: -1
+>   seed: [2345]
+> 
+>   rtol: 0.000001
+>   atol: 0.00000001
+> 
+>   latent_size: [8]           # VAE bottleneck (z space)
+>   latent_hidden_size: [16]   # ODE hidden space (h space), matches Kidger hidden_size
+>   latent_width: [16]
+>   latent_depth: [2]
+>   latent_activation: [softplus]       # Kidger uses softplus in MLP body
+>   latent_final_activation: [tanh]      # drift MLP final activation, matches Kidger
+>   latent_encoder_final_activation: [linear]  # encoder head is linear, no squashing of (μ, log σ)
+>   # latent_consistency_weight: [1e-1]
+> 
+>   latent_dynamics_type: [nonlinear]
+>   # latent_linear_init_scale: [0.02]
+>   latent_drift_scale: [1.0]           # Kidger initializes scale to 1.0
+>   latent_residual_scale: [1.0]
+> 
+>   latent_segment_stride_ratio: [1.0]
+> 
+>   latent_encoder_type: [y0_mlp] # options are "prefix_gru", "backward_gru", "y0_mlp"
+>   latent_encoder_use_time: [true]     # concatenate dt with features in GRU
+>   latent_prefix_length: [18]
+>   latent_encoder_feature_layer: [cartesian_only]
+> 
+>   # Stochastic encoder with KL — matches Kidger's VAE setup.
+>   # latent_reconstruction_type: [kidger]
+>   latent_use_stochastic_encoder: [false]
+>   latent_kl_weight: [1]
+>   latent_kl_schedule: [linear_warmup]
+>   latent_kl_weight_start: [0.0]
+>   latent_kl_warmup_steps: [-1]   # auto: clamp(fraction * total_steps, min, max)
+>   latent_kl_warmup_fraction: [0.2]
+>   latent_train_use_mean: [false]
+>   latent_eval_use_mean: [true]
+> 
+>   # Minimal regularization — let the model learn freely first.
+>   latent_initial_state_weight: [0.0]
+>   latent_orbit_closure_weight: [0.0]
+>   latent_state_norm_weight: [0.0]
+>   latent_drift_norm_weight: [0.0]
+>   latent_linear_stability_weight: [0.0]
+> 
+>   # Phase dynamics off.
+>   latent_use_phase_dynamics: [false]
+>   latent_phase_supervision_weight: [0.0]
+> 
+>   # Aux orbital head off.
+>   latent_aux_orbital_weight: [0.0]
+>   latent_aux_orbital_mu: [1.0]
+>   latent_aux_orbital_use_head: [false]
+> 
+>   latent_log_gradient_stats: [false]
+>   latent_log_dimension_mpe: [false]
+>   latent_grad_clip_total_norm: [0.0]
+>   latent_grad_clip_encoder_norm: [0.0]
+>   latent_grad_clip_dynamics_norm: [0.0]
+>   latent_grad_clip_decoder_norm: [0.0]
+>   latent_grad_clip_aux_norm: [0.0]
+> 
+>   latent_solver_max_steps: [8192]
+>   latent_log_every: [50]
+>   latent_plot_orbits: [[0, 1]]
+>   latent_checkpoint_dir: ["files/models"]
+>   latent_energy_drift_weight: 0.0   # tune this
+>   latent_energy_drift_mu: 1.0       # normalized 2BP
+> ```
+
+The feature layer is `cartesian_only`, and our encoder is `y0_mlp`. 
+run_id: edymbm5d
+
+Generalization gap:
+![[Pasted image 20260506120534.png|500]]
+
+
+![[Pasted image 20260506114313.png]]
+![[Pasted image 20260506113341.png]]
+![[Pasted image 20260506113412.png]]
+![[Pasted image 20260506113423.png]]
+
+Takeaways: 
+- The encoder and decoder are working well in that reconstruction loss is low- we find a good h0 and the reconstruction is mostly correct. However, this does not mean that the hidden representation is a good one - they have no notion of the dynamics of the problem
+- The ODE dynamics diverge significantly in past test cases, and the residual acceleration field is largely random
+- The bottleneck is the dynamics MLP. We learn a resonable mapping between state space and hidden space, but the hidden space ODE is not learning to propagate h(t) in a way corresponding to physical orbital motion.
+- The hidden space has no particular structure due to the cartesian coordinates (and maybe the small hidden size?)
+
+---
+**v1 - cartesian_only features, prefix_gru deterministic encoder**
+run_id: ![[Pasted image 20260506121512.png]]
+Let's try still using cartesian features, but use a prefix GRU encoder (deterministic) to see if/how this changes the structure of the hidden space
+
+> [!note]- config.yaml
+> ``` python
+> wandb:
+>   group: "test-latent-v2"
+> 
+> data:
+>   dataset_name: ["complex_TBP_planar_100_train"]
+>   problem: "2BP"
+> 
+> parameters:
+>   # Train on full trajectories from the start — no curriculum.
+>   length_strategy: [[[0.0, 1.0],[0.0, 1.0],[0.0, 1.0],[0.0, 1.0],[0.0, 1.0]]]
+>   lr_strategy: [[1e-2,1e-2,1e-2,1e-2,1e-2]]
+>   steps_strategy: [[500, 500, 500, 500, 1000]]
+>   segment_length_strategy: [[18, 36, 90, 180, 360]]
+> 
+>   width: [16]
+>   depth: [2]
+>   train_val_split: 0.8
+>   batch_size: [128]
+>   num_trajs: -1
+>   seed: [2345]
+> 
+>   rtol: 0.000001
+>   atol: 0.00000001
+> 
+>   latent_size: [8]           # VAE bottleneck (z space)
+>   latent_hidden_size: [16]   # ODE hidden space (h space), matches Kidger hidden_size
+>   latent_width: [16]
+>   latent_depth: [2]
+>   latent_activation: [softplus]       # Kidger uses softplus in MLP body
+>   latent_final_activation: [tanh]      # drift MLP final activation, matches Kidger
+>   latent_encoder_final_activation: [linear]  # encoder head is linear, no squashing of (μ, log σ)
+>   # latent_consistency_weight: [1e-1]
+> 
+>   latent_dynamics_type: [nonlinear]
+>   # latent_linear_init_scale: [0.02]
+>   latent_drift_scale: [1.0]           # Kidger initializes scale to 1.0
+>   latent_residual_scale: [1.0]
+> 
+>   latent_segment_stride_ratio: [1.0]
+> 
+>   latent_encoder_type: [prefix_gru] # options are "prefix_gru", "backward_gru", "y0_mlp"
+>   latent_encoder_use_time: [true]     # concatenate dt with features in GRU
+>   latent_prefix_length: [18]
+>   latent_encoder_feature_layer: [cartesian_only]
+> 
+>   # Stochastic encoder with KL — matches Kidger's VAE setup.
+>   # latent_reconstruction_type: [kidger]
+>   latent_use_stochastic_encoder: [false]
+>   latent_kl_weight: [1]
+>   latent_kl_schedule: [linear_warmup]
+>   latent_kl_weight_start: [0.0]
+>   latent_kl_warmup_steps: [-1]   # auto: clamp(fraction * total_steps, min, max)
+>   latent_kl_warmup_fraction: [0.2]
+>   latent_train_use_mean: [false]
+>   latent_eval_use_mean: [true]
+> 
+>   # Minimal regularization — let the model learn freely first.
+>   latent_initial_state_weight: [0.0]
+>   latent_orbit_closure_weight: [0.0]
+>   latent_state_norm_weight: [0.0]
+>   latent_drift_norm_weight: [0.0]
+>   latent_linear_stability_weight: [0.0]
+> 
+>   # Phase dynamics off.
+>   latent_use_phase_dynamics: [false]
+>   latent_phase_supervision_weight: [0.0]
+> 
+>   # Aux orbital head off.
+>   latent_aux_orbital_weight: [0.0]
+>   latent_aux_orbital_mu: [1.0]
+>   latent_aux_orbital_use_head: [false]
+> 
+>   latent_log_gradient_stats: [false]
+>   latent_log_dimension_mpe: [false]
+>   latent_grad_clip_total_norm: [0.0]
+>   latent_grad_clip_encoder_norm: [0.0]
+>   latent_grad_clip_dynamics_norm: [0.0]
+>   latent_grad_clip_decoder_norm: [0.0]
+>   latent_grad_clip_aux_norm: [0.0]
+> 
+>   latent_solver_max_steps: [8192]
+>   latent_log_every: [50]
+>   latent_plot_orbits: [[0, 1]]
+>   latent_checkpoint_dir: ["files/models"]
+>   latent_energy_drift_weight: 0.0   # tune this
+>   latent_energy_drift_mu: 1.0       # normalized 2BP
+> 
+> ```
+
+![[Pasted image 20260506120507.png|500]]
+![[Pasted image 20260506121517.png]]
+![[Pasted image 20260506120947.png]]
+
+![[Pasted image 20260506120958.png]]
+![[Pasted image 20260506121108.png]]
+![[Pasted image 20260506121050.png|500]]
+![[Pasted image 20260506124538.png]]
+
+Takeaways:
+- let's stick with the y0_mlp encoder for now
+- 
+
+---
+**v2 - sph_4D_rinv_vel, y0_mlp encoder**
+We also want a baseline of our behavior when using the same feature layer that we did in the conference paper vanilla neuralODE.
+run_id: kvb9n4f7
+> [!note]- config.yaml
+> wandb:
+  group: "test-latent-v2"
+> ``` python
+> data:
+>   dataset_name: ["complex_TBP_planar_100_train"]
+>   problem: "2BP"
+> 
+> parameters:
+>   # Train on full trajectories from the start — no curriculum.
+>   length_strategy: [[[0.0, 1.0],[0.0, 1.0],[0.0, 1.0],[0.0, 1.0],[0.0, 1.0]]]
+>   lr_strategy: [[1e-2,1e-2,1e-2,1e-2,1e-2]]
+>   steps_strategy: [[500, 500, 500, 500, 1000]]
+>   segment_length_strategy: [[18, 36, 90, 180, 360]]
+> 
+>   width: [16]
+>   depth: [2]
+>   train_val_split: 0.8
+>   batch_size: [128]
+>   num_trajs: -1
+>   seed: [2345]
+> 
+>   rtol: 0.000001
+>   atol: 0.00000001
+> 
+>   latent_size: [8]           # VAE bottleneck (z space)
+>   latent_hidden_size: [16]   # ODE hidden space (h space), matches Kidger hidden_size
+>   latent_width: [16]
+>   latent_depth: [2]
+>   latent_activation: [softplus]       # Kidger uses softplus in MLP body
+>   latent_final_activation: [tanh]      # drift MLP final activation, matches Kidger
+>   latent_encoder_final_activation: [linear]  # encoder head is linear, no squashing of (μ, log σ)
+>   # latent_consistency_weight: [1e-1]
+> 
+>   latent_dynamics_type: [nonlinear]
+>   # latent_linear_init_scale: [0.02]
+>   latent_drift_scale: [1.0]           # Kidger initializes scale to 1.0
+>   latent_residual_scale: [1.0]
+> 
+>   latent_segment_stride_ratio: [1.0]
+> 
+>   latent_encoder_type: [y0_mlp] # options are "prefix_gru", "backward_gru", "y0_mlp"
+>   latent_encoder_use_time: [true]     # concatenate dt with features in GRU
+>   latent_prefix_length: [18]
+>   latent_encoder_feature_layer: [sph_4D_rinv_vel]
+> 
+>   # Stochastic encoder with KL — matches Kidger's VAE setup.
+>   # latent_reconstruction_type: [kidger]
+>   latent_use_stochastic_encoder: [false]
+>   latent_kl_weight: [1]
+>   latent_kl_schedule: [linear_warmup]
+>   latent_kl_weight_start: [0.0]
+>   latent_kl_warmup_steps: [-1]   # auto: clamp(fraction * total_steps, min, max)
+>   latent_kl_warmup_fraction: [0.2]
+>   latent_train_use_mean: [false]
+>   latent_eval_use_mean: [true]
+> 
+>   # Minimal regularization — let the model learn freely first.
+>   latent_initial_state_weight: [0.0]
+>   latent_orbit_closure_weight: [0.0]
+>   latent_state_norm_weight: [0.0]
+>   latent_drift_norm_weight: [0.0]
+>   latent_linear_stability_weight: [0.0]
+> 
+>   # Phase dynamics off.
+>   latent_use_phase_dynamics: [false]
+>   latent_phase_supervision_weight: [0.0]
+> 
+>   # Aux orbital head off.
+>   latent_aux_orbital_weight: [0.0]
+>   latent_aux_orbital_mu: [1.0]
+>   latent_aux_orbital_use_head: [false]
+> 
+>   latent_log_gradient_stats: [false]
+>   latent_log_dimension_mpe: [false]
+>   latent_grad_clip_total_norm: [0.0]
+>   latent_grad_clip_encoder_norm: [0.0]
+>   latent_grad_clip_dynamics_norm: [0.0]
+>   latent_grad_clip_decoder_norm: [0.0]
+>   latent_grad_clip_aux_norm: [0.0]
+> 
+>   latent_solver_max_steps: [8192]
+>   latent_log_every: [50]
+>   latent_plot_orbits: [[0, 1]]
+>   latent_checkpoint_dir: ["files/models"]
+>   latent_energy_drift_weight: 0.0   # tune this
+>   latent_energy_drift_mu: 1.0       # normalized 2BP
+> ```
+> 
+> 
+
+![[Pasted image 20260506125226.png|500]]
+
+State error:
+![[Pasted image 20260506125305.png]]
+
+Test orbits:
+![[Pasted image 20260506125322.png]]
+
+Dynamics v training orbits:
+![[Pasted image 20260506125341.png]]
+
+True vs model implied acceleration:
+![[Pasted image 20260506125401.png]]
+
+Latent PCA:
+![[Pasted image 20260506125417.png]]
+
+Takeaways:
+- The encoder/decoder is not as accurate once we change the feature layer
+- PCA shows some structure, but not meaningful
+- How can we encourage a meaningful latent structure? Do we need to change the model architecture? The feature layer? The loss function? I would imagine that for the 2BP, a meaningful structure would encode a notion of energy and angular momentum. Can we encourage this?
+
+Possible solutions:
+- Include orbital energy in training data. We are no longer trying to learn dynamics completely from scratch, so let's use the information we have available to us.
+- Acceleration consistency loss. Add a loss term that penalizes `||J_dec(h) @ f_theta(h) - a_true(y)||` at decoded points along the trajectory. This directly forces the dynamics to produce the right acceleration when decoded.
+- Metric loss on latent codes. Penalize `||z0_i - z0_j||` being large when the orbits are physically similar (same energy/SMA), and small when dissimilar. This directly shapes the latent geometry. But it only fixes the encoder structure — the dynamics can still be wrong.
+- Penalize energy drift. 
+
+---
+
+Running questions:
+- are there guidelines to sizing latent vs hidden size when we use a VAE?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
