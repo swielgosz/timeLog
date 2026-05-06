@@ -14,9 +14,13 @@ Journal paper:
 	- using these metrics - how can we quantitatively assess if a design improved or degraded model quality
 	- from there, vary training data etc to determine what is needed for a certain level of performance
 	- how much data do we need to do something interesting downstream (discover periodic orbits)
+- work on doing weekly checkins pre meeting with John to make sure thoughts are well organized and update will result in productive conversation. A lot of times I am getting lost in the weeds and we end up waxing poetic. 
+- summer - defining questions leading to paper
+- what metrics are useful for evaluating CR3BP model metrics? where does it matter that these are performing well? we need to decide which are the top ones, not just a laundry list of choices. 
 
 
-# May 5
+
+
 Goals for today: the latent ODE models are losing information about the physical structure of the 2BP dynamics. The latent space is not structured well, so we consequently cannot accurately learn latent dynamics. Today I want to focus on systematically implementing changes to improve the latent structure and overall model. And taking good notes!
 
 ## The Problem
@@ -27,7 +31,7 @@ The latent ODE models are not preserving physical structure of the 2BP dynamics.
 ![[Pasted image 20260505113454.png]]
 ![[Pasted image 20260505113429.png]]
 
-
+==What am I looking at, why do I care==
 ## Possible Solutions
 1. More intelligent design of training data representation:
 Recall that when we were focused on improving the neuralODE results, in addition to scaling the data as is standard such that $\mu^*=1$, we also spent time designing feature layers that allowed the model to more easily learn the dynamics of the problem. Typically, our feature layer is $[1/r,x/r/y/r,z/r,v_x,v_y,v_z]$ . This encodes the inverse relationship between gravity and distance. The direction components tell the network which way to point the acceleration. 
