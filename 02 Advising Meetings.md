@@ -1,3 +1,9 @@
+Journal paper:
+- long term, construct the linear latent model of the CR3BP but that is step c or d.
+- latent ODE - encoding energy level is not necessarily the way to go. John agrees that it makes sense for the long term linear latent goal. 
+- we should be able to poorly learn full CR3BP without prior information encoded, then if we include more info we should be able to better learn the dynamics. 
+- can we use vanilla neural ODEs to represent the CR3BP and how do we assess if we have successfully recovered those dynamics. We have not yet shown if we can or cannot do this with the vanilla neuralODE. Definitions of the metrics we're using, plots that we are using. 
+- we don't know what the boundary of the CR3BP is currently - how do we define the boundary? do we need t o break it into sub problem? how do we define the training data? do we take it from within or outside of the boundaries? 
 # May 5
 Goals for today: the latent ODE models are losing information about the physical structure of the 2BP dynamics. The latent space is not structured well, so we consequently cannot accurately learn latent dynamics. Today I want to focus on systematically implementing changes to improve the latent structure and overall model. And taking good notes!
 
