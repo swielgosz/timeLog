@@ -1,3 +1,4 @@
+# May 8 - Group meeting
 Journal paper:
 - long term, construct the linear latent model of the CR3BP but that is step c or d.
 - latent ODE - encoding energy level is not necessarily the way to go. John agrees that it makes sense for the long term linear latent goal. 
