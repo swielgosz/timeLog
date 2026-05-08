@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Untitled 1.md",
+                "file": "01 Spring 2026.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Untitled 1"
+              "title": "01 Spring 2026"
             }
           },
           {
@@ -202,9 +202,10 @@
   },
   "active": "1243a3f2e960bd0b",
   "lastOpenFiles": [
+    "Attachments/Pasted image 20260508150718.png",
+    "Untitled 1.md",
     "Attachments/Sarah Wielgosz Advising Agreement.pdf",
     "Untitled.md",
-    "Untitled 1.md",
     "02 Advising Meetings.md",
     "01 Spring 2026.md",
     "Attachments/Pasted image 20260506125417.png",
@@ -246,7 +247,6 @@
     "Attachments/6f0c636b-eea0-4685-980e-7efaf1e66405.pdf",
     "Latent and UDE codes",
     "Journal Paper",
-    "cleaning code",
-    "Attachments/multi_dataset_xy_baseline 1 1.pdf"
+    "cleaning code"
   ]
 }
