@@ -35,8 +35,7 @@
               "title": "02 Advising Meetings"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -186,8 +185,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ea01097301a3f3aa",
+  "active": "3ca203b88fc520a6",
   "lastOpenFiles": [
+    "02 Advising Meetings.md",
     "Untitled.md",
     "01 Spring 2026.md",
     "Attachments/Pasted image 20260506125417.png",
@@ -203,7 +203,6 @@
     "latentODE.py.md",
     "Latent and UDE codes/Training Scripts.md",
     "Sequential Neural Networks.md",
-    "02 Advising Meetings.md",
     "Attachments/L15_intro-rnn__slides.pdf",
     "Untitled",
     "cleaning code/losses.py.md",
