@@ -11,6 +11,8 @@
 	- Program meetings expected to continue over the summer 
 	- Research weeks will be held again - for one week, spend four hours per day together
 		- candidate schedule: June 22-26 me
+	- Let John know when week off is, remote week is fine within reason but let him know
+	- Send John figures to showcase if we want
 
 Journal paper:
 - long term, construct the linear latent model of the CR3BP but that is step c or d.
