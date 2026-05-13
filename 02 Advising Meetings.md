@@ -1,3 +1,10 @@
+Adam Grant - psychology guy
+
+For agentic coding - build plans first before any coding (something like two page brain dump. Problem to solve, where I'm at. This is what I have, this is kinda where I want to go with it. Want to build a diagnostic - can you ask me questions and give a couple suggestions. We'll iterate before they write any code. You can tell it to be adversarial and call you out if something seems like I don't know. If you highlight a certain part, refine that). Use wiht plots - think they're useful, want a strict metric., look at literature etc. 
+Distill weekly updates into three minute updates. can read off a script. Consolidate up front. 
+
+
+
 # May 8 - Group meeting
 - Performance reviews next Wednesday - fill out by noon on Tuesday
 - Think about suggestions for change
