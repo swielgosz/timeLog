@@ -5,7 +5,12 @@ To bring you back into the neural ODE headspace, we are returning to  working on
 
 For the metrics, my goals is to have a few different pieces of information available at a glance for model diagnostics while keeping required compute time low. We want both qualitative and quantitative diagnostic measures. 
 
-My thought was that for a model to be good, it should model scientifically important regions well. Errors in these regions will indicate poor model behavior. I will describe  To determine what is scientifically important, I was 
+My thought was that for a model to be good, it should model scientifically important regions well. Errors in these regions will indicate poor model behavior. To determine what is scientifically important, I would like to consider proximity to Lagrange points, and proximity to stable and unstable manifolds.
+
+I ranked the Lagrange points in order of scientific significance in the Earth-Moon system. L1 and L2 are the most important being near the moon, L4 and L5 are symmetric and the only stable lagrange points so I have ranked those lower since they could still be used for observation, and L3 is generally not used much in space missions.
+
+We also need to know what proximity to the Lagrange points means - 
+
 
 
 ![[Pasted image 20260527115825.png]]
