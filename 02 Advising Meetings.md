@@ -4,6 +4,8 @@ I want to discuss a CR3BP error metric and a schedule for the summer.
 To bring you back into the neural ODE headspace, we are returning to  working on improving our vanilla neural ODEs for CR3BP. The first question to answer is what makes a good model? In order to know if neural ODEs can recover CR3BP dynamics well, we need to have an idea of what this actually means.
 
 For the metrics, my goals is to have a few different pieces of information available at a glance for model diagnostics while keeping required compute time low. We want both qualitative and quantitative diagnostic measures. 
+
+My thought was that for a model to be good, it should model scientifically important regions well. To determin what is scientifically important, I am considering both the proximity 
 ![[Pasted image 20260527115825.png]]
 
 # Performance Review
