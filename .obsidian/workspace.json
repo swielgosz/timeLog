@@ -6,6 +6,7 @@
       {
         "id": "62f223d0128204bd",
         "type": "tabs",
+        "dimension": 50,
         "children": [
           {
             "id": "3ca203b88fc520a6",
@@ -40,6 +41,7 @@
       {
         "id": "bd4ee354f92f505c",
         "type": "tabs",
+        "dimension": 50,
         "children": [
           {
             "id": "1243a3f2e960bd0b",
@@ -205,10 +207,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3ca203b88fc520a6",
+  "active": "1243a3f2e960bd0b",
   "lastOpenFiles": [
-    "02 Advising Meetings.md",
     "01 Summer 2026.md",
+    "02 Advising Meetings.md",
     "Attachments/Pasted image 20260527115825.png",
     "Attachments/Pasted image 20260526115801.png",
     "Archive/01 Spring 2026.md",
