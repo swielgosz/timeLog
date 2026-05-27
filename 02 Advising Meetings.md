@@ -3,8 +3,14 @@
 can we look at the jacobi drift between specific parts of the orbit? like if we break into 10 segments, maybe we track well in some of the segments but not others.
 color bar for the drift relative to the orbits?
 
-
+June 22-26 working with John we will iterate on all of the visualizations and the deliverables and experiments that need ot be done and then write for the next month
+Before then:
+- Refine error metrics
+- We need error metrics for local regions - if we just have 4 lyapunov orbits, why are they not being modeled well? where is the boundary at which point our model begins to break? distance from reference trajectory? almount of training data? training mechanics? how do we define boundaries where it breaks - wualitative and quanititative metrics. where does this happen and why. Ideally, we can see this in multiple locations. then what do we ened to do to model, training process, etc to overcome this? 
 Target July 22 for journal paper submitted deadline
+
+adversarial agentic question asking
+
 Worst case - if journal paper is not full
 Abstract by first of new semester
 
