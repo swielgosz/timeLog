@@ -35,8 +35,7 @@
               "title": "01 Summer 2026"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "bd4ee354f92f505c",
@@ -206,10 +205,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "1243a3f2e960bd0b",
+  "active": "3ca203b88fc520a6",
   "lastOpenFiles": [
-    "01 Summer 2026.md",
     "02 Advising Meetings.md",
+    "01 Summer 2026.md",
     "Attachments/Pasted image 20260527115825.png",
     "Attachments/Pasted image 20260526115801.png",
     "Archive/01 Spring 2026.md",
