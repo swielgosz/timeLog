@@ -5,31 +5,9 @@ To bring you back into the neural ODE headspace, we are returning to  working on
 
 For the metrics, my goals is to have a few different pieces of information available at a glance for model diagnostics while keeping required compute time low. We want both qualitative and quantitative diagnostic measures. 
 
-My thought was that for a model to be good, it should model scientifically important regions well. To determine what is scientifically important, I am considering both the proximity 
+My thought was that for a model to be good, it should model scientifically important regions well. Errors in these regions will indicate poor model behavior. I will describe  To determine what is scientifically important, I was 
 
-You don't need specific family Jacobi constants for a crude first pass — the critical values C_Li are already a natural anchor. Each orbit family bifurcates from its libration point at exactly C = C_Li and grows toward lower C as orbits get larger. So C_Li is the characteristic energy of "small orbits near Li," and the weighting naturally de-emphasizes larger orbits (which is arguably correct — you're most interested in the dynamically active region near the point itself).
 
-The formula would be:
-
-```
-w_jacobi(state) = Σᵢ λᵢ · exp(-(C(state) - C_Li)² / (2σ_C²))
-```
-
-where C(state) = 2Ω(x,y) - v² is the Jacobi constant at that grid state, and the λᵢ encode your importance ranking:
-
-```
-λ_L1 = λ_L2 = 1.0,  λ_L4 = λ_L5 = 0.5,  λ_L3 = 0.1
-```
-
-This directly captures what you want:
-
-- A state far from L1 in position but with C ≈ C_L1 (the far end of a large Lyapunov orbit) gets high weight
-- A state near L1 but with C far from C_L1 (energetically incompatible with L1 dynamics) gets low weight
-- L3 is de-emphasized regardless of position
-
-The crude part is σ_C. A reasonable starting point is σ_C ≈ 0.05, since |C_L1 - C_L2| ≈ 0.016 and |C_L2 - C_L3| ≈ 0.16 — tight enough to separate L1 from L2 but wide enough to cover realistic orbit family ranges. To refine later you'd compute the actual C range spanned by the orbit families in your HDF5 data and fit σ_C to that spread per libration point (they'd each get their own σ).
-
-Want me to implement this as a new weight function in `eval_grid.py`?
 ![[Pasted image 20260527115825.png]]
 
 # Performance Review
