@@ -1,5 +1,7 @@
 # May 27
-I want to discuss a CR3BP error metric and a 
+I want to discuss a CR3BP error metric and a schedule for the summer.
+
+For the metrics, my goals is to have a few different pieces of information available at a glance for model diagnostics while keeping required compute time low. To 
 
 # Performance Review
 
