@@ -1,7 +1,10 @@
 # May 27
 I want to discuss a CR3BP error metric and a schedule for the summer.
 
+To bring you back into the neural ODE headspace, we are returning to the vanilla neural ODEs for CR3BP. We 
+
 For the metrics, my goals is to have a few different pieces of information available at a glance for model diagnostics while keeping required compute time low. To 
+![[Pasted image 20260527115825.png]]
 
 # Performance Review
 

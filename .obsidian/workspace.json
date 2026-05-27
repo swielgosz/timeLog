@@ -22,34 +22,6 @@
             }
           },
           {
-            "id": "1243a3f2e960bd0b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "02 Advising Meetings.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "02 Advising Meetings"
-            }
-          },
-          {
-            "id": "ea01097301a3f3aa",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Archive/01 Spring 2026.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "01 Spring 2026"
-            }
-          },
-          {
             "id": "57d80ed349ea3eab",
             "type": "leaf",
             "state": {
@@ -65,6 +37,26 @@
           }
         ],
         "currentTab": 1
+      },
+      {
+        "id": "bd4ee354f92f505c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1243a3f2e960bd0b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "02 Advising Meetings.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "02 Advising Meetings"
+            }
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -214,11 +206,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "1243a3f2e960bd0b",
+  "active": "57d80ed349ea3eab",
   "lastOpenFiles": [
+    "02 Advising Meetings.md",
+    "Attachments/Pasted image 20260527115825.png",
     "01 Summer 2026.md",
     "Attachments/Pasted image 20260526115801.png",
-    "02 Advising Meetings.md",
     "Archive/01 Spring 2026.md",
     "Attachments/Pasted image 20260524173908.png",
     "Attachments/Pasted image 20260520173202.png",
@@ -232,7 +225,6 @@
     "Attachments/Pasted image 20260508150718.png",
     "Attachments/Sarah Wielgosz Advising Agreement.pdf",
     "Attachments/Pasted image 20260506125417.png",
-    "Attachments/Pasted image 20260506125401.png",
     "latentODE.py.md",
     "Latent and UDE codes/Training Scripts.md",
     "Sequential Neural Networks.md",
