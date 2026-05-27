@@ -1,3 +1,8 @@
+# May 27
+I want to discuss a CR3BP error metric and a 
+
+# Performance Review
+
 Adam Grant - psychology guy
 
 For agentic coding - build plans first before any coding (something like two page brain dump. Problem to solve, where I'm at. This is what I have, this is kinda where I want to go with it. Want to build a diagnostic - can you ask me questions and give a couple suggestions. We'll iterate before they write any code. You can tell it to be adversarial and call you out if something seems like I don't know. If you highlight a certain part, refine that). Use wiht plots - think they're useful, want a strict metric., look at literature etc. 
@@ -34,12 +39,7 @@ Journal paper:
 - latent ODE - encoding energy level is not necessarily the way to go. John agrees that it makes sense for the long term linear latent goal. 
 - we should be able to poorly learn full CR3BP without prior information encoded, then if we include more info we should be able to better learn the dynamics. 
 - can we use vanilla neural ODEs to represent the CR3BP and how do we assess if we have successfully recovered those dynamics. We have not yet shown if we can or cannot do this with the vanilla neuralODE. Definitions of the metrics we're using, plots that we are using. 
-- we don't know what the boundary of the CR3BP is currently - how do we define the boundary? do we need t o break it into sub problem? how do we define the training data? do we take it from within or outside of the boundaries? 
-- neural ODEs don't model the CR3BP well:
-	- what does modeling well mean?
-	- what are the metrics for this?
-	- how do we get the models to generalize well?
-	- what else has been done to train these models?
+
 - in notes, we should know what question we are specifically asking
 - what metrics define high quality tools across the different systems we have developed
 	- using these metrics - how can we quantitatively assess if a design improved or degraded model quality

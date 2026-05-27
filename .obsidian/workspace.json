@@ -63,7 +63,8 @@
               "title": "01 Summer 2026"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -213,11 +214,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3ca203b88fc520a6",
+  "active": "1243a3f2e960bd0b",
   "lastOpenFiles": [
+    "01 Summer 2026.md",
     "Attachments/Pasted image 20260526115801.png",
     "02 Advising Meetings.md",
-    "01 Summer 2026.md",
     "Archive/01 Spring 2026.md",
     "Attachments/Pasted image 20260524173908.png",
     "Attachments/Pasted image 20260520173202.png",
@@ -232,7 +233,6 @@
     "Attachments/Sarah Wielgosz Advising Agreement.pdf",
     "Attachments/Pasted image 20260506125417.png",
     "Attachments/Pasted image 20260506125401.png",
-    "Attachments/Pasted image 20260506125341.png",
     "latentODE.py.md",
     "Latent and UDE codes/Training Scripts.md",
     "Sequential Neural Networks.md",
