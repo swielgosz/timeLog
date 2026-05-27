@@ -1,4 +1,16 @@
 # May 27
+
+can we look at the jacobi drift between specific parts of the orbit? like if we break into 10 segments, maybe we track well in some of the segments but not others.
+color bar for the drift relative to the orbits?
+
+
+Target July 22 for journal paper submitted deadline
+Worst case - if journal paper is not full
+Abstract by first of new semester
+
+
+
+
 I want to discuss a CR3BP error metric and a schedule for the summer.
 
 To bring you back into the neural ODE headspace, we are returning to  working on improving our vanilla neural ODEs for CR3BP. The first question to answer is what makes a good model? In order to know if neural ODEs can recover CR3BP dynamics well, we need to have an idea of what this actually means.
