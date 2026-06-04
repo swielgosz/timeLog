@@ -42,12 +42,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Running To Do.md",
+                "file": "01 Summer 2026.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Running To Do"
+              "title": "01 Summer 2026"
             }
           },
           {
@@ -238,8 +238,8 @@
   },
   "active": "c940b64bdbaf7b51",
   "lastOpenFiles": [
-    "01 Summer 2026.md",
     "Running To Do.md",
+    "01 Summer 2026.md",
     "02 Advising Meetings.md",
     "Untitled.md",
     "Attachments/Pasted image 20260527115825.png",
