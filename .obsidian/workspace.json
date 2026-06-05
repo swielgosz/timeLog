@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 Summer 2026.md",
+                "file": "02 Advising Meetings.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01 Summer 2026"
+              "title": "02 Advising Meetings"
             }
           },
           {
@@ -63,8 +63,7 @@
               "title": "Untitled"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -121,8 +120,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "8b5870f707c309dd",
@@ -215,8 +213,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "c940b64bdbaf7b51",
+  "active": "3ca203b88fc520a6",
   "lastOpenFiles": [
+    "02 Advising Meetings.md",
+    "Attachments/Pasted image 20260605131822.png",
+    "01 Summer 2026.md",
     "Attachments/Pasted image 20260605125400.png",
     "Attachments/Pasted image 20260605125332.png",
     "Attachments/Pasted image 20260605125318.png",
@@ -226,11 +227,7 @@
     "Attachments/Pasted image 20260605123239.png",
     "Attachments/Pasted image 20260605123203.png",
     "Attachments/Pasted image 20260604193504.png",
-    "Attachments/Pasted image 20260604193447.png",
-    "Attachments/Pasted image 20260604183845.png",
     "Running To Do.md",
-    "01 Summer 2026.md",
-    "02 Advising Meetings.md",
     "Untitled.md",
     "Archive/01 Spring 2026.md",
     "Attachments/Frnka_2010.pdf",

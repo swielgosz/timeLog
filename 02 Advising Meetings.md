@@ -1,3 +1,6 @@
+# June 5
+![[Pasted image 20260605131822.png]]
+
 # May 27
 
 can we look at the jacobi drift between specific parts of the orbit? like if we break into 10 segments, maybe we track well in some of the segments but not others.
