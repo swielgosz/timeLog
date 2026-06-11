@@ -1,4 +1,10 @@
 # June 11
+It stands for **Frobenius norm**. For a matrix $A$, it's defined as:
+
+$$|A|_F = \sqrt{\sum_{i,j} A_{ij}^2}$$
+
+It's just the square root of the sum of all squared entries — effectively treating the matrix as a flat vector and taking its Euclidean norm. Here $A = \partial f_\theta / \partial \theta$ is a $6 \times P$ matrix (6 output dimensions, $P$ parameters), so $|\cdot|_F$ gives a single scalar summarizing the overall magnitude of parameter sensitivity at that point
+
 Our adjoint represent how sensitive we are 
 
 **Orbit gradient plots (Figures 1 & 2)** Colored trajectory showing $|\partial L_t / \partial \theta|$ at each orbital position, for 4 different ICs. Tells you _where on the orbit_ the model receives gradient signal. If apoapsis is consistently dark, the parameters active there are undertrained regardless of how many epochs you run. Separate train/test figures show whether the pattern generalizes.
