@@ -64,7 +64,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -214,10 +214,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "57d80ed349ea3eab",
+  "active": "c940b64bdbaf7b51",
   "lastOpenFiles": [
-    "02 Advising Meetings.md",
     "01 Summer 2026.md",
+    "02 Advising Meetings.md",
     "Attachments/Pasted image 20260605131822.png",
     "Attachments/Pasted image 20260605125400.png",
     "Attachments/Pasted image 20260605125332.png",
