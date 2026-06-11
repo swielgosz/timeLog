@@ -1,5 +1,5 @@
 # June 11
-
+Our adjoint represent how sensitive we are 
 # June 5
 ![[Pasted image 20260605131822.png]]
 
