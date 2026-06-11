@@ -1,5 +1,28 @@
 # June 11
 Our adjoint represent how sensitive we are 
+
+**Orbit gradient plots (Figures 1 & 2)** Colored trajectory showing $|\partial L_t / \partial \theta|$ at each orbital position, for 4 different ICs. Tells you _where on the orbit_ the model receives gradient signal. If apoapsis is consistently dark, the parameters active there are undertrained regardless of how many epochs you run. Separate train/test figures show whether the pattern generalizes.
+
+**Signal vs. radius/time/acceleration (Figure 3)** Same gradient norm plotted against $|r|$, time, and $|a_\text{true}|$ as x-axes, overlaid with accumulated error and instantaneous error. The point is to identify the _causal variable_ — does gradient signal drop because radius is large, because acceleration is small, or both? Separating accumulated error (drift) from instantaneous error (local model fidelity) tells you whether apoapsis is bad because the model can't learn it, or because error drifts into it from elsewhere.
+
+---
+
+**`analyze_adjoint.py`**
+
+**$|\partial f / \partial \theta|_F$ (row 1)** Frobenius norm of the Jacobian of the vector field with respect to parameters. This measures how sensitive the model _output_ is to its weights at each orbital location, independent of any loss. Low at apoapsis means gradient descent literally cannot move those weights much regardless of how large the loss gradient $a(t)$ is — the two multiply together, so if either is zero, $dL/d\theta$ is zero there.
+
+**$|a(t)|$ (row 2)** The adjoint norm — how much the loss changes if you perturb the state at time $t$. This is set by the loss function and the dynamics Jacobian $\partial f / \partial x$ propagating sensitivity backward. Tells you whether the loss is even "aware" of what the model does at each orbital location. If this is small at apoapsis, changing the loss function (e.g. `percent_error_weighted`) is the right lever.
+
+**Integrand $|a(t)^\top (\partial f / \partial \theta)|$ (row 3)** The actual per-location contribution to $dL/d\theta = \int a(t)^\top (\partial f/\partial \theta), dt$. This is the bottom line — if it's small somewhere, that location contributes nothing to the parameter update. Rows 1 and 2 diagnose _why_ it's small (model insensitivity vs. loss insensitivity), but row 3 is the direct consequence.
+
+**$\text{tr}(\partial f_\theta / \partial x)$ divergence (row 4)** For true 2BP this is exactly zero everywhere — the flow is Hamiltonian and volume-preserving. If the learned model has a consistently nonzero trace, it has learned a dissipative or expansive vector field even if its trajectory rollout looks fine. Negative divergence directly causes adjoint decay (phase space is being contracted), which suppresses $|a(t)|$ in row 2. This is the diagnostic for whether adjoint decay is a _model quality problem_ rather than a loss or dynamics property.
+
+---
+
+**Does post-training matter?**
+
+For diagnosis, no — you want to understand what happened, not intervene. But it does mean these plots can't guide individual gradient steps. Their value is in informing _structural_ decisions: which loss function to use, whether the model architecture can even represent the right Jacobian, and whether adding more training data or epochs will help at all (if $|\partial f/\partial \theta|_F$ is structurally zero at apoapsis, no loss change fixes it).
+
 # June 5
 ![[Pasted image 20260605131822.png]]
 
