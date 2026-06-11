@@ -1,4 +1,7 @@
 # June 11
+We want gradient of loss wrt each individual training arc
+
+
 It stands for **Frobenius norm**. For a matrix $A$, it's defined as:
 
 $$|A|_F = \sqrt{\sum_{i,j} A_{ij}^2}$$
