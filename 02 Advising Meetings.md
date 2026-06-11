@@ -1,5 +1,7 @@
 # June 11
 We want gradient of loss wrt each individual training arc
+next week - srtnog understandigm of what each term in the integrand means
+we think second term is where the modeling energy is getting placed 
 
 
 It stands for **Frobenius norm**. For a matrix $A$, it's defined as:
