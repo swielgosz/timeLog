@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 Summer 2026.md",
+                "file": "Weekly Recaps.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01 Summer 2026"
+              "title": "Weekly Recaps"
             }
           }
         ],
@@ -216,8 +216,8 @@
   },
   "active": "b9d7899c47ef5626",
   "lastOpenFiles": [
-    "Weekly Recaps.md",
     "01 Summer 2026.md",
+    "Weekly Recaps.md",
     "Untitled 1.md",
     "02 Advising Meetings.md",
     "Attachments/Pasted image 20260605131822.png",
