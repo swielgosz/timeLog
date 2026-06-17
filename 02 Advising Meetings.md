@@ -4,7 +4,9 @@ Issues in github can become context for the agent once we have
 - reproduce on a different dynamical system (exponential growth? spring-mass damper might be too similar)
 - can we desensitize the adjoint to time? 
 - do we want a model that focuses on periapsis or can we weight this differently? we can probably hack this - take this term, normalize by r^2. maybe divide by 1/dynamics(t) we is agnositic of the dynamics
-- what if we tried changing the loss to something like mse/dn
+- what if we tried changing the loss to something like mse/dynamics?
+- go back to most vanilla case - probably try full orbit but don't discount segments
+- 
 # June 11
 We want gradient of loss wrt each individual training arc
 next week - srtnog understandigm of what each term in the integrand means
