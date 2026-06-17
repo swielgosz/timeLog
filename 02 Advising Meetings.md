@@ -1,4 +1,5 @@
 # June 17
+Issues in github can become context for the agent once we have 
 # June 11
 We want gradient of loss wrt each individual training arc
 next week - srtnog understandigm of what each term in the integrand means
