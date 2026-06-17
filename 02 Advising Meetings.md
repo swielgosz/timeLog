@@ -1,3 +1,4 @@
+# June 17
 # June 11
 We want gradient of loss wrt each individual training arc
 next week - srtnog understandigm of what each term in the integrand means
