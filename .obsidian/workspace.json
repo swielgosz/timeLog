@@ -77,8 +77,7 @@
               "title": "Untitled 3"
             }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "vertical"
@@ -229,13 +228,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "afac18398ff34af4",
+  "active": "3ca203b88fc520a6",
   "lastOpenFiles": [
+    "Untitled.md",
     "Untitled 3.md",
     "Untitled 2.md",
     "01 Summer 2026.md",
     "Untitled 1.md",
-    "Untitled.md",
     "Untitled.base",
     "Weekly Recaps.md",
     "02 Advising Meetings.md",
