@@ -1,4 +1,5 @@
-# June 17
+# June 17/18
+
 Issues in github can become context for the agent once we have 
 
 - reproduce on a different dynamical system (exponential growth? spring-mass damper might be too similar)
