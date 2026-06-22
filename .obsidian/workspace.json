@@ -91,8 +91,7 @@
               "title": "Untitled 3"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -242,10 +241,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3c07f08e13dd0109",
+  "active": "3ca203b88fc520a6",
   "lastOpenFiles": [
-    "01 Summer 2026.md",
     "plot_timestep_spacing.py.md",
+    "01 Summer 2026.md",
     "Code Archive",
     "02 Advising Meetings.md",
     "Untitled.md",
