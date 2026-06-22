@@ -1,4 +1,12 @@
 # June 22
+- Can we jsut add this function to the loss function? if not, we need to dig into diffrax
+- look at the dynamics and diff eq 
+- We want to know how to actualy navigate what is happening in diffrax
+- check parallelization of adjoint analysis
+- script for first order test tomorrow 
+- thursday friday - we can talk about swath foe xperiments and possibly do some refactoring
+
+
 The scripts are too long. There is a lot of formatting. We mainly just want to see what the methods etc are. Things like formatting should be hidden from user
 We have a lot of if statements - these should be methods
 in particular, `train_model` is very long
