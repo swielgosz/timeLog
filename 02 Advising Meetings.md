@@ -6,7 +6,9 @@ everything is very dense
 do unit testing. make dummy data to run things very quickly and see if the plots look how we want
 harnesses - workflow you want executred every time you run your code. this would 
 come up with unit tests for things in repository. claude - set line limits for scripts, if there are enough private methods in a script it should be a class, set line scripts for methods, etc. 
-
+these tools value volume - we want the simplest experiments 
+look up ponytail - use fewest number of lines. 
+separate user facing front end from nitty gritty getting formatting correct. we don'tj need these for the academic side of things 
 
 
 # June 17/18
