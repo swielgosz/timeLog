@@ -10,7 +10,8 @@ these tools value volume - we want the simplest experiments
 look up ponytail - use fewest number of lines. 
 separate user facing front end from nitty gritty getting formatting correct. we don'tj need these for the academic side of things 
 
-
+Our goal is to normalize the loss function by the model dynamics such that we are not placing importance only on the high dynamics areas. We also w
+BacksolveAdjoint vs RecursiveAdjoint
 # June 17/18
 
 Issues in github can become context for the agent once we have 
