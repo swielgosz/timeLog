@@ -11,7 +11,26 @@ look up ponytail - use fewest number of lines.
 separate user facing front end from nitty gritty getting formatting correct. we don'tj need these for the academic side of things 
 
 Our goal is to normalize the loss function by the model dynamics such that we are not placing importance only on the high dynamics areas. We also w
-BacksolveAdjoint vs RecursiveAdjoint
+
+BacksolveAdjoint vs RecursiveAdjoint (aka opt-disc vs disc-opt)
+`BacksolveAdjoint` solves the continuous adjoint ODE backwards, while `RecursiveCheckpointAdjoint` tells JAX to differentiate directly through the numerical solver steps, i.e. backprop through the for-loop of the integrator (what does this mean?).
+
+In optimise-then-discretize, we treat the adjoint equation as a continuous mathematical object. We derive our adjoint equations analytically, and then solve those numerically. The gradient we get is an approximation to the true continuous sensitivity, and numerical is introduced from the backward solve. Conversely, in discretise-then-optimise, we treat the solver as a fixed computational graph and we diffferentiate that graph using reverse-mode AD.
+
+Example of computational graph. Let's say the solver (Tsit5 and PID controller) takes a seuqnece of adaptive steps, and it takes N steps to go from t0 to t1. Our forward pass looks somethig like:
+```
+y0  →  [Tsit5 stage evals + error estimate + PID step accept/reject]  →  y1
+y1  →  [Tsit5 stage evals + error estimate + PID step accept/reject]  →  y2
+...
+y_{N-1}  →  [...]  →  y_N ≈ y(t1)
+```
+
+`RecusriveCheckpointAdjoint `
+
+
+
+
+Can we return to the 2BP
 # June 17/18
 
 Issues in github can become context for the agent once we have 
