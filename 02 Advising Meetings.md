@@ -1,3 +1,5 @@
+# 
+The scripts are too long. There is a lot of formatting. We mainly just want to see what the methods etc are. Things like 
 # June 17/18
 
 Issues in github can become context for the agent once we have 
