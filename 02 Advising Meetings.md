@@ -25,7 +25,13 @@ y1  →  [Tsit5 stage evals + error estimate + PID step accept/reject]  →  y2
 y_{N-1}  →  [...]  →  y_N ≈ y(t1)
 ```
 
-`RecusriveCheckpointAdjoint `
+`RecusriveCheckpointAdjoint` tells JAX to differentiate this ocmposition using the chain rule with no approximations. 
+
+```
+dL/dθ = (dL/dy_N) · (dy_N/dy_{N-1}) · ... · (dy_1/dy_0) · (dy_0/dθ)
+```
+
+Each factor `dy_k/dy_{k-1}` is the Jacobian of one solver step, computed exactly by JAX's AD through Tsit5's arithmetic.
 
 
 
