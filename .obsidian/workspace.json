@@ -22,6 +22,20 @@
             }
           },
           {
+            "id": "3c07f08e13dd0109",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "plot_timestep_spacing.py.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "plot_timestep_spacing.py"
+            }
+          },
+          {
             "id": "079e87b5d655c8d9",
             "type": "leaf",
             "state": {
@@ -77,7 +91,8 @@
               "title": "Untitled 3"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -227,10 +242,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3ca203b88fc520a6",
+  "active": "3c07f08e13dd0109",
   "lastOpenFiles": [
-    "02 Advising Meetings.md",
     "01 Summer 2026.md",
+    "plot_timestep_spacing.py.md",
+    "Code Archive",
+    "02 Advising Meetings.md",
     "Untitled.md",
     "Untitled 1.md",
     "Untitled 2.md",
@@ -252,10 +269,9 @@
     "Attachments/Frnka_2010.pdf",
     "Attachments/Sarah Wielgosz Advising Agreement.pdf",
     "latentODE.py.md",
-    "Latent and UDE codes/Training Scripts.md",
+    "Code Archive/Latent and UDE codes/Training Scripts.md",
     "Sequential Neural Networks.md",
     "Attachments/L15_intro-rnn__slides.pdf",
-    "Untitled",
     "cleaning code/losses.py.md",
     "Lit Review Color Code.md",
     "cleaning code/metrics.md",
@@ -269,11 +285,10 @@
     "cleaning code/test_latent_autencoder_2BP.py.md",
     "Archive/Fall 2025.md",
     "Archive/Research Notes.md",
-    "cleaning code/train_latent_2BP_compare.py.md",
     "Attachments/recon_compare_orbit_grid.pdf",
     "Attachments/cf4796d9-aba4-4ba3-bd80-4a44b61e2312.pdf",
     "Attachments/5de52ce2-36b7-4ea5-956a-7c28d42a7ac7.pdf",
     "Attachments/6f0c636b-eea0-4685-980e-7efaf1e66405.pdf",
-    "Latent and UDE codes"
+    "Code Archive/Latent and UDE codes"
   ]
 }
