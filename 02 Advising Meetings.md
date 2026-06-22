@@ -1,5 +1,14 @@
-# 
-The scripts are too long. There is a lot of formatting. We mainly just want to see what the methods etc are. Things like 
+# June 22
+The scripts are too long. There is a lot of formatting. We mainly just want to see what the methods etc are. Things like formatting should be hidden from user
+We have a lot of if statements - these should be methods
+in particular, `train_model` is very long
+everything is very dense
+do unit testing. make dummy data to run things very quickly and see if the plots look how we want
+harnesses - workflow you want executred every time you run your code. this would 
+come up with unit tests for things in repository. claude - set line limits for scripts, if there are enough private methods in a script it should be a class, set line scripts for methods, etc. 
+
+
+
 # June 17/18
 
 Issues in github can become context for the agent once we have 
