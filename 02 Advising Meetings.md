@@ -35,12 +35,18 @@ $$H(x,u,\lambda,t) = \ell(x,u,t) + \lambda^\top f(x,u,t).$$
 
 The state $x(t)$ tellsl you where the ststem is, the costate $\lambda(t)$ tells us how valuable or costly the state is from the perspective of the objective. This is analogous to $a(t)$ in our neuralODE - it tells us how much the final objective would change if we slightly changed the state at time $t$. 
 
+The Hamiltonion tells you the cost you are accumulating right now, and the way your current dynamics affect future cost. First term is the immediate running cost (how expensive is it to be at this state and use this control right now?), second term connects the dynamics to the future objective. $f$ tells you how the state is currently moving, and the costate $\lambda$ tells you which state changes matter for the objective. $f$ might point some direction in state space which tells us how the state is changing, $\lambda$ might point in the direction where the loss is most snesitive. Their dot product asks if the system is currently moving in a direction that increases or decreases the objective?
+
 The necessary conditions are then
 $$\dot x = \frac{\partial H}{\partial \lambda} = f(x,u,t),$$
-
+This just recovers the original dynamics, and says the state must still objey the phsyical dynamics.
 $$\dot \lambda = - \frac{\partial H}{\partial x},$$
+this tells us how the costate evolves. The state evolves forward according to the dynamics, and the costate evolves according to how the Hamiltonian changes iwth the state. “If changing the current state would strongly affect immediate cost or future dynamics, then the costate changes accordingly.”
+
 and the optimal control satisfies a pointwise extremum condition
 $$u^*(t) = \arg\min_u H(x^*(t),u,\lambda(t),t),$$ (or argmax depending on the Hamiltonian sign convention)
+
+This says “If you already know the state x(t) and costate \lambda(t), then the best control at that instant is the one that optimizes the Hamiltonian.” This means “If you already know the state x(t) and costate \lambda(t), then the best control at that instant is the one that optimizes the Hamiltonian.”
 
 The costate terminal condition is typically 
 $\lambda(t_f) = \frac{\partial \phi}{\partial x(t_f)}.$ so $\lambda(t)$ is telling us how much the final objective would change if you perturbed the state at time $t$. 
@@ -63,6 +69,13 @@ So $\partial H/\partial u$ is the local gradient signal for the control. This is
   
 
 $\frac{dL}{d\theta} = \int_{t_0}^{t_f} a(t)^\top \frac{\partial f_\theta}{\partial \theta} \,dt.$
+
+
+Do not break:
+- relationship between the forward dynamics, loss, adjoint equation, and the parameter-gradient accumulation. Math may become inconsistent if we change one piece but still interprest the result as the exact gradient of the original loss
+
+For our neural ODE, the parameter gradient is
+$$\frac{dL}{d\theta} = \int_{t_0}^{t_f} a(t)^\top \frac{\partial f_\theta}{\partial \theta} \,dt.$$ and let's say we want to make the gradient less domi
 # June 22
 - Can we jsut add this function to the loss function? if not, we need to dig into diffrax
 - look at the dynamics and diff eq 
