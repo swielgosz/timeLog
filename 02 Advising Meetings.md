@@ -73,9 +73,26 @@ $\frac{dL}{d\theta} = \int_{t_0}^{t_f} a(t)^\top \frac{\partial f_\theta
 
 Do not break:
 - relationship between the forward dynamics, loss, adjoint equation, and the parameter-gradient accumulation. Math may become inconsistent if we change one piece but still interprest the result as the exact gradient of the original loss
+	
+	For our neural ODE, the parameter gradient is
+	$$\frac{dL}{d\theta} = \int_{t_0}^{t_f} a(t)^\top \frac{\partial f_\theta}{\partial \theta} \,dt.$$ and let's say we want to make the gradient less dominated by the dynamics Conceptually we want something like
+	$$\frac{dL}{d\theta}_{\text{modified}} = \int_{t_0}^{t_f} \rho(z,t,\theta) \, a(t)^\top \frac{\partial f_\theta}{\partial \theta} \,dt,$$
+	where $\rho$ is a normalization factor like
+	$$\rho = \frac{1}{\|f_\theta(z,t)\|+\epsilon}.$$
+	
+	The issue - we can modify the gradient, but then it may no longer be the exact gradient of the original loss. Not automatically bad - optimization methods often use modified gradients like clipping, normalization, preconditioning, etc.
+	
+	Safest thing to modify is the parameter-gradient accumulation term, not the state adjoint.
+	E.g. change the standard
+	$$g_\theta = \int_{t_0}^{t_f} a(t)^\top \frac{\partial f_\theta}{\partial \theta} \,dt.$$
+	to the modified
+	$$g_\theta^{\text{norm}} = \int_{t_0}^{t_f} \rho(t) a(t)^\top \frac{\partial f_\theta}{\partial \theta} \,dt.$$
+	which keeps $a(t)$ as the correct sensitivity of the loss wrt the state. It just changes how much each time contributes to the parameter update. 
+- forward dynamics
+- terminal condition
+- adjoint has jumps for losses at multiple observation times - don't change these. We can reweight the loss jumps by changing the loss, not by changing the jump terms. Example: $L=\sum_k w_k \ell_k$ would give $a(t_k^-) = a(t_k^+) + w_k \frac{\partial \ell_k}{\partial z(t_k)}.$ which is mathematically valid becuase it corresponds to a modified loss
+- don't break sign convention
 
-For our neural ODE, the parameter gradient is
-$$\frac{dL}{d\theta} = \int_{t_0}^{t_f} a(t)^\top \frac{\partial f_\theta}{\partial \theta} \,dt.$$ and let's say we want to make the gradient less domi
 # June 22
 - Can we jsut add this function to the loss function? if not, we need to dig into diffrax
 - look at the dynamics and diff eq 
