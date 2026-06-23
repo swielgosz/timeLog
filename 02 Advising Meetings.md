@@ -1,3 +1,7 @@
+# June 23
+The adjoint describes how th 
+$a(t) = \frac{\partial L}{\partial z(t)}$
+Its dynamics are governed by 
 # June 22
 - Can we jsut add this function to the loss function? if not, we need to dig into diffrax
 - look at the dynamics and diff eq 
