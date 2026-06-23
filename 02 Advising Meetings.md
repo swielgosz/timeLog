@@ -28,15 +28,41 @@ $\min_{u(t)} J = \phi(x(t_f)) + \int_{t_0}^{t_f} \ell(x(t),u(t),t)\,dt$
 subject to
 $\dot x(t)=f(x(t),u(t),t), \qquad x(t_0)=x_0.$
 
+This is saying that we have a system moving according to physics. We can influence it with some input. What input history should we choose so the system does the best thing? In our case, we choose the hwole control function to make the total cost $J$ as small as possible.The first part is the terminal cost. The second part is the running cost which accumulates cost along the entire trajectory. It is constrained by the system dynamics, and must evolve according to the differential equation $\dot x(t)=f(x(t),u(t),t)$.
+
 Introduce a costate $\lambda(t)$ (also called adjoint variable) and form the Hamiltonian
 $$H(x,u,\lambda,t) = \ell(x,u,t) + \lambda^\top f(x,u,t).$$
 
+The state $x(t)$ tellsl you where the ststem is, the costate $\lambda(t)$ tells us how valuable or costly the state is from the perspective of the objective. This is analogous to $a(t)$ in our neuralODE - it tells us how much the final objective would change if we slightly changed the state at time $t$. 
 
 The necessary conditions are then
 $$\dot x = \frac{\partial H}{\partial \lambda} = f(x,u,t),$$
 
 $$\dot \lambda = - \frac{\partial H}{\partial x},$$
+and the optimal control satisfies a pointwise extremum condition
+$$u^*(t) = \arg\min_u H(x^*(t),u,\lambda(t),t),$$ (or argmax depending on the Hamiltonian sign convention)
 
+The costate terminal condition is typically 
+$\lambda(t_f) = \frac{\partial \phi}{\partial x(t_f)}.$ so $\lambda(t)$ is telling us how much the final objective would change if you perturbed the state at time $t$. 
+
+This is essentially the same object as our neural ODE notation $a(t)=\frac{\partial L}{\partial z(t)}.$ 
+
+Why did it matter. for control? It converted trajectory optimization into sensitivity propagation - answers questions like how does final miss distance change if I perturb the thrust at this time. 
+
+The adjoint gives a compact answer. If a perturbation $\delta u(t)$ changes the dynamics through
+$$\delta \dot x = f_x \delta x + f_u \delta u,$$
+then the first-order variation of the objective can be written in terms of the adjoint as
+$$\delta J = \int_{t_0}^{t_f} \left( \frac{\partial H}{\partial u} \right)^\top \delta u(t)\,dt$$
+
+plus boundary terms, depending on the problem formulation.
+
+  
+
+So $\partial H/\partial u$ is the local gradient signal for the control. This is the same structural idea that appears in neural ODEs, except the “control” becomes the parameter vector $\theta$, and the gradient signal becomes
+
+  
+
+$\frac{dL}{d\theta} = \int_{t_0}^{t_f} a(t)^\top \frac{\partial f_\theta}{\partial \theta} \,dt.$
 # June 22
 - Can we jsut add this function to the loss function? if not, we need to dig into diffrax
 - look at the dynamics and diff eq 
