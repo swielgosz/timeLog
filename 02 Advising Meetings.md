@@ -93,6 +93,7 @@ Do not break:
 - adjoint has jumps for losses at multiple observation times - don't change these. We can reweight the loss jumps by changing the loss, not by changing the jump terms. Example: $L=\sum_k w_k \ell_k$ would give $a(t_k^-) = a(t_k^+) + w_k \frac{\partial \ell_k}{\partial z(t_k)}.$ which is mathematically valid becuase it corresponds to a modified loss
 - don't break sign convention
 
+repo uses h(t) instead of z(t)
 # June 22
 - Can we jsut add this function to the loss function? if not, we need to dig into diffrax
 - look at the dynamics and diff eq 
