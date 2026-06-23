@@ -11,11 +11,12 @@ The adjoint has an inherent time dependence because $a(t)=\partial L/\partial z(
 
 We have a trajecotry loss. The adjoint diagnostic should include sensitivity contributions from every time point where we evaluate the loss, not only the final state. 
 
-Making the loss $L = \frac{1}{N+1}\sum_{k=0}^{N} \ell(z(t_k), z_k^\ast)$ already makes the objective values at all saved times equally weighted. But it does not make their gradient influence equal. Earlier states still influence more future residuals through the rollout dynamics.
+Making the loss $L = \frac{1}{N+1}\sum_{k=0}^{N} \ell(z(t_k), z_k^\ast)$ already makes the objective values at all saved times equally weighted. But it does not make their gradient influence equal. Earlier states still influence more future residuals through the rollout dynamics. The diminishing adjoint is expected for a causal rollout loss, but it is undesirable for learning a globally accurate orbital vector field. A uniformly averaged trajectory loss weights all time samples equally in the objective, but not necessarily in the gradient.
 
-If you mean “each time point contributes equally to the scalar loss,” you already have that with a uniformly averaged trajectory loss.
+So, our issue is that the loss values are all equally weighted in time, but the training signal is not.
 
-If you mean “each time point contributes equally to the parameter update,” then no, a standard rollout loss does not guarantee that. The causal structure of the ODE rollout biases the gradient toward earlier states.
+
+
 # June 22
 - Can we jsut add this function to the loss function? if not, we need to dig into diffrax
 - look at the dynamics and diff eq 
