@@ -16,7 +16,10 @@ Making the loss $L = \frac{1}{N+1}\sum_{k=0}^{N} \ell(z(t_k), z_k^\ast)$ already
 So, our issue is that the loss values are all equally weighted in time, but the training signal is not.
 
 
+---
+Lev Semenovich Pontryagin, EF Mishchenko, VG Boltyanskii, and RV Gamkrelidze. The mathematical theory of optimal processes. 1962.
 
+This is the original aldjint method source. 
 # June 22
 - Can we jsut add this function to the loss function? if not, we need to dig into diffrax
 - look at the dynamics and diff eq 
