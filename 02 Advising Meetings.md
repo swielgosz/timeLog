@@ -94,6 +94,11 @@ Do not break:
 - don't break sign convention
 
 repo uses h(t) instead of z(t)
+
+
+Before tomorrow:
+- [ ] take repo, generate orbital data and test idea and see where to implement it
+- [ ] 
 # June 22
 - Can we jsut add this function to the loss function? if not, we need to dig into diffrax
 - look at the dynamics and diff eq 
