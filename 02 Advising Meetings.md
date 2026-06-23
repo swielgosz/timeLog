@@ -17,9 +17,26 @@ So, our issue is that the loss values are all equally weighted in time, but the 
 
 
 ---
-Lev Semenovich Pontryagin, EF Mishchenko, VG Boltyanskii, and RV Gamkrelidze. The mathematical theory of optimal processes. 1962.
+Lev Semenovich Pontryagin, EF Mishchenko, VG Boltyanskii, and RV Gamkrelidze. The mathematical theory of optimal processes. 1962. This is the original adjoint method source.
 
-This is the original aldjint method source. 
+Comes from older optimal-control idea - introduce a second variable (adjoint or costate - these typically refer to the same mathematical object in optimal control).
+
+In optimal control, we care about this problem because we want to carry sensitivity information backward through our dynamics. 
+
+Basic optimal-control problem:
+$\min_{u(t)} J = \phi(x(t_f)) + \int_{t_0}^{t_f} \ell(x(t),u(t),t)\,dt$ 
+subject to
+$\dot x(t)=f(x(t),u(t),t), \qquad x(t_0)=x_0.$
+
+Introduce a costate $\lambda(t)$ (also called adjoint variable) and form the Hamiltonian
+$$H(x,u,\lambda,t) = \ell(x,u,t) + \lambda^\top f(x,u,t).$$
+
+
+The necessary conditions are then
+$$\dot x = \frac{\partial H}{\partial \lambda} = f(x,u,t),$$
+
+$$\dot \lambda = - \frac{\partial H}{\partial x},$$
+
 # June 22
 - Can we jsut add this function to the loss function? if not, we need to dig into diffrax
 - look at the dynamics and diff eq 
