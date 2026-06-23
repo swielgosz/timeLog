@@ -5,6 +5,10 @@
 - check parallelization of adjoint analysis
 - script for first order test tomorrow 
 - thursday friday - we can talk about swath foe xperiments and possibly do some refactoring
+- clone diffrax - have claude strip it down to bare bones. no fancy adjoint methods, controlled odes, etc. this could become unit test that needs to be preserved. 
+- lead analytics 
+- do some tidying 
+- begin writing out the readme
 
 
 The scripts are too long. There is a lot of formatting. We mainly just want to see what the methods etc are. Things like formatting should be hidden from user
