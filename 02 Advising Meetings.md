@@ -1,7 +1,13 @@
 # June 23
-The adjoint describes how th 
-$a(t) = \frac{\partial L}{\partial z(t)}$
+Our loss is a scalar-valued function:
+$$L\big(z(t_1)\big)=L\left(\operatorname{ODESolve}\big(z(t_0), f, t_0, t_1, \theta\big)\right)$$
+The adjoint describes how the gradient of the loss depends on the hidden state at each instant:
+$$a(t) = \frac{\partial L}{\partial z(t)}$$
 Its dynamics are governed by 
+$$\frac{d a(t)}{dt} = - a(t)^{T} \frac{\partial f(z(t), t, \theta)}{\partial z}$$
+We compute the parameter gradient as 
+$$\frac{dL}{d\theta} = \int_{t_1}^{t_0} a(t)^{T} \frac{\partial f(z(t), t, \theta)}{\partial \theta} \, dt$$
+The adjoint has an inherent time dependence because $a(t)=\partial L/\partial z(t)$ measures how the loss changes if the state at time t is perturbed. For a trajectory-level loss, earlier states can influence a larger portion of the subsequent trajectory, while later states have less remaining time over which their perturbations can affect the accumulated loss. Therefore, in some systems and loss formulations, $\|a(t)\|$ may decrease as we move forward in time. However, this decay is not guaranteed; it depends on the loss definition, the learned dynamics, and the state-transition sensitivity along the trajectory.
 # June 22
 - Can we jsut add this function to the loss function? if not, we need to dig into diffrax
 - look at the dynamics and diff eq 
