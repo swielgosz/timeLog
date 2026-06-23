@@ -8,6 +8,8 @@ $$\frac{d a(t)}{dt} = - a(t)^{T} \frac{\partial f(z(t), t, \theta)}{\parti
 We compute the parameter gradient as 
 $$\frac{dL}{d\theta} = \int_{t_1}^{t_0} a(t)^{T} \frac{\partial f(z(t), t, \theta)}{\partial \theta} \, dt$$
 The adjoint has an inherent time dependence because $a(t)=\partial L/\partial z(t)$ measures how the loss changes if the state at time t is perturbed. For a trajectory-level loss, earlier states can influence a larger portion of the subsequent trajectory, while later states have less remaining time over which their perturbations can affect the accumulated loss. Therefore, in some systems and loss formulations, $\|a(t)\|$ may decrease as we move forward in time. However, this decay is not guaranteed; it depends on the loss definition, the learned dynamics, and the state-transition sensitivity along the trajectory.
+
+We have a trajecotry loss. The adjoint diagnostic should include sensitivity contributions from every time point where we evaluate the loss, not only the final state. 
 # June 22
 - Can we jsut add this function to the loss function? if not, we need to dig into diffrax
 - look at the dynamics and diff eq 
