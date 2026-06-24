@@ -1,4 +1,27 @@
 # June 24
+Architecture Changes
+
+- Added sph_4D_rinv_vel feature layer mapping [x,y,vx,vy] to [1/r, sx, sy, vx, vy], mirroring the parent repo. Inverse-radius features improve generalization in Keplerian dynamics.
+- Added mlp_4D_unit_scaled output layer that constrains the network to output physically-structured [vx, vy, ax, ay] with a unit-direction acceleration.
+- Added HIDDEN and N_LAYERS to the config block so architecture can be varied without touching code.
+
+Training Changes
+
+- All orbit segments are batched into a single forward+adjoint pass. The key correctness fix is that backward_dynamics loops over each sample individually — a full-batch VJP would sum gradients across orbits, contaminating each orbit's adjoint with other orbits' Jacobians.
+- Added NeuralODENormalized with three scaling modes (magnitude, componentwise_rel, componentwise_abs). Scaling happens only on dL/dθ, not on a(t) itself — two separate autograd.grad calls per RK4 step. Scaling a(t) corrupts the adjoint ODE and produces NaN losses.
+- Added WARMUP_STEPS: normalized modes use a standard NeuralODE for the first N epochs so weights stabilize before scaling activates.
+- split_dataset now shuffles orbits with a seeded RNG (8 train, 2 test). Split indices are stored in each checkpoint so analysis scripts use the exact same split.
+- Added seeded reproducibility via torch.manual_seed and np.random.seed in main() and each Ray worker.
+- Replaced sequential training with Ray remote workers, one per adjoint mode, all CPU-pinned. Progress is plain print lines every LOG_INTERVAL epochs to avoid tqdm flashing with parallel workers.
+
+Analysis and Diagnostics
+
+- Added adjoint_diagnostics.py which computes and plots the Frobenius norm of df/dtheta, the norm of a(t), and their product (the integrand of eq. 5 of Chen 2018) for each model and orbit, both as time series and on the XY plane. Separates train vs test orbits into subdirectories. The goal is to understand where along the orbit each adjoint method concentrates its gradient signal, since periapsis dominance is the core problem being studied.
+- Updated analyze.py to include all 4 model labels and colors, added .squeeze(1) on batched model output to handle the extra batch dimension, and added a .get fallback for scalar in older checkpoints.
+- Added neuralODEs.code-workspace so NeuralODE-ref appears as a second root in VS Code source control.
+
+
+
 Added the stripped down neuralODE repo to my workspace. 
 It's a fully independent git repo — its own `.git/`, its own remote pointing to the original GitHub repo. It doesn't import or depend on anything from `neuralODEs`. The only "relationship" is that it lives inside the same folder, which is just a convenience for your Explorer sidebar. Nothing is linked at the code level.
 
