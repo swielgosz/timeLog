@@ -1,4 +1,8 @@
 # June 24
+
+Work on speed up
+Run best case overnight - do training properly for 8 hours
+
 Architecture Changes
 
 - Added sph_4D_rinv_vel feature layer mapping [x,y,vx,vy] to [1/r, sx, sy, vx, vy], mirroring the parent repo. Inverse-radius features improve generalization in Keplerian dynamics.
