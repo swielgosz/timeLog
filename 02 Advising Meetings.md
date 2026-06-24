@@ -7,6 +7,12 @@ $$$$$$\frac{dL}{d\theta} = \int_{t_1}^{t_0} \frac{1}{f(z(t),t,\theta)}a(t)
 
 I want to update the parameter gradient from Chen eq. 5:$$\frac{dL}{d\theta} = \int_{t_1}^{t_0} a(t)^{T} \frac{\partial f(z(t), t, \theta)}{\partial \theta} \, dt$$ to a parameter gradient update which is normalized by the dynamics $$\frac{dL}{d\theta} = \int_{t_1}^{t_0} \frac{1}{f(z(t),t,\theta)}a(t)^{T} \frac{\partial f(z(t), t, \theta)}{\partial \theta} \, dt.$$
 Can we do this, and if so why? 
+
+**`NeuralODE_naive` ↔ `diffrax.RecursiveCheckpointAdjoint`** Both differentiate through the solver steps directly using standard autograd. `RecursiveCheckpointAdjoint` adds gradient checkpointing to reduce the O(T) memory cost, but the fundamental approach — autodiff through the RK steps — is the same.
+
+**`NeuralODE` ↔ `diffrax.BacksolveAdjoint`** Both solve a second ODE backward in time using the adjoint equations (Chen 2018). `BacksolveAdjoint` is the production-quality version — it handles the time direction correctly, supports adaptive step sizes, and integrates cleanly with diffrax's solver infrastructure — but the mathematical object is identical to what `NeuralODE.py` implements.
+
+One nuance worth noting: `BacksolveAdjoint` in diffrax also backsolves for `z(t)` (the state) simultaneously with the adjoint, rather than saving `z(t)` from the forward pass. This makes it truly O(1) memory but introduces numerical error if the dynamics are stiff or the backward solve diverges — which is exactly the kind of instability you're seeing near periapsis in 2BP. That's part of why your normalized gradient idea is interesting: it addresses a symptom of that instability at the gradient level.
 # June 23
 Our loss is a scalar-valued function:
 $$L\big(z(t_1)\big)=L\left(\operatorname{ODESolve}\big(z(t_0), f, t_0, t_1, \theta\big)\right)$$
