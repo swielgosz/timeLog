@@ -1,3 +1,12 @@
+# June 24
+Added the stripped down neuralODE repo to my workspace. 
+It's a fully independent git repo — its own `.git/`, its own remote pointing to the original GitHub repo. It doesn't import or depend on anything from `neuralODEs`. The only "relationship" is that it lives inside the same folder, which is just a convenience for your Explorer sidebar. Nothing is linked at the code level.
+
+Within this repo, we are going to change the parameter gradient to 
+$$$$$$\frac{dL}{d\theta} = \int_{t_1}^{t_0} \frac{1}{f(z(t),t,\theta)}a(t)^{T} \frac{\partial f(z(t), t, \theta)}{\partial \theta} \, dt$$
+
+I want to update the parameter gradient from Chen eq. 5:$$\frac{dL}{d\theta} = \int_{t_1}^{t_0} a(t)^{T} \frac{\partial f(z(t), t, \theta)}{\partial \theta} \, dt$$ to a parameter gradient update which is normalized by the dynamics $$\frac{dL}{d\theta} = \int_{t_1}^{t_0} \frac{1}{f(z(t),t,\theta)}a(t)^{T} \frac{\partial f(z(t), t, \theta)}{\partial \theta} \, dt.$$
+Can we do this, and if so why? 
 # June 23
 Our loss is a scalar-valued function:
 $$L\big(z(t_1)\big)=L\left(\operatorname{ODESolve}\big(z(t_0), f, t_0, t_1, \theta\big)\right)$$
