@@ -1,3 +1,5 @@
+we model to some radius, and our training data only goes so far. don't worry what happens outside that - can we have some quantitative gradient limit?
+
 # June 24
 -nosegment-5000-substep10
 -nosegment-2500-substep10
