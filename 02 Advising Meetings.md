@@ -1,4 +1,8 @@
 # June 24
+-nosegment-5000-substep10
+-nosegment-2500-substep10
+
+
 Group NeuralODE-ref:
 ```
 N_SEGMENTS = 20  # split each orbit into N sub-trajectories (1 = no split)
