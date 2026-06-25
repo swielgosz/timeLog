@@ -26,7 +26,7 @@ Kidger recommends not using this. He recommends discretize-then-optimize (disc-o
 
 So, we really only care about `BacksolveAdjoint` because this is directly what implements the equations from Chen 2018, and we want to modify the parameter gradient within it. Focusing on this adjoint method and the basic neuralODE (e.g. not SDE, CDE, etc -  https://docs.kidger.site/diffrax/examples/neural_ode/), explain the core functions that we must understand and how they relate to BacksolveAdjoint and how they work. 
 
-Diffrax is a dependency in this workspace, so we should be able to parse through it and tease out the details. Write a diffrax README file with details, and then we can continue to iterate on what we do not uderstand. You should focus on just diffrax and 
+Diffrax is a dependency in this workspace, so we should be able to parse through it and tease out the details. Write a diffrax README file with details, and then we can continue to iterate on what we do not uderstand. You should focus on just diffrax and the backsolveadjoint and vanilla neural ODE mainly, but if you need other context from diffrax or the workspae you may use it (other locations should provide no more than 10% of your context)
 
 
 we model to some radius, and our training data only goes so far. don't worry what happens outside that - can we have some quantitative gradient limit?
