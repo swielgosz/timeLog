@@ -1,3 +1,22 @@
+# June 25
+We want to understand what diffrax is doing behind the scenes. I want to know where the equations from Chen are implemented. Let's work piece by piece on making a large, detailed README that describes the functionality of JAX. What is the point of this? We want to modify the gradients in our model. We found approximately where this occurred, but we do not understand the looping (there is a "loop" function) or what is actually happening. 
+
+We are focused on training vanilla neural ODEs right now, so we can ignore other functionality like latent ODE, stochastic DE, etc. 
+Does Chen use opt-disc or disc-opt? Specifically,
+
+
+
+Let's orient ourselves. These are the functionalities of diffrax:
+- ODE/SDE/CDE (ordinary/stochastic/controlled) solvers;
+- lots of different solvers (including `Tsit5`, `Dopri8`, symplectic solvers, implicit solvers);
+- vmappable _everything_ (including the region of integration);
+- using a PyTree as the state;
+- dense solutions;
+- multiple adjoint methods for backpropagation;
+- support for neural differential equations
+
+Our interest is in modifying the continuous adjoint equation from Chen 2018. 
+
 we model to some radius, and our training data only goes so far. don't worry what happens outside that - can we have some quantitative gradient limit?
 
 # June 24
