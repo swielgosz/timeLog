@@ -2,9 +2,6 @@
 We want to understand what diffrax is doing behind the scenes. I want to know where the equations from Chen are implemented. Let's work piece by piece on making a large, detailed README that describes the functionality of JAX. What is the point of this? We want to modify the gradients in our model. We found approximately where this occurred, but we do not understand the looping (there is a "loop" function) or what is actually happening. 
 
 We are focused on training vanilla neural ODEs right now, so we can ignore other functionality like latent ODE, stochastic DE, etc. 
-Does Chen use opt-disc or disc-opt? Specifically,
-
-
 
 Let's orient ourselves. These are the functionalities of diffrax:
 - ODE/SDE/CDE (ordinary/stochastic/controlled) solvers;
@@ -15,7 +12,22 @@ Let's orient ourselves. These are the functionalities of diffrax:
 - multiple adjoint methods for backpropagation;
 - support for neural differential equations
 
-Our interest is in modifying the continuous adjoint equation from Chen 2018. 
+Our interest is in modifying the continuous adjoint equation from Chen 2018, which is an optimize-then-discretize method (opt-disc). In the paper, they define the Neural ODE as a continuous-time system
+$$\frac{dz(t)}{dt} = f(z(t), t, \theta),$$
+derive the continuous adjoint equation
+$$\frac{da(t)}{dt} = -a(t)^T \frac{\partial f(z(t),t,\theta)}{\partial z},$$
+and accumulate the parameter gradient through the continuous-time integral
+$$\frac{dL}{d\theta} = -\int_{t_1}^{t_0} a(t)^T \frac{\partial f(z(t),t,\theta)}{\partial \theta} \,dt.$$
+
+That is the optimize-then-discretize viewpoint: first derive the continuous adjoint equations, then numerically discretize/integrate those equations with an ODE solver. Chen et al. explicitly describe treating the ODE solver as a black box and computing gradients using the adjoint sensitivity method, rather than backpropagating through every internal solver operation.  In diffrax, this method is `BacksolveAdjoint`
+
+
+Kidger recommends not using this. He recommends discretize-then-optimize (disc-opt). In disc-opt, first discretize the forward ODE solve into the actual numerical steps used by the solver, then apply reverse-mode autodiff/backpropagation through that discrete computation graph. That gives the exact gradient of the numerically discretized solver output, assuming the autodiff is correct. It is not what the original Chen adjoint method is mainly advocating. In diffrax, this method is `diffrax.RecursiveCheckpointAdjoint(diffrax.AbstractAdjoint)'. 
+
+So, we really only care about `BacksolveAdjoint` because this is directly what implements the equations from Chen 2018, and we want to modify the parameter gradient within it. Focusing on this adjoint method and the basic neuralODE (e.g. not SDE, CDE, etc -  https://docs.kidger.site/diffrax/examples/neural_ode/), explain the core functions that we must understand and how they relate to BacksolveAdjoint and how they work. 
+
+Diffrax is a dependency in this workspace, so we should be able to parse through it and tease out the details. Write a diffrax README file with details, and then we can continue to iterate on what we do not uderstand. You should focus on just diffrax and 
+
 
 we model to some radius, and our training data only goes so far. don't worry what happens outside that - can we have some quantitative gradient limit?
 
