@@ -41,6 +41,10 @@ Can we do this, and if so why?
 **`NeuralODE` ↔ `diffrax.BacksolveAdjoint`** Both solve a second ODE backward in time using the adjoint equations (Chen 2018). `BacksolveAdjoint` is the production-quality version — it handles the time direction correctly, supports adaptive step sizes, and integrates cleanly with diffrax's solver infrastructure — but the mathematical object is identical to what `NeuralODE.py` implements.
 
 One nuance worth noting: `BacksolveAdjoint` in diffrax also backsolves for `z(t)` (the state) simultaneously with the adjoint, rather than saving `z(t)` from the forward pass. This makes it truly O(1) memory but introduces numerical error if the dynamics are stiff or the backward solve diverges — which is exactly the kind of instability you're seeing near periapsis in 2BP. That's part of why your normalized gradient idea is interesting: it addresses a symptom of that instability at the gradient level.
+
+Shortcuts we are taking:
+- data is downsampled to 20 samples
+How is dt calculated right now for rk4?
 # June 23
 Our loss is a scalar-valued function:
 $$L\big(z(t_1)\big)=L\left(\operatorname{ODESolve}\big(z(t_0), f, t_0, t_1, \theta\big)\right)$$
