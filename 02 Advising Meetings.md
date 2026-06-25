@@ -1,4 +1,35 @@
 # June 24
+Group NeuralODE-ref:
+```
+N_SEGMENTS = 20  # split each orbit into N sub-trajectories (1 = no split)
+# Normalized adjoint modes to train alongside standard. [] to skip all normalized variants.
+# Options: "magnitude", "componentwise_rel", "componentwise_abs"
+NORM_MODES = ["magnitude", "componentwise_abs"]
+EPOCHS = 2500
+LR = 1e-3
+HIDDEN = 64
+N_LAYERS = 2  # number of hidden layers
+T_TRAIN = 18     # number of data points per orbit used for supervision
+N_SUBSTEPS = 2   # RK4 substeps between each pair of data points (1 = no substeps)
+GRAD_CLIP = 10.0  # max gradient norm; guards against blow-up in normalized modes
+WARMUP_STEPS = 200  # steps using standard adjoint before switching to normalized
+SCALAR = 1.0  # output layer acceleration scale factor
+MODEL_DIR = os.path.join("files", "models")
+SEED = 0
+DATASET_NAME = "complex_TBP_planar_100_train"  # W&B dataset artifact name
+N_VAL = 10  # number of orbits held out for validation
+WANDB_GROUP = "NeuralODE-ref"  # W&B run group name for organizing experiments
+```
+
+Group test-adjoint-segment-5000:
+- increased epochs
+- segment data (above does as well)
+- increase n_substeps
+
+- `T_TRAIN=360` → keep all 360 pts → split into 20 segments × 18 pts each
+- `T_TRAIN=100` → downsample to 100 pts → split into 20 segments × 5 pts each
+- `T_TRAIN=18` → downsample to 18 pts → split into 20 segments × 0 pts ← your current error
+
 
 Work on speed up
 are you still concerned about the possible sign error that you pointed out in the gradient calculation?
@@ -55,7 +86,11 @@ dt < 1 / (k * ||∂f/∂z||)
 
 where `||∂f/∂z||` is roughly the largest rate of change of the dynamics — i.e., the spectral radius of the Jacobian. In practice this means the step size should be small enough that the dynamics don't change significantly within one step.
 
-
+1. Load raw data from W&B
+2. Split into train/val **orbits** (shuffle happens here via `split_dataset`)
+3. Normalize orbits (fit normalization constants on train, apply to both)
+4. Segment orbits → flat list of segments
+5. Shuffle train segments
 
 # June 23
 Our loss is a scalar-valued function:
