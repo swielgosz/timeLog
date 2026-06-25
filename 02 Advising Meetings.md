@@ -1,5 +1,7 @@
 # June 25
 `da_diff_term` is the integrand
+work on modifying the opt-disc - subclass backsolveadjoint
+swap the recursive adjoint 
 We want to understand what diffrax is doing behind the scenes. I want to know where the equations from Chen are implemented. Let's work piece by piece on making a large, detailed README that describes the functionality of JAX. What is the point of this? We want to modify the gradients in our model. We found approximately where this occurred, but we do not understand the looping (there is a "loop" function) or what is actually happening. 
 
 We are focused on training vanilla neural ODEs right now, so we can ignore other functionality like latent ODE, stochastic DE, etc. 
