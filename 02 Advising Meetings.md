@@ -45,7 +45,18 @@ One nuance worth noting: `BacksolveAdjoint` in diffrax also backsolves for `z(t)
 Shortcuts we are taking:
 - data is downsampled to 20 samples
 - T_TRAIN is the number of points in the time grid used during training (e.g. how many steps we downsample to). It controls how many states the model is compared against, and how many RK4 steps the solver takes
-How is dt calculated right now for rk4?
+	How is dt calculated right now for rk4? Currently, we set the number of substeps between time samples
+
+The classic rule of thumb for RK4 is that the step size `dt` should satisfy:
+
+```
+dt < 1 / (k * ||∂f/∂z||)
+```
+
+where `||∂f/∂z||` is roughly the largest rate of change of the dynamics — i.e., the spectral radius of the Jacobian. In practice this means the step size should be small enough that the dynamics don't change significantly within one step.
+
+
+
 # June 23
 Our loss is a scalar-valued function:
 $$L\big(z(t_1)\big)=L\left(\operatorname{ODESolve}\big(z(t_0), f, t_0, t_1, \theta\big)\right)$$
