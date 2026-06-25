@@ -44,6 +44,7 @@ One nuance worth noting: `BacksolveAdjoint` in diffrax also backsolves for `z(t)
 
 Shortcuts we are taking:
 - data is downsampled to 20 samples
+- T_TRAIN is the number of points in the time grid used during training (e.g. how many steps we downsample to). It controls how many states the model is compared against, and how many RK4 steps the solver takes
 How is dt calculated right now for rk4?
 # June 23
 Our loss is a scalar-valued function:
