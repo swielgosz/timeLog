@@ -1,6 +1,10 @@
 # June 24
 -nosegment-5000-substep10
 -nosegment-2500-substep10
+-nosegment-2500-substep4
+-segment-2500-substep36
+-segment-5000-substep36
+-segment-5000-substep36
 
 
 Group NeuralODE-ref:
