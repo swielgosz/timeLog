@@ -1,6 +1,7 @@
 # June 24
 
 Work on speed up
+are you still concerned about the possible sign error that you pointed out in the gradient calculation?
 Run best case overnight - do training properly for 8 hours
 
 Architecture Changes
