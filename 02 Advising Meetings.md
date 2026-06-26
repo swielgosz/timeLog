@@ -1,3 +1,5 @@
+# June 26
+
 # June 25
 `da_diff_term` is the integrand
 work on modifying the opt-disc - subclass backsolveadjoint
