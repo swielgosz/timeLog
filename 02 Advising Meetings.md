@@ -8,7 +8,9 @@
 `da_diff_term` is $\partial L/\partial \theta$. It is the incrememnt for one RK state, and it represents `da_diff_term = -a(t)ᵀ · ∂f/∂θ · Δt`. This represent the integrand of the Chen parameter gradient integral evaluated at one point in time and multiplied by the step size. The fourth slot of the augmented state `a_diff_term` (what does the augmented state represent?) accumulates these incremeents across all RK stages and all solver steps until it reaches the total: `∂L/∂θ = -∫[t1→t0] a(t)ᵀ ∂f/∂θ dt. So `da_diff_term` is a piece of `∂L/∂θ`, and `a_diff_term` (the running fourth slot) is the total `∂L/∂θ` accumulated so far. By the time the backward solve reaches `t0`, `a_diff_term` is the complete `∂L/∂θ` that gets returned to the optimizer.
 
 
+First attempt at implementing normalized dynamics failed. 
 
+What did john say about large dynamics?
 `
 # June 25
 `da_diff_term` is the integrand
