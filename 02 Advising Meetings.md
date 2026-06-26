@@ -11,6 +11,9 @@
 First attempt at implementing normalized dynamics failed. 
 
 What did john say about large dynamics?
+
+wgyc is normalized
+
 `
 # June 25
 `da_diff_term` is the integrand
