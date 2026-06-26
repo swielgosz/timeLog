@@ -14,6 +14,7 @@ What did john say about large dynamics?
 
 wgyc is normalized
 
+The naive approach for backpropagation through a neuralODE is autodiff through every solver step. This is memory-expensive, which is why the adjoint equation is used. This is `BacksolveAdjoint` in diffrax. This class defines a custom VJP that re-derives the trajectory during the backward pass and integrates the adjoint ODE. 
 `
 # June 25
 `da_diff_term` is the integrand
