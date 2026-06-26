@@ -1,5 +1,8 @@
 # June 26
-
+- [ ] Review opt-disc vs disc-opt
+- [ ] Review how the vanilla neural ODE actually trains using BacksolveAdjoint vs RecursiveCheckpointAdjoint
+- [ ] Subclass the opt-disc method and work on modifying it
+- [ ] 
 # June 25
 `da_diff_term` is the integrand
 work on modifying the opt-disc - subclass backsolveadjoint
