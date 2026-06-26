@@ -1,4 +1,7 @@
 # June 26
+In my analyze adjoint plots, I have a plot for the original integrand formulation and for the modified normalized by dynamics integrand formulation. I want to create a new set of plots where we plot these overlapping (let's only do it for the predicted model rollout, not the true IC version), and let's have a second subplot which plots the difference in the two quantities. I also want a plot that shows the actual integral of the original integrand over each segment, and on the same plot show the integral of the normalized integrand over each segment. Plot vertical lines for periapsis and apoapsis for all of these. Also, make sure that we always load eval data the same way so that I can compare orbit 1 rollout for one model against orbit 1 rollout of another model. I think there was
+
+
 - [ ] Review opt-disc vs disc-opt - why is opt-disc not exact but disc-opt is? Why do we use disc-opt? We think there is some recursive aspect that would make the backprop prohibitively expesnive, so how is this cheaper? I think it has to do with VJP
 - [ ] Review how the vanilla neural ODE actually trains using BacksolveAdjoint vs RecursiveCheckpointAdjoint
 - [ ] Subclass the opt-disc method and work on modifying it
@@ -15,6 +18,15 @@ What did john say about large dynamics?
 wgyc is normalized
 
 The naive approach for backpropagation through a neuralODE is autodiff through every solver step. This is memory-expensive, which is why the adjoint equation is used. This is `BacksolveAdjoint` in diffrax. This class defines a custom VJP that re-derives the trajectory during the backward pass and integrates the adjoint ODE. 
+
+
+
+
+
+
+
+
+
 `
 # June 25
 `da_diff_term` is the integrand
