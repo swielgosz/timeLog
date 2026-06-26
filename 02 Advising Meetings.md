@@ -1,9 +1,11 @@
 # June 26
-- [ ] Review opt-disc vs disc-opt
+- [ ] Review opt-disc vs disc-opt - why is opt-disc not exact but disc-opt is? Why do we use disc-opt? We think there is some recursive aspect that would make the backprop prohibitively expesnive, so how is this cheaper? I think it has to do with VJP
 - [ ] Review how the vanilla neural ODE actually trains using BacksolveAdjoint vs RecursiveCheckpointAdjoint
 - [ ] Subclass the opt-disc method and work on modifying it
+- [ ] review the VJP stuff
+- [ ] 
 
-
+`da_diff_term` is $\partial L/\partial \theta$. It is the incrememnt for one RK state, and it represents `da_diff_term = -a(t)ᵀ · ∂f/∂θ · Δt`. This represent the integrand of the Chen parameter gradient integral evaluated at one point in time and multiplied by the step size. It is put into the fourth slot of the augmented state `a_diff_term` (what does the augmented state represent?)
 # June 25
 `da_diff_term` is the integrand
 work on modifying the opt-disc - subclass backsolveadjoint
