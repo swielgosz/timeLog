@@ -3,6 +3,16 @@ kv6kw024 - normalized
 a7usn73i - not normalized
 
 is the del f/ del theta the behavior that we want
+extend the dataset to 100 orbits and see if the model adjustments have actually helped or not
+
+form the world of RL:
+vanilla gradient descent -> naturlal gradient descent. desnensitizes to numerical scale: fischer information matrix nromalizes across experiences
+
+more nuanced form of the gradient? 
+other forms:
+- natural gradient with constraints liek once we have jacobi drift too high
+
+- time regularization
 
 In my analyze adjoint plots, I have a plot for the original integrand formulation and for the modified normalized by dynamics integrand formulation. I want to create a new set of plots where we plot these overlapping (let's only do it for the predicted model rollout, not the true IC version), and let's have a second subplot which plots the difference in the two quantities. I also want a plot that shows the actual integral of the original integrand over each segment, and on the same plot show the integral of the normalized integrand over each segment. Plot vertical lines for periapsis and apoapsis for all of these. Also, make sure that we always load eval data the same way so that I can compare orbit 1 rollout for one model against orbit 1 rollout of another model. I think there was a bug earlier with the zipping somewhere and not totally sure if it got fixed.
 
