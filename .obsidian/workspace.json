@@ -63,8 +63,7 @@
               "title": "02 Advising Meetings"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -214,10 +213,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "72e0be5598dbb23f",
+  "active": "3ca203b88fc520a6",
   "lastOpenFiles": [
-    "01 Summer 2026.md",
     "GitHub Issues.md",
+    "01 Summer 2026.md",
     "02 Advising Meetings.md",
     "Running To Do.md",
     "Resources.md",
