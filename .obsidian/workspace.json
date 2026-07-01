@@ -97,8 +97,7 @@
               "title": "Untitled"
             }
           }
-        ],
-        "currentTab": 6
+        ]
       }
     ],
     "direction": "vertical"
@@ -248,7 +247,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "43cfffd2c37b47c5",
+  "active": "3ca203b88fc520a6",
   "lastOpenFiles": [
     "Untitled.md",
     "01 Summer 2026.md",
