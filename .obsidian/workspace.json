@@ -62,8 +62,43 @@
               "icon": "lucide-file",
               "title": "02 Advising Meetings"
             }
+          },
+          {
+            "id": "58382d3b086f6870",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "2584e85d0a37d38c",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "43cfffd2c37b47c5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Untitled.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Untitled"
+            }
           }
-        ]
+        ],
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -213,11 +248,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3ca203b88fc520a6",
+  "active": "43cfffd2c37b47c5",
   "lastOpenFiles": [
+    "Untitled.md",
+    "01 Summer 2026.md",
     "Attachments/Pasted image 20260701114415.png",
     "GitHub Issues.md",
-    "01 Summer 2026.md",
     "02 Advising Meetings.md",
     "Running To Do.md",
     "Resources.md",
@@ -240,7 +276,6 @@
     "Attachments/Pasted image 20260605125247.png",
     "Attachments/Pasted image 20260605123239.png",
     "Attachments/Pasted image 20260605123203.png",
-    "Attachments/Pasted image 20260604193504.png",
     "Archive/01 Spring 2026.md",
     "Attachments/Frnka_2010.pdf",
     "Attachments/Sarah Wielgosz Advising Agreement.pdf",
