@@ -1,3 +1,4 @@
+# July 1
 
 # June 26
 kv6kw024 - normalized
