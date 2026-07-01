@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Archive/Fall 2025.md",
+                "file": "01 Summer 2026.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Fall 2025"
+              "title": "01 Summer 2026"
             }
           },
           {
@@ -150,8 +150,7 @@
               "title": "Search"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "horizontal",
@@ -250,8 +249,9 @@
   },
   "active": "3ca203b88fc520a6",
   "lastOpenFiles": [
-    "01 Summer 2026.md",
+    "Archive/Fall 2025.md",
     "Untitled.md",
+    "01 Summer 2026.md",
     "Attachments/Pasted image 20260701114415.png",
     "GitHub Issues.md",
     "02 Advising Meetings.md",
@@ -290,7 +290,6 @@
     "Running To Do List.md",
     "Reverse-mode automatic differentiation of ODE solutions.md",
     "cleaning code/test_latent_autencoder_2BP.py.md",
-    "Archive/Fall 2025.md",
     "Attachments/recon_compare_orbit_grid.pdf",
     "Attachments/cf4796d9-aba4-4ba3-bd80-4a44b61e2312.pdf",
     "Attachments/5de52ce2-36b7-4ea5-956a-7c28d42a7ac7.pdf",
