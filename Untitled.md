@@ -1,6 +1,8 @@
 Extending training. 100 orbits, no normalization, 5000 steps, percent error loss. run_id: ukpkpr3r
 
-100 orbits, normalize by dynamics, 5000 steps, percent error loss. run_id: vfyzpmbl
+100 orbits, normalize by dynamics, 5000 steps, percent error loss. run_id: vfyzpmbl. Behavior was very noisy. Put in a warmup period.
+
+100 orbits, normalize by dynamics, 750 stpe warmup, percent error loss. run_id: 8s1eh0af
 
 
 That's a cleaner question than the one I answered — let me address it directly.
