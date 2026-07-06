@@ -55,32 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "02 Advising Meetings.md",
+                "file": "01 Summer 2026.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "02 Advising Meetings"
-            }
-          },
-          {
-            "id": "58382d3b086f6870",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "2584e85d0a37d38c",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
+              "title": "01 Summer 2026"
             }
           },
           {
@@ -98,7 +78,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -248,10 +228,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "afac18398ff34af4",
+  "active": "43cfffd2c37b47c5",
   "lastOpenFiles": [
-    "GitHub Issues.md",
     "01 Summer 2026.md",
+    "Technical Notes/The Vanishing Gradient Problem for Stiff Neural Differential Equations.md",
+    "02 Advising Meetings.md",
+    "GitHub Issues.md",
     "Untitled.base",
     "Software Tips.md",
     "Sequential Neural Networks.md",
@@ -260,7 +242,6 @@
     "Resources.md",
     "Reinforcement Learning.md",
     "Untitled.md",
-    "02 Advising Meetings.md",
     "Archive/Fall 2025.md",
     "Attachments/Pasted image 20260701114415.png",
     "Untitled 2.md",
