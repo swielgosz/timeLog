@@ -97,7 +97,8 @@
               "title": "Untitled"
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -247,10 +248,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3ca203b88fc520a6",
+  "active": "afac18398ff34af4",
   "lastOpenFiles": [
-    "01 Summer 2026.md",
     "GitHub Issues.md",
+    "01 Summer 2026.md",
     "Untitled.base",
     "Software Tips.md",
     "Sequential Neural Networks.md",
