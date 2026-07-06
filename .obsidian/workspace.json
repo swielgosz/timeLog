@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 Summer 2026.md",
+                "file": "GitHub Issues.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01 Summer 2026"
+              "title": "GitHub Issues"
             }
           },
           {
@@ -249,6 +249,7 @@
   },
   "active": "3ca203b88fc520a6",
   "lastOpenFiles": [
+    "01 Summer 2026.md",
     "GitHub Issues.md",
     "Untitled.base",
     "Software Tips.md",
@@ -258,7 +259,6 @@
     "Resources.md",
     "Reinforcement Learning.md",
     "Untitled.md",
-    "01 Summer 2026.md",
     "02 Advising Meetings.md",
     "Archive/Fall 2025.md",
     "Attachments/Pasted image 20260701114415.png",
