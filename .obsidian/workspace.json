@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 Summer 2026.md",
+                "file": "GitHub Issues.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01 Summer 2026"
+              "title": "GitHub Issues"
             }
           },
           {
@@ -230,8 +230,8 @@
   },
   "active": "afac18398ff34af4",
   "lastOpenFiles": [
-    "Untitled.md",
     "01 Summer 2026.md",
+    "Untitled.md",
     "Technical Notes/The Vanishing Gradient Problem for Stiff Neural Differential Equations.md",
     "02 Advising Meetings.md",
     "GitHub Issues.md",

@@ -9,6 +9,12 @@ Github issues:
 	- Record any remaining confusion or open questions as comments so the discussion can continue asynchronously.
 
 	Follow up: validate the adjoint/vanishing-gradient interpretation on a simple dynamical system such as a spring-mass-damper or exponential-growth model. Compare segmented and full-horizon calculations, document whether the same sensitivity pattern appears, and close with a short state/resolution write-up suitable for the repository or devlog.
+
+	Follow up: 
+	Connect the adjoint-method verification work to the current questions about Sundman and Levi-Civita transformations.
+	- [ ] Document the role of the Sundman transform in the current model and why small time increments may destabilize the solver.
+	- [ ] Write a short technical note or issue comment explaining the Levi-Civita transform at the level needed for debugging discussions.
+
 2. Implement and document the local diagnostic method for CR3BP neural ODE models using Floquet analysis.
 
 	Expected output:
