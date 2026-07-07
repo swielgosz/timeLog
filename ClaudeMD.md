@@ -1,0 +1,1 @@
+great. let's make commits for the chantges we made. there can be multiple files (or parts of files) per commit, but each commit should only cover one idea. don't go over the visible limit in the first line, but add description below. don't write co authored by claude
