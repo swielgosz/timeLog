@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GitHub Issues.md",
+                "file": "01 Summer 2026.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "GitHub Issues"
+              "title": "01 Summer 2026"
             }
           },
           {
@@ -244,6 +244,7 @@
   },
   "active": "72e0be5598dbb23f",
   "lastOpenFiles": [
+    "GitHub Issues.md",
     "02 Advising Meetings.md",
     "Weekly Recaps.md",
     "ClaudeMD.md",
@@ -256,7 +257,6 @@
     "Attachments/Pasted image 20260707113002.png",
     "Attachments/Pasted image 20260707112950.png",
     "Attachments/Pasted image 20260707112825.png",
-    "GitHub Issues.md",
     "plot_timestep_spacing.py.md",
     "Untitled.md",
     "Technical Notes/The Vanishing Gradient Problem for Stiff Neural Differential Equations.md",
