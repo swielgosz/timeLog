@@ -92,7 +92,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -242,8 +242,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "e2b65813b86f2709",
+  "active": "72e0be5598dbb23f",
   "lastOpenFiles": [
+    "02 Advising Meetings.md",
     "Weekly Recaps.md",
     "ClaudeMD.md",
     "01 Summer 2026.md",
@@ -255,7 +256,6 @@
     "Attachments/Pasted image 20260707113002.png",
     "Attachments/Pasted image 20260707112950.png",
     "Attachments/Pasted image 20260707112825.png",
-    "02 Advising Meetings.md",
     "GitHub Issues.md",
     "plot_timestep_spacing.py.md",
     "Untitled.md",
