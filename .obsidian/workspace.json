@@ -25,14 +25,13 @@
             "id": "72e0be5598dbb23f",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "bases",
               "state": {
-                "file": "01 Summer 2026.md",
-                "mode": "source",
-                "source": false
+                "file": "Untitled.base",
+                "viewName": "Table"
               },
-              "icon": "lucide-file",
-              "title": "01 Summer 2026"
+              "icon": "lucide-table",
+              "title": "Untitled"
             }
           },
           {
@@ -41,12 +40,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Sundman Transform for Neural ODE.md",
+                "file": "Running To Do.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Sundman Transform for Neural ODE"
+              "title": "Running To Do"
             }
           },
           {
@@ -90,23 +89,9 @@
               "icon": "lucide-file",
               "title": "GitHub Issues"
             }
-          },
-          {
-            "id": "43cfffd2c37b47c5",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Untitled.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Untitled"
-            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -256,8 +241,28 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "72e0be5598dbb23f",
+  "active": "a4aa7a49b68e3a1e",
   "lastOpenFiles": [
+    "01 Summer 2026.md",
+    "Sundman Transform for Neural ODE.md",
+    "02 Advising Meetings.md",
+    "Untitled.base",
+    "Untitled.md",
+    "Technical Notes/Lit Reviews/Sequential Neural Networks.md",
+    "Sensitivity Analysis.md",
+    "GitHub Issues.md",
+    "Technical Notes/Machine Learning/Reinforcement Learning.md",
+    "Technical Notes/Machine Learning",
+    "Technical Notes/Astrodynamics/Periodic Orbit Discovery.md",
+    "Technical Notes/The Vanishing Gradient Problem for Stiff Neural Differential Equations.md",
+    "Technical Notes/Lit Reviews/Ergodic Coverage.md",
+    "Technical Notes/Lit Reviews",
+    "Technical Notes/Untitled.md",
+    "Running To Do.md",
+    "Technical Notes/Astrodynamics.md",
+    "Technical Notes/Astrodynamics",
+    "Resources.md",
+    "plot_timestep_spacing.py.md",
     "Attachments/Pasted image 20260713151704.png",
     "Attachments/Pasted image 20260713151654.png",
     "Attachments/Pasted image 20260713150146.png",
@@ -266,25 +271,11 @@
     "Attachments/Pasted image 20260713150033.png",
     "Attachments/Pasted image 20260713145909.png",
     "Attachments/Pasted image 20260713144237.png",
-    "Sundman Transform for Neural ODE.md",
-    "01 Summer 2026.md",
-    "GitHub Issues.md",
-    "02 Advising Meetings.md",
     "Weekly Recaps.md",
     "ClaudeMD.md",
     "Attachments/Pasted image 20260707185739.png",
     "Attachments/Pasted image 20260707185709.png",
-    "Attachments/Pasted image 20260707185650.png",
-    "plot_timestep_spacing.py.md",
-    "Untitled.md",
-    "Technical Notes/The Vanishing Gradient Problem for Stiff Neural Differential Equations.md",
-    "Untitled.base",
     "Software Tips.md",
-    "Sequential Neural Networks.md",
-    "Sensitivity Analysis.md",
-    "Running To Do.md",
-    "Resources.md",
-    "Reinforcement Learning.md",
     "Archive/Fall 2025.md",
     "Untitled 2.md",
     "Untitled 3.md",
@@ -295,14 +286,7 @@
     "latentODE.py.md",
     "Code Archive/Latent and UDE codes/Training Scripts.md",
     "Attachments/L15_intro-rnn__slides.pdf",
-    "cleaning code/losses.py.md",
-    "Lit Review Color Code.md",
-    "cleaning code/metrics.md",
-    "Notebook Contents.md",
     "Attachments/recon_compare_orbit_grid.pdf",
-    "Attachments/cf4796d9-aba4-4ba3-bd80-4a44b61e2312.pdf",
-    "Attachments/5de52ce2-36b7-4ea5-956a-7c28d42a7ac7.pdf",
-    "Attachments/6f0c636b-eea0-4685-980e-7efaf1e66405.pdf",
-    "Code Archive/Latent and UDE codes"
+    "Attachments/cf4796d9-aba4-4ba3-bd80-4a44b61e2312.pdf"
   ]
 }

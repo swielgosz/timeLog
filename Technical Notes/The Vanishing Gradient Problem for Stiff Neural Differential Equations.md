@@ -1,1 +1,0 @@
-- Standard explicit integrators (forward Euler or RK) are bad for stiff problems due to small time steps.
