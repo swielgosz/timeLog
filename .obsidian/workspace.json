@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GitHub Issues.md",
+                "file": "01 Summer 2026.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "GitHub Issues"
+              "title": "01 Summer 2026"
             }
           },
           {
@@ -243,8 +243,8 @@
   },
   "active": "3ca203b88fc520a6",
   "lastOpenFiles": [
-    "ClaudeMD.md",
     "GitHub Issues.md",
+    "ClaudeMD.md",
     "01 Summer 2026.md",
     "02 Advising Meetings.md",
     "Resources.md",
