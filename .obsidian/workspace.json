@@ -13,25 +13,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "02 Advising Meetings.md",
+                "file": "01 Summer 2026.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "02 Advising Meetings"
+              "title": "01 Summer 2026"
             }
           },
           {
             "id": "72e0be5598dbb23f",
             "type": "leaf",
             "state": {
-              "type": "bases",
+              "type": "markdown",
               "state": {
-                "file": "Untitled.base",
-                "viewName": "Table"
+                "file": "Technical Notes/Lit Reviews/Sequential Neural Networks.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-table",
-              "title": "Untitled"
+              "icon": "lucide-file",
+              "title": "Sequential Neural Networks"
             }
           },
           {
@@ -40,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Running To Do.md",
+                "file": "Resources.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Running To Do"
+              "title": "Resources"
             }
           },
           {
@@ -90,8 +91,7 @@
               "title": "GitHub Issues"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -241,27 +241,36 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "a4aa7a49b68e3a1e",
+  "active": "3ca203b88fc520a6",
   "lastOpenFiles": [
-    "01 Summer 2026.md",
-    "Sundman Transform for Neural ODE.md",
     "02 Advising Meetings.md",
+    "Resources.md",
+    "Running To Do.md",
+    "Software Tips.md",
+    "Weekly Recaps.md",
+    "Journal Paper/Archive/Journal Planning.md",
+    "Journal Paper/Archive/Technical Notes.md",
+    "Journal Paper/Archive/Sensitivity Analysis.md",
+    "Journal Paper/Archive",
+    "Notebook Contents.md",
+    "Lit Review Color Code.md",
+    "latentODE.py.md",
+    "GitHub Issues.md",
+    "ClaudeMD.md",
+    "Technical Notes/NeuralODEs/Sundman Transform for Neural ODE.md",
+    "01 Summer 2026.md",
     "Untitled.base",
     "Untitled.md",
     "Technical Notes/Lit Reviews/Sequential Neural Networks.md",
-    "Sensitivity Analysis.md",
-    "GitHub Issues.md",
-    "Technical Notes/Machine Learning/Reinforcement Learning.md",
-    "Technical Notes/Machine Learning",
+    "Technical Notes/Lit Reviews/Reinforcement Learning.md",
+    "Technical Notes/NeuralODEs",
     "Technical Notes/Astrodynamics/Periodic Orbit Discovery.md",
     "Technical Notes/The Vanishing Gradient Problem for Stiff Neural Differential Equations.md",
     "Technical Notes/Lit Reviews/Ergodic Coverage.md",
     "Technical Notes/Lit Reviews",
     "Technical Notes/Untitled.md",
-    "Running To Do.md",
     "Technical Notes/Astrodynamics.md",
     "Technical Notes/Astrodynamics",
-    "Resources.md",
     "plot_timestep_spacing.py.md",
     "Attachments/Pasted image 20260713151704.png",
     "Attachments/Pasted image 20260713151654.png",
@@ -271,22 +280,13 @@
     "Attachments/Pasted image 20260713150033.png",
     "Attachments/Pasted image 20260713145909.png",
     "Attachments/Pasted image 20260713144237.png",
-    "Weekly Recaps.md",
-    "ClaudeMD.md",
     "Attachments/Pasted image 20260707185739.png",
     "Attachments/Pasted image 20260707185709.png",
-    "Software Tips.md",
     "Archive/Fall 2025.md",
-    "Untitled 2.md",
-    "Untitled 3.md",
     "Code Archive",
-    "Archive/01 Spring 2026.md",
     "Attachments/Frnka_2010.pdf",
     "Attachments/Sarah Wielgosz Advising Agreement.pdf",
-    "latentODE.py.md",
-    "Code Archive/Latent and UDE codes/Training Scripts.md",
     "Attachments/L15_intro-rnn__slides.pdf",
-    "Attachments/recon_compare_orbit_grid.pdf",
-    "Attachments/cf4796d9-aba4-4ba3-bd80-4a44b61e2312.pdf"
+    "Attachments/recon_compare_orbit_grid.pdf"
   ]
 }
