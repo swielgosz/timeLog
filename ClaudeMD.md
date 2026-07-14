@@ -1,1 +1,3 @@
 great. let's make commits for the chantges we made. there can be multiple files (or parts of files) per commit, but each commit should only cover one idea. don't go over the visible limit in the first line, but add description below. don't write co authored by claude
+
+Each commit should only represent one idea and the main message should be short enough that it doesn't get cut off. A commit can span multiple files (or parts of files), but should represent one idealogica change.

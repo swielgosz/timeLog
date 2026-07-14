@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GitHub Issues.md",
+                "file": "ClaudeMD.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "GitHub Issues"
+              "title": "ClaudeMD"
             }
           },
           {
@@ -243,6 +243,7 @@
   },
   "active": "3ca203b88fc520a6",
   "lastOpenFiles": [
+    "GitHub Issues.md",
     "01 Summer 2026.md",
     "02 Advising Meetings.md",
     "Resources.md",
@@ -256,7 +257,6 @@
     "Notebook Contents.md",
     "Lit Review Color Code.md",
     "latentODE.py.md",
-    "GitHub Issues.md",
     "ClaudeMD.md",
     "Technical Notes/NeuralODEs/Sundman Transform for Neural ODE.md",
     "Untitled.base",
